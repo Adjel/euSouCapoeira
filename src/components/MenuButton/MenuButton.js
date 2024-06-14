@@ -1,7 +1,12 @@
-import React from 'react';
+import React from "react";
+import { CgMenu } from "react-icons/cg";
 
 function MenuButton() {
-  return <div></div>;
+  return (
+    <>
+      <CgMenu />
+    </>
+  );
 }
 
 export default MenuButton;
