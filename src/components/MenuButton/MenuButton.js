@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { CgMenu } from "react-icons/cg";
 
 function MenuButton({ onClick }) {

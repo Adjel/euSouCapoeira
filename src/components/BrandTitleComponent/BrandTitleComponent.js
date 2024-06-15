@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 function BrandTitleComponent() {
-  return <div></div>;
+  return <div className="">Eu sou capoeira</div>;
 }
 
 export default BrandTitleComponent;
