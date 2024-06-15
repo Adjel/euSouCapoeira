@@ -25,7 +25,7 @@ function SearchBar() {
           type="text"
           value={query}
           onChange={handleInputChange}
-          className="text-center color-blue"
+          className="text-center border-0"
           placeholder="Rechercher"
         />
       </form>
