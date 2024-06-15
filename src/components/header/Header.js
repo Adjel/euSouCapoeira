@@ -1,12 +1,16 @@
 import React from "react";
 import UserButtonsComponent from "../UserButtonsComponent";
 import SearchBar from "../SearchBar";
+import MenuButton from "../MenuButton";
 
 function Header() {
   return (
-    <div className="bg-background-medium-gray w-full">
+    <div className="basics py-3 bg-background-medium-gray w-full">
       <UserButtonsComponent />
-      <SearchBar />
+      <div className=" flex gap-7">
+        <SearchBar />
+        <MenuButton />
+      </div>
     </div>
   );
 }

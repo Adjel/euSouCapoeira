@@ -12,7 +12,6 @@ function UserButtonsComponent() {
       <SlBasket />
       <FaRegCircle />
       <FaRegHeart />
-      <MenuButton />
     </div>
   );
 }
