@@ -15,7 +15,7 @@ function SearchBar() {
   };
 
   return (
-    <div className="bg-blue-600">
+    <>
       <form
         onSubmit={handleSubmit}
         className="flex items-center justify-center w-full max-w-md mx-auto my-4 bd-black-800 underline"
@@ -29,7 +29,7 @@ function SearchBar() {
           placeholder="Rechercher"
         />
       </form>
-    </div>
+    </>
   );
 }
 
