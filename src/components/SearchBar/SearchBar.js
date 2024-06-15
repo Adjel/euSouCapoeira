@@ -18,14 +18,14 @@ function SearchBar() {
     <>
       <form
         onSubmit={handleSubmit}
-        className="flex items-center justify-center w-full max-w-md mx-auto my-4 bd-black-800 underline"
+        className="flex items-center justify-between w-full mx-none px-4 bd-black-800 bg-white rounded-md"
       >
-        <GoSearch />
+        <GoSearch className="size-6 fill-color-dark-gray" />
         <input
           type="text"
           value={query}
           onChange={handleInputChange}
-          className="text-center border-0"
+          className="flex-1 text-center border-0"
           placeholder="Rechercher"
         />
       </form>

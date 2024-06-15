@@ -8,6 +8,7 @@ export const theme = {
   extend: {
     colors: {
       "background-medium-gray": "var(--background-medium-gray)",
+      "color-dark-gray": "var(--color-dark-gray)",
     },
   },
 };
