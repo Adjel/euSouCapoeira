@@ -5,6 +5,10 @@ export const content = [
   ".src/page/**/*.{html,js,jsx}",
 ];
 export const theme = {
-  extend: {},
+  extend: {
+    colors: {
+      "background-medium-gray": "var(--background-medium-gray)",
+    },
+  },
 };
 export const plugins = [];
