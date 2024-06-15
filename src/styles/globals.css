@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background-medium-gray: rgb(243 243 243);
+    --color-dark-gray: rgb(135 139 148);
+}
