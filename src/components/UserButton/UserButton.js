@@ -1,14 +1,21 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import userIcon from "../../../public/userIcon.svg";
 import connectedUserIcon from "../../../public/coUserIcon.svg";
 import styles from "../UserButtonsComponent/userButtonsComponent.module.css";
 import Image from "next/image";
 
 function UserButton() {
+  const [user, setUser] = useState();
+
   return (
-    <div>
-      <Image className={styles.userNavItem} src={connectedUserIcon} />
-    </div>
+    <>
+      {user ? (
+        <Image className={styles.userNavItem} src={connectedUserIcon} />
+      ) : (
+        <Image className={styles.userNavItem} src={userIcon} />
+      )}
+    </>
   );
 }
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { SlHeart } from "react-icons/sl";
-import { SlBasket } from "react-icons/sl";
 import styles from "./userButtonsComponent.module.css";
 import LanguageButton from "../LanguageButton";
 import UserButton from "../UserButton/UserButton";
+import BasketButton from "../BasketButton";
 
 function UserButtonsComponent() {
   return (
@@ -11,7 +11,7 @@ function UserButtonsComponent() {
       <LanguageButton />
       <UserButton />
       <SlHeart className={styles.userNavItem} />
-      <SlBasket className={styles.userNavItem} />
+      <BasketButton />
     </div>
   );
 }
