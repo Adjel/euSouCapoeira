@@ -7,7 +7,7 @@ import Image from "next/image";
 function UserButton() {
   return (
     <div>
-      <Image className={styles.userNavItem} src={connectedUserIcon} />
+      <Image className={styles.userNavItem} src={userIcon} />
     </div>
   );
 }
