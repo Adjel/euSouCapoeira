@@ -18,7 +18,7 @@ function SearchBar() {
     <>
       <form
         onSubmit={handleSubmit}
-        className="flex items-center justify-between w-full mx-none px-4 bd-black-800 bg-white rounded-md"
+        className="flex items-center justify-between w-full h-7 mx-none px-4 bd-black-800 bg-white rounded-md"
       >
         <GoSearch className="size-6 fill-color-dark-gray" />
         <input

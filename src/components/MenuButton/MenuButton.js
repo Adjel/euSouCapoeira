@@ -13,7 +13,7 @@ function MenuButton({ onClick }) {
 
   return (
     <>
-      <CgMenu onClick={onClicked} className="size-7" />
+      <CgMenu onClick={onClicked} className="size-7 sm:size-6" />
     </>
   );
 }

@@ -7,7 +7,7 @@ import BasketButton from "../BasketButton";
 
 function UserButtonsComponent() {
   return (
-    <div className="relative flex items-center justify-between">
+    <div className="relative flex h-7 items-center justify-between">
       <LanguageButton />
       <UserButton />
       <SlHeart className={styles.userNavItem} />
