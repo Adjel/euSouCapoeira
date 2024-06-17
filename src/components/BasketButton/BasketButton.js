@@ -1,22 +1,22 @@
 "use client";
 import React, { useState } from "react";
 import styles from "../UserButtonsComponent/userButtonsComponent.module.css";
-import { SlBasket } from "react-icons/sl";
 import nEBasket from "../../../public/nEBasket.svg";
-import basket from "../../../public/basket.svg";
+import basket from "./public/basket.svg";
+import Image from "next/image";
 
 function BasketButton() {
   const [basket, setBasket] = useState([]);
 
   return (
     <>
-      {basket.length === 0 ? (
+      {basket.length > 0 ? (
         <>
-          <nEBasket className={styles.userNavItem} />
+          <Image src={nEBasket} className={styles.userNavItem} />
           <span className="absolute right-0.5 -top-1 w-3 h-1">3</span>
         </>
       ) : (
-        <SlBasket className={styles.userNavItem} />
+        <Image src={basket} className={styles.userNavItem} />
       )}
     </>
   );
