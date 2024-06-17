@@ -1,16 +1,17 @@
 import React from "react";
-import { SlBasket } from "react-icons/sl";
+import { GoCircle } from "react-icons/go";
 import { RxAvatar } from "react-icons/rx";
-import { FaRegCircle } from "react-icons/fa6";
-import { FaRegHeart } from "react-icons/fa6";
+import { SlHeart } from "react-icons/sl";
+import { SlBasket } from "react-icons/sl";
+import styles from "./userButtonsComponent.module.css";
 
 function UserButtonsComponent() {
   return (
-    <div className="basics flex">
-      <RxAvatar />
-      <SlBasket />
-      <FaRegCircle />
-      <FaRegHeart />
+    <div className="flex items-center justify-between">
+      <GoCircle className={`${styles.userNavItem} ml-0`} />
+      <RxAvatar className={styles.userNavItem} />
+      <SlHeart className={styles.userNavItem} />
+      <SlBasket className={styles.userNavItem} />
     </div>
   );
 }

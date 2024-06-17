@@ -6,7 +6,7 @@ import BrandTitleComponent from "../BrandTitleComponent";
 
 function Header() {
   return (
-    <div className="basics py-3 bg-background-medium-gray w-full">
+    <header className="basicPadding py-3 bg-background-medium-gray w-full w-max-1512">
       <div className="flex justify-between">
         <BrandTitleComponent />
         <UserButtonsComponent />
@@ -15,7 +15,7 @@ function Header() {
         <SearchBar />
         <MenuButton />
       </div>
-    </div>
+    </header>
   );
 }
 
