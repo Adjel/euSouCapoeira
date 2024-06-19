@@ -1,11 +1,12 @@
-import Page from "@/app/page";
-import styles from "../styles/globals.css";
+import "../styles/globals.css";
+import Header from "@/components/header/Header";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Component {...pageProps}>
-      <Page />
-    </Component>
+    <>
+      <Header />
+      <Component {...pageProps} />
+    </>
   );
 }
 

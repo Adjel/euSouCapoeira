@@ -1,19 +1,26 @@
 import React from "react";
-import { SlBasket } from "react-icons/sl";
-import { RxAvatar } from "react-icons/rx";
-import { FaRegCircle } from "react-icons/fa6";
-import { HiMenu } from "react-icons/hi";
-import { FaRegHeart } from "react-icons/fa6";
+import { SlHeart } from "react-icons/sl";
+import styles from "./userButtonsComponent.module.css";
+import LanguageButton from "../LanguageButton";
+import UserButton from "../UserButton/UserButton";
+import BasketButton from "../BasketButton";
 
 function UserButtonsComponent() {
   return (
-    <div>
-      <RxAvatar />
-      <SlBasket />
-      <FaRegCircle />
-      <HiMenu />
-      <FaRegHeart />
-    </div>
+    <ul className="relative flex h-7 items-center justify-between">
+      <li>
+        <LanguageButton />
+      </li>
+      <li>
+        <UserButton />
+      </li>
+      <li>
+        <SlHeart className={styles.userNavItem} />
+      </li>
+      <li>
+        <BasketButton />
+      </li>
+    </ul>
   );
 }
 

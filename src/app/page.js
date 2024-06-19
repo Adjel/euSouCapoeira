@@ -1,6 +1,11 @@
-import styles from "./page.module.css";
-import Home from "@/pages/Home";
+import Home from "@/pages/home";
+import Header from "@/components/header";
 
 export default function Page() {
-  return <Home />;
+  return (
+    <>
+      <Header />
+      <Home />
+    </>
+  );
 }

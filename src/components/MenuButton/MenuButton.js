@@ -1,7 +1,21 @@
-import React from 'react';
+"use client";
+import React, { useState } from "react";
+import { CgMenu } from "react-icons/cg";
 
-function MenuButton() {
-  return <div></div>;
+function MenuButton({ onClick }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function onClicked() {
+    setIsOpen(!isOpen);
+    onClick(isOpen);
+    console.log({ isOpen });
+  }
+
+  return (
+    <>
+      <CgMenu onClick={onClicked} className="size-7 sm:size-6" />
+    </>
+  );
 }
 
 export default MenuButton;

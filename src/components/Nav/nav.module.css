@@ -1,0 +1,7 @@
+.nav {
+    @apply flex w-full h-8 gap-28 justify-center items-center bg-black;
+}
+
+.item {
+    @apply first-letter:uppercase text-color-text-medium-gray cursor-pointer;
+}
