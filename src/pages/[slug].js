@@ -1,3 +1,4 @@
+import useUserStore from "@/stores/useUserStore";
 import { useRouter } from "next/router";
 
 const DynamicPage = () => {
@@ -23,14 +24,33 @@ const DynamicPage = () => {
   
   OU 
   
-  */
   if (slug.includes("productCategory")) {
     // Logique pour les produits
     return <div>Page de catégorie de produit: {slug}</div>;
   } else {
     // Logique pour les catégories
-    return <h1>{slug}</h1>;
-  }
+  return <h1>{slug}</h1>;
+}
+*/
+
+  /**
+ * 
+const bears = useStore((state) => state.bears);
+const increasePopulation = useStore((state) => state.increasePopulation);
+const removeAllBears = useStore((state) => state.removeAllBears);
+*/
+
+  const bears = useUserStore((state) => state.bears);
+  const increasePopulation = useUserStore((state) => state.increasePopulation);
+  const removeAllBears = useUserStore((state) => state.removeAllBears);
+
+  return (
+    <div>
+      <h1>{bears} bears around here ...</h1>
+      <button onClick={increasePopulation}>Increase</button>
+      <button onClick={removeAllBears}>Remove all</button>
+    </div>
+  );
 };
 
 export default DynamicPage;
