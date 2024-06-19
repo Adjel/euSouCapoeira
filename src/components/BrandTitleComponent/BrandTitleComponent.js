@@ -1,10 +1,14 @@
 import React from "react";
 import icon from "../../../public/icon.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 function BrandTitleComponent() {
   return (
-    <div className="flex justify-center items-center uppercase">
+    <Link
+      href="/"
+      className="flex justify-center items-center uppercase cursor-pointer"
+    >
       Eu sou
       <Image
         alt="une photo d'un berimbau représentant une lettre C"
@@ -12,7 +16,7 @@ function BrandTitleComponent() {
         className="-mr-2"
       />
       apoeira
-    </div>
+    </Link>
   );
 }
 

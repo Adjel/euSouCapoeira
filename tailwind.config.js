@@ -20,6 +20,7 @@ module.exports = {
     extend: {
       colors: {
         "background-medium-gray": "var(--background-medium-gray)",
+        "color-text-medium-gray": "var(--color-text-medium-gray)",
         "color-dark-gray": "var(--color-dark-gray)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
