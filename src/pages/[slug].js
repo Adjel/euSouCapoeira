@@ -1,3 +1,4 @@
+import HomeHeader from "@/components/homePage/HomeHeader";
 import useUserStore from "@/stores/useUserStore";
 import { useRouter } from "next/router";
 
@@ -44,13 +45,7 @@ const removeAllBears = useStore((state) => state.removeAllBears);
   const increasePopulation = useUserStore((state) => state.increasePopulation);
   const removeAllBears = useUserStore((state) => state.removeAllBears);
 
-  return (
-    <div>
-      <h1>{bears} bears around here ...</h1>
-      <button onClick={increasePopulation}>Increase</button>
-      <button onClick={removeAllBears}>Remove all</button>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default DynamicPage;
