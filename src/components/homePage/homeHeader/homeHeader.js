@@ -17,7 +17,7 @@ function HomeHeader() {
   const imageWrapperStyle =
     "relative w-full h-36 md:h-48 lg:h-64 overflow-hidden";
 
-  const buttonStyle = "bg-black hidden lg:flex";
+  const buttonStyle = "bg-color-gold hidden lg:flex";
 
   function Item({ src }) {
     return (
@@ -38,7 +38,12 @@ function HomeHeader() {
 
   return (
     <div className="py-4 overflow-hidden">
-      <Carousel>
+      <Carousel
+        opts={{
+          align: "center",
+          loop: true,
+        }}
+      >
         <CarouselContent>
           <Item src={fake1} />
           <Item src={fake3} />
