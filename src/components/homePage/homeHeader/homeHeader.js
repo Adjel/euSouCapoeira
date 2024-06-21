@@ -8,17 +8,14 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import { adds } from "@/providers/addImagesProvider";
+import styles from "./homeHeader.module.css";
+import Categories from "@/components/Categories/Categories";
 
 function HomeHeader() {
-  const imageWrapperStyle =
-    "relative w-full h-36 md:h-48 lg:h-64 overflow-hidden";
-
-  const buttonStyle = "bg-color-gold hidden lg:flex";
-
   function Item({ src }) {
     return (
       <CarouselItem className="basis-4/6">
-        <div className={imageWrapperStyle}>
+        <div className={styles.imageWrapperStyle}>
           <Image
             className="rounded"
             src={src}
@@ -33,22 +30,25 @@ function HomeHeader() {
   }
 
   return (
-    <div className="py-4 overflow-hidden">
-      <Carousel
-        opts={{
-          align: "center",
-          loop: true,
-        }}
-      >
-        <CarouselContent>
-          {adds.map(({ alt, image }) => (
-            <Item src={image} alt={alt} />
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className={`left-12 ${buttonStyle}`} />
-        <CarouselNext className={`right-12 ${buttonStyle}`} />
-      </Carousel>
-    </div>
+    <>
+      <div className="py-4 overflow-hidden">
+        <Carousel
+          opts={{
+            align: "center",
+            loop: true,
+          }}
+        >
+          <CarouselContent>
+            {adds.map(({ alt, image }) => (
+              <Item src={image} alt={alt} />
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className={`left-12 ${styles.buttonStyle}`} />
+          <CarouselNext className={`right-12 ${styles.buttonStyle}`} />
+        </Carousel>
+        <Categories />
+      </div>
+    </>
   );
 }
 
