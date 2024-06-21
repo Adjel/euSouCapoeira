@@ -7,11 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
-import fake1 from "../../../../public/fakeApi/fakeAdd.jpg";
-import fake2 from "../../../../public/fakeApi/bateria.webp";
-import fake3 from "../../../../public/fakeApi/fake3.webp";
-import capo from "../../../../public/fakeApi/capo.jpg";
-import event from "../../../../public/fakeApi/event.jpg";
+import { adds } from "@/providers/addImagesProvider";
 
 function HomeHeader() {
   const imageWrapperStyle =
@@ -45,11 +41,9 @@ function HomeHeader() {
         }}
       >
         <CarouselContent>
-          <Item src={fake1} />
-          <Item src={fake3} />
-          <Item src={fake2} />
-          <Item src={capo} />
-          <Item src={event} />
+          {adds.map(({ alt, image }) => (
+            <Item src={image} alt={alt} />
+          ))}
         </CarouselContent>
         <CarouselPrevious className={`left-12 ${buttonStyle}`} />
         <CarouselNext className={`right-12 ${buttonStyle}`} />
