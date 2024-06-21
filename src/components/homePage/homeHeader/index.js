@@ -1,2 +1,2 @@
-export * from './homeHeader';
-export { default } from './homeHeader';
+export * from "./HomeHeader";
+export { default } from "./HomeHeader";
