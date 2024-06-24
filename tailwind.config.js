@@ -18,8 +18,13 @@ module.exports = {
       },
     },
     extend: {
+      height: {
+        0.2: "0.05rem",
+        0.1: "0.025rem",
+      },
       colors: {
         "background-medium-gray": "var(--background-medium-gray)",
+        "color-divider": "var(--color-divider)",
         "color-text-medium-gray": "var(--color-text-medium-gray)",
         "color-dark-gray": "var(--color-dark-gray)",
         "color-gold": "var(--color-gold)",
