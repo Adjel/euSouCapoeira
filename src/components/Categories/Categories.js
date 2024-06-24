@@ -3,7 +3,7 @@ import CategoryItem from "./CategoryItem";
 
 export default function Categories() {
   return (
-    <div className="basicPadding flex-col mt-10">
+    <div className="basicPadding flex-col mt-10 mb-16">
       <h1 className="text-2xl font-bold mb-2 text-center first-letter:uppercase">
         Nos Catégories
       </h1>

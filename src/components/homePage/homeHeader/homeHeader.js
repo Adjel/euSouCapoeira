@@ -10,6 +10,7 @@ import Image from "next/image";
 import { adds } from "@/providers/addImagesProvider";
 import styles from "./homeHeader.module.css";
 import Categories from "@/components/Categories/Categories";
+import RecommandsComponent from "@/components/RecommandsComponent";
 
 function HomeHeader() {
   function Item({ src }) {
@@ -47,6 +48,7 @@ function HomeHeader() {
           <CarouselNext className={`right-12 ${styles.buttonStyle}`} />
         </Carousel>
         <Categories />
+        <RecommandsComponent title="produit phares" />
       </div>
     </>
   );
