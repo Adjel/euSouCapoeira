@@ -1,12 +1,15 @@
 import React from "react";
 import ProductPreview from "../ProductPreview";
 
-function RecommandsComponent({ title }) {
+function RecommandsComponent({ title, products }) {
   return (
-    <div className="flex-col items-center">
-      <h2 className="h2title">{title}</h2>
-      <ProductPreview title={title} className="border-2 border-blue-700" />
-    </div>
+    products &&
+    products?.length > 0 && (
+      <div className="flex flex-col items-center px-2">
+        <h2 className="h2title text-center">{title}</h2>
+        <ProductPreview title={title} products={products} />
+      </div>
+    )
   );
 }
 

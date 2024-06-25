@@ -11,6 +11,7 @@ import { adds } from "@/providers/addImagesProvider";
 import styles from "./homeHeader.module.css";
 import Categories from "@/components/Categories/Categories";
 import RecommandsComponent from "@/components/RecommandsComponent";
+import { products as recommendedProducts } from "@/providers/RecomandsProvider";
 
 function HomeHeader() {
   function Item({ src }) {
@@ -48,7 +49,10 @@ function HomeHeader() {
           <CarouselNext className={`right-12 ${styles.buttonStyle}`} />
         </Carousel>
         <Categories />
-        <RecommandsComponent title="produit phares" />
+        <RecommandsComponent
+          title="produit phares"
+          products={recommendedProducts}
+        />
       </div>
     </>
   );
