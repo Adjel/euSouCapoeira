@@ -11,7 +11,10 @@ import { adds } from "@/providers/addImagesProvider";
 import styles from "./homeHeader.module.css";
 import Categories from "@/components/Categories/Categories";
 import RecommandsComponent from "@/components/RecommandsComponent";
-import { products as recommendedProducts } from "@/providers/RecomandsProvider";
+import {
+  products as recommendedProducts,
+  newProducts,
+} from "@/providers/RecomandsProvider";
 
 function HomeHeader() {
   function Item({ src }) {
@@ -53,6 +56,7 @@ function HomeHeader() {
           title="produit phares"
           products={recommendedProducts}
         />
+        <RecommandsComponent title="nouveaux produits" products={newProducts} />
       </div>
     </>
   );
