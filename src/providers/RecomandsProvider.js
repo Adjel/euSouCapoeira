@@ -85,3 +85,5 @@ export const products = [
     rateNbr: 0,
   },
 ];
+
+export const newProducts = products;
