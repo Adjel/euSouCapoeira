@@ -15,6 +15,7 @@ import {
   products as recommendedProducts,
   newProducts,
 } from "@/providers/RecomandsProvider";
+import PartenersComponent from "@/components/PartenersComponent";
 
 function HomeHeader() {
   function Item({ src }) {
@@ -57,6 +58,7 @@ function HomeHeader() {
           products={recommendedProducts}
         />
         <RecommandsComponent title="nouveaux produits" products={newProducts} />
+        <PartenersComponent />
       </div>
     </>
   );
