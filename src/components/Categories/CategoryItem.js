@@ -4,9 +4,13 @@ import Link from "next/link";
 
 function CategoryItem({ title, image, alt }) {
   const getLink = () => {
+    if (title === "instruments") return "/instruments";
     if (title === "vêtements") return "/vetements";
+    if (title === "entraînements") return "/entrainement";
+    if (title === "livres") return "/livres";
+    if (title === "ésotérisme") return "/esoterisme";
     else {
-      throw new Error("You need to pass a valid category");
+      throw new Error(`You need to pass a valid category`);
     }
   };
 
