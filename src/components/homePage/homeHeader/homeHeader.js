@@ -17,6 +17,7 @@ import {
 } from "@/providers/RecomandsProvider";
 import PartenersComponent from "@/components/PartenersComponent";
 import Reinsurance from "@/components/Reinsurance";
+import FooterTest from "@/components/Footer/FooterTest";
 
 function HomeHeader() {
   function Item({ src }) {
@@ -61,6 +62,7 @@ function HomeHeader() {
         <RecommandsComponent title="nouveaux produits" products={newProducts} />
         <PartenersComponent />
         <Reinsurance />
+        <FooterTest />
       </div>
     </>
   );

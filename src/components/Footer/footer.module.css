@@ -1,0 +1,13 @@
+.item {
+    @apply first-letter:uppercase text-white text-xs;
+}
+.icon {
+    @apply size-5
+}
+.gridItem {
+    @apply gap-4 h-fit
+}
+
+.col {
+    @apply flex flex-col gap-8 justify-center
+}
