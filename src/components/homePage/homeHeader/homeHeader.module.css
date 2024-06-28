@@ -1,0 +1,7 @@
+.imageWrapperStyle {
+    @apply relative w-full h-36 md:h-48 lg:h-64 overflow-hidden
+}
+
+.buttonStyle {
+   @apply bg-color-gold hidden lg:flex
+}

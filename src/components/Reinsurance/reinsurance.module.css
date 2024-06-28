@@ -1,0 +1,11 @@
+.icon {
+    @apply size-12
+}
+
+.item {
+    @apply flex items-center
+}
+
+.desc {
+    @apply items-center pl-4
+}

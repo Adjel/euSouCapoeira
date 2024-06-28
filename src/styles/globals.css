@@ -4,10 +4,17 @@
 
 :root {
     --background-medium-gray: rgb(243 243 243);
+    --color-divider: rgb(232 232 232);
     --color-text-medium-gray: rgb(243 243 243);
     --color-dark-gray: rgb(135 139 148);
+    --color-gold: rgb(190 150 85);
+    --extreme-dark-gray: rgb(28 28 28);
 }
 
 .basicPadding {
     @apply px-7;
+}
+
+.h2title {
+    @apply text-center text-2xl mb-6 font-bold first-letter:uppercase;
 }
