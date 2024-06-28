@@ -28,6 +28,7 @@ module.exports = {
         "color-text-medium-gray": "var(--color-text-medium-gray)",
         "color-dark-gray": "var(--color-dark-gray)",
         "color-gold": "var(--color-gold)",
+        "extreme-dark-gray": "var(--extreme-dark-gray)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
