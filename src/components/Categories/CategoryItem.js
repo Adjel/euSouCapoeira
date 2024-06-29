@@ -15,12 +15,13 @@ function CategoryItem({ title, image, alt }) {
   };
 
   return (
-    <div className="flex items-center p-2 pr-3">
+    <Link
+      href={getLink()}
+      className="flex items-center p-2 pr-3 hover:text-color-gold"
+    >
       <Image className="size-24 pr-4" src={image} alt={alt} />
-      <Link href={getLink()}>
-        <h2 className="first-letter:uppercase">{title}</h2>
-      </Link>
-    </div>
+      <h2 className="first-letter:uppercase">{title}</h2>
+    </Link>
   );
 }
 
