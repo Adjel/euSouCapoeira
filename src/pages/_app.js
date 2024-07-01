@@ -13,7 +13,6 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <Reinsurance />
       <Footer />
-      <LoginModal />
     </QueryClientProvider>
   );
 }

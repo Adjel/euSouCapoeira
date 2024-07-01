@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import { create } from "zustand";
 
 const useUserStore = create((set) => ({
@@ -12,3 +15,13 @@ const useLoginModalStore = create((set) => ({
 }));
 
 export { useUserStore, useLoginModalStore };
+
+const LoginModal = () => {
+  const { isOpen, setIsOpen } = useLoginModalStore();
+
+  useEffect(() => {
+    console.log("isOpen state:", isOpen);
+  }, [isOpen]);
+};
+
+export default LoginModal;
