@@ -18,6 +18,9 @@ module.exports = {
       },
     },
     extend: {
+      width: {
+        31.5: "31.5rem", // 504px
+      },
       height: {
         0.2: "0.05rem",
         0.1: "0.025rem",

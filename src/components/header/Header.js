@@ -10,7 +10,6 @@ function Header() {
   return (
     <>
       <header className="relative basicPadding pt-3 pb-4 lg:px-10 lg:py-4 bg-background-medium-gray w-full w-max-1512">
-        <LoginModal className="absolute top-0 bottom-0 right-0 border-2 border-blue-600" />
         <div className="block sm:hidden">
           <div className="flex justify-between">
             <BrandTitleComponent />
