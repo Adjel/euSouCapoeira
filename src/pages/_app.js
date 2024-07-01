@@ -4,14 +4,16 @@ import Header from "@/components/header/Header";
 import "../styles/globals.css";
 import Reinsurance from "@/components/Reinsurance";
 import Footer from "@/components/Footer";
+import LoginModal from "@/components/LoginModal";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient} className="relative">
       <Header />
       <Component {...pageProps} />
       <Reinsurance />
       <Footer />
+      <LoginModal />
     </QueryClientProvider>
   );
 }

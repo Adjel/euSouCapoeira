@@ -6,4 +6,9 @@ const useUserStore = create((set) => ({
   clearUser: () => set({ user: null }),
 }));
 
-export default useUserStore;
+const useLoginModalStore = create((set) => ({
+  isOpen: false,
+  setIsOpen: (isOpen) => set({ isOpen }),
+}));
+
+export { useUserStore, useLoginModalStore };
