@@ -15,10 +15,7 @@ function UserButton() {
   }
 
   return (
-    <div
-      onClick={handleClick}
-      className="w-fit cursor-pointer border-2 border-red-600"
-    >
+    <div onClick={handleClick} className="w-fit cursor-pointer">
       {user ? (
         <Image className={styles.userNavItem} src={connectedUserIcon} />
       ) : (
