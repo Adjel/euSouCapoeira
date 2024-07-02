@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <Reinsurance />
       <Footer />
-      <LoginModal className="absolute top-0 bottom-0 right-0 border-2 border-blue-600" />
+      <LoginModal />
     </QueryClientProvider>
   );
 }

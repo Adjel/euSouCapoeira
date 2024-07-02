@@ -1,14 +1,22 @@
 "use client";
 import React, { useEffect } from "react";
-import { useLoginModalStore, useUserStore } from "@/stores/useUserStore";
+import {
+  useLoginModalStore,
+  useUserStore,
+  useUserLogger,
+} from "@/stores/useUserStore";
 import { IoCloseOutline } from "react-icons/io5";
 import DashboardNav from "../DashboardNav";
 import SignUpForm from "../SignUpForm";
 import Link from "next/link";
 
 function LoginModal() {
-  const { isOpen, setIsOpen } = useLoginModalStore();
+  const { isOpen, toggle } = useLoginModalStore();
   const { user } = useUserStore;
+
+  useEffect(() => {
+    console.log({ user });
+  }, [user]);
 
   const linkStyle =
     "underline underline-offset-8 text-lg hover:text-color-gold first-letter:uppercase";
@@ -32,7 +40,7 @@ function LoginModal() {
             </h2>
             <IoCloseOutline
               className="size-12 cursor-pointer"
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={toggle}
             />
           </header>
           {user ? (
@@ -43,22 +51,14 @@ function LoginModal() {
             <>
               <SignUpForm />
               <div className="flex flex-col mt-6 gap-8 items-center">
-                <Link
-                  href="/pw_lost"
-                  className={linkStyle}
-                  onClick={() => setIsOpen(false)}
-                >
+                <Link href="/pw_lost" className={linkStyle} onClick={toggle}>
                   vous avez oublié votre mot de pase ?
                 </Link>
                 <hr className="w-full borderb-2 border-color-dark-gray" />
                 <div className="text-extreme-dark-gray">
                   Pas encore de compte ?
                 </div>
-                <Link
-                  href="/signup"
-                  className={linkStyle}
-                  onClick={() => setIsOpen(false)}
-                >
+                <Link href="/signup" className={linkStyle} onClick={toggle}>
                   s'inscrire maintenant
                 </Link>
               </div>
@@ -66,6 +66,7 @@ function LoginModal() {
           )}
         </aside>
       </div>
+      <useUserLogger />
     </div>
   );
 }

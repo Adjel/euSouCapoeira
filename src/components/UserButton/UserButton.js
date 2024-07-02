@@ -7,15 +7,11 @@ import Image from "next/image";
 import { useLoginModalStore, useUserStore } from "@/stores/useUserStore";
 
 function UserButton() {
-  const { isOpen, setIsOpen } = useLoginModalStore();
-  const { user, setUser } = useUserStore();
-
-  function handleClick() {
-    setIsOpen(!isOpen);
-  }
+  const { toggle } = useLoginModalStore();
+  const { user } = useUserStore();
 
   return (
-    <div onClick={handleClick} className="w-fit cursor-pointer">
+    <div onClick={toggle} className="w-fit cursor-pointer">
       {user ? (
         <Image className={styles.userNavItem} src={connectedUserIcon} />
       ) : (

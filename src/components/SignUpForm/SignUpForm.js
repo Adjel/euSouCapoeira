@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSignUp } from "@/stores/useUserStore";
+import { FaRegEyeSlash } from "react-icons/fa";
+import { IoEyeOutline } from "react-icons/io5";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex = /^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
@@ -34,6 +36,7 @@ const formSchema = z.object({
 
 function SignUpForm() {
   const { signUp } = useSignUp();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   // 1. Define your form.
   const form = useForm({
@@ -75,12 +78,27 @@ function SignUpForm() {
             <FormItem>
               <FormLabel>Mot de passe</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Mot de passe"
-                  {...field}
-                  isError={!!form.formState.errors.password}
-                />
+                <div className="relative">
+                  <Input
+                    placeholder="Mot de passe"
+                    {...field}
+                    isError={!!form.formState.errors.password}
+                    // !isPasswordVisible because password type hide the password by default
+                    isPassword={!isPasswordVisible}
+                  />
+                  <button
+                    className="absolute top-0 bottom-0 right-0 mr-6"
+                    onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                  >
+                    {isPasswordVisible ? (
+                      <IoEyeOutline className="size-6 text-extreme-dark-gray" />
+                    ) : (
+                      <FaRegEyeSlash className="size-6 text-extreme-dark-gray" />
+                    )}
+                  </button>
+                </div>
               </FormControl>
+
               <FormMessage />
             </FormItem>
           )}

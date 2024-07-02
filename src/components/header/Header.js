@@ -4,7 +4,6 @@ import SearchBar from "../SearchBar";
 import MenuButton from "../MenuButton";
 import BrandTitleComponent from "../BrandTitleComponent";
 import Nav from "../Nav";
-import LoginModal from "../LoginModal";
 
 function Header() {
   return (
