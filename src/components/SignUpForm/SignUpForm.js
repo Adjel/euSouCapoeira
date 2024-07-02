@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useSignUp } from "@/stores/useUserStore";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordRegex = /^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
@@ -24,14 +25,16 @@ const formSchema = z.object({
     .regex(emailRegex, "Invalid email address"),
   password: z
     .string()
-    .min(8, "Le mot de passe doit comporter au moins 8 caractères.")
+    .min(1, "Un mot de passe est requis.")
     .regex(
       passwordRegex,
-      "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
+      "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
     ),
 });
 
 function SignUpForm() {
+  const { signUp } = useSignUp();
+
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -42,9 +45,7 @@ function SignUpForm() {
   });
 
   function onSubmit(values) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    signUp(values.email, values.password);
   }
 
   return (
