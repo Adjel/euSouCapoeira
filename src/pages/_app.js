@@ -4,6 +4,7 @@ import Header from "@/components/header/Header";
 import "../styles/globals.css";
 import Reinsurance from "@/components/Reinsurance";
 import Footer from "@/components/Footer";
+import LoginModal from "@/components/LoginModal";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <Reinsurance />
       <Footer />
+      <LoginModal />
     </QueryClientProvider>
   );
 }

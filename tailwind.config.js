@@ -18,6 +18,9 @@ module.exports = {
       },
     },
     extend: {
+      width: {
+        31.5: "31.5rem", // 504px
+      },
       height: {
         0.2: "0.05rem",
         0.1: "0.025rem",
@@ -28,6 +31,7 @@ module.exports = {
         "color-text-medium-gray": "var(--color-text-medium-gray)",
         "color-dark-gray": "var(--color-dark-gray)",
         "color-gold": "var(--color-gold)",
+        "color-error": "var(--color-error)",
         "extreme-dark-gray": "var(--extreme-dark-gray)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

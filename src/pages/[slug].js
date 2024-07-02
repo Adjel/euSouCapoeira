@@ -41,11 +41,7 @@ const increasePopulation = useStore((state) => state.increasePopulation);
 const removeAllBears = useStore((state) => state.removeAllBears);
 */
 
-  const bears = useUserStore((state) => state.bears);
-  const increasePopulation = useUserStore((state) => state.increasePopulation);
-  const removeAllBears = useUserStore((state) => state.removeAllBears);
-
-  return <div></div>;
+  return <div>{slug}</div>;
 };
 
 export default DynamicPage;
