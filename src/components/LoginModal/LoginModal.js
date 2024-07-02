@@ -1,10 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import {
-  useLoginModalStore,
-  useUserStore,
-  useUserLogger,
-} from "@/stores/useUserStore";
+import { useLoginModalStore, useUserStore } from "@/stores/useUserStore";
 import { IoCloseOutline } from "react-icons/io5";
 import DashboardNav from "../DashboardNav";
 import SignUpForm from "../SignUpForm";
@@ -12,7 +8,7 @@ import Link from "next/link";
 
 function LoginModal() {
   const { isOpen, toggle } = useLoginModalStore();
-  const { user } = useUserStore;
+  const { user } = useUserStore();
 
   useEffect(() => {
     console.log({ user });
@@ -43,6 +39,14 @@ function LoginModal() {
               onClick={toggle}
             />
           </header>
+          {user && (
+            <div>
+              <div>
+                {user?.firstName} {user?.lastName}
+              </div>
+              <div>{user?.email}</div>
+            </div>
+          )}
           {user ? (
             <>
               <DashboardNav />

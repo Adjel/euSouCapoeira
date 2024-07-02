@@ -24,9 +24,7 @@ const useSignUp = create((set) => ({
       const user = await createAccount({ email, password });
       const { setUser } = useUserStore.getState();
       const { setIsOpen } = useLoginModalStore.getState();
-      console.log({ user });
       setUser(user);
-      console.log({ user });
       // Modal have to autoclose when user is connected
       setIsOpen(false);
       // Toast
