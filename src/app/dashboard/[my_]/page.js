@@ -2,20 +2,27 @@
 import DashboardNav from "@/components/DashboardNav";
 import { useUserStore } from "@/stores/useUserStore";
 import React, { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
-export default function dashboard() {
+export default function dashboard({ params }) {
   const { user } = useUserStore();
 
   const router = useRouter();
-  const { my_ } = router.query;
+
+  const my_ = params.my_;
 
   let content = null;
   switch (my_) {
-    case "information":
+    case "mes_informations":
       content = <div>Contenu 1</div>;
       break;
-    case "content2":
+    case "mes_commandes":
+      content = <div>Contenu 2</div>;
+      break;
+    case "mes_adresses":
+      content = <div>Contenu 2</div>;
+      break;
+    case "retour":
       content = <div>Contenu 2</div>;
       break;
     default:
@@ -24,7 +31,7 @@ export default function dashboard() {
   }
 
   useEffect(() => {
-    if (!user) router.push("/");
+    if (!user) router.push("/login");
   }, [user]);
 
   return (
