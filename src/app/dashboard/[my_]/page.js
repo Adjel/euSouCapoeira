@@ -3,6 +3,7 @@ import DashboardNav from "@/components/DashboardNav";
 import { useUserStore } from "@/stores/useUserStore";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 export default function dashboard({ params }) {
   const { user } = useUserStore();
@@ -14,7 +15,29 @@ export default function dashboard({ params }) {
   let content = null;
   switch (my_) {
     case "mes_informations":
-      content = <div>Contenu 1</div>;
+      content = (
+        <section className="flex flex-col  p-7 gap-8">
+          <header className="flex w-full lg:gap-16 lg:items-baseline">
+            <h2 className="text-5xl font-bold">Carnet d'adresses</h2>
+            <span className="lg:ml-auto">
+              <Button>Ajouter l'adresse</Button>
+            </span>
+          </header>
+          <span className="flex flex-col gap-4">
+            <span className="flex w-1/2 gap-16">
+              <h3 className="text-2xl font-bold">Adresse de facturation</h3>
+              <span className="ml-auto">ICON</span>
+            </span>
+            <span>
+              <div className={""}>entreprise</div>
+              <div>username</div>
+              <div>n° et rue</div>
+              <div>cp et ville</div>
+              <div>pays</div>
+            </span>
+          </span>
+        </section>
+      );
       break;
     case "mes_commandes":
       content = <div>Contenu 2</div>;
@@ -48,13 +71,7 @@ export default function dashboard({ params }) {
         </div>
         <DashboardNav isModal={false} />
       </aside>
-      <div>
-        <header className="flex flex-col">
-          <h2>TITLE</h2>
-          <h3>SUB TITLE</h3>
-        </header>
-        <div className="w-full h-full border-2 border-blue-600">{content}</div>
-      </div>
+      <div className="w-full h-full border-2 border-blue-600">{content}</div>
     </div>
   );
 }
