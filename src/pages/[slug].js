@@ -1,5 +1,4 @@
 import HomeHeader from "@/components/homePage/HomeHeader";
-import useUserStore from "@/stores/useUserStore";
 import { useRouter } from "next/router";
 
 const DynamicPage = () => {

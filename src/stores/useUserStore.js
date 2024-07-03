@@ -3,22 +3,7 @@ import createAccount from "@/providers/logInProvider";
 import { toast } from "@/components/ui/use-toast";
 
 const useUserStore = create((set) => ({
-  //user: null,
-  user: {
-    firstName: "ad",
-    lastName: "tou",
-    email: "toto@toto.com",
-    adress: {
-      adress1: "",
-    },
-    commands: [
-      {
-        date: "",
-        articles: [],
-        totalPrice: "",
-      },
-    ],
-  },
+  user: null,
   setUser: (user) => set({ user }),
   clearUser: () => set({ user: null }),
 }));

@@ -18,7 +18,7 @@ function DashboardNav({ isModal = true }) {
       }`}
     >
       <li className={liStyle}>
-        <Link href="/dashboard" className={`${linkStyle}`}>
+        <Link href="/dashboard/informations" className={`${linkStyle}`}>
           <div className="textStyle">Informations</div>
         </Link>
       </li>

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { SlHeart } from "react-icons/sl";
 import styles from "./userButtonsComponent.module.css";
