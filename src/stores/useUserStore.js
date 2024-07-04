@@ -5,12 +5,27 @@ import { toast } from "@/components/ui/use-toast";
 const useUserStore = create((set) => ({
   //user: null,
   user: {
-    firstName: "ad",
-    lastName: "tou",
-    email: "toto@toto.com",
-    adress: {
-      adress1: "",
-    },
+    firstName: "Patrick",
+    lastName: "toupie",
+    email: "P-toupie@toto.com",
+    adress: [
+      {
+        isCurrent: "",
+        firstName: "Patrick",
+        lastName: "toupie",
+        nbrAndStreet: "10 rue du vent",
+        codeAndCity: "41000 Dally",
+        country: "Thailand",
+      },
+      {
+        isCurrent: "",
+        firstName: "Jean",
+        lastName: "toupie",
+        nbrAndStreet: "12 rue de la montagne",
+        codeAndCity: "70000 David",
+        country: "Panama",
+      },
+    ],
     commands: [
       {
         date: "",

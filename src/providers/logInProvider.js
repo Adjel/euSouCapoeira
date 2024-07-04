@@ -6,9 +6,13 @@ const createAccount = async ({ email, password }) => {
         firstName: "ad",
         lastName: "tou",
         email: "toto@toto.com",
-        adress: {
-          adress1: "",
-        },
+        adress: [
+          {
+            nbrAndStreet: "10",
+            codeAndCity: "41000 Dally",
+            country: "Thailand",
+          },
+        ],
         commands: [
           {
             date: "",
