@@ -1,18 +1,16 @@
 "use client";
 import DashboardNav from "@/components/DashboardNav";
 import { useUserStore } from "@/stores/useUserStore";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import UserInfoComponent from "@/components/UserInfoComponent";
-import { RiDeleteBinLine } from "react-icons/ri";
 import { FaPen } from "react-icons/fa";
 
 export default function dashboard({ params }) {
   const { user } = useUserStore();
 
-  const router = useRouter();
-
   const my_ = params.my_;
+  const router = useRouter();
 
   let content = null;
   switch (my_) {
@@ -30,14 +28,7 @@ export default function dashboard({ params }) {
       content = <div>Contenu 2</div>;
       break;
     case "mes_adresses":
-      content = (
-        <UserInfoComponent
-          isInfo={false}
-          title={"Carnet d'adresses"}
-          subTitle={"Adresse de facturation"}
-          iconButton={RiDeleteBinLine}
-        />
-      );
+      content = <UserInfoComponent isInfo={false} />;
       break;
     case "retour":
       content = <div>Contenu 2</div>;
