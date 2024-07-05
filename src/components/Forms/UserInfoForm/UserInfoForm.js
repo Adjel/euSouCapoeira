@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import styles from "../Forms.module.css";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -12,66 +13,66 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import styles from "./userAdressForm.module.css";
 import { useUserStore } from "@/stores/useUserStore";
+import { emailRegex, passwordRegex } from "@/lib/utils";
+import PasswordInput from "@/components/PasswordInput";
 
 const errorMessage = "Merci de saisir votre";
 
-const formSchema = z.object({
-  firstName: z.string().min(1, `${errorMessage} prénom.`),
-  lastName: z.string().min(1, `${errorMessage} nom de famille.`),
-  street: z.string().min(1, `${errorMessage} rue et numéro de rue.`),
-  zipCode: z.string().min(1, `${errorMessage} code postal.`),
-  city: z.string().min(1, `${errorMessage} ville.`),
-});
+function UserInfoForm({ cancel }) {
+  const formSchema = z
+    .object({
+      firstName: z.string().min(1, `${errorMessage} prénom.`),
+      lastName: z.string().min(1, `${errorMessage} nom de famille.`),
+      newEmail: z
+        .string()
+        .min(1, `${errorMessage} votre adresse e-mail.`)
+        .regex(emailRegex, "L'adresse email fournie n'a pas un format valide"),
+      oldPassword: z.string().optional(),
+      newPassword: z.string().optional(),
+    })
+    .superRefine((data, ctx) => {
+      if (data.newPassword && !passwordRegex.test(data.newPassword || "")) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Le nouveau mot de passe n'a pas un format valide",
+          path: ["newPassword"],
+        });
+        if (data.newPassword && !data.oldPassword)
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message:
+              "Vous devez entrer votre ancien mot de passe pour le changer",
+            path: ["oldPassword"],
+          });
+      }
+    });
 
-function UserAdressForm({ cancel }) {
-  const { addAdress } = useUserStore();
+  const { user, updateUser } = useUserStore();
 
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      street: "",
-      zipCode: "",
-      city: "",
-      country: "France",
+      firstName: user.firstName,
+      lastName: user.lastName,
+      newEmail: user.email,
+      oldPassword: null,
+      newPassword: null,
     },
   });
 
   function onSubmit(values) {
-    if (addAdress(values)) cancel();
+    if (updateUser(values)) cancel();
   }
 
   return (
     <section className="border-4 py-6 px-48">
       <Form {...form}>
         <h2 className="text-2xl font-bold text-center my-8">
-          Modifier l'adresse de livraison
+          Modifier mes informations
         </h2>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="business"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      placeholder="Société/institution/Groupe/"
-                      {...field}
-                    />
-                    <span className="absolute top-0 bottom-0 right-0 my-auto mr-6 h-fit p-1 text-xs text-white rounded bg-color-hover-cancel-button">
-                      optionnel
-                    </span>
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <FormField
             control={form.control}
             name="firstName"
@@ -107,14 +108,14 @@ function UserAdressForm({ cancel }) {
           />
           <FormField
             control={form.control}
-            name="street"
+            name="newEmail"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
                   <Input
-                    placeholder="Rue et numéro de maison"
+                    placeholder="Votre email"
                     {...field}
-                    isError={!!form.formState.errors.street}
+                    isError={!!form.formState.errors.newEmail}
                   />
                 </FormControl>
                 <FormMessage />
@@ -123,14 +124,14 @@ function UserAdressForm({ cancel }) {
           />
           <FormField
             control={form.control}
-            name="zipCode"
+            name="oldPassword"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input
-                    placeholder="Code postal"
-                    {...field}
-                    isError={!!form.formState.errors.zipCode}
+                  <PasswordInput
+                    placeholder="Ancien mot de passe"
+                    field={field}
+                    isError={!!form.formState.errors.oldPassword}
                   />
                 </FormControl>
                 <FormMessage />
@@ -139,26 +140,16 @@ function UserAdressForm({ cancel }) {
           />
           <FormField
             control={form.control}
-            name="city"
+            name="newPassword"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input
-                    placeholder="Ville"
-                    {...field}
-                    isError={!!form.formState.errors.city}
+                  <PasswordInput
+                    placeholder="Nouveau mot de passe"
+                    field={field}
+                    isError={!!form.formState.errors.newPassword}
                   />
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="country"
-            render={({ field }) => (
-              <FormItem>
-                <Input placeholder="France" {...field} />
                 <FormMessage />
               </FormItem>
             )}
@@ -175,4 +166,4 @@ function UserAdressForm({ cancel }) {
   );
 }
 
-export default UserAdressForm;
+export default UserInfoForm;

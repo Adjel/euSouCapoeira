@@ -3,7 +3,7 @@ import React from "react";
 import { useLoginModalStore, useUserStore } from "@/stores/useUserStore";
 import { IoCloseOutline } from "react-icons/io5";
 import DashboardNav from "../DashboardNav";
-import SignUpForm from "../SignUpForm";
+import SignUpForm from "../Forms/SignUpForm";
 import Link from "next/link";
 
 function LoginModal() {

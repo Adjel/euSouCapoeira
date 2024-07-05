@@ -21,3 +21,7 @@
 .h2title {
     @apply text-center text-2xl mb-6 font-bold first-letter:uppercase;
 }
+
+.cancelButton {
+    @apply text-black font-bold bg-color-cancel-button hover:bg-color-hover-cancel-button
+}

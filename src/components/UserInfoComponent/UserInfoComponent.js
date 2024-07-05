@@ -5,7 +5,8 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { ImCheckmark } from "react-icons/im";
 import { FaCheckDouble } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import UserAdressForm from "../UserAdressForm";
+import UserAdressForm from "../Forms/UserAdressForm";
+import UserInfoForm from "../Forms/UserInfoForm";
 
 function UserInfoComponent({
   isInfo,
@@ -16,6 +17,7 @@ function UserInfoComponent({
   const { user, setCurrentAddress, deleteAddress } = useUserStore();
   const [isModifying, setIsModifying] = useState(false);
 
+  // Component is Adresses component by default, but can be something else like userInfo component
   if (isInfo === undefined) throw new Error("isInfo is undefined");
 
   const router = useRouter();
@@ -23,6 +25,11 @@ function UserInfoComponent({
   useEffect(() => {
     if (!user) router.push("/login");
   }, [user]);
+
+  function handleIsModifyingInfo(event) {
+    if (event) event.preventDefault();
+    setIsModifying(!isModifying);
+  }
 
   return (
     <section className="flex flex-col p-7 gap-8">
@@ -33,7 +40,7 @@ function UserInfoComponent({
           </h2>
           <span className="lg:ml-auto">
             {!isInfo && !isModifying && (
-              <Button onClick={() => setIsModifying(!isModifying)}>
+              <Button onClick={(event) => handleIsModifyingInfo(event)}>
                 Ajouter une adresse
               </Button>
             )}
@@ -68,13 +75,13 @@ function UserInfoComponent({
                     ) : (
                       <>
                         <span
-                          className="p-4 border-2 rounded-full hover:border-color-gold hover:text-color-gold cursor:pointer"
+                          className="p-4 border-2 rounded-full hover:border-color-gold hover:text-color-gold cursor-pointer"
                           onClick={() => deleteAddress(date)}
                         >
                           <RiDeleteBinLine className="ml-auto size-8" />
                         </span>
                         <span
-                          className="p-4 border-2 rounded-full hover:border-color-gold hover:text-color-gold cursor:pointer"
+                          className="p-4 border-2 rounded-full hover:border-color-gold hover:text-color-gold cursor-pointer"
                           onClick={() => setCurrentAddress(date)}
                         >
                           <ImCheckmark className="ml-auto size-8" />
@@ -102,7 +109,10 @@ function UserInfoComponent({
             <section className="flex flex-col gap-4">
               <span className="flex w-1/2 gap-16 items-top">
                 <h3 className="text-2xl font-bold">{subTitle}</h3>
-                <span className="p-4 border-2 rounded-full hover:border-color-gold hover:text-color-gold cursor:pointer">
+                <span
+                  className="p-4 border-2 rounded-full hover:border-color-gold hover:text-color-gold cursor-pointer"
+                  onClick={(event) => handleIsModifyingInfo(event)}
+                >
                   <IconButton className="ml-auto size-8 hover:text-color-gold" />
                 </span>
               </span>
@@ -118,9 +128,19 @@ function UserInfoComponent({
           )}
         </>
       ) : (
-        <section>
-          <UserAdressForm cancel={() => setIsModifying(!isModifying)} />
-        </section>
+        <>
+          {!isInfo ? (
+            <section>
+              <UserAdressForm
+                cancel={(event) => handleIsModifyingInfo(event)}
+              />
+            </section>
+          ) : (
+            <>
+              <UserInfoForm cancel={(event) => handleIsModifyingInfo(event)} />
+            </>
+          )}
+        </>
       )}
     </section>
   );

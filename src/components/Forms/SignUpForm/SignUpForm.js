@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -14,11 +14,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSignUp, useSignUpMock } from "@/stores/useUserStore";
-import { FaRegEyeSlash } from "react-icons/fa";
-import { IoEyeOutline } from "react-icons/io5";
-
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const passwordRegex = /^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+import { emailRegex, passwordRegex } from "@/lib/utils";
+import PasswordInput from "@/components/PasswordInput";
 
 const formSchema = z.object({
   /*
@@ -26,7 +23,7 @@ const formSchema = z.object({
   email: z
     .string()
     .min(1, "Ce champ est requis")
-    .regex(emailRegex, "Invalid email address"),
+    .regex(emailRegex, "l'adresse email fournie n'a pas un format valide"),
   password: z
     .string()
     .min(1, "Un mot de passe est requis.")
@@ -40,7 +37,6 @@ const formSchema = z.object({
 function SignUpForm() {
   const { signUp } = useSignUp();
   const { signUpMock } = useSignUpMock();
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   // 1. Define your form.
   const form = useForm({
@@ -83,27 +79,11 @@ function SignUpForm() {
             <FormItem>
               <FormLabel>Mot de passe</FormLabel>
               <FormControl>
-                <div className="relative">
-                  <Input
-                    placeholder="Mot de passe"
-                    {...field}
-                    isError={!!form.formState.errors.password}
-                    // !isPasswordVisible because password type hide the password by default
-                    isPassword={!isPasswordVisible}
-                  />
-                  <button
-                    className="absolute top-0 bottom-0 right-0 mr-6"
-                    onClick={() => setIsPasswordVisible(!isPasswordVisible)}
-                  >
-                    {isPasswordVisible ? (
-                      <IoEyeOutline className="size-6 text-extreme-dark-gray" />
-                    ) : (
-                      <FaRegEyeSlash className="size-6 text-extreme-dark-gray" />
-                    )}
-                  </button>
-                </div>
+                <PasswordInput
+                  isError={!!form.formState.errors.password}
+                  field={field}
+                />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}

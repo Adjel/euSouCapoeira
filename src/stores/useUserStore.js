@@ -5,6 +5,10 @@ import { toast } from "@/components/ui/use-toast";
 const useUserStore = create((set) => ({
   user: null,
   setUser: (user) => set({ user }),
+  updateUser: (updatedUser) => {
+    set((state) => ({ user: { ...state.user, ...updatedUser } }));
+    return true;
+  },
   clearUser: () => set({ user: null }),
   addAdress(address) {
     const date = new Date();
@@ -25,6 +29,7 @@ const useUserStore = create((set) => ({
     });
     return true;
   },
+
   setCurrentAddress: (date) =>
     set((state) => {
       const updatedAddresses = state.user.addresses.map((address) => ({
@@ -38,6 +43,7 @@ const useUserStore = create((set) => ({
         },
       };
     }),
+
   deleteAddress: (date) =>
     set((state) => {
       const addresses = state.user.addresses.filter(
