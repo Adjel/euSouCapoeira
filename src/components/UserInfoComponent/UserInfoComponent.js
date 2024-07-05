@@ -5,15 +5,15 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { ImCheckmark } from "react-icons/im";
 import { FaCheckDouble } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import UserAdressForm from "../UserAdressForm";
 
 function UserInfoComponent({
   isInfo,
   title,
   subTitle,
   iconButton: IconButton,
-  onClick,
 }) {
-  const { user, setCurrentAddress, addAdress, deleteAddress } = useUserStore();
+  const { user, setCurrentAddress, deleteAddress } = useUserStore();
   const [isModifying, setIsModifying] = useState(false);
 
   if (isInfo === undefined) throw new Error("isInfo is undefined");
@@ -21,8 +21,7 @@ function UserInfoComponent({
   const router = useRouter();
 
   useEffect(() => {
-    console.log({ user });
-    //if (!user) router.push("/login");
+    if (!user) router.push("/login");
   }, [user]);
 
   return (
@@ -51,8 +50,9 @@ function UserInfoComponent({
                 isCurrent,
                 firstName,
                 lastName,
-                nbrAndStreet,
-                codeAndCity,
+                street,
+                zipCode,
+                city,
                 country,
               }) => (
                 <section
@@ -88,8 +88,10 @@ function UserInfoComponent({
                       <div>
                         {firstName} {lastName}
                       </div>
-                      <div>{nbrAndStreet}</div>
-                      <div>{codeAndCity}</div>
+                      <div>{street}</div>
+                      <div>
+                        {zipCode} {city}
+                      </div>
                       <div>{country}</div>
                     </>
                   </span>
@@ -117,7 +119,7 @@ function UserInfoComponent({
         </>
       ) : (
         <section>
-          <Button onClick={() => setIsModifying(!isModifying)}>annuler</Button>
+          <UserAdressForm cancel={() => setIsModifying(!isModifying)} />
         </section>
       )}
     </section>

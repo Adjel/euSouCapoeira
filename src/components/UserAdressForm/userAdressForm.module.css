@@ -1,0 +1,3 @@
+.cancelButton {
+    @apply text-black font-bold bg-color-cancel-button hover:bg-color-hover-cancel-button
+}

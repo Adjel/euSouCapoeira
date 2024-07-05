@@ -12,8 +12,9 @@ const createAccount = async ({ email, password }) => {
             isCurrent: false,
             firstName: "Patrick",
             lastName: "toupie",
-            nbrAndStreet: "10 rue du vent",
-            codeAndCity: "41000 Dally",
+            street: "10 rue du vent",
+            zipCode: "41000",
+            city: "Dally",
             country: "Thailand",
           },
           {
@@ -21,8 +22,9 @@ const createAccount = async ({ email, password }) => {
             isCurrent: true,
             firstName: "Jean",
             lastName: "toupie",
-            nbrAndStreet: "12 rue de la montagne",
-            codeAndCity: "70000 David",
+            street: "12 rue de la montagne",
+            zipCode: "70000",
+            city: "David",
             country: "Panama",
           },
         ],
@@ -43,6 +45,7 @@ export async function mockUser() {
   const currentDate = new Date();
 
   const tomorrow = new Date(currentDate);
+  const yesterday = new Date(currentDate - 1);
   tomorrow.setDate(currentDate.getDate() + 1);
   return {
     firstName: "Patrick",
@@ -50,12 +53,13 @@ export async function mockUser() {
     email: "P-toupie@toto.com",
     addresses: [
       {
-        date: currentDate,
+        date: yesterday,
         isCurrent: false,
         firstName: "Patrick",
         lastName: "toupie",
-        nbrAndStreet: "10 rue du vent",
-        codeAndCity: "41000 Dally",
+        street: "10 rue du vent",
+        zipCode: "41000",
+        city: "Dally",
         country: "Thailand",
       },
       {
@@ -63,8 +67,9 @@ export async function mockUser() {
         isCurrent: true,
         firstName: "Jean",
         lastName: "toupie",
-        nbrAndStreet: "12 rue de la montagne",
-        codeAndCity: "70000 David",
+        street: "12 rue de la montagne",
+        zipCode: "70000",
+        city: "David",
         country: "Panama",
       },
     ],

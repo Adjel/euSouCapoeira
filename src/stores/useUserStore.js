@@ -7,16 +7,26 @@ const useUserStore = create((set) => ({
   setUser: (user) => set({ user }),
   clearUser: () => set({ user: null }),
   addAdress(address) {
+    const date = new Date();
+    const newAddress = {
+      date,
+      ...address,
+      // The site only support France shipment, so we secure the country
+      country: "France",
+    };
     set((state) => ({
       user: {
         ...state.user,
-        addresses: [...state.user.addresses, address],
+        addresses: [...state.user.addresses, newAddress],
       },
     }));
+    toast({
+      title: "Votre adresse à bien été enregistrée",
+    });
+    return true;
   },
   setCurrentAddress: (date) =>
     set((state) => {
-      console.log({ date });
       const updatedAddresses = state.user.addresses.map((address) => ({
         ...address,
         isCurrent: address.date === date,
