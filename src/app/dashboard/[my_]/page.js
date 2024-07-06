@@ -1,26 +1,34 @@
 "use client";
 import DashboardNav from "@/components/DashboardNav";
 import { useUserStore } from "@/stores/useUserStore";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import UserInfoComponent from "@/components/UserInfoComponent";
+import { FaPen } from "react-icons/fa";
 
 export default function dashboard({ params }) {
   const { user } = useUserStore();
 
-  const router = useRouter();
-
   const my_ = params.my_;
+  const router = useRouter();
 
   let content = null;
   switch (my_) {
     case "mes_informations":
-      content = <div>Contenu 1</div>;
+      content = (
+        <UserInfoComponent
+          isInfo={true}
+          title={"Mes informations"}
+          subTitle={"Mettez à jour vos informations"}
+          iconButton={FaPen}
+        />
+      );
       break;
     case "mes_commandes":
       content = <div>Contenu 2</div>;
       break;
     case "mes_adresses":
-      content = <div>Contenu 2</div>;
+      content = <UserInfoComponent isInfo={false} />;
       break;
     case "retour":
       content = <div>Contenu 2</div>;
@@ -35,7 +43,7 @@ export default function dashboard({ params }) {
   }, [user]);
 
   return (
-    <div className="flex w-full h-full gap-16 p-8 border-2 border-blue-600">
+    <div className="flex w-full h-full gap-16 p-8">
       <aside className="flex flex-col h-full">
         <header className="flex justify-between mb-8">
           <h2 className="w-fit text-3xl font-bold m-0 p-0">Espace client</h2>
@@ -48,13 +56,7 @@ export default function dashboard({ params }) {
         </div>
         <DashboardNav isModal={false} />
       </aside>
-      <div>
-        <header className="flex flex-col">
-          <h2>TITLE</h2>
-          <h3>SUB TITLE</h3>
-        </header>
-        <div className="w-full h-full border-2 border-blue-600">{content}</div>
-      </div>
+      <div className="w-full h-full">{content}</div>
     </div>
   );
 }

@@ -33,6 +33,8 @@ module.exports = {
         "color-gold": "var(--color-gold)",
         "color-error": "var(--color-error)",
         "extreme-dark-gray": "var(--extreme-dark-gray)",
+        "color-cancel-button": "var(--color-cancel-button)",
+        "color-hover-cancel-button": "var(--color-hover-cancel-button)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

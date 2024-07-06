@@ -4,6 +4,7 @@ import { useLoginModalStore, useUserStore } from "@/stores/useUserStore";
 
 function DashboardNav({ isModal = true }) {
   const { clearUser } = useUserStore();
+  const { close } = useLoginModalStore();
 
   const liStyle = "cursor-pointer hover:text-color-gold";
   const linkStyle = `w-fit ${
@@ -13,7 +14,11 @@ function DashboardNav({ isModal = true }) {
 
   const LinkComponent = ({ title, link }) => {
     return (
-      <Link href={`/dashboard/${link}`} className={`${linkStyle}`}>
+      <Link
+        href={`/dashboard/${link}`}
+        className={`${linkStyle}`}
+        onClick={close}
+      >
         <div className={textStyle}>{title}</div>
       </Link>
     );
