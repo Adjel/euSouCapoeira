@@ -17,48 +17,42 @@ import { useUserStore } from "@/stores/useUserStore";
 import { emailRegex, passwordRegex } from "@/lib/utils";
 import PasswordInput from "@/components/PasswordInput";
 
-const errorMessage = "Merci de saisir votre";
-
 function UserInfoForm({ cancel }) {
+  const { user, updateUser } = useUserStore();
+  const errorMessage = "Merci de saisir votre";
+
   const formSchema = z
     .object({
       firstName: z.string().min(1, `${errorMessage} prénom.`),
       lastName: z.string().min(1, `${errorMessage} nom de famille.`),
-      newEmail: z
+      email: z
         .string()
         .min(1, `${errorMessage} votre adresse e-mail.`)
         .regex(emailRegex, "L'adresse email fournie n'a pas un format valide"),
       oldPassword: z.string().optional(),
       newPassword: z.string().optional(),
     })
-    .superRefine((data, ctx) => {
-      if (data.newPassword && !passwordRegex.test(data.newPassword || "")) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Le nouveau mot de passe n'a pas un format valide",
-          path: ["newPassword"],
-        });
-        if (data.newPassword && !data.oldPassword)
-          ctx.addIssue({
-            code: z.ZodIssueCode.custom,
-            message:
-              "Vous devez entrer votre ancien mot de passe pour le changer",
-            path: ["oldPassword"],
-          });
+    .refine(
+      (data) => !data.newPassword || passwordRegex.test(data.newPassword),
+      {
+        message: "Le nouveau mot de passe n'a pas un format valide",
+        path: ["newPassword"],
       }
+    )
+    .refine((data) => !(data.newPassword && !data.oldPassword), {
+      message: "Vous devez entrer votre ancien mot de passe pour le changer",
+      path: ["oldPassword"],
     });
 
-  const { user, updateUser } = useUserStore();
-
-  // 1. Define your form.
+  // 1. Définir votre formulaire.
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       firstName: user.firstName,
       lastName: user.lastName,
-      newEmail: user.email,
-      oldPassword: null,
-      newPassword: null,
+      email: user.email,
+      oldPassword: "",
+      newPassword: "",
     },
   });
 
@@ -85,7 +79,6 @@ function UserInfoForm({ cancel }) {
                     isError={!!form.formState.errors.firstName}
                   />
                 </FormControl>
-
                 <FormMessage />
               </FormItem>
             )}
@@ -108,14 +101,14 @@ function UserInfoForm({ cancel }) {
           />
           <FormField
             control={form.control}
-            name="newEmail"
+            name="email"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
                   <Input
                     placeholder="Votre email"
                     {...field}
-                    isError={!!form.formState.errors.newEmail}
+                    isError={!!form.formState.errors.email}
                   />
                 </FormControl>
                 <FormMessage />

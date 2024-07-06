@@ -6,7 +6,10 @@ const useUserStore = create((set) => ({
   user: null,
   setUser: (user) => set({ user }),
   updateUser: (updatedUser) => {
-    set((state) => ({ user: { ...state.user, ...updatedUser } }));
+    set((state) => ({
+      user: { ...state.user, ...updatedUser },
+    }));
+    //TODO: Return success from API
     return true;
   },
   clearUser: () => set({ user: null }),
@@ -27,6 +30,7 @@ const useUserStore = create((set) => ({
     toast({
       title: "Votre adresse à bien été enregistrée",
     });
+    //TODO: Return success from API
     return true;
   },
 
