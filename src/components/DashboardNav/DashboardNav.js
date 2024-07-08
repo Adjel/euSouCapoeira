@@ -1,35 +1,46 @@
 import React from "react";
 import Link from "next/link";
-import { useUserStore } from "@/stores/useUserStore";
+import { useLoginModalStore, useUserStore } from "@/stores/useUserStore";
 
-function DashboardNav() {
+function DashboardNav({ isModal = true }) {
   const { clearUser } = useUserStore();
+  const { close } = useLoginModalStore();
 
-  const linkStyle = "w-fit text-xl font-bold m-0 p-0";
   const liStyle = "cursor-pointer hover:text-color-gold";
+  const linkStyle = `w-fit ${
+    isModal ? "text-xl" : "text-lg"
+  } font-bold m-0 p-0`;
   const textStyle = "first-letter:uppercase";
 
+  const LinkComponent = ({ title, link }) => {
+    return (
+      <Link
+        href={`/dashboard/${link}`}
+        className={`${linkStyle}`}
+        onClick={close}
+      >
+        <div className={textStyle}>{title}</div>
+      </Link>
+    );
+  };
+
   return (
-    <ul className="flex flex-col h-full justify-center gap-16">
+    <ul
+      className={`flex flex-col h-full justify-center ${
+        isModal ? "gap-16" : "gap-4"
+      }`}
+    >
       <li className={liStyle}>
-        <Link href="/dashboard" className={`${linkStyle}`}>
-          <div className="textStyle">Informations</div>
-        </Link>
+        <LinkComponent link={"mes_informations"} title={"mes informations"} />
       </li>
       <li className={liStyle}>
-        <Link href="/dashboard" className={`${linkStyle}`}>
-          <div className={textStyle}>mes commandes</div>
-        </Link>
+        <LinkComponent link={"mes_commandes"} title={"mes commandes"} />
       </li>
       <li className={liStyle}>
-        <Link href="/dashboard" className={`${linkStyle}`}>
-          <div className={textStyle}>Mes adresses</div>
-        </Link>
+        <LinkComponent link={"mes_adresses"} title={"mes adresses"} />
       </li>
       <li className={liStyle}>
-        <Link href="/dashboard" className={`${linkStyle}`}>
-          <div className={textStyle}>retounrer un produit</div>
-        </Link>
+        <LinkComponent link={"retour"} title={"retourner un produit"} />
       </li>
       <li className={liStyle}>
         <button className={`${linkStyle}`} onClick={clearUser}>

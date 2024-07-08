@@ -8,7 +8,6 @@ function MenuButton({ onClick }) {
   function onClicked() {
     setIsOpen(!isOpen);
     onClick(isOpen);
-    console.log({ isOpen });
   }
 
   return (

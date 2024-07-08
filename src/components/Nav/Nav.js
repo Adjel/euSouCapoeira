@@ -13,7 +13,7 @@ function Nav() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/instruments">
+            <Link href="/categories/instruments">
               <div className={styles.item}>instruments</div>
             </Link>
           </NavigationMenuItem>
@@ -22,7 +22,7 @@ function Nav() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/vetements">
+            <Link href="/categories/vetements">
               <div className={styles.item}>vêtements</div>
             </Link>
           </NavigationMenuItem>
@@ -31,7 +31,7 @@ function Nav() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/entrainement">
+            <Link href="/categories/entrainement">
               <div className={styles.item}>entraînement</div>
             </Link>
           </NavigationMenuItem>
@@ -40,7 +40,7 @@ function Nav() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="livres">
+            <Link href="/categories/livres">
               <div className={styles.item}>livres</div>
             </Link>
           </NavigationMenuItem>
@@ -49,7 +49,7 @@ function Nav() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/esoterisme">
+            <Link href="/categories/esoterisme">
               <div className={styles.item}>ésotérisme</div>
             </Link>
           </NavigationMenuItem>

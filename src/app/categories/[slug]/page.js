@@ -1,17 +1,14 @@
-import HomeHeader from "@/components/homePage/HomeHeader";
-import useUserStore from "@/stores/useUserStore";
-import { useRouter } from "next/router";
+"use client";
 
-const DynamicPage = () => {
-  const router = useRouter();
-  const { slug } = router.query;
-
+const Page = ({ params }) => {
+  /*
   if (!slug) {
     // Si le slug n'est pas encore défini (ex: lors du chargement initial), tu peux retourner un état de chargement
     return <div>Loading...</div>;
   }
+    */
 
-  const slugString = Array.isArray(slug) ? slug.join("/") : slug;
+  //const slugString = Array.isArray(slug) ? slug.join("/") : slug;
 
   /*
     // Logique pour déterminer quel type de page afficher
@@ -41,7 +38,7 @@ const increasePopulation = useStore((state) => state.increasePopulation);
 const removeAllBears = useStore((state) => state.removeAllBears);
 */
 
-  return <div>{slug}</div>;
+  return <div>{params.slug}</div>;
 };
 
-export default DynamicPage;
+export default Page;
