@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import UserInfoComponent from "@/components/UserInfoComponent";
 import { FaPen } from "react-icons/fa";
+import UserCommands from "@/components/UserCommands";
 
 export default function dashboard({ params }) {
   const { user } = useUserStore();
@@ -15,17 +16,15 @@ export default function dashboard({ params }) {
   let content = null;
   switch (my_) {
     case "mes_informations":
-      content = (
-        <UserInfoComponent
-          isInfo={true}
-          title={"Mes informations"}
-          subTitle={"Mettez à jour vos informations"}
-          iconButton={FaPen}
-        />
-      );
+      <UserInfoComponent
+        isInfo={true}
+        title={"Mes informations"}
+        subTitle={"Mettez à jour vos informations"}
+        iconButton={FaPen}
+      />;
       break;
     case "mes_commandes":
-      content = <div>Contenu 2</div>;
+      content = <UserCommands />;
       break;
     case "mes_adresses":
       content = <UserInfoComponent isInfo={false} />;
