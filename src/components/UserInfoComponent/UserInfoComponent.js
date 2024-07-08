@@ -7,6 +7,7 @@ import { FaCheckDouble } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import UserAdressForm from "../Forms/UserAdressForm";
 import UserInfoForm from "../Forms/UserInfoForm";
+import styles from "./userInfoComponent.module.css";
 
 function UserInfoComponent({
   isInfo,
@@ -34,7 +35,7 @@ function UserInfoComponent({
   return (
     <section className="flex flex-col p-7 gap-8">
       <section>
-        <header className="flex w-full lg:gap-16 lg:items-baseline">
+        <header className="flex flex-col md:flex-row w-full gap-4 lg:gap-16 lg:items-baseline">
           <h2 className="text-5xl font-bold">
             {title ? title : "Carnet d'adresses"}
           </h2>
@@ -71,20 +72,22 @@ function UserInfoComponent({
                       Adresse de facturation
                     </h3>
                     {isCurrent ? (
-                      <FaCheckDouble className="ml-auto mr-48 size-8" />
+                      <span className="size-16 rounded-full">
+                        <FaCheckDouble className="ml-auto mr-48 size-7" />
+                      </span>
                     ) : (
                       <>
                         <span
-                          className="p-4 border-2 rounded-full hover:border-color-gold hover:text-color-gold cursor-pointer"
+                          className={styles.button}
                           onClick={() => deleteAddress(date)}
                         >
-                          <RiDeleteBinLine className="ml-auto size-8" />
+                          <RiDeleteBinLine className="ml-auto size-7" />
                         </span>
                         <span
-                          className="p-4 border-2 rounded-full hover:border-color-gold hover:text-color-gold cursor-pointer"
+                          className={styles.button}
                           onClick={() => setCurrentAddress(date)}
                         >
-                          <ImCheckmark className="ml-auto size-8" />
+                          <ImCheckmark className="ml-auto size-7" />
                         </span>
                       </>
                     )}
@@ -110,7 +113,7 @@ function UserInfoComponent({
               <span className="flex w-1/2 gap-16 items-top">
                 <h3 className="text-2xl font-bold">{subTitle}</h3>
                 <span
-                  className="p-4 border-2 rounded-full hover:border-color-gold hover:text-color-gold cursor-pointer"
+                  className={styles.button}
                   onClick={(event) => handleIsModifyingInfo(event)}
                 >
                   <IconButton className="ml-auto size-8 hover:text-color-gold" />

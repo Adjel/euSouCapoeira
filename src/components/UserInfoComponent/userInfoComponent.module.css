@@ -1,0 +1,3 @@
+.button {
+    @apply flex justify-center items-center size-16 p-4 border-2 rounded-full hover:border-color-gold hover:text-color-gold cursor-pointer
+}
