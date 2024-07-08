@@ -14,9 +14,9 @@ function MyCommands() {
       {commands.map(({ products, date, id, totalPrice, status }) => (
         <div key={id} className="flex flex-col">
           <Divider />
-          {products.map(({ imageSrc, alt, link }, index) => (
+          {products.map(({ imageSrc, alt, id }, index) => (
             // TODO: link have to be a reel link to product page with the product id in params
-            <Link href={link}>
+            <Link href={`/products/id:${id}`}>
               <Image
                 key={index}
                 src={imageSrc}

@@ -1,7 +1,7 @@
 "use client";
 import DashboardNav from "@/components/DashboardNav";
 import { useUserStore } from "@/stores/useUserStore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import UserInfoComponent from "@/components/UserInfoComponent";
 import { FaPen } from "react-icons/fa";

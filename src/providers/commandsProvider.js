@@ -8,7 +8,7 @@ export const commands = [
       {
         imageSrc: clothes,
         alt: "",
-        link: "",
+        id: "",
       },
     ],
     date: new Date(),
@@ -30,12 +30,12 @@ export const commands = [
       {
         imageSrc: music,
         alt: "",
-        link: "",
+        id: "",
       },
       {
         imageSrc: music,
         alt: "",
-        link: "",
+        id: "",
       },
     ],
     date: new Date(),
