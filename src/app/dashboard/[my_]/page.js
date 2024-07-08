@@ -16,12 +16,14 @@ export default function dashboard({ params }) {
   let content = null;
   switch (my_) {
     case "mes_informations":
-      <UserInfoComponent
-        isInfo={true}
-        title={"Mes informations"}
-        subTitle={"Mettez à jour vos informations"}
-        iconButton={FaPen}
-      />;
+      content = (
+        <UserInfoComponent
+          isInfo={true}
+          title={"Mes informations"}
+          subTitle={"Mettez à jour vos informations"}
+          iconButton={FaPen}
+        />
+      );
       break;
     case "mes_commandes":
       content = <UserCommands />;
