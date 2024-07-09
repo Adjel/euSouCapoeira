@@ -3,23 +3,21 @@ import React from "react";
 import CategoryItem from "@/components/Categories/CategoryItem";
 import { categories } from "@/providers/categoriesProvider";
 import { useRouter } from "next/navigation";
+import { normalizeString } from "@/lib/utils";
 
 const Page = ({ params }) => {
   const router = useRouter();
-  const normalizeString = (str) => {
-    return str
-      .normalize("NFD") // Normalize to decomposed form
-      .replace(/[\u0300-\u036f]/g, "") // Remove diacritical marks
-      .replace(/s$/, ""); // Remove trailing 's' if present
-  };
-  const normalizedCategory = normalizeString(params.category.toLowerCase());
+
+  const normalizedCategory = normalizeString(params.category);
 
   const category = categories.find(
     (cat) => normalizeString(cat.title.toLowerCase()) === normalizedCategory
   );
 
-  if (category.subCategories.length < 1) {
-    router.push(`/product/${category}`);
+  console.log({ category });
+
+  if (category && category.subCategories.length < 1) {
+    router.push(`${category}/${category}`);
   } else {
     return (
       <section className="flex flex-col md:grid-cols-4 lg:grid-cols-5">
