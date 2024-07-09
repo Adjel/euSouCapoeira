@@ -25,3 +25,7 @@
 .cancelButton {
     @apply text-black font-bold bg-color-cancel-button hover:bg-color-hover-cancel-button
 }
+
+.signLink {
+    @apply underline underline-offset-8 text-lg hover:text-color-gold first-letter:uppercase
+}
