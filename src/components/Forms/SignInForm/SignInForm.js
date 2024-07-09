@@ -34,7 +34,7 @@ const formSchema = z.object({
     */
 });
 
-function SignUpForm() {
+function SignInForm() {
   const { signUp } = useSignUp();
   const { signUpMock } = useSignUpMock();
 
@@ -96,4 +96,4 @@ function SignUpForm() {
   );
 }
 
-export default SignUpForm;
+export default SignInForm;

@@ -3,15 +3,13 @@ import React from "react";
 import { useLoginModalStore, useUserStore } from "@/stores/useUserStore";
 import { IoCloseOutline } from "react-icons/io5";
 import DashboardNav from "../DashboardNav";
-import SignUpForm from "../Forms/SignUpForm";
+import SignInForm from "../Forms/SignInForm";
 import Link from "next/link";
+import "@/styles/globals.css";
 
 function LoginModal() {
   const { isOpen, toggle } = useLoginModalStore();
   const { user } = useUserStore();
-
-  const linkStyle =
-    "underline underline-offset-8 text-lg hover:text-color-gold first-letter:uppercase";
 
   return (
     <div>
@@ -49,16 +47,16 @@ function LoginModal() {
             </>
           ) : (
             <>
-              <SignUpForm />
+              <SignInForm />
               <div className="flex flex-col mt-6 gap-8 items-center">
-                <Link href="/pw_lost" className={linkStyle} onClick={toggle}>
+                <Link href="/pw_lost" className="signLink" onClick={toggle}>
                   vous avez oublié votre mot de pase ?
                 </Link>
                 <hr className="w-full borderb-2 border-color-dark-gray" />
                 <div className="text-extreme-dark-gray">
                   Pas encore de compte ?
                 </div>
-                <Link href="/signup" className={linkStyle} onClick={toggle}>
+                <Link href="/signup" className="signLink" onClick={toggle}>
                   s'inscrire maintenant
                 </Link>
               </div>

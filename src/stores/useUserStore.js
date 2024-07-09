@@ -4,7 +4,16 @@ import { toast } from "@/components/ui/use-toast";
 
 const useUserStore = create((set) => ({
   user: null,
-  setUser: (user) => set({ user }),
+  setUser: (user) => {
+    set({ user });
+    // TODO: get response from API
+    if ("mock" === "mock")
+      toast({
+        title: "Votre compte à bien été crée",
+        description: "Vous êtes connecté",
+      });
+    return true;
+  },
   updateUser: (updatedUser) => {
     set((state) => ({
       user: { ...state.user, ...updatedUser },
