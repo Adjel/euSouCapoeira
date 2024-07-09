@@ -123,6 +123,7 @@ const useSignUpMock = create((set) => ({
     toast({
       title: "Vous êtes connecté (Mock) !",
     });
+    return true;
   },
 }));
 
