@@ -27,5 +27,5 @@
 }
 
 .signLink {
-    @apply underline underline-offset-8 text-lg hover:text-color-gold first-letter:uppercase
+    @apply underline underline-offset-8 hover:text-color-gold first-letter:uppercase text-sm md:text-base lg:text-lg
 }
