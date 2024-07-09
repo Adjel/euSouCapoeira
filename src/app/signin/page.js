@@ -11,11 +11,11 @@ export default function page() {
       </h2>
       <span className="flex flex-col w-1/2 justify-center items-center p-8 gap-6">
         <SignInForm className="w-full" />
-        <div className="flex flex-col mt-6 gap-8 items-center">
-          <Link href="/pw_lost" className="signLink">
-            vous avez oublié votre mot de pase ?
-          </Link>
-          <hr className="w-full borderb-2 border-color-dark-gray" />
+        <Link href="/pw_lost" className="signLink">
+          vous avez oublié votre mot de pase ?
+        </Link>
+        <hr className="w-full borderb-2 border-color-dark-gray mt-4" />
+        <div className="flex flex-col mt-4 gap-8 items-center">
           <div className="text-extreme-dark-gray">Pas encore de compte ?</div>
           <Link href="/signup" className="signLink">
             s'inscrire maintenant
