@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { useSignUp, useSignUpMock } from "@/stores/useUserStore";
 import { emailRegex, passwordRegex } from "@/lib/utils";
 import PasswordInput from "@/components/PasswordInput";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   /*
@@ -38,6 +39,8 @@ function SignInForm() {
   const { signUp } = useSignUp();
   const { signUpMock } = useSignUpMock();
 
+  const router = useRouter();
+
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -49,12 +52,12 @@ function SignInForm() {
 
   function onSubmit(values) {
     //signUp(values.email, values.password);
-    signUpMock();
+    if (signUpMock()) router.push("/dashboard/mes_informations");
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
         <FormField
           control={form.control}
           name="email"
