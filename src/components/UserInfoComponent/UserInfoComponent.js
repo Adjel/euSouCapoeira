@@ -51,7 +51,7 @@ function UserInfoComponent({
       {!isModifying ? (
         <>
           {!isInfo ? (
-            user?.addresses.map(
+            user?.addresses?.map(
               ({
                 date,
                 entreprise,
