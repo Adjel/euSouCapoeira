@@ -10,7 +10,12 @@ function MyCommands() {
   const { commands } = useCommandsStore();
 
   return (
-    <section className="flex flex-col gap-24">
+    <section className="flex flex-col gap-24 pl-4 md:pl-8">
+      <header>
+        <h2 className="text-5xl font-bold first-letter:uppercase">
+          mes commandes
+        </h2>
+      </header>
       {commands.map(({ products, date, id, totalPrice, status }) => (
         <div key={id} className="flex flex-col">
           <Divider />
@@ -28,13 +33,18 @@ function MyCommands() {
             </Link>
           ))}
 
-          <div className="flex w-full justify-between items-center gap-6 mb-4">
-            <Label title="commande du" content={date.toLocaleDateString()} />
-            <Label title="commande n°" content={id} />
-            <Label title="prix total" content={`${totalPrice} €`} />
-            <Label title="statut" status={status} />
-            <Button className="mx-32">Détails</Button>
+          <div className="flex w-1/2 md:w-full justify-between items-center gap-6 mb-4">
+            <div className="flex flex-col gap-6 md:flex-row">
+              <Label title="commande du" content={date.toLocaleDateString()} />
+              <Label title="commande n°" content={id} />
+            </div>
+            <div className="flex flex-col gap-6 md:flex-row">
+              <Label title="prix total" content={`${totalPrice} €`} />
+              <Label title="statut" status={status} />
+            </div>
+            <Button className="hidden md:flex md:mx-6 lg:mx-32">Détails</Button>
           </div>
+          <Button className="md:hidden w-fit mb-6">Détails</Button>
           <Divider />
         </div>
       ))}

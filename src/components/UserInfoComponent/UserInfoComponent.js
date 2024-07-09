@@ -33,7 +33,7 @@ function UserInfoComponent({
   }
 
   return (
-    <section className="flex flex-col p-7 gap-8">
+    <section className="flex flex-col p-4 md:p-8 gap-8">
       <section>
         <header className="flex flex-col md:flex-row w-full gap-4 lg:gap-16 lg:items-baseline">
           <h2 className="text-5xl font-bold">
