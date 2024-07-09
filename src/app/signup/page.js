@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import "@/styles/globals.css";
+import { emailRegex } from "@/lib/utils";
 
 const errorMessage = "Merci de saisir votre";
 
@@ -30,6 +31,10 @@ const formSchema = z.object({
       message: "Merci de saisir un code postal de cinq chiffre.",
     }),
   city: z.string().min(1, `${errorMessage} ville.`),
+  email: z
+    .string()
+    .min(1, "Ce champ est requis")
+    .regex(emailRegex, "l'adresse email fournie n'a pas un format valide"),
 });
 
 export default function signup() {
@@ -47,11 +52,12 @@ export default function signup() {
       zipCode: "",
       city: "",
       country: "France",
+      email: "",
     },
   });
 
   function onSubmit(values) {
-    if (setUser(values)) router.push("/signin");
+    if (setUser(values)) router.push("/dashboard/mes_informations");
   }
 
   return (
@@ -109,6 +115,22 @@ export default function signup() {
                       placeholder="Nom"
                       {...field}
                       isError={!!form.formState.errors.lastName}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      placeholder="monadresse@email.com"
+                      {...field}
+                      isError={!!form.formState.errors.email}
                     />
                   </FormControl>
                   <FormMessage />

@@ -4,7 +4,25 @@ import { toast } from "@/components/ui/use-toast";
 
 const useUserStore = create((set) => ({
   user: null,
-  setUser: (user) => {
+  setUser: (values) => {
+    const { city, email, firstName, lastName, street, zipCode } = values;
+    const user = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      addresses: [
+        {
+          date: new Date(),
+          isCurrent: true,
+          firstName: firstName,
+          lastName: lastName,
+          street: street,
+          zipCode: zipCode,
+          city: city,
+          country: "France",
+        },
+      ],
+    };
     set({ user });
     // TODO: get response from API
     if ("mock" === "mock")
@@ -12,6 +30,7 @@ const useUserStore = create((set) => ({
         title: "Votre compte à bien été crée",
         description: "Vous êtes connecté",
       });
+    console.log({ user });
     return true;
   },
   updateUser: (updatedUser) => {
