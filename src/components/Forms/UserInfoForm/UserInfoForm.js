@@ -61,7 +61,7 @@ function UserInfoForm({ cancel }) {
   }
 
   return (
-    <section className="border-4 py-6 px-48">
+    <section className="border-4 py-6 px-8 md:px-48">
       <Form {...form}>
         <h2 className="text-2xl font-bold text-center my-8">
           Modifier mes informations

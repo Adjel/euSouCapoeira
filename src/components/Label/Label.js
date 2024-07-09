@@ -3,7 +3,7 @@ import React from "react";
 function Label({ title, content, status }) {
   return (
     <div className="flex flex-col gap-2">
-      <div className="text-sm uppercase text-color-dark-gray">{title}</div>
+      <div className="uppercase text-color-dark-gray">{title}</div>
       {!status ? (
         <div className="first-letter:uppercase">{content}</div>
       ) : (
