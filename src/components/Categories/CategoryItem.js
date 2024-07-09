@@ -10,7 +10,8 @@ function CategoryItem({ title, image, alt }) {
     if (title === "livres") return "/livres";
     if (title === "ésotérisme") return "/esoterisme";
     else {
-      throw new Error(`You need to pass a valid category`);
+      return "";
+      //throw new Error(`You need to pass a valid category`);
     }
   };
 
