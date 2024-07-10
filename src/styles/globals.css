@@ -19,7 +19,7 @@
 }
 
 .h2title {
-    @apply text-center text-2xl mb-6 font-bold first-letter:uppercase;
+    @apply text-center text-2xl mb-6 font-bold first-letter:uppercase
 }
 
 .cancelButton {
