@@ -1,12 +1,14 @@
 import clothes from "../../public/fakeCatsImages/clothes.jpg";
 import entrain from "../../public/fakeCatsImages/entrain.jpg";
 import music from "../../public/fakeCatsImages/music.jpg";
+import berimbau from "../../public/backgrounds/berimbau.png";
 
 export const categories = [
   {
     image: clothes,
     alt: "catégorie vêtements",
     title: "vêtements",
+    backgroundImage: berimbau,
     subCategories: [
       {
         name: "chaussures",
@@ -40,6 +42,7 @@ export const categories = [
     image: entrain,
     alt: "catégorie entraînements",
     title: "entraînements",
+    backgroundImage: berimbau,
     subCategories: [
       {
         name: "frappe",
@@ -53,6 +56,7 @@ export const categories = [
     image: music,
     alt: "catégorie instruments",
     title: "instruments",
+    backgroundImage: berimbau,
     subCategories: [
       {
         name: "berimbau Gunga",
@@ -102,12 +106,14 @@ export const categories = [
     image: music,
     alt: "catégorie Livres",
     title: "livres",
+    backgroundImage: berimbau,
     subCategories: [],
   },
   {
     image: music,
     alt: "catégorie ésotérisme",
     title: "ésotérisme",
+    backgroundImage: berimbau,
     subCategories: [],
   },
 ];
