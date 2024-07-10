@@ -5,7 +5,7 @@ import { categories } from "@/providers/categoriesProvider";
 import { useRouter } from "next/navigation";
 import { normalizeString } from "@/lib/utils";
 import Image from "next/image";
-import berimbau from "../../../public/backgrounds/berimbau.png";
+
 import "@/styles/globals.css";
 import {
   Breadcrumb,
@@ -32,7 +32,7 @@ const Page = ({ params }) => {
       <section className="relative flex flex-col md:grid-cols-4 lg:grid-cols-5">
         <header className="flex flex-col justify-center lg:justify-start items-start h-24 md:h-36 lg:h-56">
           <Image
-            src={berimbau}
+            src={category.backgroundImage}
             style={{ objectFit: "cover" }}
             className="absolute z-0 top-0 w-full h-24 md:h-36 lg:h-56"
           />
