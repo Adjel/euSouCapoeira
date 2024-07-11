@@ -1,6 +1,6 @@
 "use client";
 import { products } from "@/providers/productsProvider";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import Image from "next/image";
 import RatingComponent from "@/components/RatingComponent";
 import { normalizeString, normalizeName } from "@/lib/utils";
@@ -56,7 +56,12 @@ export default function page({ params }) {
         break;
     }
     return sorted;
-  }, [productList?.products ?? [], sortOption]);
+  }, [productList?.products, sortOption]);
+
+  const toggleGridList = useCallback(() => setGridOrList((prev) => !prev), []);
+
+  const productCount = productList?.products?.length ?? 0;
+  const isSingleProduct = productCount === 1;
 
   return (
     <section className="py-7 px-14">
@@ -66,23 +71,20 @@ export default function page({ params }) {
             hrefLink={[params.categories, params.products]}
           />
         </div>
-        <div className="md:gap-6 md:items-end md:flex-row flex flex-col gap-2 ">
+        <div className="md:gap-6 md:items-end md:flex-row flex flex-col gap-2">
           <h2 className="text-4xl md:text-5xl font-bold first-letter:uppercase">
             {params.products}
           </h2>
-          <span className="md:text-2xl md:font-bold md:text-color-dark-gray text-extreme-dark-gray">
-            {productList?.products?.length}{" "}
+          <span className="md:text-2xl md:font-bold md:text-color-dark-gray flex gap-2 text-extreme-dark-gray">
+            {productCount}
             <span className="md:hidden">
-              {productList?.products?.length === 1 ? "Produit" : "Produits"}
+              {isSingleProduct ? "Produit" : "Produits"}
             </span>
           </span>
         </div>
         <section className="flex gap-4 pr-7 justify-end">
           <SelectSortingComponent />
-          <GridListSwithButton
-            toggle={() => setGridOrList(!gridOrList)}
-            className="size-6"
-          />
+          <GridListSwithButton toggle={toggleGridList} className="size-6" />
         </section>
       </header>
       <div
@@ -163,7 +165,7 @@ export default function page({ params }) {
           )
         ) : (
           <h2 className="md:text-2xl lg:text:3xl flex flex-col gap-10 text-center text-xl font-bold">
-            {`Désolé, cette catégorie ne propose pas encore de produits ${"\n"} :'(`}
+            {`Désolé, cette catégorie ne propose pas encore de produits :'( `}
             <Button className="w-fit mx-auto">
               <Link href="/">Retour à l'acceuil</Link>
             </Button>
