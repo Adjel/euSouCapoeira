@@ -12,6 +12,10 @@
     --color-gold: rgb(190 150 85);
     --extreme-dark-gray: rgb(28 28 28);
     --color-error: rgb(236 61 87);
+
+    --color-green: rgb(0 178 125);
+    --color-yellow: rgb(224 175 11);
+    --color-red: rgb(230, 65, 85);
 }
 
 .basicPadding {
