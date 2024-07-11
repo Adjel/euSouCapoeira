@@ -5,18 +5,20 @@ import Link from "next/link";
 
 function BrandTitleComponent() {
   return (
-    <Link
-      href="/"
-      className="flex justify-center items-center uppercase cursor-pointer"
-    >
-      Eu sou
-      <Image
-        alt="une photo d'un berimbau représentant une lettre C"
-        src={icon}
-        className="-mr-2"
-      />
-      apoeira
-    </Link>
+    <h1>
+      <Link
+        href="/"
+        className="flex justify-center items-center uppercase cursor-pointer"
+      >
+        Eu sou
+        <Image
+          alt="une photo d'un berimbau représentant une lettre C"
+          src={icon}
+          className="-mr-2"
+        />
+        apoeira
+      </Link>
+    </h1>
   );
 }
 

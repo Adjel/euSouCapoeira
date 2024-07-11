@@ -4,6 +4,7 @@ const useCartStore = create((set) => ({
   cart: [],
   addToCart: (product) =>
     set((state) => {
+      console.log({ product });
       const existingProduct = state.cart.find((item) => item.id === product.id);
       if (existingProduct) {
         return {
@@ -14,8 +15,12 @@ const useCartStore = create((set) => ({
           ),
         };
       } else {
+        console.log({ product });
+        const cart = [...state.cart, { ...product, quantity: 1 }];
+        console.log({ cart });
         return {
-          cart: [...state.cart, { ...product, quantity: 1 }],
+          cart: cart,
+          //cart: [...state.cart, { ...product, quantity: 1 }],
         };
       }
     }),

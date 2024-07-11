@@ -8,7 +8,7 @@ import Link from "next/link";
 import AvailabilityComponent from "@/components/AvailabilityComponent";
 import PriceComponent from "@/components/PriceComponent";
 import SelectSortingComponent from "@/components/SelectSortingComponent";
-import GridListSwithButton from "@/components/GridListSwitchButton/GridListSwitchButton";
+import GridListSwitchButton from "@/components/GridListSwitchButton/GridListSwitchButton";
 import BestSellerComponent from "@/components/BestSellerComponent";
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
 import WishAddButton from "@/components/WishAddButton";
@@ -16,7 +16,7 @@ import BasketAddButton from "@/components/BasketAddButton";
 import useProductSortStore from "@/stores/useProductsSortStore";
 import { Button } from "@/components/ui/button";
 
-export default function page({ params }) {
+export default function Page({ params }) {
   const [gridOrList, setGridOrList] = useState(false);
   const { sortOption } = useProductSortStore();
 
@@ -50,8 +50,6 @@ export default function page({ params }) {
         );
         break;
       default:
-        // TODO: popularity may be best sells / days for the week or/&& month ect
-        // Popularité - Sort by the number of ratings
         sorted.sort((a, b) => b.rateNbr - a.rateNbr);
         break;
     }
@@ -84,19 +82,19 @@ export default function page({ params }) {
         </div>
         <section className="flex gap-4 pr-7 justify-end">
           <SelectSortingComponent />
-          <GridListSwithButton toggle={toggleGridList} className="size-6" />
+          <GridListSwitchButton toggle={toggleGridList} className="size-6" />
         </section>
       </header>
       <div
         className={`${
           !gridOrList
             ? "flex flex-col"
-            : "md:grid-cols-4 min-w-80 grid grid-cols-2 "
+            : "md:grid-cols-4 min-w-80 grid grid-cols-2"
         } gap-4 p-7`}
       >
         {sortedProducts.length > 0 ? (
-          sortedProducts.map(
-            ({
+          sortedProducts.map((product) => {
+            const {
               name,
               image,
               price,
@@ -106,13 +104,15 @@ export default function page({ params }) {
               isBestSeller,
               id,
               alt,
-            }) => (
+            } = product;
+
+            return (
               <div
                 className={`${gridOrList && "flex flex-col gap-4"}`}
                 key={id}
               >
                 <Link
-                  href={id}
+                  href={`product/${id}`}
                   className="xs:flex-row relative flex flex-col min-w-fit gap-4 p-7 bg-background-medium-gray rounded"
                 >
                   <Image
@@ -141,12 +141,11 @@ export default function page({ params }) {
                   {!gridOrList && (
                     <div className="md:flex hidden flex-col gap-1 ml-auto items-end">
                       <BestSellerComponent isBestSeller={isBestSeller} />
-
                       <span className="hidden lg:flex">
                         <PriceComponent price={price} />
                       </span>
                       <span className="mt-auto flex items-center">
-                        <BasketAddButton />
+                        <BasketAddButton product={product} />
                         <WishAddButton />
                       </span>
                     </div>
@@ -161,13 +160,13 @@ export default function page({ params }) {
                   <PriceComponent price={price} />
                 </div>
               </div>
-            )
-          )
+            );
+          })
         ) : (
-          <h2 className="md:text-2xl lg:text:3xl flex flex-col gap-10 text-center text-xl font-bold">
+          <h2 className="md:text-2xl lg:text-3xl flex flex-col gap-10 text-center text-xl font-bold">
             {`Désolé, cette catégorie ne propose pas encore de produits :'( `}
             <Button className="w-fit mx-auto">
-              <Link href="/">Retour à l'acceuil</Link>
+              <Link href="/">Retour à l'accueil</Link>
             </Button>
           </h2>
         )}
