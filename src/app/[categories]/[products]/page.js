@@ -14,6 +14,7 @@ import BreadcrumbComponent from "@/components/BreadcrumbComponent";
 import WishAddButton from "@/components/WishAddButton";
 import BasketAddButton from "@/components/BasketAddButton";
 import useProductSortStore from "@/stores/useProductsSortStore";
+import { Button } from "@/components/ui/button";
 
 export default function page({ params }) {
   const [gridOrList, setGridOrList] = useState(false);
@@ -24,7 +25,7 @@ export default function page({ params }) {
   );
 
   const sortedProducts = useMemo(() => {
-    const sorted = [...productList.products];
+    const sorted = [...(productList?.products ?? [])];
     switch (sortOption) {
       case "Prix: - cher au + cher":
         sorted.sort((a, b) => a.price - b.price);
@@ -55,24 +56,24 @@ export default function page({ params }) {
         break;
     }
     return sorted;
-  }, [productList.products, sortOption]);
+  }, [productList?.products ?? [], sortOption]);
 
   return (
     <section className="py-7 px-14">
       <header className="flex flex-col gap-4">
-        <div className="hidden lg:flex flex-col w-fit h-1/2 justify-center items-start p-2">
+        <div className="lg:flex hidden flex-col w-fit h-1/2 justify-center items-start p-2">
           <BreadcrumbComponent
             hrefLink={[params.categories, params.products]}
           />
         </div>
-        <div className="flex flex-col md:flex-row md:items-end gap-2 md:gap-6">
+        <div className="md:gap-6 md:items-end md:flex-row flex flex-col gap-2 ">
           <h2 className="text-4xl md:text-5xl font-bold first-letter:uppercase">
             {params.products}
           </h2>
-          <span className="text-extreme-dark-gray md:text-color-dark-gray md:text-2xl md:font-bold">
-            {productList.products.length}{" "}
+          <span className="md:text-2xl md:font-bold md:text-color-dark-gray text-extreme-dark-gray">
+            {productList?.products?.length}{" "}
             <span className="md:hidden">
-              {productList.products.length === 1 ? "Produit" : "Produits"}
+              {productList?.products?.length === 1 ? "Produit" : "Produits"}
             </span>
           </span>
         </div>
@@ -88,71 +89,85 @@ export default function page({ params }) {
         className={`${
           !gridOrList
             ? "flex flex-col"
-            : "min-w-80 grid grid-cols-2 md:grid-cols-4"
+            : "md:grid-cols-4 min-w-80 grid grid-cols-2 "
         } gap-4 p-7`}
       >
-        {sortedProducts.map(
-          ({
-            name,
-            image,
-            price,
-            rate,
-            rateNbr,
-            availability,
-            isBestSeller,
-            id,
-            alt,
-          }) => (
-            <div className={`${gridOrList && "flex flex-col gap-4"}`} key={id}>
-              <Link
-                href={id}
-                className="relative flex flex-col xs:flex-row min-w-fit gap-4 p-7 bg-background-medium-gray rounded"
+        {sortedProducts.length > 0 ? (
+          sortedProducts.map(
+            ({
+              name,
+              image,
+              price,
+              rate,
+              rateNbr,
+              availability,
+              isBestSeller,
+              id,
+              alt,
+            }) => (
+              <div
+                className={`${gridOrList && "flex flex-col gap-4"}`}
+                key={id}
               >
-                <Image
-                  src={image}
-                  alt={alt}
-                  className={`${!gridOrList && "max-w-24 max-h-24"}`}
-                />
-                {gridOrList && (
-                  <span className="absolute bottom-0 left-0">
-                    <BestSellerComponent isBestSeller={isBestSeller} />
-                  </span>
-                )}
+                <Link
+                  href={id}
+                  className="xs:flex-row relative flex flex-col min-w-fit gap-4 p-7 bg-background-medium-gray rounded"
+                >
+                  <Image
+                    src={image}
+                    alt={alt}
+                    className={`${!gridOrList && "max-w-24 max-h-24"}`}
+                  />
+                  {gridOrList && (
+                    <span className="absolute bottom-0 left-0">
+                      <BestSellerComponent isBestSeller={isBestSeller} />
+                    </span>
+                  )}
+                  <div
+                    className={`${
+                      gridOrList && "hidden"
+                    } flex flex-col gap-0.5`}
+                  >
+                    {name}
+                    <RatingComponent rate={rate} rateNbr={rateNbr} />
+                    <span className="md:hidden">
+                      <BestSellerComponent isBestSeller={isBestSeller} />
+                    </span>
+                    <AvailabilityComponent availability={availability} />
+                    <PriceComponent price={price} />
+                  </div>
+                  {!gridOrList && (
+                    <div className="md:flex hidden flex-col gap-1 ml-auto items-end">
+                      <BestSellerComponent isBestSeller={isBestSeller} />
+
+                      <span className="hidden lg:flex">
+                        <PriceComponent price={price} />
+                      </span>
+                      <span className="mt-auto flex items-center">
+                        <BasketAddButton />
+                        <WishAddButton />
+                      </span>
+                    </div>
+                  )}
+                </Link>
                 <div
-                  className={`${gridOrList && "hidden"} flex flex-col gap-0.5`}
+                  className={`${!gridOrList && "hidden"} flex flex-col text-sm`}
                 >
                   {name}
                   <RatingComponent rate={rate} rateNbr={rateNbr} />
-                  <span className="md:hidden">
-                    <BestSellerComponent isBestSeller={isBestSeller} />
-                  </span>
                   <AvailabilityComponent availability={availability} />
                   <PriceComponent price={price} />
                 </div>
-                {!gridOrList && (
-                  <div className="hidden flex-col gap-1 md:flex ml-auto items-end">
-                    <BestSellerComponent isBestSeller={isBestSeller} />
-
-                    <span className="hidden lg:flex">
-                      <PriceComponent price={price} />
-                    </span>
-                    <span className="mt-auto flex items-center">
-                      <BasketAddButton />
-                      <WishAddButton />
-                    </span>
-                  </div>
-                )}
-              </Link>
-              <div
-                className={`${!gridOrList && "hidden"} flex flex-col text-sm`}
-              >
-                {name}
-                <RatingComponent rate={rate} rateNbr={rateNbr} />
-                <AvailabilityComponent availability={availability} />
-                <PriceComponent price={price} />
               </div>
-            </div>
+            )
           )
+        ) : (
+          <h2 className="md:text-2xl lg:text:3xl flex flex-col gap-10 text-center text-xl font-bold">
+            {`Désolé, cette catégorie ne propose pas encore de produits ${"\n"} :'(`}
+            <Button className="w-fit mx-auto">
+              <Link href="/">Retour à l'acceuil</Link>
+            </Button>
+          </h2>
         )}
       </div>
     </section>

@@ -9,11 +9,11 @@ import Link from "next/link";
 
 function Nav() {
   return (
-    <div className={styles.nav}>
+    <nav className={styles.nav}>
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/categories/instruments">
+            <Link href="/instruments">
               <div className={styles.item}>instruments</div>
             </Link>
           </NavigationMenuItem>
@@ -22,7 +22,7 @@ function Nav() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/categories/vetements">
+            <Link href="/vetements">
               <div className={styles.item}>vêtements</div>
             </Link>
           </NavigationMenuItem>
@@ -31,7 +31,7 @@ function Nav() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/categories/entrainement">
+            <Link href="/entrainement">
               <div className={styles.item}>entraînement</div>
             </Link>
           </NavigationMenuItem>
@@ -40,7 +40,7 @@ function Nav() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/categories/livres">
+            <Link href="/livres">
               <div className={styles.item}>livres</div>
             </Link>
           </NavigationMenuItem>
@@ -49,13 +49,13 @@ function Nav() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="/categories/esoterisme">
+            <Link href="/esoterisme">
               <div className={styles.item}>ésotérisme</div>
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-    </div>
+    </nav>
   );
 }
 
