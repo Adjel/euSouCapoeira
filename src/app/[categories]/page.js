@@ -18,7 +18,7 @@ const Page = ({ params }) => {
   );
 
   if (category && category.subCategories.length < 1) {
-    router.push(`/products/${normalizedCategory}`);
+    router.push(`/${params.categories}/${normalizedCategory}`);
   } else {
     return (
       <section className="relative flex flex-col md:grid-cols-4 lg:grid-cols-5">
@@ -40,7 +40,7 @@ const Page = ({ params }) => {
             {category.subCategories.map(({ name, image, alt }) => (
               <div className="flex">
                 <CategoryItem
-                  preLink={"/products"}
+                  preLink={`${params.categories}`}
                   title={name}
                   image={image}
                   alt={alt}

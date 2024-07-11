@@ -1,27 +1,26 @@
 import React from "react";
 
-function AvailabilityComponent({ avalaibility }) {
-  let color;
+function AvailabilityComponent({ availability }) {
+  let textColor;
   let content;
-  if (avalaibility === "now") {
-    color = "color-green";
+  if (availability === "now") {
+    textColor = "text-color-green";
     content = "Disponible";
-  } else if (avalaibility === "command") {
-    color = "color-yellow";
+  } else if (availability === "command") {
+    textColor = "text-color-yellow";
     content = "Sur commande";
-  } else if (avalaibility === "not") {
-    color = "color-red";
+  } else if (availability === "not") {
+    textColor = "text-color-red";
     content = "momentanément indisponible";
-  } else if (avalaibility === "nostock") {
-    color = "color-red";
+  } else if (availability === "nostock") {
+    textColor = "text-color-red";
     content = "stock épuisé";
   } else {
-    color = "black";
+    textColor = "black";
+    content = "Disponibilité inconnue";
   }
 
-  return (
-    <div className={`text-${color} first-letter:uppercase`}>{content}</div>
-  );
+  return <div className={`${textColor} first-letter:uppercase`}>{content}</div>;
 }
 
 export default AvailabilityComponent;

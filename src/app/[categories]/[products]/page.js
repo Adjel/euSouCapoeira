@@ -60,8 +60,10 @@ export default function page({ params }) {
   return (
     <section className="py-7 px-14">
       <header className="flex flex-col gap-4">
-        <div className="hidden lg:flex flex-col w-fit h-1/2 justify-center items-start p-2 text-black">
-          <BreadcrumbComponent hrefLink={["products", params.products]} />
+        <div className="hidden lg:flex flex-col w-fit h-1/2 justify-center items-start p-2">
+          <BreadcrumbComponent
+            hrefLink={[params.categories, params.products]}
+          />
         </div>
         <div className="flex flex-col md:flex-row md:items-end gap-2 md:gap-6">
           <h2 className="text-4xl md:text-5xl font-bold first-letter:uppercase">
@@ -96,15 +98,14 @@ export default function page({ params }) {
             price,
             rate,
             rateNbr,
-            avalaibility,
+            availability,
             isBestSeller,
             id,
             alt,
           }) => (
-            <div className={`${gridOrList && "flex flex-col gap-4"}`}>
+            <div className={`${gridOrList && "flex flex-col gap-4"}`} key={id}>
               <Link
                 href={id}
-                key={id}
                 className="relative flex flex-col xs:flex-row min-w-fit gap-4 p-7 bg-background-medium-gray rounded"
               >
                 <Image
@@ -125,28 +126,29 @@ export default function page({ params }) {
                   <span className="md:hidden">
                     <BestSellerComponent isBestSeller={isBestSeller} />
                   </span>
-                  <AvailabilityComponent avalaibility={avalaibility} />
+                  <AvailabilityComponent availability={availability} />
                   <PriceComponent price={price} />
                 </div>
-                <div className="hidden flex-col gap-1 md:flex ml-auto items-end">
-                  {!gridOrList && (
+                {!gridOrList && (
+                  <div className="hidden flex-col gap-1 md:flex ml-auto items-end">
                     <BestSellerComponent isBestSeller={isBestSeller} />
-                  )}
-                  <span className="hidden lg:flex">
-                    <PriceComponent price={price} />
-                  </span>
-                  <span className="mt-auto flex items-center">
-                    <BasketAddButton />
-                    <WishAddButton />
-                  </span>
-                </div>
+
+                    <span className="hidden lg:flex">
+                      <PriceComponent price={price} />
+                    </span>
+                    <span className="mt-auto flex items-center">
+                      <BasketAddButton />
+                      <WishAddButton />
+                    </span>
+                  </div>
+                )}
               </Link>
               <div
                 className={`${!gridOrList && "hidden"} flex flex-col text-sm`}
               >
                 {name}
                 <RatingComponent rate={rate} rateNbr={rateNbr} />
-                <AvailabilityComponent avalaibility={avalaibility} />
+                <AvailabilityComponent availability={availability} />
                 <PriceComponent price={price} />
               </div>
             </div>
