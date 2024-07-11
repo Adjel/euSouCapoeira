@@ -23,3 +23,10 @@ export const normalizeString = (str) => {
       .toLowerCase()
   );
 };
+
+export const normalizeName = (name) => {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "") // Remove non-alphanumeric characters
+    .replace(/\s+/g, ""); // Remove spaces
+};

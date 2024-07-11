@@ -3,7 +3,7 @@ import { products } from "@/providers/productsProvider";
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import RatingComponent from "@/components/RatingComponent";
-import { normalizeString } from "@/lib/utils";
+import { normalizeString, normalizeName } from "@/lib/utils";
 import Link from "next/link";
 import AvailabilityComponent from "@/components/AvailabilityComponent";
 import PriceComponent from "@/components/PriceComponent";
@@ -39,10 +39,14 @@ export default function page({ params }) {
         sorted.sort((a, b) => b.rate - a.rate);
         break;
       case "Alphabétique A - Z":
-        sorted.sort((a, b) => a.name.localeCompare(b.name));
+        sorted.sort((a, b) =>
+          normalizeName(a.name).localeCompare(normalizeName(b.name))
+        );
         break;
       case "Alphabétique Z - A":
-        sorted.sort((a, b) => b.name.localeCompare(a.name));
+        sorted.sort((a, b) =>
+          normalizeName(b.name).localeCompare(normalizeName(a.name))
+        );
         break;
       default:
         // TODO: popularity may be best sells / days for the week or/&& month ect
