@@ -3,10 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { normalizeString } from "@/lib/utils";
 
-function CategoryItem({ title, image, alt, isVertical = false }) {
+function CategoryItem({ title, image, alt, isVertical = false, preLink }) {
   const normalizedCategory = normalizeString(title);
   const getLink = () => {
-    if (normalizedCategory !== "") return `/${normalizedCategory}`;
+    if (normalizedCategory !== "")
+      return `${preLink ? preLink : ""}/${normalizedCategory}`;
     else {
       throw new Error(`You need to pass a valid category`);
     }

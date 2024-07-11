@@ -18,6 +18,9 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        xs: "350px",
+      },
       width: {
         31.5: "31.5rem", // 504px
       },
@@ -26,6 +29,9 @@ module.exports = {
         0.1: "0.025rem",
       },
       colors: {
+        "color-green": "var(--color-green)",
+        "color-yellow": "var(--color-yellow)",
+        "color-red": "var(--color-red)",
         "background-medium-gray": "var(--background-medium-gray)",
         "color-divider": "var(--color-divider)",
         "color-text-medium-gray": "var(--color-text-medium-gray)",

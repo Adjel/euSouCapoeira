@@ -5,16 +5,8 @@ import { categories } from "@/providers/categoriesProvider";
 import { useRouter } from "next/navigation";
 import { normalizeString } from "@/lib/utils";
 import Image from "next/image";
-
 import "@/styles/globals.css";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import BreadcrumbComponent from "@/components/BreadcrumbComponent";
 
 const Page = ({ params }) => {
   const router = useRouter();
@@ -26,7 +18,7 @@ const Page = ({ params }) => {
   );
 
   if (category && category.subCategories.length < 1) {
-    router.push(`${category}/${category}`);
+    router.push(`/products/${normalizedCategory}`);
   } else {
     return (
       <section className="relative flex flex-col md:grid-cols-4 lg:grid-cols-5">
@@ -37,19 +29,7 @@ const Page = ({ params }) => {
             className="absolute z-0 top-0 w-full h-24 md:h-36 lg:h-56"
           />
           <div className="hidden lg:flex flex-col h-1/2 justify-center items-start z-0 top-0 w-fit ml-6 md:ml-10 lg:ml-12 text-white">
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/">accueil</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href={`/${params.categories}`}>
-                    {params.categories}
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+            <BreadcrumbComponent hrefLink={[params.categories]} />
           </div>
           <h2 className="z-0 top-0 ml-6 md:ml-10 lg:ml-12 text-xl md:text-2xl lg:text-4xl font-bold first-letter:uppercase text-white ">
             {category.title}
@@ -60,6 +40,7 @@ const Page = ({ params }) => {
             {category.subCategories.map(({ name, image, alt }) => (
               <div className="flex">
                 <CategoryItem
+                  preLink={"/products"}
                   title={name}
                   image={image}
                   alt={alt}
