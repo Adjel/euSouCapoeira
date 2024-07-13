@@ -17,7 +17,8 @@ import useProductSortStore from "@/stores/useProductsSortStore";
 import { Button } from "@/components/ui/button";
 
 export default function Page({ params }) {
-  const [gridOrList, setGridOrList] = useState(false);
+  // the page will present items into a grid or a list
+  const [isGrid, setIsGrid] = useState(false);
   const { sortOption } = useProductSortStore();
 
   const productList = products.find(
@@ -56,7 +57,7 @@ export default function Page({ params }) {
     return sorted;
   }, [productList?.products, sortOption]);
 
-  const toggleGridList = useCallback(() => setGridOrList((prev) => !prev), []);
+  const toggleGridList = useCallback(() => setIsGrid((prev) => !prev), []);
 
   const productCount = productList?.products?.length ?? 0;
   const isSingleProduct = productCount === 1;
@@ -87,9 +88,7 @@ export default function Page({ params }) {
       </header>
       <div
         className={`${
-          !gridOrList
-            ? "flex flex-col"
-            : "md:grid-cols-4 min-w-80 grid grid-cols-2"
+          !isGrid ? "flex flex-col" : "md:grid-cols-4 min-w-80 grid grid-cols-2"
         } gap-4 p-7`}
       >
         {sortedProducts.length > 0 ? (
@@ -107,38 +106,38 @@ export default function Page({ params }) {
             } = product;
 
             return (
-              <div
-                className={`${gridOrList && "flex flex-col gap-4"}`}
-                key={id}
-              >
-                <Link
-                  href={`product/${id}`}
-                  className="xs:flex-row relative flex flex-col min-w-fit gap-4 p-7 bg-background-medium-gray rounded"
-                >
-                  <Image
-                    src={image}
-                    alt={alt}
-                    className={`${!gridOrList && "max-w-24 max-h-24"}`}
-                  />
-                  {gridOrList && (
-                    <span className="absolute bottom-0 left-0">
-                      <BestSellerComponent isBestSeller={isBestSeller} />
-                    </span>
-                  )}
+              <div className={`${isGrid && "flex flex-col gap-4"}`} key={id}>
+                <div className="xs:flex-row relative flex flex-col min-w-fit gap-4 p-7 bg-background-medium-gray rounded">
+                  <Link href={`/product/${id}`}>
+                    <Image
+                      src={image}
+                      alt={alt}
+                      className={`${!isGrid && "max-w-24 max-h-24"}`}
+                    />
+                    {isGrid && (
+                      <span className="absolute bottom-0 left-0">
+                        <BestSellerComponent isBestSeller={isBestSeller} />
+                      </span>
+                    )}
+                  </Link>
                   <div
-                    className={`${
-                      gridOrList && "hidden"
-                    } flex flex-col gap-0.5`}
+                    className={`${isGrid && "hidden"} flex flex-col gap-0.5`}
                   >
-                    {name}
-                    <RatingComponent rate={rate} rateNbr={rateNbr} />
-                    <span className="md:hidden">
-                      <BestSellerComponent isBestSeller={isBestSeller} />
+                    <Link href={`/product/${id}`}>
+                      {name}
+                      <RatingComponent rate={rate} rateNbr={rateNbr} />
+                      <span className="md:hidden">
+                        <BestSellerComponent isBestSeller={isBestSeller} />
+                      </span>
+                      <AvailabilityComponent availability={availability} />
+                      <PriceComponent price={price} />
+                    </Link>
+                    <span className="flex md:hidden">
+                      <BasketAddButton product={product} ml={"ml-0"} />
+                      <WishAddButton />
                     </span>
-                    <AvailabilityComponent availability={availability} />
-                    <PriceComponent price={price} />
                   </div>
-                  {!gridOrList && (
+                  {!isGrid && (
                     <div className="md:flex hidden flex-col gap-1 ml-auto items-end">
                       <BestSellerComponent isBestSeller={isBestSeller} />
                       <span className="hidden lg:flex">
@@ -150,14 +149,18 @@ export default function Page({ params }) {
                       </span>
                     </div>
                   )}
-                </Link>
-                <div
-                  className={`${!gridOrList && "hidden"} flex flex-col text-sm`}
-                >
-                  {name}
-                  <RatingComponent rate={rate} rateNbr={rateNbr} />
-                  <AvailabilityComponent availability={availability} />
-                  <PriceComponent price={price} />
+                </div>
+                <div className={`${!isGrid && "hidden"} flex flex-col text-sm`}>
+                  <Link href={`/product/${id}`}>
+                    {name}
+                    <RatingComponent rate={rate} rateNbr={rateNbr} />
+                    <AvailabilityComponent availability={availability} />
+                    <PriceComponent price={price} />
+                  </Link>
+                  <span className="flex">
+                    <BasketAddButton product={product} ml={"ml-0"} />
+                    <WishAddButton />
+                  </span>
                 </div>
               </div>
             );
