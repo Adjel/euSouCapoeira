@@ -2,75 +2,7 @@ import { create } from "zustand";
 import clothes from "../../public/fakeCatsImages/clothes.jpg";
 
 const useCartStore = create((set) => ({
-  //cart: [],
-  cart: [
-    {
-      name: "Chaussure Capoeira - Rainha VL2500 -Blanc-rouge",
-      image: clothes,
-      alt: "",
-      price: 55,
-      rate: 3,
-      rateNbr: 5,
-      availability: "command",
-      id: "333333333",
-      date: new Date(),
-      isBestSeller: false,
-      quantity: 2,
-      comments: [
-        {
-          author: "Laïa",
-          date: new Date(),
-          rating: 4,
-          comment: "Bien bien",
-        },
-        {
-          author: "Pixote",
-          date: new Date(),
-          rating: 2.5,
-          comment: "Au top !",
-        },
-        {
-          author: "Tanjiro",
-          date: new Date(),
-          rating: 3,
-          comment: "Elles sont moins chères au Brésil nan ?",
-        },
-      ],
-    },
-    {
-      name: "Chaussure Capoeira - Rainha VL2500 - Bleu-gris",
-      image: clothes,
-      alt: "",
-      price: 57.79,
-      rate: 2,
-      rateNbr: 19,
-      availability: "now",
-      id: "12345456789",
-      date: new Date(),
-      isBestSeller: true,
-      quantity: 1,
-      comments: [
-        {
-          author: "goku",
-          date: new Date(),
-          rating: 4.5,
-          comment: "Il sonne trop bien",
-        },
-        {
-          author: "Pernalonga",
-          date: new Date(),
-          rating: 5,
-          comment: "Top à l'aise",
-        },
-        {
-          author: "Tanjiro",
-          date: new Date(),
-          rating: 3.5,
-          comment: "Ca a l'air solide on verra avec le temps",
-        },
-      ],
-    },
-  ],
+  cart: [],
   productQuantity: 0,
   totalPrice: 0,
   updateProductQuantity: (id, isAdding) =>
