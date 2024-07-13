@@ -1,30 +1,17 @@
-import React from "react";
-import Image from "next/image";
-import nebasket from "../../../public/nEBasket.svg";
-import basketIcon from "../../../public/basket.svg";
-import Link from "next/link";
 import useCartStore from "@/stores/useCartStore";
+import React from "react";
+import { SlBasket } from "react-icons/sl";
 
-function AddToBasketButton() {
-  const { productQuantity } = useCartStore();
+function AddToBasketButton({ product, ml = "ml-4" }) {
+  const { addToCart } = useCartStore();
 
   return (
-    <Link href={"/basket"} className="cursor-pointer">
-      {productQuantity > 0 ? (
-        <>
-          <Image src={nebasket} className="ml-4 w-8 h-8" />
-          <span
-            className={`absolute text-xs top-1 ${
-              productQuantity < 10 ? "right-2.5" : "right-1.5"
-            }`}
-          >
-            {productQuantity}
-          </span>
-        </>
-      ) : (
-        <Image src={basketIcon} className="ml-4 w-8 h-8" />
-      )}
-    </Link>
+    (product.availability === "now" || product.availability === "command") && (
+      <SlBasket
+        className={`${ml} w-6 h-6 cursor-pointer`}
+        onClick={() => addToCart(product)}
+      />
+    )
   );
 }
 

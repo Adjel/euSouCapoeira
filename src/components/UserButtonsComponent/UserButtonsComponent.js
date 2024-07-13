@@ -4,7 +4,7 @@ import { SlHeart } from "react-icons/sl";
 import styles from "./userButtonsComponent.module.css";
 import LanguageButton from "../LanguageButton";
 import UserButton from "../UserButton/UserButton";
-import AddToBasketButton from "../AddToBasketButton";
+import BasketButton from "../BasketButton";
 
 function UserButtonsComponent() {
   return (
@@ -19,7 +19,7 @@ function UserButtonsComponent() {
         <SlHeart className={styles.userNavItem} />
       </li>
       <li>
-        <AddToBasketButton />
+        <BasketButton />
       </li>
     </ul>
   );

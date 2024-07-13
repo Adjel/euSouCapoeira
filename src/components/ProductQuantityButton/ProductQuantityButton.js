@@ -2,9 +2,9 @@ import useCartStore from "@/stores/useCartStore";
 import React from "react";
 import { IoChevronDownOutline } from "react-icons/io5";
 import { IoChevronUpOutline } from "react-icons/io5";
-import "./basketProductQuantityButton.module.css";
+import "./productQuantityButton.module.css";
 
-function BasketProductQuantityButton({ productId, quantity }) {
+function ProductQuantityButton({ productId, quantity }) {
   const { updateProductQuantity } = useCartStore();
 
   return (
@@ -26,4 +26,4 @@ function BasketProductQuantityButton({ productId, quantity }) {
   );
 }
 
-export default BasketProductQuantityButton;
+export default ProductQuantityButton;
