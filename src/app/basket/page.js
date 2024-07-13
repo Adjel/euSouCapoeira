@@ -9,17 +9,21 @@ import SelectProductQuantity from "@/components/SelectProductQuantity";
 import WishAddButton from "@/components/WishAddButton";
 import DeleteProductFromBasketButton from "@/components/DeleteProductFromBasketButton";
 
+import ArrowButton from "@/components/ArrowButton";
+import TotalBasketPriceComponent from "@/components/TotalBasketPriceComponent";
+import RecommandsComponent from "@/components/RecommandsComponent";
+
 export default function page() {
   const { cart } = useCartStore();
 
   return (
-    <section className="flex flex-col p-7 gap-6">
+    <section className="flex flex-col p-10 gap-6">
       <header className="">
         <h2 className="first-letter:uppercase text-4xl md:text-6xl font-bold">
           votre panier
         </h2>
       </header>
-      <section>
+      <section className="flex flex-col gap-6">
         {cart?.length > 0 ? (
           cart.map(
             ({ name, id, image, alt, price, availability, quantity }) => (
@@ -58,12 +62,20 @@ export default function page() {
           )
         ) : (
           <div className="flex flex-col justify-center items-center h-48 text-center uppercase border-2">
+            <TotalBasketPriceComponent />
             <span>Votre panier est vide</span>
             <br />
             <div className="rotate-90">{`:(`}</div>
           </div>
         )}
+        <section className="flex flex-col w-1/2 mx-auto mb-28 p-7 gap-6 justify-center items-center bg-color-hover-cancel-button rounded-xl">
+          <header>
+            <TotalBasketPriceComponent />
+          </header>
+          <ArrowButton href={""} text={"Aller à la caisse"} />
+        </section>
       </section>
+      <RecommandsComponent title={"Recommandés pour vous"} />
     </section>
   );
 }

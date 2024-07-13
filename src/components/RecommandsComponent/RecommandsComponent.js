@@ -1,7 +1,8 @@
 import React from "react";
 import ProductPreview from "../ProductPreview";
+import { products as adsProducts } from "../../providers/RecomandsProvider";
 
-function RecommandsComponent({ title, products }) {
+function RecommandsComponent({ title, products = adsProducts }) {
   return (
     products &&
     products?.length > 0 && (

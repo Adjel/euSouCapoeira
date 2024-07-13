@@ -72,8 +72,13 @@ const useCartStore = create((set) => ({
     },
   ],
   productQuantity: 0,
+  totalPrice: 0,
   updateProductQuantity: (id, isAdding) =>
     set((state) => {
+      const product = state.cart.find((item) => item.id === id);
+      if (!product) {
+        handleQuantityError();
+      }
       const newCart = state.cart.map((item) =>
         item.id === id
           ? {
@@ -87,6 +92,7 @@ const useCartStore = create((set) => ({
       return {
         cart: newCart,
         productQuantity: calculateTotalQuantity(newCart),
+        totalPrice: calculateTotalPrice(newCart),
       };
     }),
 
@@ -110,6 +116,7 @@ const useCartStore = create((set) => ({
       return {
         cart: newCart,
         productQuantity: calculateTotalQuantity(newCart),
+        totalPrice: calculateTotalPrice(newCart),
       };
     }),
 
@@ -119,6 +126,7 @@ const useCartStore = create((set) => ({
       return {
         cart: newCart,
         productQuantity: calculateTotalQuantity(newCart),
+        totalPrice: calculateTotalPrice(newCart),
       };
     }),
 
@@ -137,6 +145,10 @@ function handleQuantityError() {
 
 const calculateTotalQuantity = (cart) => {
   return cart.reduce((total, item) => total + item.quantity, 0);
+};
+
+const calculateTotalPrice = (cart) => {
+  return cart.reduce((total, item) => total + item.price * item.quantity, 0);
 };
 
 export default useCartStore;
