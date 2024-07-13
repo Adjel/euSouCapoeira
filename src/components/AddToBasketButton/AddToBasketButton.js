@@ -5,7 +5,7 @@ import basketIcon from "../../../public/basket.svg";
 import Link from "next/link";
 import useCartStore from "@/stores/useCartStore";
 
-function BasketButton() {
+function AddToBasketButton() {
   const { productQuantity } = useCartStore();
 
   return (
@@ -28,4 +28,4 @@ function BasketButton() {
   );
 }
 
-export default BasketButton;
+export default AddToBasketButton;
