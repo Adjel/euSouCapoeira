@@ -5,11 +5,12 @@ import Image from "next/image";
 import AvailabilityComponent from "@/components/AvailabilityComponent";
 import PriceComponent from "@/components/PriceComponent";
 import useCartStore from "@/stores/useCartStore";
+import SelectProductQuantity from "@/components/SelectProductQuantity";
+import WishAddButton from "@/components/WishAddButton";
+import DeleteProductFromBasketButton from "@/components/DeleteProductFromBasketButton";
 
 export default function page() {
   const { cart } = useCartStore();
-
-  console.log(cart);
 
   return (
     <section className="flex flex-col p-7 gap-6">
@@ -18,29 +19,40 @@ export default function page() {
           votre panier
         </h2>
       </header>
-      <div>
+      <section>
         {cart?.length > 0 ? (
           cart.map(
             ({ name, id, image, alt, price, availability, quantity }) => (
-              <div className="flex flex-col gap-4" key={id}>
-                <Link
-                  href={`product/${id}`}
-                  className="xs:flex-row relative flex flex-col min-w-fit gap-4 p-7 bg-background-medium-gray rounded"
-                >
+              <div
+                key={id}
+                className="flex gap-4 border-t bt-background-medium-gray"
+              >
+                <Link href={`product/${id}`}>
                   <Image
                     alt={alt}
                     src={image}
-                    className="max-w-24 max-h-24"
-                    // Todo: delete
-                    height={24}
-                    width={24}
+                    className="max-w-14 max-h-14 md:max-w-24 md:max-h-24"
                   />
-                  <div className=" flex flex-col gap-0.5">
-                    {name}
-                    <AvailabilityComponent availability={availability} />
-                    <PriceComponent price={price} />
-                  </div>
                 </Link>
+                <div className="flex flex-col w-full p-2 gap-3 justify-between">
+                  <div className="flex justify-between gap-4">
+                    <Link href={`product/${id}`} className="flex flex-col ">
+                      <strong className="text-lg font-bold">{name}</strong>
+                      {quantity > 1 && (
+                        <span className="text-sm text-color-dark-gray">{`${price} € / pièce`}</span>
+                      )}
+                      <AvailabilityComponent availability={availability} />
+                    </Link>
+                    <SelectProductQuantity productId={id} quantity={quantity} />
+                  </div>
+                  <div className="flex flex-col xs:flex-row justify-between">
+                    <div className="flex">
+                      <DeleteProductFromBasketButton productId={id} />
+                      <WishAddButton />
+                    </div>
+                    <PriceComponent price={price * quantity} />
+                  </div>
+                </div>
               </div>
             )
           )
@@ -51,7 +63,7 @@ export default function page() {
             <div className="rotate-90">{`:(`}</div>
           </div>
         )}
-      </div>
+      </section>
     </section>
   );
 }
