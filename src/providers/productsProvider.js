@@ -78,7 +78,7 @@ export const products = [
         rate: 4.5,
         rateNbr: 8,
         availability: "command",
-        id: "123444",
+        id: "12344409876",
         date: new Date(),
         isBestSeller: false,
         comments: [
@@ -115,7 +115,7 @@ export const products = [
         rate: 2,
         rateNbr: 19,
         availability: "now",
-        id: "123454",
+        id: "12345456789",
         date: new Date(),
         isBestSeller: true,
         comments: [
@@ -147,7 +147,7 @@ export const products = [
         rate: 3,
         rateNbr: 5,
         availability: "nostock",
-        id: "321454",
+        id: "111111111",
         date: new Date(),
         isBestSeller: false,
         comments: [
@@ -179,7 +179,7 @@ export const products = [
         rate: 5,
         rateNbr: 15,
         availability: "nostock",
-        id: "321454",
+        id: "222222222",
         date: new Date(),
         isBestSeller: true,
         comments: [
@@ -211,7 +211,7 @@ export const products = [
         rate: 3,
         rateNbr: 5,
         availability: "command",
-        id: "321454",
+        id: "333333333",
         date: new Date(),
         isBestSeller: false,
         comments: [

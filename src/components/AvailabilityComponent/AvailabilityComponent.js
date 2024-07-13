@@ -20,7 +20,11 @@ function AvailabilityComponent({ availability }) {
     content = "Disponibilité inconnue";
   }
 
-  return <div className={`${textColor} first-letter:uppercase`}>{content}</div>;
+  return (
+    <div className={`${textColor} text-sm md:text-base first-letter:uppercase`}>
+      {content}
+    </div>
+  );
 }
 
 export default AvailabilityComponent;
