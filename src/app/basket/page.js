@@ -5,7 +5,7 @@ import Image from "next/image";
 import AvailabilityComponent from "@/components/AvailabilityComponent";
 import PriceComponent from "@/components/PriceComponent";
 import useCartStore from "@/stores/useCartStore";
-import SelectProductQuantity from "@/components/SelectProductQuantity";
+import BasketProductQuantityButtons from "@/components/BasketProductQuantityButton";
 import WishAddButton from "@/components/WishAddButton";
 import DeleteProductFromBasketButton from "@/components/DeleteProductFromBasketButton";
 
@@ -47,7 +47,10 @@ export default function page() {
                       )}
                       <AvailabilityComponent availability={availability} />
                     </Link>
-                    <SelectProductQuantity productId={id} quantity={quantity} />
+                    <BasketProductQuantityButtons
+                      productId={id}
+                      quantity={quantity}
+                    />
                   </div>
                   <div className="flex flex-col xs:flex-row justify-between">
                     <div className="flex">
