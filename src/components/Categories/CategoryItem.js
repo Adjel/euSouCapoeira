@@ -7,7 +7,7 @@ function CategoryItem({ title, image, alt, isVertical = false, preLink }) {
   const normalizedCategory = normalizeString(title);
   const getLink = () => {
     if (normalizedCategory !== "")
-      return `${preLink ? preLink : ""}/${normalizedCategory}`;
+      return `${preLink ? preLink : "/categories"}/${normalizedCategory}`;
     else {
       throw new Error(`You need to pass a valid category`);
     }

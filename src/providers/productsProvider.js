@@ -17,6 +17,8 @@ export const products = [
         id: "123454",
         date: new Date(),
         isBestSeller: true,
+        linkedProducts: ["id1", "id2", "id3"],
+        variantsPhotos: [{ alt: "", src: "" }],
         comments: [
           {
             author: "goku",
@@ -49,6 +51,8 @@ export const products = [
         id: "321454",
         date: new Date(),
         isBestSeller: false,
+        linkedProducts: ["id1", "id2", "id3"],
+        variantsPhotos: [{ alt: "", src: "" }],
         comments: [
           {
             author: "Laïa",
@@ -81,6 +85,8 @@ export const products = [
         id: "12344409876",
         date: new Date(),
         isBestSeller: false,
+        linkedProducts: ["id1", "id2", "id3"],
+        variantsPhotos: [{ alt: "", src: "" }],
         comments: [
           {
             author: "Chama",
@@ -118,6 +124,8 @@ export const products = [
         id: "12345456789",
         date: new Date(),
         isBestSeller: true,
+        linkedProducts: ["id1", "id2", "id3"],
+        variantsPhotos: [{ alt: "", src: "" }],
         comments: [
           {
             author: "goku",
@@ -150,6 +158,8 @@ export const products = [
         id: "111111111",
         date: new Date(),
         isBestSeller: false,
+        linkedProducts: ["id1", "id2", "id3"],
+        variantsPhotos: [{ alt: "", src: "" }],
         comments: [
           {
             author: "Laïa",
@@ -182,6 +192,8 @@ export const products = [
         id: "222222222",
         date: new Date(),
         isBestSeller: true,
+        linkedProducts: ["id1", "id2", "id3"],
+        variantsPhotos: [{ alt: "", src: "" }],
         comments: [
           {
             author: "Laïa",
@@ -214,6 +226,8 @@ export const products = [
         id: "333333333",
         date: new Date(),
         isBestSeller: false,
+        linkedProducts: ["id1", "id2", "id3"],
+        variantsPhotos: [{ alt: "", src: "" }],
         comments: [
           {
             author: "Laïa",
