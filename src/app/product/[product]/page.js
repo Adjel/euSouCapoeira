@@ -95,7 +95,10 @@ export default function page({ params }) {
           </div>
           <div className="flex flex-wrap justify-start">
             {product?.variants.map(({ alt, photo, id }, index) => (
-              <Link href={`/product/${id}`} className="relative">
+              <Link
+                href={`/product/${id}`}
+                className="relative hover:text-color-gold"
+              >
                 <Image
                   key={id}
                   className={`${
