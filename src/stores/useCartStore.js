@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import clothes from "../../public/fakeCatsImages/clothes.jpg";
 
 const useCartStore = create((set) => ({
   cart: [],

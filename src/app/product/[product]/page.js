@@ -35,10 +35,10 @@ export default function page({ params }) {
   return (
     <section className="basicPadding py-7">
       <div className="flex flex-col lg:flex-row">
-        <section className="flex flex-col border-2 border-pink-500">
+        <section className="flex flex-col ">
           <header>
             {product?.name}
-            <RatingComponent rate={product?.rate} rateNbr={product?.rateNbr} />
+            <RatingComponent rateList={product?.rates} />
           </header>
           <Image
             src={product?.photos[photoIndex ?? 0].photo}
@@ -64,12 +64,12 @@ export default function page({ params }) {
             ))}
           </div>
         </section>
-        <section className="border-2 border-blue-400">
+        <section>
           <div className="py-1">
             <PriceComponent price={product?.price} />
             <AvailabilityComponent availability={product?.availability} />
           </div>
-          <div className="flex py-3 gap-4 border-2 border-green-400">
+          <div className="flex py-3 gap-4">
             <ProductQuantityButton
               quantity={quantity}
               productId={product?.id}
@@ -88,8 +88,8 @@ export default function page({ params }) {
           </div>
         </section>
       </div>
-      <section className="border-2 border-yellow-300">
-        <div className="flex flex-col gap-2 justify-center border-2 border-blue-600">
+      <section>
+        <div className="flex flex-col gap-2 mt-4 justify-center ">
           <div className="text-base md:text-lg font-semibold">
             Variations de ce produit
           </div>
@@ -114,28 +114,27 @@ export default function page({ params }) {
             ))}
           </div>
         </div>
-        <ul className="flex flex-col gap-2 border-2 border-violet-500">
+        <ul className="flex flex-col gap-2 mt-4 text-base ">
           <header>
-            <h2>{product?.name}</h2>
+            <h2 className="text-xl font-bold">{product?.name}</h2>
           </header>
           {product?.specs.map((item, index) => (
             <il
               key={index}
               className="flex flex-row gap-1 justify-start items-center"
             >
-              <span className="w-2 h-2 border-2 border-extreme-dark-gray rounded-full"></span>
+              <span className="w-2 h-2 border-2 border-black rounded-full"></span>
               <div className="lowercase first-letter:uppercase">{item}</div>
             </il>
           ))}
         </ul>
       </section>
       <RecommandsComponent />
-      <section className="border-2 border-green-500">
-        <header>
-          <h2>{`${product?.rateNbr} Evaluations de clients`}</h2>
-        </header>
-        <RatingComponent rate={product?.rate} rateNbr={product?.rateNbr} />
-        <CommentsComponent comment={product?.comments} />
+      <section>
+        <CommentsComponent
+          comments={product?.comments}
+          rates={product?.rates}
+        />
       </section>
     </section>
   );

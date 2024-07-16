@@ -30,7 +30,3 @@ export const normalizeName = (name) => {
     .replace(/[^a-z0-9]/g, "") // Remove non-alphanumeric characters
     .replace(/\s+/g, ""); // Remove spaces
 };
-
-export const getSingleOrPluralOneWordString = (nbr, string) => {
-  return nbr === 1 ? string : `${string}s`;
-};

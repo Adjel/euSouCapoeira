@@ -97,7 +97,7 @@ export default function Page({ params }) {
               name,
               image,
               price,
-              rate,
+              rates,
               rateNbr,
               availability,
               isBestSeller,
@@ -125,7 +125,7 @@ export default function Page({ params }) {
                   >
                     <Link href={`/product/${id}`}>
                       {name}
-                      <RatingComponent rate={rate} rateNbr={rateNbr} />
+                      <RatingComponent rateList={rates} />
                       <span className="md:hidden">
                         <BestSellerComponent isBestSeller={isBestSeller} />
                       </span>
@@ -153,7 +153,7 @@ export default function Page({ params }) {
                 <div className={`${!isGrid && "hidden"} flex flex-col text-sm`}>
                   <Link href={`/product/${id}`}>
                     {name}
-                    <RatingComponent rate={rate} rateNbr={rateNbr} />
+                    <RatingComponent rateList={rates} />
                     <AvailabilityComponent availability={availability} />
                     <PriceComponent price={price} />
                   </Link>
