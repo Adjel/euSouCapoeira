@@ -9,7 +9,7 @@ function PriceComponent({ price }) {
 
   return (
     price !== "" && (
-      <span className="font-bold text-xl">{formattedPrice} €</span>
+      <span className="font-bold text-3xl">{formattedPrice} €</span>
     )
   );
 }
