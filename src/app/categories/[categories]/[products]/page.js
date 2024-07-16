@@ -11,7 +11,7 @@ import SelectSortingComponent from "@/components/SelectSortingComponent";
 import GridListSwitchButton from "@/components/GridListSwitchButton/GridListSwitchButton";
 import BestSellerComponent from "@/components/BestSellerComponent";
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
-import WishAddButton from "@/components/WishAddButton";
+import AddToWishListButton from "@/components/AddToWishListButton";
 import AddToBasketButton from "@/components/AddToBasketButton";
 import useProductSortStore from "@/stores/useProductsSortStore";
 import { Button } from "@/components/ui/button";
@@ -134,7 +134,7 @@ export default function Page({ params }) {
                     </Link>
                     <span className="flex md:hidden">
                       <AddToBasketButton product={product} ml={"ml-0"} />
-                      <WishAddButton />
+                      <AddToWishListButton />
                     </span>
                   </div>
                   {!isGrid && (
@@ -145,7 +145,7 @@ export default function Page({ params }) {
                       </span>
                       <span className="mt-auto flex items-center">
                         <AddToBasketButton product={product} />
-                        <WishAddButton />
+                        <AddToWishListButton />
                       </span>
                     </div>
                   )}
@@ -159,7 +159,7 @@ export default function Page({ params }) {
                   </Link>
                   <span className="flex">
                     <AddToBasketButton product={product} ml={"ml-0"} />
-                    <WishAddButton />
+                    <AddToWishListButton />
                   </span>
                 </div>
               </div>

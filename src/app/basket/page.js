@@ -6,7 +6,7 @@ import AvailabilityComponent from "@/components/AvailabilityComponent";
 import PriceComponent from "@/components/PriceComponent";
 import useCartStore from "@/stores/useCartStore";
 import ProductQuantityButton from "@/components/ProductQuantityButton";
-import WishAddButton from "@/components/WishAddButton";
+import AddToWishListButton from "@/components/AddToWishListButton";
 import DeleteProductFromBasketButton from "@/components/DeleteProductFromBasketButton";
 
 import ArrowButton from "@/components/ArrowButton";
@@ -57,7 +57,7 @@ export default function page() {
                   <div className="flex flex-col xs:flex-row justify-between">
                     <div className="flex">
                       <DeleteProductFromBasketButton productId={id} />
-                      <WishAddButton />
+                      <AddToWishListButton />
                     </div>
                     <PriceComponent price={price * quantity} />
                   </div>

@@ -11,6 +11,10 @@ import RatingComponent from "@/components/RatingComponent";
 import CommentsComponent from "@/components/CommentsComponent";
 import "@/styles/globals.css";
 import useCartStore from "@/stores/useCartStore";
+import ShareProductButton from "@/components/ShareProductButton";
+import AddToWishListButton from "@/components/AddToWishListButton";
+import Link from "next/link";
+import CheckedIcon from "@/components/CheckedIcon";
 
 export default function page({ params }) {
   const { addToCart } = useCartStore();
@@ -50,11 +54,11 @@ export default function page({ params }) {
                 } `}
               >
                 <Image
+                  className="mx-auto w-16 md:w-24 h-auto cursor-pointer"
                   key={index}
                   src={photo}
                   alt={alt}
                   onClick={() => setPhotoIndex(index)}
-                  className="mx-auto w-12 md:w-20 h-auto"
                 />
               </div>
             ))}
@@ -78,12 +82,48 @@ export default function page({ params }) {
               Ajouter au panier
             </Button>
           </div>
+          <div className="flex flex-row justify-evenly">
+            <AddToWishListButton product={product} />
+            <ShareProductButton params={params} />
+          </div>
         </section>
       </div>
       <section className="border-2 border-yellow-300">
-        <div className="border-2 border-blue-600">Variations de ce produit</div>
-        <ul className="border-2 border-violet-500">
-          CARACT2RISTIQUES DU PRODUIT
+        <div className="flex flex-col gap-2 justify-center border-2 border-blue-600">
+          <div className="text-base md:text-lg font-semibold">
+            Variations de ce produit
+          </div>
+          <div className="flex flex-wrap justify-start">
+            {product?.variants.map(({ alt, photo, id }, index) => (
+              <Link href={`/product/${id}`} className="relative">
+                <Image
+                  key={id}
+                  className={`${
+                    index === product?.variants.length - 1
+                      ? "border"
+                      : "border border-r-0 hover:border-r"
+                  } w-16 md:w-24 h-16 md:h-24 p-4 border-color-hover-cancel-button hover:border-color-gold cursor-pointer `}
+                  src={photo}
+                  alt={alt}
+                />
+                {id === product?.id && <CheckedIcon />}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <ul className="flex flex-col gap-2 border-2 border-violet-500">
+          <header>
+            <h2>{product?.name}</h2>
+          </header>
+          {product?.specs.map((item, index) => (
+            <il
+              key={index}
+              className="flex flex-row gap-1 justify-start items-center"
+            >
+              <span className="w-2 h-2 border-2 border-extreme-dark-gray rounded-full"></span>
+              <div className="lowercase first-letter:uppercase">{item}</div>
+            </il>
+          ))}
         </ul>
       </section>
       <RecommandsComponent />

@@ -16,7 +16,8 @@ export const products = [
         date: new Date(),
         isBestSeller: true,
         linkedProducts: ["id1", "id2", "id3"],
-        variantsPhotos: [{ alt: "", src: "" }],
+        specs: ["", "", "", "", ""],
+        variants: [{ alt: "", photo: "", id: "" }],
         photos: [{ image: music, alt: "" }],
         comments: [
           {
@@ -50,7 +51,8 @@ export const products = [
         date: new Date(),
         isBestSeller: false,
         linkedProducts: ["id1", "id2", "id3"],
-        variantsPhotos: [{ alt: "", src: "" }],
+        specs: ["", "", "", "", ""],
+        variants: [{ alt: "", photos: "", id: "" }],
         photos: [{ image: music, alt: "" }],
         comments: [
           {
@@ -84,7 +86,8 @@ export const products = [
         date: new Date(),
         isBestSeller: false,
         linkedProducts: ["id1", "id2", "id3"],
-        variantsPhotos: [{ alt: "", src: "" }],
+        specs: ["", "", "", "", ""],
+        variants: [{ alt: "", photo: "", id: "" }],
         photos: [{ image: music, alt: "" }],
         comments: [
           {
@@ -122,7 +125,19 @@ export const products = [
         date: new Date(),
         isBestSeller: true,
         linkedProducts: ["id1", "id2", "id3"],
-        variantsPhotos: [{ alt: "", src: "" }],
+        specs: [
+          "Marque Rainha Volei VL 2500",
+          "SEMELLE INTÉRIEURE Textile",
+          "SEMELLE Caoutchouc latex avec nervures antidérapantes",
+          "MATÉRIAU SUPÉRIEUR en Toile 100 % coton",
+          "interne en Textile",
+        ],
+        variants: [
+          { alt: "", photo: clothes, id: "111111111" },
+          { alt: "", photo: clothes, id: "222222222" },
+          { alt: "", photo: clothes, id: "333333333" },
+          { alt: "", photo: clothes, id: "12345456789" },
+        ],
         photos: [
           {
             alt: "",
@@ -213,7 +228,13 @@ export const products = [
         date: new Date(),
         isBestSeller: false,
         linkedProducts: ["id1", "id2", "id3"],
-        variantsPhotos: [{ alt: "", src: "" }],
+        specs: ["", "", "", "", ""],
+        variants: [
+          { alt: "", photo: clothes, id: "222222222" },
+          { alt: "", photo: clothes, id: "333333333" },
+          { alt: "", photo: clothes, id: "12345456789" },
+          { alt: "", photo: clothes, id: "111111111" },
+        ],
         photos: [{ image: clothes, alt: "" }],
         comments: [
           {
@@ -247,7 +268,13 @@ export const products = [
         date: new Date(),
         isBestSeller: true,
         linkedProducts: ["id1", "id2", "id3"],
-        variantsPhotos: [{ alt: "", src: "" }],
+        specs: ["", "", "", "", ""],
+        variants: [
+          { alt: "", photo: clothes, id: "111111111" },
+          { alt: "", photo: clothes, id: "222222222" },
+          { alt: "", photo: clothes, id: "333333333" },
+          { alt: "", photo: clothes, id: "12345456789" },
+        ],
         photos: [{ image: clothes, alt: "" }],
         comments: [
           {
@@ -281,7 +308,13 @@ export const products = [
         date: new Date(),
         isBestSeller: false,
         linkedProducts: ["id1", "id2", "id3"],
-        variantsPhotos: [{ alt: "", src: "" }],
+        specs: ["", "", "", "", ""],
+        variants: [
+          { alt: "", photo: clothes, id: "111111111" },
+          { alt: "", photo: clothes, id: "222222222" },
+          { alt: "", photo: clothes, id: "333333333" },
+          { alt: "", photo: clothes, id: "12345456789" },
+        ],
         photos: [
           {
             image: clothes,
