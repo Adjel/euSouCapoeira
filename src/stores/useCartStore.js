@@ -28,7 +28,7 @@ const useCartStore = create((set) => ({
       };
     }),
 
-  addToCart: (product) =>
+  addToCart: (product, quantity = 1) =>
     set((state) => {
       // est-ce que le produit existe déjà
       const existingProduct = state.cart.find((item) => item.id === product.id);
@@ -39,12 +39,12 @@ const useCartStore = create((set) => ({
             // si le produit est dans le panier
             item.id === product.id
               ? // on fait + 1 à sa quantité
-                { ...item, quantity: item.quantity + 1 }
+                { ...item, quantity: item.quantity + quantity }
               : // sinon on retourne l'item
                 item
           )
         : // si non, on retourne le panier actuel + le produit avec sa quantité à un
-          [...state.cart, { ...product, quantity: 1 }];
+          [...state.cart, { ...product, quantity: quantity }];
       return {
         cart: newCart,
         productQuantity: calculateTotalQuantity(newCart),

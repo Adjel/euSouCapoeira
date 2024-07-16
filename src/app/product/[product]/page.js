@@ -71,7 +71,10 @@ export default function page({ params }) {
               productId={product?.id}
               onClick={handleQuantity}
             />
-            <Button className="w-full" onClick={() => addToCart(product)}>
+            <Button
+              className="w-full"
+              onClick={() => addToCart(product, quantity)}
+            >
               Ajouter au panier
             </Button>
           </div>
