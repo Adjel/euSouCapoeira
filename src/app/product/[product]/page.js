@@ -8,68 +8,60 @@ import ProductQuantityButton from "@/components/ProductQuantityButton";
 import { Button } from "@/components/ui/button";
 import RecommandsComponent from "@/components/RecommandsComponent";
 import RatingComponent from "@/components/RatingComponent";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
 import CommentsComponent from "@/components/CommentsComponent";
 import "@/styles/globals.css";
 
 export default function page({ params }) {
   const [product, setProduct] = useState();
+  const [photoIndex, setPhotoIndex] = useState(0);
 
   useEffect(() => {
     setProduct(getMockedProductById(params.product));
   }, [params]);
 
   return (
-    <section>
-      <section className="border-2 border-pink-500">
-        <header>{product?.name}</header>
-        <Image src={product?.image} width={25} height={25} />
-        <div className="border-2 border-green-300">
-          <Carousel
-            opts={{
-              align: "center",
-              loop: true,
-            }}
-          >
-            <CarouselContent>
-              {product?.variantPhotos?.map(({ alt, src }) => (
-                <CarouselItem className="basis-4/6">
-                  <div className={styles.imageWrapperStyle}>
-                    <Image
-                      className="rounded"
-                      src={src}
-                      alt={alt}
-                      layout="fill"
-                      objectFit="cover"
-                      objectPosition="50% 20%"
-                      width={25}
-                      height={25}
-                    />
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className={`left-12 buttonStyle}`} />
-            <CarouselNext className={`right-12 buttonStyle}`} />
-          </Carousel>
-        </div>
-      </section>
-      <section className="border-2 border-blue-400">
-        <div>
-          <PriceComponent price={product?.price} />
-          <AvailabilityComponent availability={product?.availability} />
-        </div>
-        <div className="flex border-2 border-green-400">
-          <ProductQuantityButton />
-          <Button>Ajouter au panier</Button>
-        </div>
-      </section>
+    <section className="basicPadding py-7">
+      <div className="flex flex-col lg:flex-row">
+        <section className="flex flex-col border-2 border-pink-500">
+          <header>
+            {product?.name}
+            <RatingComponent rate={product?.rate} rateNbr={product?.rateNbr} />
+          </header>
+          <Image
+            src={product?.photos[photoIndex ?? 0].photo}
+            alt={product?.alt}
+            className="mx-auto w-48 md:w-80 h-auto"
+          />
+          <div className="flex flex-wrap gap-4 justify-start items-center bg-background-medium-gray">
+            {product?.photos.map(({ photo, alt }, index) => (
+              <div
+                className={`${
+                  index === photoIndex &&
+                  "px-5 py-3 border-t-2 border-color-gold bg-color-hover-cancel-button rounded"
+                } `}
+              >
+                <Image
+                  key={index}
+                  src={photo}
+                  alt={alt}
+                  onClick={() => setPhotoIndex(index)}
+                  className="mx-auto w-12 md:w-20 h-auto"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="border-2 border-blue-400">
+          <div>
+            <PriceComponent price={product?.price} />
+            <AvailabilityComponent availability={product?.availability} />
+          </div>
+          <div className="flex border-2 border-green-400">
+            <ProductQuantityButton />
+            <Button>Ajouter au panier</Button>
+          </div>
+        </section>
+      </div>
       <section className="border-2 border-yellow-300">
         <div className="border-2 border-blue-600">Variations de ce produit</div>
         <ul className="border-2 border-violet-500">

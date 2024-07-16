@@ -1,4 +1,3 @@
-import { categories } from "./categoriesProvider";
 import music from "../../public/fakeCatsImages/music.jpg";
 import clothes from "../../public/fakeCatsImages/clothes.jpg";
 
@@ -8,8 +7,7 @@ export const products = [
     products: [
       {
         name: "berimbau Viola par Mestre Foguete",
-        image: music,
-        alt: "",
+
         price: 60,
         rate: 3,
         rateNbr: 5,
@@ -19,6 +17,7 @@ export const products = [
         isBestSeller: true,
         linkedProducts: ["id1", "id2", "id3"],
         variantsPhotos: [{ alt: "", src: "" }],
+        photos: [{ image: music, alt: "" }],
         comments: [
           {
             author: "goku",
@@ -42,8 +41,7 @@ export const products = [
       },
       {
         name: "berimbau Gunga fabriqué au Brésil",
-        image: music,
-        alt: "",
+
         price: 59.99,
         rate: 5,
         rateNbr: 15,
@@ -53,6 +51,7 @@ export const products = [
         isBestSeller: false,
         linkedProducts: ["id1", "id2", "id3"],
         variantsPhotos: [{ alt: "", src: "" }],
+        photos: [{ image: music, alt: "" }],
         comments: [
           {
             author: "Laïa",
@@ -76,8 +75,7 @@ export const products = [
       },
       {
         name: "berimbau Viola fait avec du bois de Noisetié",
-        image: music,
-        alt: "",
+
         price: 29.9,
         rate: 4.5,
         rateNbr: 8,
@@ -87,6 +85,7 @@ export const products = [
         isBestSeller: false,
         linkedProducts: ["id1", "id2", "id3"],
         variantsPhotos: [{ alt: "", src: "" }],
+        photos: [{ image: music, alt: "" }],
         comments: [
           {
             author: "Chama",
@@ -115,8 +114,6 @@ export const products = [
     products: [
       {
         name: "Chaussure Capoeira - Rainha VL2500 - Bleu-gris",
-        image: clothes,
-        alt: "",
         price: 57.79,
         rate: 2,
         rateNbr: 19,
@@ -126,6 +123,64 @@ export const products = [
         isBestSeller: true,
         linkedProducts: ["id1", "id2", "id3"],
         variantsPhotos: [{ alt: "", src: "" }],
+        photos: [
+          {
+            alt: "",
+            photo: clothes,
+          },
+          {
+            alt: "",
+            photo: music,
+          },
+          {
+            alt: "",
+            photo: clothes,
+          },
+          {
+            alt: "",
+            photo: music,
+          },
+          {
+            alt: "",
+            photo: clothes,
+          },
+          {
+            alt: "",
+            photo: music,
+          },
+          {
+            alt: "",
+            photo: clothes,
+          },
+          {
+            alt: "",
+            photo: music,
+          },
+          {
+            alt: "",
+            photo: clothes,
+          },
+          {
+            alt: "",
+            photo: music,
+          },
+          {
+            alt: "",
+            photo: clothes,
+          },
+          {
+            alt: "",
+            photo: music,
+          },
+          {
+            alt: "",
+            photo: clothes,
+          },
+          {
+            alt: "",
+            photo: music,
+          },
+        ],
         comments: [
           {
             author: "goku",
@@ -149,8 +204,7 @@ export const products = [
       },
       {
         name: "Chaussure Capoeira - Rainha VL2500 -Blanc-bleu ",
-        image: clothes,
-        alt: "",
+
         price: 57.69,
         rate: 3,
         rateNbr: 5,
@@ -160,6 +214,7 @@ export const products = [
         isBestSeller: false,
         linkedProducts: ["id1", "id2", "id3"],
         variantsPhotos: [{ alt: "", src: "" }],
+        photos: [{ image: clothes, alt: "" }],
         comments: [
           {
             author: "Laïa",
@@ -183,8 +238,7 @@ export const products = [
       },
       {
         name: "Chaussure Capoeira - Rainha VL2500 -Blanc-noir",
-        image: clothes,
-        alt: "",
+
         price: 59.6,
         rate: 5,
         rateNbr: 15,
@@ -194,6 +248,7 @@ export const products = [
         isBestSeller: true,
         linkedProducts: ["id1", "id2", "id3"],
         variantsPhotos: [{ alt: "", src: "" }],
+        photos: [{ image: clothes, alt: "" }],
         comments: [
           {
             author: "Laïa",
@@ -217,8 +272,7 @@ export const products = [
       },
       {
         name: "Chaussure Capoeira - Rainha VL2500 -Blanc-rouge",
-        image: clothes,
-        alt: "",
+
         price: 55,
         rate: 3,
         rateNbr: 5,
@@ -228,6 +282,12 @@ export const products = [
         isBestSeller: false,
         linkedProducts: ["id1", "id2", "id3"],
         variantsPhotos: [{ alt: "", src: "" }],
+        photos: [
+          {
+            image: clothes,
+            alt: "",
+          },
+        ],
         comments: [
           {
             author: "Laïa",
