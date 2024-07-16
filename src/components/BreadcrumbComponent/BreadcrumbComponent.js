@@ -7,14 +7,14 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-function BreadCrumbComponent({ hrefLink }) {
+function BreadCrumbComponent({ hrefLinkList }) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">accueil</BreadcrumbLink>
         </BreadcrumbItem>
-        {hrefLink.map((link, index) => (
+        {hrefLinkList.map((link, index) => (
           <div className="flex items-center gap-2.5" key={index}>
             <BreadcrumbSeparator />
             <BreadcrumbItem>

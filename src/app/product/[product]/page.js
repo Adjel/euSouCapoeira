@@ -15,6 +15,7 @@ import ShareProductButton from "@/components/ShareProductButton";
 import AddToWishListButton from "@/components/AddToWishListButton";
 import Link from "next/link";
 import CheckedIcon from "@/components/CheckedIcon";
+import BreadCrumbComponent from "@/components/BreadcrumbComponent/BreadcrumbComponent";
 
 export default function page({ params }) {
   const { addToCart } = useCartStore();
@@ -37,6 +38,7 @@ export default function page({ params }) {
       <div className="flex flex-col lg:flex-row">
         <section className="flex flex-col ">
           <header>
+            <BreadCrumbComponent hrefLinkList={[]} />
             {product?.name}
             <RatingComponent rateList={product?.rates} />
           </header>
@@ -65,6 +67,31 @@ export default function page({ params }) {
           </div>
         </section>
         <section>
+          <div className="flex flex-col gap-2 mt-4 justify-center ">
+            <div className="text-base md:text-lg font-semibold">
+              Variations de ce produit
+            </div>
+            <div className="flex flex-wrap justify-start">
+              {product?.variants.map(({ alt, photo, id }, index) => (
+                <Link
+                  href={`/product/${id}`}
+                  className="relative hover:text-color-gold"
+                >
+                  <Image
+                    key={id}
+                    className={`${
+                      index === product?.variants.length - 1
+                        ? "border"
+                        : "border border-r-0 hover:border-r"
+                    } w-16 h-16 p-4 border-color-hover-cancel-button hover:border-color-gold cursor-pointer `}
+                    src={photo}
+                    alt={alt}
+                  />
+                  {id === product?.id && <CheckedIcon />}
+                </Link>
+              ))}
+            </div>
+          </div>
           <div className="py-1">
             <PriceComponent price={product?.price} />
             <AvailabilityComponent availability={product?.availability} />
@@ -89,31 +116,6 @@ export default function page({ params }) {
         </section>
       </div>
       <section>
-        <div className="flex flex-col gap-2 mt-4 justify-center ">
-          <div className="text-base md:text-lg font-semibold">
-            Variations de ce produit
-          </div>
-          <div className="flex flex-wrap justify-start">
-            {product?.variants.map(({ alt, photo, id }, index) => (
-              <Link
-                href={`/product/${id}`}
-                className="relative hover:text-color-gold"
-              >
-                <Image
-                  key={id}
-                  className={`${
-                    index === product?.variants.length - 1
-                      ? "border"
-                      : "border border-r-0 hover:border-r"
-                  } w-16 md:w-24 h-16 md:h-24 p-4 border-color-hover-cancel-button hover:border-color-gold cursor-pointer `}
-                  src={photo}
-                  alt={alt}
-                />
-                {id === product?.id && <CheckedIcon />}
-              </Link>
-            ))}
-          </div>
-        </div>
         <ul className="flex flex-col gap-2 mt-4 text-base ">
           <header>
             <h2 className="text-xl font-bold">{product?.name}</h2>
@@ -129,13 +131,13 @@ export default function page({ params }) {
           ))}
         </ul>
       </section>
-      <RecommandsComponent />
       <section>
         <CommentsComponent
           comments={product?.comments}
           rates={product?.rates}
         />
       </section>
+      <RecommandsComponent />
     </section>
   );
 }
