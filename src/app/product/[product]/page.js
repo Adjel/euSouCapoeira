@@ -160,7 +160,7 @@ export default function page({ params }) {
           ))}
         </ul>
       </section>
-      <section>
+      <section className="mt-12">
         <CommentsComponent
           comments={product?.comments}
           rates={product?.rates}
