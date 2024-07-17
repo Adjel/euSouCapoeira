@@ -29,7 +29,7 @@ const Page = ({ params }) => {
             className="absolute z-0 top-0 w-full h-24 md:h-36 lg:h-56"
           />
           <div className="hidden lg:flex flex-col h-1/2 justify-center items-start z-0 top-0 w-fit ml-6 md:ml-10 lg:ml-12 text-white">
-            <BreadcrumbComponent hrefLink={[params.categories]} />
+            <BreadcrumbComponent hrefLinkList={[params.categories]} />
           </div>
           <h2 className="z-0 top-0 ml-6 md:ml-10 lg:ml-12 text-xl md:text-2xl lg:text-4xl font-bold first-letter:uppercase text-white ">
             {category.title}

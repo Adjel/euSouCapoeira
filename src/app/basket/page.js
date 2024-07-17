@@ -6,7 +6,7 @@ import AvailabilityComponent from "@/components/AvailabilityComponent";
 import PriceComponent from "@/components/PriceComponent";
 import useCartStore from "@/stores/useCartStore";
 import ProductQuantityButton from "@/components/ProductQuantityButton";
-import WishAddButton from "@/components/WishAddButton";
+import AddToWishListButton from "@/components/AddToWishListButton";
 import DeleteProductFromBasketButton from "@/components/DeleteProductFromBasketButton";
 
 import ArrowButton from "@/components/ArrowButton";
@@ -15,6 +15,7 @@ import RecommandsComponent from "@/components/RecommandsComponent";
 
 export default function page() {
   const { cart } = useCartStore();
+  const { updateProductQuantity } = useCartStore();
 
   return (
     <section className="flex flex-col p-10 gap-6">
@@ -47,12 +48,16 @@ export default function page() {
                       )}
                       <AvailabilityComponent availability={availability} />
                     </Link>
-                    <ProductQuantityButton productId={id} quantity={quantity} />
+                    <ProductQuantityButton
+                      productId={id}
+                      quantity={quantity}
+                      onClick={updateProductQuantity}
+                    />
                   </div>
                   <div className="flex flex-col xs:flex-row justify-between">
                     <div className="flex">
                       <DeleteProductFromBasketButton productId={id} />
-                      <WishAddButton />
+                      <AddToWishListButton />
                     </div>
                     <PriceComponent price={price * quantity} />
                   </div>

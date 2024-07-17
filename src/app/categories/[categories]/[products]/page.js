@@ -11,7 +11,7 @@ import SelectSortingComponent from "@/components/SelectSortingComponent";
 import GridListSwitchButton from "@/components/GridListSwitchButton/GridListSwitchButton";
 import BestSellerComponent from "@/components/BestSellerComponent";
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
-import WishAddButton from "@/components/WishAddButton";
+import AddToWishListButton from "@/components/AddToWishListButton";
 import AddToBasketButton from "@/components/AddToBasketButton";
 import useProductSortStore from "@/stores/useProductsSortStore";
 import { Button } from "@/components/ui/button";
@@ -67,7 +67,7 @@ export default function Page({ params }) {
       <header className="flex flex-col gap-4">
         <div className="lg:flex hidden flex-col w-fit h-1/2 justify-center items-start p-2">
           <BreadcrumbComponent
-            hrefLink={[params.categories, params.products]}
+            hrefLinkList={[params.categories, params.products]}
           />
         </div>
         <div className="md:gap-6 md:items-end md:flex-row flex flex-col gap-2">
@@ -97,7 +97,7 @@ export default function Page({ params }) {
               name,
               image,
               price,
-              rate,
+              rates,
               rateNbr,
               availability,
               isBestSeller,
@@ -125,7 +125,7 @@ export default function Page({ params }) {
                   >
                     <Link href={`/product/${id}`}>
                       {name}
-                      <RatingComponent rate={rate} rateNbr={rateNbr} />
+                      <RatingComponent rateList={rates} />
                       <span className="md:hidden">
                         <BestSellerComponent isBestSeller={isBestSeller} />
                       </span>
@@ -134,7 +134,7 @@ export default function Page({ params }) {
                     </Link>
                     <span className="flex md:hidden">
                       <AddToBasketButton product={product} ml={"ml-0"} />
-                      <WishAddButton />
+                      <AddToWishListButton />
                     </span>
                   </div>
                   {!isGrid && (
@@ -145,7 +145,7 @@ export default function Page({ params }) {
                       </span>
                       <span className="mt-auto flex items-center">
                         <AddToBasketButton product={product} />
-                        <WishAddButton />
+                        <AddToWishListButton />
                       </span>
                     </div>
                   )}
@@ -153,13 +153,13 @@ export default function Page({ params }) {
                 <div className={`${!isGrid && "hidden"} flex flex-col text-sm`}>
                   <Link href={`/product/${id}`}>
                     {name}
-                    <RatingComponent rate={rate} rateNbr={rateNbr} />
+                    <RatingComponent rateList={rates} />
                     <AvailabilityComponent availability={availability} />
                     <PriceComponent price={price} />
                   </Link>
                   <span className="flex">
                     <AddToBasketButton product={product} ml={"ml-0"} />
-                    <WishAddButton />
+                    <AddToWishListButton />
                   </span>
                 </div>
               </div>
