@@ -7,7 +7,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-function BreadCrumbComponent({ hrefLinkList }) {
+function BreadCrumbComponent({ hrefLinkList, unClickableList = [] }) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -20,6 +20,12 @@ function BreadCrumbComponent({ hrefLinkList }) {
             <BreadcrumbItem>
               <BreadcrumbLink href={`/${link}`}>{link}</BreadcrumbLink>
             </BreadcrumbItem>
+          </div>
+        ))}
+        {unClickableList.map((link, index) => (
+          <div className="flex items-center gap-2.5" key={index}>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>{link}</BreadcrumbItem>
           </div>
         ))}
       </BreadcrumbList>

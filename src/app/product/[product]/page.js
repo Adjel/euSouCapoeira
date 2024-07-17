@@ -16,12 +16,15 @@ import AddToWishListButton from "@/components/AddToWishListButton";
 import Link from "next/link";
 import CheckedIcon from "@/components/CheckedIcon";
 import BreadCrumbComponent from "@/components/BreadcrumbComponent/BreadcrumbComponent";
+import { IoCloseOutline } from "react-icons/io5";
+import { FaPlus } from "react-icons/fa6";
 
 export default function page({ params }) {
   const { addToCart } = useCartStore();
   const [product, setProduct] = useState();
   const [photoIndex, setPhotoIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [isPhotoBarExpanded, setIsPhotoBarExpanded] = useState(false);
 
   useEffect(() => {
     setProduct(getMockedProductById(params.product));
@@ -38,7 +41,12 @@ export default function page({ params }) {
       <div className="flex flex-col lg:flex-row">
         <section className="flex flex-col ">
           <header>
-            <BreadCrumbComponent hrefLinkList={[]} />
+            <div className="mb-7">
+              <BreadCrumbComponent
+                hrefLinkList={[`${params.categories}`]}
+                unClickableList={[`${product?.name}`]}
+              />
+            </div>
             {product?.name}
             <RatingComponent rateList={product?.rates} />
           </header>
@@ -47,12 +55,32 @@ export default function page({ params }) {
             alt={product?.alt}
             className="mx-auto w-48 md:w-80 h-auto"
           />
-          <div className="flex flex-wrap gap-4 justify-start items-center bg-background-medium-gray">
+
+          <div
+            className={`flex flex-wrap gap-4 px-2 overflow-hidden ${
+              !isPhotoBarExpanded
+                ? "max-h-20 md:max-h-32"
+                : "max-h-40 md:max-h-64"
+            } justify-start items-center bg-background-medium-gray height-transition transition-all duration-500 ease-in-out
+            `}
+          >
+            <button
+              className="flex flex-col justify-center items-center w-14 h-14 shadow-md rounded-full text-6xl bg-white"
+              onClick={() => setIsPhotoBarExpanded(!isPhotoBarExpanded)}
+            >
+              <span className=" text-color-gold">
+                {isPhotoBarExpanded ? (
+                  <IoCloseOutline className="size-9" />
+                ) : (
+                  <IoCloseOutline className="size-9 rotate-45" />
+                )}
+              </span>
+            </button>
             {product?.photos.map(({ photo, alt }, index) => (
               <div
                 className={`${
                   index === photoIndex &&
-                  "px-5 py-3 border-t-2 border-color-gold bg-color-hover-cancel-button rounded"
+                  "px-5 py-4 border-t-2 border-color-gold bg-color-hover-cancel-button rounded"
                 } `}
               >
                 <Image
@@ -68,6 +96,7 @@ export default function page({ params }) {
         </section>
         <section>
           <div className="flex flex-col gap-2 mt-4 justify-center ">
+            <div className="hidden lg:flex mb-7" />
             <div className="text-base md:text-lg font-semibold">
               Variations de ce produit
             </div>
