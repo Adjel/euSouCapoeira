@@ -1,5 +1,9 @@
 import music from "../../public/fakeCatsImages/music.jpg";
 import clothes from "../../public/fakeCatsImages/clothes.jpg";
+import livreBatuque from "../../public/fakeApi/livreBatuque.jpg";
+import livreBatuqueBack from "../../public/fakeApi/livreBatuqueBack.jpg";
+import livreBatuqueOpen from "../../public/fakeApi/livreBatuqueOpen.jpg";
+import livretexpressao from "../../public/fakeApi/livretexpressao.jpg";
 
 export const products = [
   {
@@ -7,7 +11,6 @@ export const products = [
     products: [
       {
         name: "berimbau Viola par Mestre Foguete",
-
         price: 60,
         rates: [
           { authId: "", rate: 3 },
@@ -24,8 +27,12 @@ export const products = [
         isBestSeller: true,
         linkedProducts: ["id1", "id2", "id3"],
         specs: ["", "", "", "", ""],
-        variants: [{ alt: "", photo: "", id: "" }],
-        photos: [{ image: music, alt: "" }],
+        variants: [{ alt: "", image: "", id: "" }],
+        images: [
+          { image: music, alt: "" },
+          { image: music, alt: "" },
+          { image: music, alt: "" },
+        ],
         comments: [
           {
             title: "YEah",
@@ -55,7 +62,6 @@ export const products = [
       },
       {
         name: "berimbau Gunga fabriqué au Brésil",
-
         price: 59.99,
         rates: [
           { authId: "", rate: 3 },
@@ -72,8 +78,11 @@ export const products = [
         isBestSeller: false,
         linkedProducts: ["id1", "id2", "id3"],
         specs: ["", "", "", "", ""],
-        variants: [{ alt: "", photos: "", id: "" }],
-        photos: [{ image: music, alt: "" }],
+        variants: [{ alt: "", image: "", id: "" }],
+        images: [
+          { image: music, alt: "" },
+          { image: music, alt: "" },
+        ],
         comments: [
           {
             title: "YEah",
@@ -103,7 +112,6 @@ export const products = [
       },
       {
         name: "berimbau Viola fait avec du bois de Noisetié",
-
         price: 29.9,
         rates: [
           { authId: "", rate: 3 },
@@ -120,8 +128,11 @@ export const products = [
         isBestSeller: false,
         linkedProducts: ["id1", "id2", "id3"],
         specs: ["", "", "", "", ""],
-        variants: [{ alt: "", photo: "", id: "" }],
-        photos: [{ image: music, alt: "" }],
+        variants: [{ alt: "", image: "", id: "" }],
+        images: [
+          { image: music, alt: "" },
+          { image: music, alt: "" },
+        ],
         comments: [
           {
             title: "YEah",
@@ -179,67 +190,67 @@ export const products = [
           "interne en Textile",
         ],
         variants: [
-          { alt: "", photo: clothes, id: "111111111" },
-          { alt: "", photo: clothes, id: "222222222" },
-          { alt: "", photo: clothes, id: "333333333" },
-          { alt: "", photo: clothes, id: "12345456789" },
+          { alt: "", image: clothes, id: "111111111" },
+          { alt: "", image: clothes, id: "222222222" },
+          { alt: "", image: clothes, id: "333333333" },
+          { alt: "", image: clothes, id: "12345456789" },
         ],
-        photos: [
+        images: [
           {
             alt: "",
-            photo: clothes,
+            image: clothes,
           },
           {
             alt: "",
-            photo: music,
+            image: music,
           },
           {
             alt: "",
-            photo: clothes,
+            image: clothes,
           },
           {
             alt: "",
-            photo: music,
+            image: music,
           },
           {
             alt: "",
-            photo: clothes,
+            image: clothes,
           },
           {
             alt: "",
-            photo: music,
+            image: music,
           },
           {
             alt: "",
-            photo: clothes,
+            image: clothes,
           },
           {
             alt: "",
-            photo: music,
+            image: music,
           },
           {
             alt: "",
-            photo: clothes,
+            image: clothes,
           },
           {
             alt: "",
-            photo: music,
+            image: music,
           },
           {
             alt: "",
-            photo: clothes,
+            image: clothes,
           },
           {
             alt: "",
-            photo: music,
+            image: music,
           },
           {
             alt: "",
-            photo: clothes,
+            image: clothes,
           },
           {
             alt: "",
-            photo: music,
+            image: music,
           },
         ],
         comments: [
@@ -271,7 +282,6 @@ export const products = [
       },
       {
         name: "Chaussure Capoeira - Rainha VL2500 -Blanc-bleu ",
-
         price: 57.69,
         rates: [
           { authId: "", rate: 2 },
@@ -289,12 +299,12 @@ export const products = [
         linkedProducts: ["id1", "id2", "id3"],
         specs: ["", "", "", "", ""],
         variants: [
-          { alt: "", photo: clothes, id: "222222222" },
-          { alt: "", photo: clothes, id: "333333333" },
-          { alt: "", photo: clothes, id: "12345456789" },
-          { alt: "", photo: clothes, id: "111111111" },
+          { alt: "", image: clothes, id: "222222222" },
+          { alt: "", image: clothes, id: "333333333" },
+          { alt: "", image: clothes, id: "12345456789" },
+          { alt: "", image: clothes, id: "111111111" },
         ],
-        photos: [{ image: clothes, alt: "" }],
+        images: [{ image: clothes, alt: "" }],
         comments: [
           {
             title: "Bien",
@@ -343,12 +353,12 @@ export const products = [
         linkedProducts: ["id1", "id2", "id3"],
         specs: ["", "", "", "", ""],
         variants: [
-          { alt: "", photo: clothes, id: "111111111" },
-          { alt: "", photo: clothes, id: "222222222" },
-          { alt: "", photo: clothes, id: "333333333" },
-          { alt: "", photo: clothes, id: "12345456789" },
+          { alt: "", image: clothes, id: "111111111" },
+          { alt: "", image: clothes, id: "222222222" },
+          { alt: "", image: clothes, id: "333333333" },
+          { alt: "", image: clothes, id: "12345456789" },
         ],
-        photos: [{ image: clothes, alt: "" }],
+        images: [{ image: clothes, alt: "" }],
         comments: [
           {
             title: "YEah",
@@ -396,12 +406,12 @@ export const products = [
         linkedProducts: ["id1", "id2", "id3"],
         specs: ["", "", "", "", ""],
         variants: [
-          { alt: "", photo: clothes, id: "111111111" },
-          { alt: "", photo: clothes, id: "222222222" },
-          { alt: "", photo: clothes, id: "333333333" },
-          { alt: "", photo: clothes, id: "12345456789" },
+          { alt: "", image: clothes, id: "111111111" },
+          { alt: "", image: clothes, id: "222222222" },
+          { alt: "", image: clothes, id: "333333333" },
+          { alt: "", image: clothes, id: "12345456789" },
         ],
-        photos: [
+        images: [
           {
             image: clothes,
             alt: "",
@@ -427,6 +437,134 @@ export const products = [
           {
             title: "Cool",
             authorNameName: "Tanjiro",
+            authorId: "",
+            date: new Date(),
+            rating: 3,
+            comment: "Elles sont moins chères au Brésil nan ?",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    subCategory: "livre",
+    products: [
+      {
+        name: "LIVRET EXPRESSÃO DA ARTE MAI-JUIN 2003",
+        price: 12.92,
+        rates: [
+          { authId: "", rate: 5 },
+          { authId: "", rate: 5 },
+          { authId: "", rate: 4 },
+          { authId: "", rate: 5 },
+          { authId: "", rate: 5 },
+          { authId: "", rate: 5 },
+          { authId: "", rate: 4 },
+          { authId: "", rate: 4 },
+          { authId: "", rate: 4 },
+          { authId: "", rate: 4 },
+          { authId: "", rate: 4 },
+          { authId: "", rate: 4 },
+        ],
+        availability: "now",
+        id: "987654321",
+        date: new Date(),
+        isBestSeller: true,
+        linkedProducts: ["id1", "id2", "id3"],
+        specs: [
+          "En portugais",
+          "30 pages",
+          "au format de poche (voir photo)",
+          "MATÉRIAU SUPÉRIEUR en Toile 100 % coton",
+          "interne en Textile",
+        ],
+        variants: [],
+        images: [
+          {
+            alt: "",
+            image: livretexpressao,
+          },
+          {
+            alt: "",
+            image: livretexpressao,
+          },
+        ],
+        comments: [
+          {
+            title: "YEah",
+            authorName: "goku",
+            authorId: "",
+            date: new Date(),
+            rating: 4,
+            comment: "Il sonne trop bien",
+          },
+          {
+            title: "J'aime",
+            authorName: "Pernalonga",
+            authorId: "",
+            date: new Date(),
+            rating: 5,
+            comment: "Top à l'aise",
+          },
+          {
+            title: "Ok à première vue",
+            authorName: "Tanjiro",
+            authorId: "",
+            date: new Date(),
+            rating: 3,
+            comment: "Ca a l'air solide on verra avec le temps",
+          },
+        ],
+      },
+      {
+        name: "Livre O Batuque, a luta braba (Frede Abreu)",
+        price: 100.32,
+        rates: [
+          { authId: "", rate: 2 },
+          { authId: "", rate: 2 },
+          { authId: "", rate: 2 },
+          { authId: "", rate: 2 },
+          { authId: "", rate: 5 },
+          { authId: "", rate: 4 },
+        ],
+        availability: "nostock",
+        id: "112233445",
+        date: new Date(),
+        isBestSeller: false,
+        linkedProducts: ["id1", "id2", "id3"],
+        specs: [
+          "Bilingue (portugais et anglais)",
+          "152 pages",
+          "Par Frede Abreu, chercheur et historien passioné par l'histoire de la capoeira",
+          "Livre rare (édition cloturée)",
+          "Edition limitée",
+        ],
+        variants: [],
+        images: [
+          { image: livreBatuque, alt: "" },
+          { image: livreBatuqueBack, alt: "" },
+          { image: livreBatuqueOpen, alt: "" },
+        ],
+        comments: [
+          {
+            title: "Bien",
+            authorName: "Laïa",
+            authorId: "",
+            date: new Date(),
+            rating: 4,
+            comment: "Bien bien",
+          },
+          {
+            title: "Khaja",
+            authorName: "Pixote",
+            authorId: "",
+            date: new Date(),
+            rating: 2.5,
+            comment: "Le top !",
+          },
+          {
+            title: "Top !",
+            authorName: "Tanjiro",
             authorId: "",
             date: new Date(),
             rating: 3,

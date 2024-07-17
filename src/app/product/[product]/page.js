@@ -17,14 +17,13 @@ import Link from "next/link";
 import CheckedIcon from "@/components/CheckedIcon";
 import BreadCrumbComponent from "@/components/BreadcrumbComponent/BreadcrumbComponent";
 import { IoCloseOutline } from "react-icons/io5";
-import { FaPlus } from "react-icons/fa6";
 
 export default function page({ params }) {
   const { addToCart } = useCartStore();
   const [product, setProduct] = useState();
-  const [photoIndex, setPhotoIndex] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [isPhotoBarExpanded, setIsPhotoBarExpanded] = useState(false);
+  const [isImageBarExpanded, setIsImageBarExpanded] = useState(false);
 
   useEffect(() => {
     setProduct(getMockedProductById(params.product));
@@ -39,7 +38,7 @@ export default function page({ params }) {
   return (
     <section className="basicPadding py-7">
       <div className="flex flex-col lg:flex-row">
-        <section className="flex flex-col ">
+        <section className="flex flex-col lg:w-2/3">
           <header>
             <div className="mb-7">
               <BreadCrumbComponent
@@ -51,14 +50,14 @@ export default function page({ params }) {
             <RatingComponent rateList={product?.rates} />
           </header>
           <Image
-            src={product?.photos[photoIndex ?? 0].photo}
+            src={product?.images[imageIndex ?? 0].image}
             alt={product?.alt}
             className="mx-auto w-48 md:w-80 h-auto"
           />
 
           <div
             className={`flex flex-wrap gap-4 px-2 overflow-hidden ${
-              !isPhotoBarExpanded
+              !isImageBarExpanded
                 ? "max-h-20 md:max-h-32"
                 : "max-h-40 md:max-h-64"
             } justify-start items-center bg-background-medium-gray height-transition transition-all duration-500 ease-in-out
@@ -66,29 +65,29 @@ export default function page({ params }) {
           >
             <button
               className="flex flex-col justify-center items-center w-14 h-14 shadow-md rounded-full text-6xl bg-white"
-              onClick={() => setIsPhotoBarExpanded(!isPhotoBarExpanded)}
+              onClick={() => setIsImageBarExpanded(!isImageBarExpanded)}
             >
               <span className=" text-color-gold">
-                {isPhotoBarExpanded ? (
+                {isImageBarExpanded ? (
                   <IoCloseOutline className="size-9" />
                 ) : (
                   <IoCloseOutline className="size-9 rotate-45" />
                 )}
               </span>
             </button>
-            {product?.photos.map(({ photo, alt }, index) => (
+            {product?.images.map(({ image, alt }, index) => (
               <div
                 className={`${
-                  index === photoIndex &&
+                  index === imageIndex &&
                   "px-5 py-4 border-t-2 border-color-gold bg-color-hover-cancel-button rounded"
                 } `}
               >
                 <Image
                   className="mx-auto w-16 md:w-24 h-auto cursor-pointer"
                   key={index}
-                  src={photo}
+                  src={image}
                   alt={alt}
-                  onClick={() => setPhotoIndex(index)}
+                  onClick={() => setImageIndex(index)}
                 />
               </div>
             ))}
@@ -101,7 +100,7 @@ export default function page({ params }) {
               Variations de ce produit
             </div>
             <div className="flex flex-wrap justify-start">
-              {product?.variants.map(({ alt, photo, id }, index) => (
+              {product?.variants.map(({ alt, image, id }, index) => (
                 <Link
                   href={`/product/${id}`}
                   className="relative hover:text-color-gold"
@@ -113,7 +112,7 @@ export default function page({ params }) {
                         ? "border"
                         : "border border-r-0 hover:border-r"
                     } w-16 h-16 p-4 border-color-hover-cancel-button hover:border-color-gold cursor-pointer `}
-                    src={photo}
+                    src={image}
                     alt={alt}
                   />
                   {id === product?.id && <CheckedIcon />}
