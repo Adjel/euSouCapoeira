@@ -18,7 +18,7 @@ const Page = ({ params }) => {
   );
 
   if (category && category.subCategories.length < 1) {
-    router.push(`/${params.categories}/${normalizedCategory}`);
+    router.push(`/categories/${normalizedCategory}`);
   } else {
     return (
       <section className="relative flex flex-col md:grid-cols-4 lg:grid-cols-5">
