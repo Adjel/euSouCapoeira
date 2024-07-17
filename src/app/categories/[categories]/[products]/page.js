@@ -95,10 +95,9 @@ export default function Page({ params }) {
           sortedProducts.map((product) => {
             const {
               name,
-              image,
+              images,
               price,
               rates,
-              rateNbr,
               availability,
               isBestSeller,
               id,
@@ -110,7 +109,7 @@ export default function Page({ params }) {
                 <div className="xs:flex-row relative flex flex-col min-w-fit gap-4 p-7 bg-background-medium-gray rounded">
                   <Link href={`/product/${id}`}>
                     <Image
-                      src={image}
+                      src={images[0].image}
                       alt={alt}
                       className={`${!isGrid && "max-w-24 max-h-24"}`}
                     />

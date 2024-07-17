@@ -2,10 +2,14 @@ import { products } from "./productsProvider";
 
 export function getMockedProductById(productId) {
   let p;
+  console.log(productId);
   products.map((productList) => {
+    console.log(productList);
     const item = productList.products.find((item) => item.id === productId);
-    p = item;
+    if (!p && item) p = item;
+    console.log(item);
   });
+  console.log(p);
   return p ?? handleError;
 }
 
