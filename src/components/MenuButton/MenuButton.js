@@ -1,18 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { CgMenu } from "react-icons/cg";
+import { useMobileNavStore } from "@/stores/useNavStore";
+import "@/styles/globals.css";
 
-function MenuButton({ onClick }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function onClicked() {
-    setIsOpen(!isOpen);
-    onClick(isOpen);
-  }
+function MenuButton() {
+  const { toggle } = useMobileNavStore();
 
   return (
     <>
-      <CgMenu onClick={onClicked} className="size-7 sm:size-6" />
+      <CgMenu onClick={toggle} className="size-7 sm:size-6 cursor-pointer" />
     </>
   );
 }
