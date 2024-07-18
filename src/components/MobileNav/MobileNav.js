@@ -8,10 +8,6 @@ import "@/styles/globals.css";
 function MobileNav() {
   const { isOpen, close } = useMobileNavStore();
 
-  useEffect(() => {
-    console.log(isOpen);
-  }, [isOpen]);
-
   const liStyle = "cursor-pointer hover:text-color-gold";
   const linkStyle = "w-fit text-xl font-bold m-0 p-0";
   const textStyle = "first-letter:uppercase";

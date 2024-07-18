@@ -8,8 +8,6 @@ import {
 } from "@/components/ui/breadcrumb";
 
 function BreadCrumbComponent({ hrefLinkList, unClickableList = [] }) {
-  console.log(hrefLinkList);
-  console.log(unClickableList);
   return (
     <Breadcrumb>
       <BreadcrumbList>

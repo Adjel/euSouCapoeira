@@ -35,9 +35,6 @@ export default function Page({ params }) {
 
   const paramProducts = normalizeParam(params.products);
 
-  console.log(params);
-  console.log(paramProducts);
-
   const sortedProducts = useMemo(() => {
     const sorted = [...(productList?.products ?? [])];
     switch (sortOption) {
