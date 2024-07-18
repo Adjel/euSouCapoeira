@@ -24,6 +24,7 @@ const Page = ({ params }) => {
       <section className="relative flex flex-col md:grid-cols-4 lg:grid-cols-5">
         <header className="flex flex-col justify-center lg:justify-start items-start h-24 md:h-36 lg:h-56">
           <Image
+            alt={category.alt}
             src={category.backgroundImage}
             style={{ objectFit: "cover" }}
             className="absolute z-0 top-0 w-full h-24 md:h-36 lg:h-56"
@@ -37,8 +38,8 @@ const Page = ({ params }) => {
         </header>
         <div className="basicPadding flex-col mt-10 mb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {category.subCategories.map(({ name, image, alt }) => (
-              <div className="flex">
+            {category.subCategories.map(({ name, image, alt }, index) => (
+              <div key={index} className="flex">
                 <CategoryItem
                   preLink={`${params.categories}`}
                   title={name}

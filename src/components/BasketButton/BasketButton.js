@@ -12,7 +12,11 @@ function BasketButton() {
     <Link href={"/basket"} className="cursor-pointer">
       {productQuantity > 0 ? (
         <>
-          <Image src={nebasket} className="ml-4 w-8 h-8" />
+          <Image
+            src={nebasket}
+            alt={"l'icône du bouton panier"}
+            className="ml-4 w-8 h-8"
+          />
           <span
             className={`absolute text-xs top-1 ${
               productQuantity < 10 ? "right-2.5" : "right-1.5"
@@ -22,7 +26,11 @@ function BasketButton() {
           </span>
         </>
       ) : (
-        <Image src={basketIcon} className="ml-4 w-8 h-8" />
+        <Image
+          src={basketIcon}
+          alt={"l'icône du bouton panier"}
+          className="ml-4 w-8 h-8"
+        />
       )}
     </Link>
   );

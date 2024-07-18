@@ -14,20 +14,26 @@ function BreadCrumbComponent({ hrefLinkList, unClickableList = [] }) {
         <BreadcrumbItem>
           <BreadcrumbLink href="/">accueil</BreadcrumbLink>
         </BreadcrumbItem>
-        {hrefLinkList.map((link, index) => (
-          <div className="flex items-center gap-2.5" key={index}>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href={`/${link}`}>{link}</BreadcrumbLink>
-            </BreadcrumbItem>
-          </div>
-        ))}
-        {unClickableList.map((link, index) => (
-          <div className="flex items-center gap-2.5" key={index}>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>{link}</BreadcrumbItem>
-          </div>
-        ))}
+        {hrefLinkList.map(
+          (link, index) =>
+            link && (
+              <div className="flex items-center gap-2.5" key={index}>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href={`/${link}`}>{link}</BreadcrumbLink>
+                </BreadcrumbItem>
+              </div>
+            )
+        )}
+        {unClickableList.map(
+          (link, index) =>
+            link && (
+              <div className="flex items-center gap-2.5" key={index}>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>{link}</BreadcrumbItem>
+              </div>
+            )
+        )}
       </BreadcrumbList>
     </Breadcrumb>
   );

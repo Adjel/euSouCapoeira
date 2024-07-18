@@ -13,9 +13,17 @@ function UserButton() {
   return (
     <div onClick={toggle} className="w-fit cursor-pointer">
       {user ? (
-        <Image className={styles.userNavItem} src={connectedUserIcon} />
+        <Image
+          className={styles.userNavItem}
+          alt="l'icône de l'utilisateur connecté"
+          src={connectedUserIcon}
+        />
       ) : (
-        <Image className={styles.userNavItem} src={userIcon} />
+        <Image
+          className={styles.userNavItem}
+          alt="l'icône de l'utilisateur non connecté"
+          src={userIcon}
+        />
       )}
     </div>
   );

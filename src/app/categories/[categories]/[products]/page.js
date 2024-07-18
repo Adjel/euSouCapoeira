@@ -67,24 +67,32 @@ export default function Page({ params }) {
       <header className="flex flex-col gap-4">
         <div className="lg:flex hidden flex-col w-fit h-1/2 justify-center items-start p-2">
           <BreadcrumbComponent
-            hrefLinkList={[params.categories, params.products]}
+            hrefLinkList={[
+              params.categories.toLowerCase() !== "products" &&
+                params.categories,
+              params.products,
+            ]}
           />
         </div>
         <div className="md:gap-6 md:items-end md:flex-row flex flex-col gap-2">
           <h2 className="text-4xl md:text-5xl font-bold first-letter:uppercase">
             {params.products}
           </h2>
-          <span className="md:text-2xl md:font-bold md:text-color-dark-gray flex gap-2 text-extreme-dark-gray">
-            {productCount}
-            <span className="md:hidden">
-              {isSingleProduct ? "Produit" : "Produits"}
+          {productCount > 0 && (
+            <span className="md:text-2xl md:font-bold md:text-color-dark-gray flex gap-2 text-extreme-dark-gray">
+              {productCount}
+              <span className="md:hidden">
+                {isSingleProduct ? "Produit" : "Produits"}
+              </span>
             </span>
-          </span>
+          )}
         </div>
-        <section className="flex gap-4 pr-7 justify-end">
-          <SelectSortingComponent />
-          <GridListSwitchButton toggle={toggleGridList} className="size-6" />
-        </section>
+        {productCount > 0 && (
+          <section className="flex gap-4 pr-7 justify-end">
+            <SelectSortingComponent />
+            <GridListSwitchButton toggle={toggleGridList} className="size-6" />
+          </section>
+        )}
       </header>
       <div
         className={`${
