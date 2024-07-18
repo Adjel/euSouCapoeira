@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import Reinsurance from "@/components/Reinsurance";
 import Footer from "@/components/Footer";
 import LoginModal from "@/components/LoginModal";
+import MobileNav from "@/components/MobileNav";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
         <Reinsurance />
         <Footer />
         <LoginModal />
+        <MobileNav />
         <Toaster />
       </body>
     </html>
