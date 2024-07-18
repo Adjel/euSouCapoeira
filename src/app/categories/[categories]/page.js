@@ -24,21 +24,21 @@ const Page = ({ params }) => {
       <section className="relative flex flex-col md:grid-cols-4 lg:grid-cols-5">
         <header className="flex flex-col justify-center lg:justify-start items-start h-24 md:h-36 lg:h-56">
           <Image
-            alt={category.alt}
-            src={category.backgroundImage}
+            alt={category?.alt}
+            src={category?.backgroundImage}
             style={{ objectFit: "cover" }}
             className="absolute z-0 top-0 w-full h-24 md:h-36 lg:h-56"
           />
           <div className="hidden lg:flex flex-col h-1/2 justify-center items-start z-0 top-0 w-fit ml-6 md:ml-10 lg:ml-12 text-white">
-            <BreadcrumbComponent hrefLinkList={[params.categories]} />
+            <BreadcrumbComponent unClickableList={[params.categories]} />
           </div>
           <h2 className="z-0 top-0 ml-6 md:ml-10 lg:ml-12 text-xl md:text-2xl lg:text-4xl font-bold first-letter:uppercase text-white ">
-            {category.title}
+            {category?.title}
           </h2>
         </header>
         <div className="basicPadding flex-col mt-10 mb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {category.subCategories.map(({ name, image, alt }, index) => (
+            {category?.subCategories.map(({ name, image, alt }, index) => (
               <div key={index} className="flex">
                 <CategoryItem
                   preLink={`${params.categories}`}

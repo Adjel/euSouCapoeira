@@ -30,7 +30,6 @@ const useUserStore = create((set) => ({
         title: "Votre compte à bien été crée",
         description: "Vous êtes connecté",
       });
-    console.log({ user });
     return true;
   },
   updateUser: (updatedUser) => {
@@ -115,7 +114,6 @@ const useSignUpMock = create((set) => ({
     const user = await mockUser();
     const { setUser } = useUserStore.getState();
     const { setIsOpen } = useLoginModalStore.getState();
-    console.log({ user });
     setUser(user);
     // Modal have to autoclose when user is connected
     setIsOpen(false);

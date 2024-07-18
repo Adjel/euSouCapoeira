@@ -59,19 +59,19 @@ export const categories = [
     backgroundImage: berimbau,
     subCategories: [
       {
-        name: "berimbau Gunga",
+        name: "Berimbau Gunga",
         image: music,
         alt: "une image représentant la catégorie berimbau gunga",
         productNbr: 2,
       },
       {
-        name: "berimbau Medio",
+        name: "Berimbau Medio",
         image: music,
         alt: "une image représentant la catégorie berimbau medio",
         productNbr: 2,
       },
       {
-        name: "berimbau Viola",
+        name: "berimbau viola",
         image: music,
         alt: "une image représentant la catégorie berimbau viola",
         productNbr: 2,

@@ -7,7 +7,7 @@ import livretexpressao from "../../public/fakeApi/livretexpressao.jpg";
 
 export const products = [
   {
-    subCategory: "berimbau Viola",
+    subCategory: "berimbau viola",
     products: [
       {
         name: "berimbau Viola par Mestre Foguete",
