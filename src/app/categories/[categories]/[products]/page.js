@@ -21,6 +21,8 @@ export default function Page({ params }) {
   const [isGrid, setIsGrid] = useState(false);
   const { sortOption } = useProductSortStore();
 
+  console.log(params);
+
   const productList = products.find(
     (item) => params.products === normalizeString(item.subCategory)
   );
@@ -67,7 +69,11 @@ export default function Page({ params }) {
       <header className="flex flex-col gap-4">
         <div className="lg:flex hidden flex-col w-fit h-1/2 justify-center items-start p-2">
           <BreadcrumbComponent
-            hrefLinkList={[params.categories, params.products]}
+            hrefLinkList={[
+              params.categories.toLowerCase() !== "products" &&
+                params.categories,
+              params.products,
+            ]}
           />
         </div>
         <div className="md:gap-6 md:items-end md:flex-row flex flex-col gap-2">

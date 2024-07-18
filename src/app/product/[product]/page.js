@@ -17,6 +17,7 @@ import Link from "next/link";
 import CheckedIcon from "@/components/CheckedIcon";
 import BreadCrumbComponent from "@/components/BreadcrumbComponent/BreadcrumbComponent";
 import { IoCloseOutline } from "react-icons/io5";
+import ZoomImage from "@/components/ZoomOnImage/ZoomOnImage";
 
 export default function page({ params }) {
   const { addToCart } = useCartStore();
@@ -42,39 +43,43 @@ export default function page({ params }) {
           <header>
             <div className="mb-7">
               <BreadCrumbComponent
-                hrefLinkList={[`${params.categories}`]}
+                hrefLinkList={[
+                  params.categories !== "Products" && params.categories,
+                ]}
                 unClickableList={[`${product?.name}`]}
               />
             </div>
-            {product?.name}
+            <h2 className="text-2xl md:text-3xl">{product?.name}</h2>
             <RatingComponent rateList={product?.rates} />
           </header>
-          <Image
+          <ZoomImage
             src={product?.images[imageIndex ?? 0].image}
             alt={product?.alt}
-            className="mx-auto w-48 md:w-80 h-auto"
+            classN="mx-auto w-48 md:w-80 h-auto"
           />
 
           <div
             className={`flex flex-wrap gap-4 px-2 overflow-hidden ${
               !isImageBarExpanded
-                ? "max-h-20 md:max-h-32"
+                ? "max-h-24 md:max-h-32"
                 : "max-h-40 md:max-h-64"
             } justify-start items-center bg-background-medium-gray height-transition transition-all duration-500 ease-in-out
             `}
           >
-            <button
-              className="flex flex-col justify-center items-center w-14 h-14 shadow-md rounded-full text-6xl bg-white"
-              onClick={() => setIsImageBarExpanded(!isImageBarExpanded)}
-            >
-              <span className=" text-color-gold">
-                {isImageBarExpanded ? (
-                  <IoCloseOutline className="size-9" />
-                ) : (
-                  <IoCloseOutline className="size-9 rotate-45" />
-                )}
-              </span>
-            </button>
+            {product?.images.length > 5 && (
+              <button
+                className="flex flex-col justify-center items-center w-14 h-14 shadow-md rounded-full text-6xl bg-white"
+                onClick={() => setIsImageBarExpanded(!isImageBarExpanded)}
+              >
+                <span className=" text-color-gold">
+                  {isImageBarExpanded ? (
+                    <IoCloseOutline className="size-9" />
+                  ) : (
+                    <IoCloseOutline className="size-9 rotate-45" />
+                  )}
+                </span>
+              </button>
+            )}
             {product?.images.map(({ image, alt }, index) => (
               <div
                 className={`${
@@ -94,32 +99,36 @@ export default function page({ params }) {
           </div>
         </section>
         <section>
-          <div className="flex flex-col gap-2 mt-4 justify-center ">
-            <div className="hidden lg:flex mb-7" />
-            <div className="text-base md:text-lg font-semibold">
-              Variations de ce produit
+          {product?.variants.length > 0 ? (
+            <div className="flex flex-col gap-2 mt-4 justify-center ">
+              <div className="hidden lg:flex mb-7" />
+              <div className="text-base md:text-lg font-semibold">
+                Variations de ce produit
+              </div>
+              <div className="flex flex-wrap justify-start">
+                {product?.variants.map(({ alt, image, id }, index) => (
+                  <Link
+                    href={`/product/${id}`}
+                    className="relative hover:text-color-gold"
+                  >
+                    <Image
+                      key={id}
+                      className={`${
+                        index === product?.variants.length - 1
+                          ? "border"
+                          : "border border-r-0 hover:border-r"
+                      } w-16 h-16 p-4 border-color-hover-cancel-button hover:border-color-gold cursor-pointer `}
+                      src={image}
+                      alt={alt}
+                    />
+                    {id === product?.id && <CheckedIcon />}
+                  </Link>
+                ))}
+              </div>
             </div>
-            <div className="flex flex-wrap justify-start">
-              {product?.variants.map(({ alt, image, id }, index) => (
-                <Link
-                  href={`/product/${id}`}
-                  className="relative hover:text-color-gold"
-                >
-                  <Image
-                    key={id}
-                    className={`${
-                      index === product?.variants.length - 1
-                        ? "border"
-                        : "border border-r-0 hover:border-r"
-                    } w-16 h-16 p-4 border-color-hover-cancel-button hover:border-color-gold cursor-pointer `}
-                    src={image}
-                    alt={alt}
-                  />
-                  {id === product?.id && <CheckedIcon />}
-                </Link>
-              ))}
-            </div>
-          </div>
+          ) : (
+            <div className="hidden lg:flex mb-11" />
+          )}
           <div className="py-1">
             <PriceComponent price={product?.price} />
             <AvailabilityComponent availability={product?.availability} />

@@ -7,11 +7,8 @@ function RatingComponent({ rateList, userRate }) {
   if (rateList) {
     sum = 0;
     for (let obj of rateList) {
-      console.log(obj);
       sum += obj.rate;
     }
-    console.log(userRate);
-
     average = sum / rateList.length;
   }
 

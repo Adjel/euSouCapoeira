@@ -18,7 +18,7 @@ function CommentsComponent({ comments, rates }) {
         <>
           <div className="flex flex-row gap-3">
             <span className="flex justify-center items-center w-11 h-11 font-bold text-color-gold uppercase border-2 border-color-gold rounded-full">
-              {authorName.charAt(0)}
+              {authorName?.charAt(0)}
             </span>
             <div className="flex flex-col">
               {title}
