@@ -43,9 +43,7 @@ export default function page({ params }) {
           <header>
             <div className="mb-7">
               <BreadCrumbComponent
-                hrefLinkList={[
-                  params.categories !== "Products" && params.categories,
-                ]}
+                hrefLinkList={[{ display: params.categories }]}
                 unClickableList={[`${product?.name}`]}
               />
             </div>

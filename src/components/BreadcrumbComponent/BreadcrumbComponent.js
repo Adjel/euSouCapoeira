@@ -8,29 +8,31 @@ import {
 } from "@/components/ui/breadcrumb";
 
 function BreadCrumbComponent({ hrefLinkList, unClickableList = [] }) {
+  console.log(hrefLinkList);
+  console.log(unClickableList);
   return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">accueil</BreadcrumbLink>
         </BreadcrumbItem>
-        {hrefLinkList.map(
-          (link, index) =>
-            link && (
-              <div className="flex items-center gap-2.5" key={index}>
+        {hrefLinkList?.map(
+          ({ display, link }, index) =>
+            display && (
+              <div className="flex items-center gap-2.5 capitalize" key={index}>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink href={`/${link}`}>{link}</BreadcrumbLink>
+                  <BreadcrumbLink href={`/${link}`}>{display}</BreadcrumbLink>
                 </BreadcrumbItem>
               </div>
             )
         )}
         {unClickableList.map(
-          (link, index) =>
-            link && (
-              <div className="flex items-center gap-2.5" key={index}>
+          (display, index) =>
+            display && (
+              <div className="flex items-center gap-2.5 capitalize" key={index}>
                 <BreadcrumbSeparator />
-                <BreadcrumbItem>{link}</BreadcrumbItem>
+                <BreadcrumbItem>{display}</BreadcrumbItem>
               </div>
             )
         )}

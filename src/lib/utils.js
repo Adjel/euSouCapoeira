@@ -30,3 +30,18 @@ export const normalizeName = (name) => {
     .replace(/[^a-z0-9]/g, "") // Remove non-alphanumeric characters
     .replace(/\s+/g, ""); // Remove spaces
 };
+
+export const normalizeParam = (name) => {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z]/g, " ") // Remove non-alpha characters
+    .replace(/\s+/g, " ");
+};
+
+export const average = (arr) => {
+  const sum = arr.reduce(
+    (accumulator, element) => accumulator + element.rate,
+    0
+  );
+  return arr.length ? sum / arr.length : 0;
+};

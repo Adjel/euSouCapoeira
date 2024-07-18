@@ -1,9 +1,14 @@
 "use client";
 import { products } from "@/providers/productsProvider";
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import Image from "next/image";
 import RatingComponent from "@/components/RatingComponent";
-import { normalizeString, normalizeName } from "@/lib/utils";
+import {
+  normalizeString,
+  normalizeName,
+  normalizeParam,
+  average,
+} from "@/lib/utils";
 import Link from "next/link";
 import AvailabilityComponent from "@/components/AvailabilityComponent";
 import PriceComponent from "@/components/PriceComponent";
@@ -15,15 +20,23 @@ import AddToWishListButton from "@/components/AddToWishListButton";
 import AddToBasketButton from "@/components/AddToBasketButton";
 import useProductSortStore from "@/stores/useProductsSortStore";
 import { Button } from "@/components/ui/button";
+import { categories } from "@/providers/categoriesProvider";
 
 export default function Page({ params }) {
   // the page will present items into a grid or a list
   const [isGrid, setIsGrid] = useState(false);
   const { sortOption } = useProductSortStore();
 
-  const productList = products.find(
-    (item) => params.products === normalizeString(item.subCategory)
-  );
+  const productList = products.find((item) => {
+    return (
+      normalizeParam(params.products) === normalizeString(item.subCategory)
+    );
+  });
+
+  const paramProducts = normalizeParam(params.products);
+
+  console.log(params);
+  console.log(paramProducts);
 
   const sortedProducts = useMemo(() => {
     const sorted = [...(productList?.products ?? [])];
@@ -38,7 +51,7 @@ export default function Page({ params }) {
         sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
         break;
       case "Meilleur évaluation":
-        sorted.sort((a, b) => b.rate - a.rate);
+        sorted.sort((a, b) => average(b.rates) - average(a.rates));
         break;
       case "Alphabétique A - Z":
         sorted.sort((a, b) =>
@@ -62,21 +75,26 @@ export default function Page({ params }) {
   const productCount = productList?.products?.length ?? 0;
   const isSingleProduct = productCount === 1;
 
+  // le breadcrumb va afficher l'acceuil puis soit une catégorie puis une sous catégorie, soit une catégorie qui n'a pas de sous-catégorie
+  // si on a une sous-catégorie, la catgéorie sera clickable et pointera vers la catégorie, et la sous catégorie ne le sera pas
+  // si pas de sous catégorie, on affiche la catégorie mais non clickable
   return (
     <section className="py-7 px-14">
       <header className="flex flex-col gap-4">
         <div className="lg:flex hidden flex-col w-fit h-1/2 justify-center items-start p-2">
           <BreadcrumbComponent
             hrefLinkList={[
-              params.categories.toLowerCase() !== "products" &&
-                params.categories,
-              params.products,
+              params.categories !== "products" && {
+                display: params.categories,
+                link: `categories/${params.categories}`,
+              },
             ]}
+            unClickableList={[paramProducts]}
           />
         </div>
         <div className="md:gap-6 md:items-end md:flex-row flex flex-col gap-2">
-          <h2 className="text-4xl md:text-5xl font-bold first-letter:uppercase">
-            {params.products}
+          <h2 className="text-4xl md:text-5xl font-bold capitalize">
+            {paramProducts}
           </h2>
           {productCount > 0 && (
             <span className="md:text-2xl md:font-bold md:text-color-dark-gray flex gap-2 text-extreme-dark-gray">
