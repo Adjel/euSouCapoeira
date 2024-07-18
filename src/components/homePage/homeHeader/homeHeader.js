@@ -21,8 +21,8 @@ function HomeHeader() {
           }}
         >
           <CarouselContent>
-            {adds.map(({ alt, image }) => (
-              <CarouselItem className="basis-4/6">
+            {adds.map(({ alt, image }, index) => (
+              <CarouselItem className="basis-4/6" key={index}>
                 <div className={styles.imageWrapperStyle}>
                   <Image
                     className="rounded"

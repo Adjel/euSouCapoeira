@@ -35,6 +35,7 @@ export const products = [
         ],
         comments: [
           {
+            id: "303030",
             title: "YEah",
             authorName: "goku",
             authorId: "",
@@ -43,6 +44,7 @@ export const products = [
             comment: "Il sonne trop bien",
           },
           {
+            id: "202020",
             title: "YEah",
             authorName: "Pernalonga",
             authorId: "",
@@ -51,6 +53,7 @@ export const products = [
             comment: "Je n'arrive pas à l'accorder, comment faire ?",
           },
           {
+            id: "191919",
             title: "YEah",
             authorName: "Tanjiro",
             authorId: "",
@@ -85,6 +88,7 @@ export const products = [
         ],
         comments: [
           {
+            id: "181818",
             title: "YEah",
             authorName: "Laïa",
             authorId: "",
@@ -93,6 +97,7 @@ export const products = [
             comment: "Il sonne vraiment bien",
           },
           {
+            id: "171717",
             title: "YEah",
             authorName: "Pixote",
             authorId: "",
@@ -101,6 +106,7 @@ export const products = [
             comment: "E bom !",
           },
           {
+            id: "1616161",
             title: "YEah",
             authorName: "Tanjiro",
             authorId: "",
@@ -135,6 +141,7 @@ export const products = [
         ],
         comments: [
           {
+            id: "151515",
             title: "YEah",
             authorName: "Chama",
             authorId: "",
@@ -143,6 +150,7 @@ export const products = [
             comment: "Super rapport qualité prix",
           },
           {
+            id: "141414",
             title: "YEah",
             authorName: "Babalo",
             authorId: "",
@@ -151,6 +159,7 @@ export const products = [
             comment: "J'aime pas'",
           },
           {
+            id: "131313",
             title: "YEah",
             authorName: "Tanjiro",
             authorId: "",
@@ -255,6 +264,7 @@ export const products = [
         ],
         comments: [
           {
+            id: "121212",
             title: "YEah",
             authorName: "goku",
             authorId: "",
@@ -263,6 +273,7 @@ export const products = [
             comment: "Il sonne trop bien",
           },
           {
+            id: "111111",
             title: "J'aime",
             authorName: "Pernalonga",
             authorId: "",
@@ -271,6 +282,7 @@ export const products = [
             comment: "Top à l'aise",
           },
           {
+            id: "0101010",
             title: "Ok à première vue",
             authorName: "Tanjiro",
             authorId: "",
@@ -307,6 +319,7 @@ export const products = [
         images: [{ image: clothes, alt: "" }],
         comments: [
           {
+            id: "999",
             title: "Bien",
             authorName: "Laïa",
             authorId: "",
@@ -315,6 +328,7 @@ export const products = [
             comment: "Bien bien",
           },
           {
+            id: "888",
             title: "Khaja",
             authorName: "Pixote",
             authorId: "",
@@ -323,6 +337,7 @@ export const products = [
             comment: "Le top !",
           },
           {
+            id: "777",
             title: "Top !",
             authorName: "Tanjiro",
             authorId: "",
@@ -361,6 +376,7 @@ export const products = [
         images: [{ image: clothes, alt: "" }],
         comments: [
           {
+            id: "666",
             title: "YEah",
             authorName: "Laïa",
             authorId: "",
@@ -369,6 +385,7 @@ export const products = [
             comment: "Bien bien",
           },
           {
+            id: "555",
             title: "ouds",
             authorName: "Pixote",
             authorId: "",
@@ -377,6 +394,7 @@ export const products = [
             comment: "Au top !",
           },
           {
+            id: "444",
             title: "Super",
             authorName: "Tanjiro",
             authorId: "",
@@ -419,6 +437,7 @@ export const products = [
         ],
         comments: [
           {
+            id: "333",
             title: "YEah",
             authorName: "Laïa",
             authorId: "",
@@ -427,6 +446,7 @@ export const products = [
             comment: "Bien bien",
           },
           {
+            id: "222",
             title: "J'adore !",
             authorName: "Pixote",
             authorId: "",
@@ -435,6 +455,7 @@ export const products = [
             comment: "Au top !",
           },
           {
+            id: "111",
             title: "Cool",
             authorNameName: "Tanjiro",
             authorId: "",
@@ -491,6 +512,7 @@ export const products = [
         ],
         comments: [
           {
+            id: "30",
             title: "YEah",
             authorName: "goku",
             authorId: "",
@@ -499,6 +521,7 @@ export const products = [
             comment: "Il sonne trop bien",
           },
           {
+            id: "20",
             title: "J'aime",
             authorName: "Pernalonga",
             authorId: "",
@@ -507,6 +530,7 @@ export const products = [
             comment: "Top à l'aise",
           },
           {
+            id: "10",
             title: "Ok à première vue",
             authorName: "Tanjiro",
             authorId: "",
@@ -547,6 +571,7 @@ export const products = [
         ],
         comments: [
           {
+            id: "002",
             title: "Bien",
             authorName: "Laïa",
             authorId: "",
@@ -555,6 +580,7 @@ export const products = [
             comment: "Bien bien",
           },
           {
+            id: "001",
             title: "Khaja",
             authorName: "Pixote",
             authorId: "",
@@ -563,6 +589,7 @@ export const products = [
             comment: "Le top !",
           },
           {
+            id: "003",
             title: "Top !",
             authorName: "Tanjiro",
             authorId: "",

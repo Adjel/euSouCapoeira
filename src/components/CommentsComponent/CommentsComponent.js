@@ -14,8 +14,8 @@ function CommentsComponent({ comments, rates }) {
         <span>{comments?.length}</span>
         {`${comments?.length === 1 ? " commentaire" : " commentaires"}  `}
       </h3>
-      {comments?.map(({ title, authorName, comment, date, rating }) => (
-        <>
+      {comments?.map(({ title, authorName, comment, date, rating, id }) => (
+        <div key={id}>
           <div className="flex flex-row gap-3">
             <span className="flex justify-center items-center w-11 h-11 font-bold text-color-gold uppercase border-2 border-color-gold rounded-full">
               {authorName?.charAt(0)}
@@ -30,7 +30,7 @@ function CommentsComponent({ comments, rates }) {
             </div>
           </div>
           {comment}
-        </>
+        </div>
       ))}
     </section>
   );

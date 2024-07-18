@@ -21,8 +21,6 @@ export default function Page({ params }) {
   const [isGrid, setIsGrid] = useState(false);
   const { sortOption } = useProductSortStore();
 
-  console.log(params);
-
   const productList = products.find(
     (item) => params.products === normalizeString(item.subCategory)
   );
@@ -80,17 +78,21 @@ export default function Page({ params }) {
           <h2 className="text-4xl md:text-5xl font-bold first-letter:uppercase">
             {params.products}
           </h2>
-          <span className="md:text-2xl md:font-bold md:text-color-dark-gray flex gap-2 text-extreme-dark-gray">
-            {productCount}
-            <span className="md:hidden">
-              {isSingleProduct ? "Produit" : "Produits"}
+          {productCount > 0 && (
+            <span className="md:text-2xl md:font-bold md:text-color-dark-gray flex gap-2 text-extreme-dark-gray">
+              {productCount}
+              <span className="md:hidden">
+                {isSingleProduct ? "Produit" : "Produits"}
+              </span>
             </span>
-          </span>
+          )}
         </div>
-        <section className="flex gap-4 pr-7 justify-end">
-          <SelectSortingComponent />
-          <GridListSwitchButton toggle={toggleGridList} className="size-6" />
-        </section>
+        {productCount > 0 && (
+          <section className="flex gap-4 pr-7 justify-end">
+            <SelectSortingComponent />
+            <GridListSwitchButton toggle={toggleGridList} className="size-6" />
+          </section>
+        )}
       </header>
       <div
         className={`${

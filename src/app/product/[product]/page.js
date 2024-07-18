@@ -82,6 +82,7 @@ export default function page({ params }) {
             )}
             {product?.images.map(({ image, alt }, index) => (
               <div
+                key={index}
                 className={`${
                   index === imageIndex &&
                   "px-5 py-4 border-t-2 border-color-gold bg-color-hover-cancel-button rounded"
@@ -108,11 +109,11 @@ export default function page({ params }) {
               <div className="flex flex-wrap justify-start">
                 {product?.variants.map(({ alt, image, id }, index) => (
                   <Link
+                    key={id}
                     href={`/product/${id}`}
                     className="relative hover:text-color-gold"
                   >
                     <Image
-                      key={id}
                       className={`${
                         index === product?.variants.length - 1
                           ? "border"
