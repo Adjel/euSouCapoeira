@@ -75,7 +75,7 @@ export default function page() {
         {cart?.length > 0 && (
           <section className="flex flex-col w-1/2 mx-auto mb-28 p-7 gap-6 justify-center items-center bg-color-hover-cancel-button rounded-xl">
             <TotalBasketPriceComponent />
-            <ArrowButton href={""} text={"Aller à la caisse"} />
+            <ArrowButton href={"/checkout"} text={"Aller à la caisse"} />
           </section>
         )}
       </section>

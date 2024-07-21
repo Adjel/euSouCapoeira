@@ -48,6 +48,7 @@ export async function mockUser() {
   const yesterday = new Date(currentDate - 1);
   tomorrow.setDate(currentDate.getDate() + 1);
   return {
+    business: "",
     firstName: "Patrick",
     lastName: "toupie",
     email: "P-toupie@toto.com",

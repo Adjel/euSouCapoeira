@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSignUp, useSignUpMock } from "@/stores/useUserStore";
-import { emailRegex, passwordRegex } from "@/lib/utils";
+
 import PasswordInput from "@/components/PasswordInput";
 import { useRouter } from "next/navigation";
 
@@ -35,7 +35,7 @@ const formSchema = z.object({
     */
 });
 
-function SignInForm() {
+function SignInForm({ isRedirecting = true }) {
   const { signUp } = useSignUp();
   const { signUpMock } = useSignUpMock();
 
@@ -52,7 +52,9 @@ function SignInForm() {
 
   function onSubmit(values) {
     //signUp(values.email, values.password);
-    if (signUpMock()) router.push("/dashboard/mes_informations");
+    if (signUpMock()) {
+      if (isRedirecting) router.push("/dashboard/mes_informations");
+    }
   }
 
   return (

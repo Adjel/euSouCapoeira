@@ -32,20 +32,6 @@ function UserInfoComponent({
     setIsModifying(!isModifying);
   }
 
-  function ButtonComponents() {
-    return (
-      <>
-        <Button type="submit">Valider</Button>
-        <Button
-          className={styles.cancelButton}
-          onClick={(event) => handleIsModifyingInfo(event)}
-        >
-          Annuler
-        </Button>
-      </>
-    );
-  }
-
   return (
     <section className="flex flex-col p-4 md:p-8 gap-8">
       <section>
@@ -148,7 +134,9 @@ function UserInfoComponent({
         <>
           {!isInfo ? (
             <section>
-              <UserAdressForm buttonsComponent={ButtonComponents} />
+              <UserAdressForm
+                cancel={(event) => handleIsModifyingInfo(event)}
+              />
             </section>
           ) : (
             <>

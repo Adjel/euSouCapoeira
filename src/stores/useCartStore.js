@@ -4,6 +4,7 @@ const useCartStore = create((set) => ({
   cart: [],
   productQuantity: 0,
   totalPrice: 0,
+  shippingFees: 0,
   updateProductQuantity: (id, isAdding) =>
     set((state) => {
       const product = state.cart.find((item) => item.id === id);

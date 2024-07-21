@@ -25,7 +25,7 @@ const formSchema = z.object({
   city: z.string().min(1, `${errorMessage} ville.`),
 });
 
-function UserAdressForm({ cancel, buttonsComponent }) {
+function UserAdressForm({ cancel }) {
   const { addAdress } = useUserStore();
 
   // 1. Define your form.
@@ -164,7 +164,10 @@ function UserAdressForm({ cancel, buttonsComponent }) {
             )}
           />
           <div className="flex gap-16 justify-center">
-            <buttonsComponent />
+            <Button type="submit">Valider</Button>
+            <Button className={styles.cancelButton} onClick={cancel}>
+              Annuler
+            </Button>
           </div>
         </form>
       </Form>

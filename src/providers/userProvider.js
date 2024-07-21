@@ -38,11 +38,11 @@ export function UserProvider() {
   const { data, error, isLoading } = useQuery(["users"], fetchUsers);
 
   const user = useUserStore((state) => state.user);
-  const setUser = useUserStore((state) => state.setUser);
+  const signIn = useUserStore((state) => state.signIn);
   const clearUser = useUserStore((state) => state.clearUser);
 
   const login = () => {
-    setUser({ name: "John Doe", email: "john.doe@example.com" });
+    signIn({ name: "John Doe", email: "john.doe@example.com" });
   };
 
   const logout = () => {
