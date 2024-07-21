@@ -38,7 +38,7 @@ const formSchema = z.object({
 });
 
 export default function signup() {
-  const { setUser } = useUserStore();
+  const { signUp } = useUserStore();
 
   const router = useRouter();
 
@@ -57,7 +57,7 @@ export default function signup() {
   });
 
   function onSubmit(values) {
-    if (setUser(values)) router.push("/dashboard/mes_informations");
+    if (signUp(values)) router.push("/dashboard/mes_informations");
   }
 
   return (
