@@ -97,7 +97,7 @@ export default function page() {
 
   return (
     <section className="flex p-5 gap-2">
-      <section className="w-full sm:w-1/2 flex flex-col gap-8 p-2 border-2 border-red-600">
+      <section className="w-full sm:w-1/2 flex flex-col gap-8 p-2">
         <header
           className={`${
             !user
@@ -315,7 +315,7 @@ export default function page() {
           </form>
         </Form>
       </section>
-      <aside className="hidden flex-col sm:flex w-1/2 border-2 p-2 border-red-600">
+      <aside className="hidden flex-col sm:flex w-1/2 p-2">
         <Basket />
       </aside>
     </section>
