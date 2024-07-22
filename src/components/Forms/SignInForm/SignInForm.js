@@ -52,9 +52,7 @@ function SignInForm({ isRedirecting = true }) {
 
   function onSubmit(values) {
     //signUp(values.email, values.password);
-    if (signUpMock()) {
-      if (isRedirecting) router.push("/dashboard/mes_informations");
-    }
+    signUpMock();
   }
 
   return (
