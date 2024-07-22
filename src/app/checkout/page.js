@@ -18,6 +18,7 @@ import AvailabilityComponent from "@/components/AvailabilityComponent";
 import useCartStore from "@/stores/useCartStore";
 import { emailRegex } from "@/lib/utils";
 import SignInForm from "@/components/Forms/SignInForm";
+import Link from "next/link";
 
 const errorMessage = "Merci de saisir votre";
 
@@ -72,9 +73,14 @@ export default function page() {
   const Basket = () => {
     return (
       <div className="flex flex-col gap-4 w-full">
-        <div className="flex flex-row justify-between gap-1">
+        <div className="flex flex-row justify-between gap-4">
           <h2 className={`${style.title} mb-4`}>Panier d'achat</h2>
-          <button>Editer</button>
+          <Link
+            href="/basket"
+            className="underline underline-offset-8 hover:text-color-gold"
+          >
+            Editer
+          </Link>
         </div>
         {cart.map(({ name, availability, price }) => (
           <BasketItem name={name} availability={availability} price={price} />
@@ -96,7 +102,7 @@ export default function page() {
   }
 
   return (
-    <section className="flex p-5 gap-2">
+    <section className="flex p-5 gap-2 md:px-7 lg:px-32">
       <section className="w-full sm:w-1/2 flex flex-col gap-8 p-2">
         <header
           className={`${
@@ -105,7 +111,7 @@ export default function page() {
               : "flex flex-row justify-between items-center"
           } gap-2`}
         >
-          <h2 className={style.title}>Caisse</h2>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">Caisse</h2>
           {!user ? (
             <>
               <div>Avez-vous déjà un compte client?</div>
