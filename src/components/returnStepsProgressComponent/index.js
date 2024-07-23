@@ -1,2 +1,2 @@
-export * from './returnStepsProgressComponent';
-export { default } from './returnStepsProgressComponent';
+export * from "./ReturnStepsProgressComponent";
+export { default } from "./ReturnStepsProgressComponent";
