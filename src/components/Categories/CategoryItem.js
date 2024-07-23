@@ -9,7 +9,8 @@ function CategoryItem({ title, image, alt, isVertical = false, preLink }) {
     if (normalizedCategory !== "")
       return `${preLink ? preLink : "/categories"}/${normalizedCategory}`;
     else {
-      throw new Error(`You need to pass a valid category`);
+      //throw new Error(`You need to pass a valid category`);
+      return "";
     }
   };
 
