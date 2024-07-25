@@ -3,15 +3,27 @@ import ReturnProductCheckbox from "../ReturnProductCheckbox";
 import CategoryItem from "../Categories/CategoryItem";
 import SelectProductReturnReason from "../SelectProductReturnReason";
 
-function ReturnProductItem({ toggle, name, imageSrc, alt }) {
+function ReturnProductItem({
+  toggle,
+  name,
+  imageSrc,
+  alt,
+  commandId,
+  id,
+  setProductReturnResult,
+}) {
   const [isChecked, setIschecked] = useState(false);
+  const [reasonOption, setReasonOption] = useState();
 
   const handleCheckbox = () => {
     setIschecked(!isChecked);
+    // product is checked for now but is going to be unchecked, so it have no reason to be returned
+    if (isChecked === true) {
+      setReasonOption();
+    }
     toggle();
+    setProductReturnResult(commandId, id, reasonOption);
   };
-
-  console.log(isChecked);
 
   return (
     <div className="flex flex-col gap-2 w-full">
@@ -26,7 +38,8 @@ function ReturnProductItem({ toggle, name, imageSrc, alt }) {
       {isChecked && (
         <SelectProductReturnReason
           className="w-fit border rounded ml-auto"
-          isChecked={isChecked}
+          reasonOption={reasonOption}
+          setReasonOption={setReasonOption}
         />
       )}
     </div>

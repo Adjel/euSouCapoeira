@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Select,
   SelectContent,
@@ -6,13 +6,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import useProductSortStore from "@/stores/useProductsSortStore";
 
-function SelectProductReturnReason({ className }) {
-  const [sortOption, setSortOption] = useState();
-
+function SelectProductReturnReason({
+  className,
+  reasonOption,
+  setReasonOption,
+}) {
   return (
-    <Select value={sortOption} onValueChange={() => setSortOption(sortOption)}>
+    <Select
+      value={reasonOption}
+      onValueChange={() => setReasonOption(reasonOption)}
+    >
       <SelectTrigger className={`w-[180px] ${className}`}>
         <SelectValue placeholder="Pour quelle raison?" />
       </SelectTrigger>

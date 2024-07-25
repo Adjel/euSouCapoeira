@@ -3,17 +3,12 @@ import React, { useEffect, useState } from "react";
 import ReturnProdutStepsProgressComponent from "../ReturnStepsProgressComponent";
 import ArrowButton from "../ArrowButton";
 import { useCommandsStore } from "@/stores/useCommandsStore";
-import { Checkbox } from "@/components/ui/checkbox";
-import CategoryItem from "../Categories/CategoryItem";
-import { Select } from "../ui/select";
-import SelectProductReturnReason from "../SelectProductReturnReason";
-import ReturnProductCheckbox from "../ReturnProductCheckbox";
 import ReturnProductItem from "../ReturnProductItem";
 
 function ProductReturnComponent() {
   const { commands } = useCommandsStore();
   const [currentStep, setCurrentStep] = useState("produits");
-  const [productList, setProductList] = useState([]);
+  const [returnProductList, setReturnProductList] = useState([]);
   const [steps, setSteps] = useState([
     {
       step: "produits",
@@ -23,15 +18,11 @@ function ProductReturnComponent() {
     { step: "terminé", state: "todo" },
   ]);
 
-  useEffect(() => {
-    console.log(productList);
-  }, [productList]);
-
   const toggleSelectProduct = (commandId, productId) => {
     const command = commands.find((item) => item.commandId === commandId);
     const product = command.products.find((item) => item.id === productId);
-    setProductList((prevProductList) => {
-      const exsitingProduct = productList.find(
+    setReturnProductList((prevProductList) => {
+      const exsitingProduct = returnProductList.find(
         (item) => item.product.id === productId && item.commandId === commandId
       );
       if (!exsitingProduct) {
@@ -53,13 +44,22 @@ function ProductReturnComponent() {
     });
   };
 
-  const isChecked = (commandId, productId) => {
-    if (productList) {
-      const product = productList?.find(
-        (item) => item.id === productId && item.commandId === commandId
-      );
-      return product?.checked ?? false;
-    } else return false;
+  const setProductReturnResult = (commandId, productId, reasonOption) => {
+    const command = commands.find((item) => item.commandId === commandId);
+    const product = command.products.find((item) => item.id === productId);
+    if (product) {
+      setReturnProductList((prevProductList) => {
+        const newList = prevProductList.map((item) =>
+          item.product.id === productId && item.commandId === commandId
+            ? {
+                ...item,
+                reason: reasonOption,
+              }
+            : prevProductList
+        );
+        return [newList];
+      });
+    }
   };
 
   const onToggleStep = (isNext) => {
@@ -127,7 +127,10 @@ function ProductReturnComponent() {
                   imageSrc={imageSrc}
                   alt={alt}
                   key={id}
+                  commandId={commandId}
+                  id={id}
                   toggle={() => toggleSelectProduct(commandId, id)}
+                  setProductReturnResult={setProductReturnResult}
                 />
               ))}
             </div>
@@ -135,6 +138,7 @@ function ProductReturnComponent() {
         <span className="flex w-full gap-12 justify-center">
           {currentStep !== "produits" && (
             <ArrowButton
+              type="onSubmit"
               className="w-fit"
               isReverse={true}
               onClick={() => onToggleStep(false)}
@@ -142,7 +146,7 @@ function ProductReturnComponent() {
               Etape précédante
             </ArrowButton>
           )}
-          {productList.length > 0 && (
+          {returnProductList.length > 0 && (
             <ArrowButton className="w-fit" onClick={() => onToggleStep(true)}>
               {currentStep === "détails" ? "terminer" : "Etape suivante"}
             </ArrowButton>
