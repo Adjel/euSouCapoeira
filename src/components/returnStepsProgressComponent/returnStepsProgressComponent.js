@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaCheck } from "react-icons/fa";
 
-export default function ReturnStepsProgressComponent({ steps }) {
+export default function ReturnProdutStepsProgressComponent({ steps }) {
   return (
     <div className="flex gap-2">
       {steps.map(({ step, state }) => (
