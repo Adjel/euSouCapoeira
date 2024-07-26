@@ -4,10 +4,10 @@ import ReturnProdutStepsProgressComponent from "../ReturnStepsProgressComponent"
 import ArrowButton from "../ArrowButton";
 import { useCommandsStore } from "@/stores/useCommandsStore";
 import ReturnProductItem from "../ReturnProductItem";
+import { get } from "react-hook-form";
 
 function ProductReturnComponent() {
   const { commands } = useCommandsStore();
-  const [currentStep, setCurrentStep] = useState("produits");
   const [returnProductList, setReturnProductList] = useState([]);
   const [steps, setSteps] = useState([
     {
@@ -18,11 +18,15 @@ function ProductReturnComponent() {
     { step: "terminé", state: "todo" },
   ]);
 
+  useEffect(() => {
+    console.log(returnProductList);
+  }, [returnProductList]);
+
   const toggleSelectProduct = (commandId, productId) => {
     const command = commands.find((item) => item.commandId === commandId);
     const product = command.products.find((item) => item.id === productId);
     setReturnProductList((prevProductList) => {
-      const exsitingProduct = returnProductList.find(
+      const exsitingProduct = prevProductList.find(
         (item) => item.product.id === productId && item.commandId === commandId
       );
       if (!exsitingProduct) {
@@ -32,19 +36,19 @@ function ProductReturnComponent() {
             commandId: commandId,
             product: { ...product },
             checked: true,
+            reason: "",
           },
         ];
       } else {
-        const product = prevProductList.filter(
+        return prevProductList.filter(
           (item) =>
-            item.product.id !== productId && item.commandId !== commandId
+            !(item.product.id === productId && item.commandId === commandId)
         );
-        return product;
       }
     });
   };
 
-  const setProductReturnResult = (commandId, productId, reasonOption) => {
+  const setProductReturnReason = (commandId, productId, reasonOption) => {
     const command = commands.find((item) => item.commandId === commandId);
     const product = command.products.find((item) => item.id === productId);
     if (product) {
@@ -53,47 +57,60 @@ function ProductReturnComponent() {
           item.product.id === productId && item.commandId === commandId
             ? {
                 ...item,
+                commandId: commandId,
                 reason: reasonOption,
               }
-            : prevProductList
+            : item
         );
-        return [newList];
+
+        return newList;
       });
     }
   };
 
+  const getStep = () => {
+    const step = steps.find((item) => item.state === "current");
+    return step.step;
+  };
+
   const onToggleStep = (isNext) => {
+    console.log(getStep());
+    if (!isNext && getStep() === "détails") {
+      setReturnProductList([]);
+    }
+
+    const checkReturnProductList = () => {
+      return returnProductList.some((item) => !item.reason);
+    };
+
+    if (isNext && checkReturnProductList()) {
+      // If trying to go to next step and there are items without a reason, do nothing
+      return;
+    }
+
     setSteps((prevSteps) => {
-      // Find the index of the current step
       const currentIndex = prevSteps.findIndex(
         (step) => step.state === "current"
       );
 
-      if (currentIndex === -1 || currentIndex === prevSteps.length - 1) {
-        // If no step is in progress or if we are already at the last step, do nothing
+      if (currentIndex === -1) {
+        // If no current step is found, do nothing
         return prevSteps;
       }
 
-      // Update steps state
-      return prevSteps.map((item, index) => {
+      const newSteps = prevSteps.map((step, index) => {
         if (isNext) {
-          if (index === currentIndex) return { ...item, state: "done" };
-          if (index === currentIndex + 1) {
-            setCurrentStep(item.step);
-            return { ...item, state: "current" };
-          }
-        } else {
-          // We are at the first step, so we can't go back anymore
-          if (currentIndex > 0) {
-            if (index === currentIndex) {
-              return { ...item, state: "todo" };
-            }
-            if (index === currentIndex - 1)
-              return { ...item, state: "current" };
-          }
+          if (index === currentIndex) return { ...step, state: "done" };
+          if (index === currentIndex + 1) return { ...step, state: "current" };
+        } else if (index === currentIndex - 1) {
+          return { ...step, state: "current" };
+        } else if (index === currentIndex) {
+          return { ...step, state: "todo" };
         }
-        return item;
+        return step;
       });
+
+      return newSteps;
     });
   };
 
@@ -130,15 +147,14 @@ function ProductReturnComponent() {
                   commandId={commandId}
                   id={id}
                   toggle={() => toggleSelectProduct(commandId, id)}
-                  setProductReturnResult={setProductReturnResult}
+                  setProductReturnReason={setProductReturnReason}
                 />
               ))}
             </div>
           ))}
         <span className="flex w-full gap-12 justify-center">
-          {currentStep !== "produits" && (
+          {getStep() !== "produits" && (
             <ArrowButton
-              type="onSubmit"
               className="w-fit"
               isReverse={true}
               onClick={() => onToggleStep(false)}
@@ -148,7 +164,7 @@ function ProductReturnComponent() {
           )}
           {returnProductList.length > 0 && (
             <ArrowButton className="w-fit" onClick={() => onToggleStep(true)}>
-              {currentStep === "détails" ? "terminer" : "Etape suivante"}
+              {getStep() === "détails" ? "terminer" : "Etape suivante"}
             </ArrowButton>
           )}
         </span>

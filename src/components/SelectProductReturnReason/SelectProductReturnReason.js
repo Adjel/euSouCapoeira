@@ -10,12 +10,12 @@ import {
 function SelectProductReturnReason({
   className,
   reasonOption,
-  setReasonOption,
+  handleSelectReason,
 }) {
   return (
     <Select
       value={reasonOption}
-      onValueChange={() => setReasonOption(reasonOption)}
+      onValueChange={(value) => handleSelectReason(value)}
     >
       <SelectTrigger className={`w-[180px] ${className}`}>
         <SelectValue placeholder="Pour quelle raison?" />

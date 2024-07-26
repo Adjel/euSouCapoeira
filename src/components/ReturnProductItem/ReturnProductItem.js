@@ -10,10 +10,10 @@ function ReturnProductItem({
   alt,
   commandId,
   id,
-  setProductReturnResult,
+  setProductReturnReason,
 }) {
   const [isChecked, setIschecked] = useState(false);
-  const [reasonOption, setReasonOption] = useState();
+  const [reasonOption, setReasonOption] = useState("");
 
   const handleCheckbox = () => {
     setIschecked(!isChecked);
@@ -21,8 +21,13 @@ function ReturnProductItem({
     if (isChecked === true) {
       setReasonOption();
     }
-    toggle();
-    setProductReturnResult(commandId, id, reasonOption);
+    toggle(commandId, id);
+  };
+
+  const handleSelectReason = (reason) => {
+    console.log(reason);
+    setReasonOption(reason);
+    setProductReturnReason(commandId, id, reason);
   };
 
   return (
@@ -39,7 +44,7 @@ function ReturnProductItem({
         <SelectProductReturnReason
           className="w-fit border rounded ml-auto"
           reasonOption={reasonOption}
-          setReasonOption={setReasonOption}
+          handleSelectReason={handleSelectReason}
         />
       )}
     </div>
