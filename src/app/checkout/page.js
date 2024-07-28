@@ -41,7 +41,6 @@ export default function page() {
 
   useEffect(() => {
     if (user) toggleLogInButton(false);
-    console.log(user);
   }, [user]);
 
   const form = useForm({

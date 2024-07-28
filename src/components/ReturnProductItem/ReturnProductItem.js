@@ -26,7 +26,6 @@ function ReturnProductItem({
   };
 
   const handleSelectReason = (reason) => {
-    console.log(reason);
     setReasonOption(reason);
     setProductReturnReason(commandId, id, reason);
   };

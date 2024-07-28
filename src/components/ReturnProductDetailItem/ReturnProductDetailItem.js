@@ -9,7 +9,6 @@ function ReturnProductDetailItem({
   reason,
   details,
 }) {
-  console.log(product);
   return (
     <div className="flex flex-col justify-center gap-6">
       <CategoryItem
