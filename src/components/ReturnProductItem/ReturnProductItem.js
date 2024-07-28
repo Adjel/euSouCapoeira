@@ -39,7 +39,7 @@ function ReturnProductItem({
           isChecked={isChecked}
           toggle={handleCheckbox}
         />
-        <CategoryItem title={name} image={imageSrc} alt={alt} preLink={""} />
+        <CategoryItem title={name} image={imageSrc} alt={alt} isLink={false} />
       </div>
       {isChecked && (
         <SelectProductReturnReason

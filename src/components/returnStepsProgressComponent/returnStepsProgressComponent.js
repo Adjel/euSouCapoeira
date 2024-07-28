@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaCheck } from "react-icons/fa";
 
 export default function ReturnProdutStepsProgressComponent({ steps }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex w-fit md:gap-2 mx-auto items-center">
       {steps.map(({ step, state }) => (
         <>
           <span
             key={step}
-            className={`flex flex-col md:flex-row gap-4 md:gap-2 justify-center items-center ${
+            className={`flex flex-col md:flex-row gap-2 justify-center items-center ${
               state === "current"
                 ? "text-black border-black"
                 : "text-color-hover-cancel-button border-color-hover-cancel-button"
@@ -21,7 +21,7 @@ export default function ReturnProdutStepsProgressComponent({ steps }) {
             )}
             <span className="uppercase text-sm">{step}</span>
           </span>
-          <span className="last:hidden w-24 h-2 border-b-2" />
+          <span className="last:hidden w-24 h-2 border-b-2 mb-8 md:mb-0 md:mt-6" />
         </>
       ))}
     </div>

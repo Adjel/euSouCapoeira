@@ -8,7 +8,7 @@ import { FaPen } from "react-icons/fa";
 import UserCommands from "@/components/UserCommands";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { IoCloseOutline } from "react-icons/io5";
-import ProductReturnComponent from "@/components/ProductReturnComponent";
+import ReturnProductComponent from "@/components/ReturnProductComponent";
 
 export default function dashboard({ params }) {
   const { user } = useUserStore();
@@ -36,7 +36,7 @@ export default function dashboard({ params }) {
       content = <UserInfoComponent isInfo={false} />;
       break;
     case "retour":
-      content = <ProductReturnComponent />;
+      content = <ReturnProductComponent />;
       break;
     default:
       content = (
