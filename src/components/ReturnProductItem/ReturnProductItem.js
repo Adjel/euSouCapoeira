@@ -11,6 +11,7 @@ function ReturnProductItem({
   commandId,
   id,
   setProductReturnReason,
+  error,
 }) {
   const [isChecked, setIschecked] = useState(false);
   const [reasonOption, setReasonOption] = useState("");
@@ -19,7 +20,7 @@ function ReturnProductItem({
     setIschecked(!isChecked);
     // product is checked for now but is going to be unchecked, so it have no reason to be returned
     if (isChecked === true) {
-      setReasonOption();
+      setReasonOption("");
     }
     toggle(commandId, id);
   };
@@ -47,6 +48,9 @@ function ReturnProductItem({
           handleSelectReason={handleSelectReason}
         />
       )}
+      {error !== "" &&
+        (reasonOption === "" || reasonOption === undefined) &&
+        isChecked && <span className="text-color-error ml-auto">{error}</span>}
     </div>
   );
 }

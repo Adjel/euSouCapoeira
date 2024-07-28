@@ -8,6 +8,7 @@ function ArrowButton({
   text,
   children,
   isReverse = false,
+  className,
   ...props
 }) {
   return (
