@@ -15,7 +15,6 @@ const useUserStore = create((set) => ({
   signUp: (values) => {
     const { business, city, email, firstName, lastName, street, zipCode } =
       values;
-    console.log({ values });
     const user = {
       business: business,
       firstName: firstName,
@@ -34,7 +33,6 @@ const useUserStore = create((set) => ({
         },
       ],
     };
-    console.log(user);
     set({ user });
     // TODO: get response from API
     if ("mock" === "mock")

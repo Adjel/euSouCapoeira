@@ -1,9 +1,19 @@
+"use client";
 import SignInForm from "@/components/Forms/SignInForm";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import "@/styles/globals.css";
+import { useUserStore } from "@/stores/useUserStore";
+import { useRouter } from "next/navigation";
 
 export default function page() {
+  const { user } = useUserStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) router.push("/dashboard/mes_informations");
+  }, [user]);
+
   return (
     <section className="flex flex-col justify-center items-center py-6">
       <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold text-center">

@@ -8,6 +8,7 @@ import { FaPen } from "react-icons/fa";
 import UserCommands from "@/components/UserCommands";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { IoCloseOutline } from "react-icons/io5";
+import ReturnProductComponent from "@/components/ReturnProductComponent";
 
 export default function dashboard({ params }) {
   const { user } = useUserStore();
@@ -35,15 +36,22 @@ export default function dashboard({ params }) {
       content = <UserInfoComponent isInfo={false} />;
       break;
     case "retour":
-      content = <div>Contenu 2</div>;
+      content = <ReturnProductComponent />;
       break;
     default:
-      content = <div>Page non trouvée</div>;
+      content = (
+        <UserInfoComponent
+          isInfo={true}
+          title={"Mes informations"}
+          subTitle={"Mettez à jour vos informations"}
+          iconButton={FaPen}
+        />
+      );
       break;
   }
 
   useEffect(() => {
-    if (!user) router.push("/login");
+    if (!user) router.push("/signin");
   }, [user]);
 
   return (
