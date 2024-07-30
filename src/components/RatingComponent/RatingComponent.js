@@ -4,6 +4,7 @@ import { RiStarSFill } from "react-icons/ri";
 function RatingComponent({ rateList, userRate }) {
   let sum;
   let average = undefined;
+  // Getting the global average
   if (rateList) {
     sum = 0;
     for (let obj of rateList) {

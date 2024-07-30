@@ -1,6 +1,6 @@
 "use client";
 import { products } from "@/providers/productsProvider";
-import React, { useState, useMemo, useCallback, useEffect } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import Image from "next/image";
 import RatingComponent from "@/components/RatingComponent";
 import {
@@ -17,10 +17,9 @@ import GridListSwitchButton from "@/components/GridListSwitchButton/GridListSwit
 import BestSellerComponent from "@/components/BestSellerComponent";
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
 import AddToWishListButton from "@/components/AddToWishListButton";
-import AddToBasketButton from "@/components/AddToBasketButton";
+import AddToCartButton from "@/components/AddToCartButton";
 import useProductSortStore from "@/stores/useProductsSortStore";
 import { Button } from "@/components/ui/button";
-import { categories } from "@/providers/categoriesProvider";
 
 export default function Page({ params }) {
   // the page will present items into a grid or a list
@@ -72,9 +71,9 @@ export default function Page({ params }) {
   const productCount = productList?.products?.length ?? 0;
   const isSingleProduct = productCount === 1;
 
-  // le breadcrumb va afficher l'acceuil puis soit une catégorie puis une sous catégorie, soit une catégorie qui n'a pas de sous-catégorie
-  // si on a une sous-catégorie, la catgéorie sera clickable et pointera vers la catégorie, et la sous catégorie ne le sera pas
-  // si pas de sous catégorie, on affiche la catégorie mais non clickable
+  // the breadcrumb will display home then category and subcategory, or category which have not a subcategory
+  // if have a sub-category, the category will be clickable and will push to the category, the sub-category will be not
+  // if we have no sub-category, the category is not clickable
   return (
     <section className="py-7 px-14">
       <header className="flex flex-col gap-4">
@@ -103,10 +102,10 @@ export default function Page({ params }) {
           )}
         </div>
         {productCount > 0 && (
-          <section className="flex gap-4 pr-7 justify-end">
+          <div className="flex gap-4 pr-7 justify-end">
             <SelectSortingComponent />
             <GridListSwitchButton toggle={toggleGridList} className="size-6" />
-          </section>
+          </div>
         )}
       </header>
       <div
@@ -148,27 +147,27 @@ export default function Page({ params }) {
                     <Link href={`/product/${id}`}>
                       {name}
                       <RatingComponent rateList={rates} />
-                      <span className="md:hidden">
+                      <div className="md:hidden">
                         <BestSellerComponent isBestSeller={isBestSeller} />
-                      </span>
+                      </div>
                       <AvailabilityComponent availability={availability} />
                       <PriceComponent price={price} />
                     </Link>
-                    <span className="flex md:hidden">
-                      <AddToBasketButton product={product} ml={"ml-0"} />
+                    <div className="flex md:hidden">
+                      <AddToCartButton product={product} ml={"ml-0"} />
                       <AddToWishListButton />
-                    </span>
+                    </div>
                   </div>
                   {!isGrid && (
                     <div className="md:flex hidden flex-col gap-1 ml-auto items-end">
                       <BestSellerComponent isBestSeller={isBestSeller} />
-                      <span className="hidden lg:flex">
+                      <div className="hidden lg:flex">
                         <PriceComponent price={price} />
-                      </span>
-                      <span className="mt-auto flex items-center">
-                        <AddToBasketButton product={product} />
+                      </div>
+                      <div className="mt-auto flex items-center">
+                        <AddToCartButton product={product} />
                         <AddToWishListButton />
-                      </span>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -179,10 +178,10 @@ export default function Page({ params }) {
                     <AvailabilityComponent availability={availability} />
                     <PriceComponent price={price} />
                   </Link>
-                  <span className="flex">
-                    <AddToBasketButton product={product} ml={"ml-0"} />
+                  <div className="flex">
+                    <AddToCartButton product={product} ml={"ml-0"} />
                     <AddToWishListButton />
-                  </span>
+                  </div>
                 </div>
               </div>
             );

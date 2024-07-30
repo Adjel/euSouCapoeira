@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CheckedIcon from "../CheckedIcon";
 
-function VariantsComponent({ product }) {
+function ProductVariantsComponent({ product }) {
   const sortedVariants = product.variants.sort((a, b) => a.id - b.id);
   return (
     <div className="flex flex-col gap-2 mt-4 justify-center ">
       <div className="hidden lg:flex mb-7" />
-      <div className="text-base md:text-lg font-semibold">
+      <span className="text-base md:text-lg font-semibold">
         Variations de ce produit
-      </div>
+      </span>
       <ol className="flex flex-wrap justify-start">
         {sortedVariants.map(({ alt, image, id }, index) => (
           <il key={id}>
@@ -36,4 +36,4 @@ function VariantsComponent({ product }) {
   );
 }
 
-export default VariantsComponent;
+export default ProductVariantsComponent;

@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import ReturnProdutStepsProgressComponent from "../ReturnStepsProgressComponent";
+import React, { useEffect, useState } from "react";
+import ReturnProdutStepsProgressComponent from "../ReturnProdutStepsProgressComponent";
 import ArrowButton from "../ArrowButton";
 import { useCommandsStore } from "@/stores/useCommandsStore";
 import ReturnProductItem from "../ReturnProductItem";
@@ -17,6 +17,10 @@ function ReturnProductComponent() {
     { step: "détails", state: "todo" },
     { step: "terminé", state: "todo" },
   ]);
+
+  useEffect(() => {
+    console.log(steps);
+  }, [steps]);
 
   const findCommandProduct = (commandId, productId) => {
     const command = commands.find((cmd) => cmd.commandId === commandId);
@@ -140,48 +144,52 @@ function ReturnProductComponent() {
                 <h2 className="text-2xl md:text-4xl font-bold">
                   Retourner un produit ou signaler un problème
                 </h2>
-                <div>
+                <span>
                   Vous souhaitez nous retourner un produit, demander une
                   réparation, ou avez des problèmes avec une livraison ? Vous
                   trouverez réponse à vos questions ici.
-                </div>
+                </span>
                 <ReturnProdutStepsProgressComponent steps={steps} />
               </header>
-              {commands
-                .filter((command) => command.status === "processed")
-                .map(({ products, commandId, date }) => (
-                  <div
-                    key={commandId}
-                    className="flex flex-col w-full gap-4 justify-center items-start border-2 rounded px-6 py-4"
-                  >
-                    <div className="flex xs:flex-col sm:flex-row w-full justify-between gap-4 mt-2">
-                      <div className="font-bold first-letter:uppercase">
-                        commandé le:{" "}
-                        <span className="font-normal">
-                          {new Date(date).toLocaleDateString()}
-                        </span>
+              <ul className="flex flex-col gap-6">
+                {commands
+                  .filter((command) => command.status === "processed")
+                  .map(({ products, commandId, date }) => (
+                    <li
+                      key={commandId}
+                      className="flex flex-col w-full gap-4 justify-center items-start border-2 rounded px-6 py-4"
+                    >
+                      <div className="flex xs:flex-col sm:flex-row w-full justify-between gap-4 mt-2">
+                        <div className="font-bold first-letter:uppercase">
+                          <span>commandé le: </span>
+                          <span className="font-normal">
+                            {new Date(date).toLocaleDateString()}
+                          </span>
+                        </div>
+                        <div className="font-bold first-letter:uppercase mr-4">
+                          <span>numéro de commande:</span>
+                          <span className="font-normal">{commandId}</span>
+                        </div>
                       </div>
-                      <div className="font-bold first-letter:uppercase mr-4">
-                        numéro de commande:
-                        <span className="font-normal">{commandId}</span>
-                      </div>
-                    </div>
-                    {products.map(({ name, imageSrc, alt, id }) => (
-                      <ReturnProductItem
-                        key={id}
-                        name={name}
-                        imageSrc={imageSrc}
-                        alt={alt}
-                        commandId={commandId}
-                        id={id}
-                        toggle={() => toggleSelectProduct(commandId, id)}
-                        setProductReturnReason={setProductReturnReason}
-                        error={inputError}
-                      />
-                    ))}
-                  </div>
-                ))}
-              <span className="flex w-full gap-12 justify-center">
+                      <ul className="flex flex-col w-full">
+                        {products.map(({ name, imageSrc, alt, id }) => (
+                          <ReturnProductItem
+                            key={id}
+                            name={name}
+                            imageSrc={imageSrc}
+                            alt={alt}
+                            commandId={commandId}
+                            id={id}
+                            toggle={() => toggleSelectProduct(commandId, id)}
+                            setProductReturnReason={setProductReturnReason}
+                            error={inputError}
+                          />
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+              </ul>
+              <div className="flex w-full gap-12 justify-center">
                 {returnProductList.length > 0 && (
                   <ArrowButton
                     className="w-fit"
@@ -190,7 +198,7 @@ function ReturnProductComponent() {
                     Etape suivante
                   </ArrowButton>
                 )}
-              </span>
+              </div>
             </section>
           )}
           {getStep() === "détails" && (
@@ -201,24 +209,25 @@ function ReturnProductComponent() {
                 </h2>
                 <ReturnProdutStepsProgressComponent steps={steps} />
               </header>
-              {returnProductList.map(
-                ({ product, commandId, reason, details }) => (
-                  <form
-                    key={`${commandId}-${product.id}`}
-                    className="flex p-7 flex-col w-full justify-center gap-10 border rounded-xl"
-                  >
-                    <ReturnProductDetailItem
-                      commandId={commandId}
-                      product={product}
-                      inputError={inputError}
-                      setReturnProductDetails={setReturnProductDetails}
-                      reason={reason}
-                      details={details}
-                    />
-                  </form>
-                )
-              )}
-              <span className="flex w-full gap-12 justify-center">
+              <ul>
+                {returnProductList.map(
+                  ({ product, commandId, reason, details }) => (
+                    <li key={`${commandId}-${product.id}`}>
+                      <form className="flex p-7 flex-col w-full justify-center gap-10 border rounded-xl">
+                        <ReturnProductDetailItem
+                          commandId={commandId}
+                          product={product}
+                          inputError={inputError}
+                          setReturnProductDetails={setReturnProductDetails}
+                          reason={reason}
+                          details={details}
+                        />
+                      </form>
+                    </li>
+                  )
+                )}
+              </ul>
+              <div className="flex w-full gap-12 justify-center">
                 <ArrowButton
                   className="w-fit"
                   isReverse={true}
@@ -229,20 +238,20 @@ function ReturnProductComponent() {
                 <ArrowButton className="w-fit" onClick={onFinish}>
                   terminer
                 </ArrowButton>
-              </span>
+              </div>
             </section>
           )}
           {getStep() === "terminé" && (
             <div className="p-7 w-full min-h-72 flex flex-col gap-16 justify-center items-center">
               <header className="flex flex-col w-full gap-12">
                 <h2 className="text-2xl md:text-4xl font-bold">Merci !</h2>
-                <div>Demande envoyée</div>
+                <span>Demande envoyée</span>
                 <ReturnProdutStepsProgressComponent steps={steps} />
               </header>
               <span className="text-center">
                 {`
                 Votre demande à été envoyée, vous serez recontacté sur votre
-                adresse e-mail principale :)`}
+                adresse e-mail princispale :)`}
               </span>
               <Button>
                 <Link href="/">Retour à l'accueil</Link>

@@ -1,7 +1,7 @@
 import React from "react";
 
 function Divider() {
-  return <div className="border-b"></div>;
+  return <span className="border-b"></span>;
 }
 
 export default Divider;

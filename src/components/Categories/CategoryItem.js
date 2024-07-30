@@ -18,6 +18,7 @@ function CategoryItem({
       if (normalizedCategory !== "")
         return `${preLink ? preLink : "/categories"}/${normalizedCategory}`;
       else {
+        // throw error to crashlytics ?
         //throw new Error(`You need to pass a valid category`);
         return "";
       }

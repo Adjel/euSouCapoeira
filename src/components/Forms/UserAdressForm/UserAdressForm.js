@@ -12,8 +12,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import styles from "../forms.module.css";
 import { useUserStore } from "@/stores/useUserStore";
+import styles from "../forms.module.css";
 
 const errorMessage = "Merci de saisir votre";
 

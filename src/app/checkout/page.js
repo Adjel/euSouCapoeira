@@ -2,7 +2,6 @@
 import { useUserStore } from "@/stores/useUserStore";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import style from "./checkout.module.css";
 import {
   Form,
   FormControl,
@@ -16,9 +15,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import AvailabilityComponent from "@/components/AvailabilityComponent";
 import useCartStore from "@/stores/useCartStore";
-import { emailRegex } from "@/lib/utils";
 import SignInForm from "@/components/Forms/SignInForm";
 import Link from "next/link";
+import { emailRegex } from "@/lib/utils";
+import style from "./checkout.module.css";
 
 const errorMessage = "Merci de saisir votre";
 
@@ -57,11 +57,11 @@ export default function page() {
     },
   });
 
-  const BasketItem = ({ name, availability, price }) => {
+  const CartItem = ({ name, availability, price }) => {
     return (
       <div className="flex justify-between gap-2">
         <div className="flex flex-col">
-          <div>{name}</div>
+          <strong>{name}</strong>
           <AvailabilityComponent availability={availability} />
         </div>
         <span>{price} €</span>
@@ -69,28 +69,28 @@ export default function page() {
     );
   };
 
-  const Basket = () => {
+  const Cart = () => {
     return (
       <div className="flex flex-col gap-4 w-full">
         <div className="flex flex-row justify-between gap-4">
           <h2 className={`${style.title} mb-4`}>Panier d'achat</h2>
           <Link
-            href="/basket"
+            href="/cart"
             className="underline underline-offset-8 hover:text-color-gold"
           >
             Editer
           </Link>
         </div>
         {cart.map(({ name, availability, price }) => (
-          <BasketItem name={name} availability={availability} price={price} />
+          <CartItem name={name} availability={availability} price={price} />
         ))}
         <div className="flex justify-between">
           <span>Frais de port</span>
-          <span>{shippingFees} €</span>
+          <span>{shippingFees.toFixed(2)} €</span>
         </div>
         <div className="flex justify-between">
           <h3 className="text-xl font-bold">Montant total</h3>
-          <span>{totalPrice} €</span>
+          <span>{totalPrice.toFixed(2)} €</span>
         </div>
       </div>
     );
@@ -113,7 +113,7 @@ export default function page() {
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">Caisse</h2>
           {!user ? (
             <>
-              <div>Avez-vous déjà un compte client?</div>
+              <span>Avez-vous déjà un compte client?</span>
               <Button
                 onClick={() => toggleLogInButton(!logInButton)}
                 className=" w-fit"
@@ -312,7 +312,7 @@ export default function page() {
               </div>
             )}
             <div className="flex sm:hidden">
-              <Basket />
+              <Cart />
             </div>
             <Button type="submit" className="w-fit mx-auto mt-16">
               {!user ? "S'enregistrer et acheter" : "acheter maintenant"}
@@ -321,7 +321,7 @@ export default function page() {
         </Form>
       </section>
       <aside className="hidden flex-col sm:flex w-1/2 p-2">
-        <Basket />
+        <Cart />
       </aside>
     </section>
   );

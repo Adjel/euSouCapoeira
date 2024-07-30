@@ -9,16 +9,15 @@ import { Button } from "@/components/ui/button";
 import RecommandsComponent from "@/components/RecommandsComponent";
 import RatingComponent from "@/components/RatingComponent";
 import CommentsComponent from "@/components/CommentsComponent";
-import "@/styles/globals.css";
 import useCartStore from "@/stores/useCartStore";
 import ShareProductButton from "@/components/ShareProductButton";
 import AddToWishListButton from "@/components/AddToWishListButton";
-import Link from "next/link";
-import CheckedIcon from "@/components/CheckedIcon";
 import BreadCrumbComponent from "@/components/BreadcrumbComponent/BreadcrumbComponent";
 import { IoCloseOutline } from "react-icons/io5";
 import ZoomImage from "@/components/ZoomOnImage/ZoomOnImage";
-import VariantsComponent from "@/components/VariantsComponent";
+import ProductVariantsComponent from "@/components/ProductVariantsComponent";
+import { useRouter } from "next/navigation";
+import "@/styles/globals.css";
 
 export default function page({ params }) {
   const { addToCart } = useCartStore();
@@ -27,11 +26,18 @@ export default function page({ params }) {
   const [quantity, setQuantity] = useState(1);
   const [isImageBarExpanded, setIsImageBarExpanded] = useState(false);
 
+  const router = useRouter();
+
   useEffect(() => {
-    setProduct(getMockedProductById(params.product));
+    const product = getMockedProductById(params.product);
+    if (product) {
+      setProduct(product);
+    } else {
+      router.push("/not-found");
+    }
   }, [params]);
 
-  const handleQuantity = (productId, plus) => {
+  const handleQuantity = (plus) => {
     setQuantity((prevQuantity) =>
       plus ? prevQuantity + 1 : prevQuantity > 1 ? prevQuantity - 1 : 1
     );
@@ -70,37 +76,39 @@ export default function page({ params }) {
                 className="flex flex-col justify-center items-center w-14 h-14 shadow-md rounded-full text-6xl bg-white"
                 onClick={() => setIsImageBarExpanded(!isImageBarExpanded)}
               >
-                <span className=" text-color-gold">
+                <div className="text-color-gold">
                   {isImageBarExpanded ? (
                     <IoCloseOutline className="size-9" />
                   ) : (
                     <IoCloseOutline className="size-9 rotate-45" />
                   )}
-                </span>
+                </div>
               </button>
             )}
             {product?.images.map(({ image, alt }, index) => (
-              <div
+              <ul
                 key={index}
                 className={`${
                   index === imageIndex &&
                   "px-5 py-4 border-t-2 border-color-gold bg-color-hover-cancel-button rounded"
                 } `}
               >
-                <Image
-                  className="mx-auto w-16 md:w-24 h-auto cursor-pointer"
-                  key={index}
-                  src={image}
-                  alt={alt}
-                  onClick={() => setImageIndex(index)}
-                />
-              </div>
+                <il>
+                  <Image
+                    className="mx-auto w-16 md:w-24 h-auto cursor-pointer"
+                    key={index}
+                    src={image}
+                    alt={alt}
+                    onClick={() => setImageIndex(index)}
+                  />
+                </il>
+              </ul>
             ))}
           </div>
         </section>
         <section>
           {product?.variants.length > 0 ? (
-            <VariantsComponent product={product} />
+            <ProductVariantsComponent product={product} />
           ) : (
             <div className="hidden lg:flex mb-11" />
           )}
@@ -108,19 +116,21 @@ export default function page({ params }) {
             <PriceComponent price={product?.price} />
             <AvailabilityComponent availability={product?.availability} />
           </div>
-          <div className="flex py-3 gap-4">
-            <ProductQuantityButton
-              quantity={quantity}
-              productId={product?.id}
-              onClick={handleQuantity}
-            />
-            <Button
-              className="w-full"
-              onClick={() => addToCart(product, quantity)}
-            >
-              Ajouter au panier
-            </Button>
-          </div>
+          {product?.availability !== "nostock" && (
+            <div className="flex py-3 gap-4">
+              <ProductQuantityButton
+                quantity={quantity}
+                productId={product?.id}
+                onClick={handleQuantity}
+              />
+              <Button
+                className="w-full"
+                onClick={() => addToCart(product, quantity)}
+              >
+                Ajouter au panier
+              </Button>
+            </div>
+          )}
           <div className="flex flex-row justify-evenly">
             <AddToWishListButton product={product} />
             <ShareProductButton params={params} />

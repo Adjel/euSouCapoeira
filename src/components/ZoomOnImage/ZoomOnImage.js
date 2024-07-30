@@ -16,7 +16,7 @@ const ZoomImage = ({ src, alt, classN }) => {
   };
 
   return (
-    <div
+    <section
       className={`${classN} relative overflow-hidden`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -30,7 +30,7 @@ const ZoomImage = ({ src, alt, classN }) => {
         } `}
         style={{ transformOrigin: `${position.x}px ${position.y}px` }}
       />
-    </div>
+    </section>
   );
 };
 

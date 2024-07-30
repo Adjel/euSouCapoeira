@@ -1,8 +1,8 @@
-import useCartStore from "@/stores/useCartStore";
 import React from "react";
+import useCartStore from "@/stores/useCartStore";
 import { SlBasket } from "react-icons/sl";
 
-function AddToBasketButton({ product, ml = "ml-4" }) {
+function AddToCartButton({ product, ml = "ml-4" }) {
   const { addToCart } = useCartStore();
 
   return (
@@ -15,4 +15,4 @@ function AddToBasketButton({ product, ml = "ml-4" }) {
   );
 }
 
-export default AddToBasketButton;
+export default AddToCartButton;

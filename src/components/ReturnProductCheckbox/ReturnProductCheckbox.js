@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Checkbox } from "../ui/checkbox";
 
 function ReturnProductCheckbox({ toggle, isChecked }) {

@@ -1,13 +1,13 @@
 import React from "react";
 
-function Label({ title, content, status }) {
+function CommandStateLabel({ title, content, status }) {
   return (
     <div className="flex flex-col gap-2">
-      <div className="uppercase text-color-dark-gray">{title}</div>
+      <span className="uppercase text-color-dark-gray">{title}</span>
       {!status ? (
-        <div className="first-letter:uppercase">{content}</div>
+        <span className="first-letter:uppercase">{content}</span>
       ) : (
-        <div
+        <span
           className={`first-letter:uppercase ${
             status === "processed"
               ? "text-green-400"
@@ -35,10 +35,10 @@ function Label({ title, content, status }) {
             : status !== "" && status !== undefined
             ? "unknown"
             : ""}
-        </div>
+        </span>
       )}
     </div>
   );
 }
 
-export default Label;
+export default CommandStateLabel;

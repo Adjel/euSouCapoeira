@@ -12,7 +12,7 @@ function LoginModal() {
   const { user } = useUserStore();
 
   return (
-    <div>
+    <section>
       <div
         className={`fixed inset-0 bg-extreme-dark-gray transition-opacity duration-500 ${
           isOpen ? "opacity-50" : "opacity-0 pointer-events-none"
@@ -35,10 +35,10 @@ function LoginModal() {
           </header>
           {user && (
             <div>
-              <div>
+              <span>
                 {user?.firstName} {user?.lastName}
-              </div>
-              <div>{user?.email}</div>
+              </span>
+              <span>{user?.email}</span>
             </div>
           )}
           {user ? (
@@ -53,9 +53,9 @@ function LoginModal() {
                   vous avez oublié votre mot de pase ?
                 </Link>
                 <hr className="w-full borderb-2 border-color-dark-gray" />
-                <div className="text-extreme-dark-gray">
+                <span className="text-extreme-dark-gray">
                   Pas encore de compte ?
-                </div>
+                </span>
                 <Link href="/signup" className="signLink" onClick={toggle}>
                   s'inscrire maintenant
                 </Link>
@@ -65,7 +65,7 @@ function LoginModal() {
         </aside>
       </div>
       <useUserLogger />
-    </div>
+    </section>
   );
 }
 

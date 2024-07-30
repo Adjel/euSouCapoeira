@@ -2,7 +2,7 @@ import useCartStore from "@/stores/useCartStore";
 import React from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
 
-function DeleteProductFromBasketButton({ productId }) {
+function DeleteProductFromCartButton({ productId }) {
   const { removeFromCart } = useCartStore();
 
   return (
@@ -13,4 +13,4 @@ function DeleteProductFromBasketButton({ productId }) {
   );
 }
 
-export default DeleteProductFromBasketButton;
+export default DeleteProductFromCartButton;
