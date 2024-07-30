@@ -8,9 +8,9 @@ function MenuButton() {
   const { toggle } = useMobileNavStore();
 
   return (
-    <>
-      <CgMenu onClick={toggle} className="size-7 sm:size-6 cursor-pointer" />
-    </>
+    <button onClick={toggle}>
+      <CgMenu className="size-7 sm:size-6 cursor-pointer" />
+    </button>
   );
 }
 

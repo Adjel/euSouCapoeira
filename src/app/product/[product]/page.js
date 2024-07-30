@@ -76,31 +76,33 @@ export default function page({ params }) {
                 className="flex flex-col justify-center items-center w-14 h-14 shadow-md rounded-full text-6xl bg-white"
                 onClick={() => setIsImageBarExpanded(!isImageBarExpanded)}
               >
-                <span className=" text-color-gold">
+                <div className="text-color-gold">
                   {isImageBarExpanded ? (
                     <IoCloseOutline className="size-9" />
                   ) : (
                     <IoCloseOutline className="size-9 rotate-45" />
                   )}
-                </span>
+                </div>
               </button>
             )}
             {product?.images.map(({ image, alt }, index) => (
-              <div
+              <ul
                 key={index}
                 className={`${
                   index === imageIndex &&
                   "px-5 py-4 border-t-2 border-color-gold bg-color-hover-cancel-button rounded"
                 } `}
               >
-                <Image
-                  className="mx-auto w-16 md:w-24 h-auto cursor-pointer"
-                  key={index}
-                  src={image}
-                  alt={alt}
-                  onClick={() => setImageIndex(index)}
-                />
-              </div>
+                <il>
+                  <Image
+                    className="mx-auto w-16 md:w-24 h-auto cursor-pointer"
+                    key={index}
+                    src={image}
+                    alt={alt}
+                    onClick={() => setImageIndex(index)}
+                  />
+                </il>
+              </ul>
             ))}
           </div>
         </section>

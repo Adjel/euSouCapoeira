@@ -20,10 +20,10 @@ function ProductPreviewItem({
         <Image src={image} alt={alt} objectFit="cover" />
       </div>
       <RatingComponent rateList={rates} />
-      <div className="first-letter:uppercase text-sm text-center">
+      <span className="first-letter:uppercase text-sm text-center">
         {productName}
-      </div>
-      <div className="w-fit font-bold text-center">{price} €</div>
+      </span>
+      <span className="w-fit font-bold text-center">{price} €</span>
     </Link>
   );
 }

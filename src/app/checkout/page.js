@@ -86,11 +86,11 @@ export default function page() {
         ))}
         <div className="flex justify-between">
           <span>Frais de port</span>
-          <span>{shippingFees} €</span>
+          <span>{shippingFees.toFixed(2)} €</span>
         </div>
         <div className="flex justify-between">
           <h3 className="text-xl font-bold">Montant total</h3>
-          <span>{totalPrice} €</span>
+          <span>{totalPrice.toFixed(2)} €</span>
         </div>
       </div>
     );
@@ -113,7 +113,7 @@ export default function page() {
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">Caisse</h2>
           {!user ? (
             <>
-              <div>Avez-vous déjà un compte client?</div>
+              <span>Avez-vous déjà un compte client?</span>
               <Button
                 onClick={() => toggleLogInButton(!logInButton)}
                 className=" w-fit"

@@ -13,10 +13,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { useUserStore } from "@/stores/useUserStore";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import "@/styles/globals.css";
 import { emailRegex } from "@/lib/utils";
+import Link from "next/link";
+import "@/styles/globals.css";
 
 const errorMessage = "Merci de saisir votre";
 
@@ -62,7 +62,7 @@ export default function signup() {
 
   return (
     <section className="flex flex-col justify-center items-center py-6">
-      <span className="flex flex-col gap-6 w-1/2">
+      <div className="flex flex-col gap-6 w-1/2">
         <Form {...form}>
           <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold text-center">
             S'enregistrer
@@ -197,19 +197,19 @@ export default function signup() {
             />
             <div className="flex flex-col gap-6 justify-center items-center">
               <Button type="submit" className="w-fit">
-                Enregistrer
+                Créer un compte
               </Button>
               <hr className="w-full borderb-2 border-color-dark-gray" />
-              <div className="text-extreme-dark-gray text-center">
-                Avez-vous déjà effectué un achat chez nous?
-              </div>
+              <span className="text-extreme-dark-gray text-center first-letter:uppercase">
+                avez-vous déjà effectué un achat chez nous?
+              </span>
               <Link href="/signin" className="signLink">
                 Se connecter
               </Link>
             </div>
           </form>
         </Form>
-      </span>
+      </div>
     </section>
   );
 }

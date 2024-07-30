@@ -10,7 +10,6 @@ function DashboardNav({ isModal = true }) {
   const linkStyle = `w-fit ${
     isModal ? "text-xl" : "text-lg"
   } font-bold m-0 p-0`;
-  const textStyle = "first-letter:uppercase";
 
   const LinkComponent = ({ title, link }) => {
     return (
@@ -19,7 +18,9 @@ function DashboardNav({ isModal = true }) {
         className={`${linkStyle}`}
         onClick={close}
       >
-        <div className={textStyle}>{title}</div>
+        <div className="first-letter:uppercase">
+          <span>{title}</span>
+        </div>
       </Link>
     );
   };
@@ -43,8 +44,11 @@ function DashboardNav({ isModal = true }) {
         <LinkComponent link={"retour"} title={"retourner un produit"} />
       </li>
       <li className={liStyle}>
-        <button className={`${linkStyle}`} onClick={clearUser}>
-          <div className={textStyle}>me déconnecter</div>
+        <button
+          className={`${linkStyle} first-letter:uppercase`}
+          onClick={clearUser}
+        >
+          me déconnecter
         </button>
       </li>
     </ul>

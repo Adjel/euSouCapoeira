@@ -6,7 +6,7 @@ function TotalCartPriceComponent() {
 
   return (
     <h2 className="first-letter:uppercase text-2xl font-bold">
-      Montant total: {totalPrice} €
+      Montant total: {totalPrice.toFixed(2)} €
     </h2>
   );
 }

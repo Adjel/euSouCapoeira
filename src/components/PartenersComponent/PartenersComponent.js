@@ -18,7 +18,7 @@ function PartenersComponent() {
   }`;
 
   return (
-    <div
+    <section
       className="basicPadding flex flex-col w-full h-auto items-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -70,7 +70,7 @@ function PartenersComponent() {
         <CarouselPrevious className={`${buttonStyle} start-12`} />
         <CarouselNext className={`${buttonStyle} end-12`} />
       </Carousel>
-    </div>
+    </section>
   );
 }
 

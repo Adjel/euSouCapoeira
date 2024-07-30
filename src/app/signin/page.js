@@ -1,9 +1,9 @@
 "use client";
-import SignInForm from "@/components/Forms/SignInForm";
 import React, { useEffect } from "react";
-import Link from "next/link";
 import { useUserStore } from "@/stores/useUserStore";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import SignInForm from "@/components/Forms/SignInForm";
 import "@/styles/globals.css";
 
 export default function page() {
@@ -19,7 +19,7 @@ export default function page() {
       <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold text-center">
         Connection à l'espace client
       </h2>
-      <span className="flex flex-col w-full lg:w-1/2 justify-center items-center p-8 gap-6">
+      <div className="flex flex-col w-full lg:w-1/2 justify-center items-center p-8 gap-6">
         <SignInForm className="w-full" />
 
         <Link href="/pw_lost" className="signLink">
@@ -27,14 +27,14 @@ export default function page() {
         </Link>
         <hr className="w-full borderb-2 border-color-dark-gray mt-4" />
         <div className="flex flex-col mt-4 gap-8 items-center">
-          <div className="text-sm md:text-base lg-text-lg text-extreme-dark-gray">
-            Pas encore de compte ?
-          </div>
+          <span className="text-sm md:text-base lg-text-lg text-extreme-dark-gray first-letter:uppercase">
+            pas encore de compte ?
+          </span>
           <Link href="/signup" className="signLink">
             s'inscrire maintenant
           </Link>
         </div>
-      </span>
+      </div>
     </section>
   );
 }

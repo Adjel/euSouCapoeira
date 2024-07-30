@@ -10,13 +10,13 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import "@/styles/globals.css";
 import styles from "./pwlost.module.css";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { emailRegex } from "@/lib/utils";
 import { toast } from "@/components/ui/use-toast";
+import { emailRegex } from "@/lib/utils";
+import "@/styles/globals.css";
 
 const formSchema = z.object({
   email: z

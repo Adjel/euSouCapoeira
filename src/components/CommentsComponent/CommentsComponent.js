@@ -14,24 +14,26 @@ function CommentsComponent({ comments, rates }) {
         <span>{comments?.length}</span>
         {`${comments?.length === 1 ? " commentaire" : " commentaires"}  `}
       </h3>
-      {comments?.map(({ title, authorName, comment, date, rating, id }) => (
-        <div key={id}>
-          <div className="flex flex-row gap-3">
-            <span className="flex justify-center items-center w-11 h-11 font-bold text-color-gold uppercase border-2 border-color-gold rounded-full">
-              {authorName?.charAt(0)}
-            </span>
-            <div className="flex flex-col">
-              {title}
-              <div className="flex flex-row gap-2 items-center text-color-dark-gray">
-                <RatingComponent userRate={rating} />
-                <span>{authorName}</span>
-                <span>{date.toLocaleDateString()}</span>
+      <ol className="flex flex-col gap-8">
+        {comments?.map(({ title, authorName, comment, date, rating, id }) => (
+          <li key={id}>
+            <div className="flex flex-row gap-3">
+              <span className="flex justify-center items-center w-11 h-11 font-bold text-color-gold uppercase border-2 border-color-gold rounded-full">
+                {authorName?.charAt(0)}
+              </span>
+              <div className="flex flex-col">
+                <span>{title}</span>
+                <div className="flex flex-row gap-2 items-center text-color-dark-gray">
+                  <RatingComponent userRate={rating} />
+                  <span>{authorName}</span>
+                  <span>{date.toLocaleDateString()}</span>
+                </div>
               </div>
             </div>
-          </div>
-          {comment}
-        </div>
-      ))}
+            {comment}
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }

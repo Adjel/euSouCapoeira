@@ -6,8 +6,9 @@ import { FaRegHandshake } from "react-icons/fa";
 import style from "./reinsurance.module.css";
 
 function Reinsurance() {
+  // ul and il for each ?
   return (
-    <div className="p-8 flex flex-col mt-6 md:flex-row gap-6 md:justify-evenly bg-background-medium-gray">
+    <section className="p-8 flex flex-col mt-6 md:flex-row gap-6 md:justify-evenly bg-background-medium-gray">
       <div className={style.item}>
         <FaTruckFast className={style.icon} />
         <span className={style.desc}>livraison rapide</span>
@@ -24,7 +25,7 @@ function Reinsurance() {
         <FaRegHandshake className={style.icon} />
         <span className={style.desc}>support humain</span>
       </div>
-    </div>
+    </section>
   );
 }
 

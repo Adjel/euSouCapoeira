@@ -18,7 +18,7 @@ function ReturnProductItem({
 
   const handleCheckbox = () => {
     setIschecked(!isChecked);
-    // product is checked for now but is going to be unchecked, so it have no reason to be returned
+    // product is checked for now but is going to be unchecked, so clear the reason
     if (isChecked === true) {
       setReasonOption("");
     }
@@ -30,8 +30,9 @@ function ReturnProductItem({
     setProductReturnReason(commandId, id, reason);
   };
 
+  // error is set to "" by default
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <li className="flex flex-col gap-2 w-full">
       <div className="flex gap-2 items-center">
         <ReturnProductCheckbox
           className="rounded size-6 text-color-dark-gray"
@@ -50,7 +51,7 @@ function ReturnProductItem({
       {error !== "" &&
         (reasonOption === "" || reasonOption === undefined) &&
         isChecked && <span className="text-color-error ml-auto">{error}</span>}
-    </div>
+    </li>
   );
 }
 

@@ -1,5 +1,5 @@
-import useCartStore from "@/stores/useCartStore";
 import React from "react";
+import useCartStore from "@/stores/useCartStore";
 import { SlBasket } from "react-icons/sl";
 
 function AddToCartButton({ product, ml = "ml-4" }) {

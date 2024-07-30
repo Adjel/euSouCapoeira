@@ -5,7 +5,7 @@ import frenchFlag from "../../../public/frenchFlag.png";
 
 function LanguageButton() {
   return (
-    <div className="w-6 h-6 flex relative justify-center items-center">
+    <button className="w-6 h-6 flex relative justify-center items-center">
       <GoCircle className="absolute w-6 h-6" />
       <div className="w-5 h-5 absolute flex items-center justify-center rounded-full overflow-hidden border-2 border-white">
         <Image
@@ -14,7 +14,7 @@ function LanguageButton() {
           fill
         />
       </div>
-    </div>
+    </button>
   );
 }
 

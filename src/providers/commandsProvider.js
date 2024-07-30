@@ -1,4 +1,3 @@
-import React from "react";
 import clothes from "../../public/fakeCatsImages/clothes.jpg";
 import music from "../../public/fakeCatsImages/music.jpg";
 

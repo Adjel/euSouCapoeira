@@ -2,8 +2,8 @@ import React from "react";
 import Image from "next/image";
 import nebasket from "../../../public/nEBasket.svg";
 import basketIcon from "../../../public/basket.svg";
-import Link from "next/link";
 import useCartStore from "@/stores/useCartStore";
+import Link from "next/link";
 
 function CartButton() {
   const { productQuantity } = useCartStore();

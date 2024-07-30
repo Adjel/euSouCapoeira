@@ -34,20 +34,19 @@ function UserInfoComponent({
 
   return (
     <section className="flex flex-col p-4 md:p-8 gap-8">
-      <section>
-        <header className="flex flex-col md:flex-row w-full gap-4 lg:gap-16 lg:items-baseline">
-          <h2 className="text-5xl font-bold">
-            {title ? title : "Carnet d'adresses"}
-          </h2>
-          <span className="lg:ml-auto">
-            {!isInfo && !isModifying && (
-              <Button onClick={(event) => handleIsModifyingInfo(event)}>
-                Ajouter une adresse
-              </Button>
-            )}
-          </span>
-        </header>
-      </section>
+      <header className="flex flex-col md:flex-row w-full gap-4 lg:gap-16 lg:items-baseline">
+        <h2 className="text-5xl font-bold">
+          {title ? title : "Carnet d'adresses"}
+        </h2>
+        <span className="lg:ml-auto">
+          {!isInfo && !isModifying && (
+            <Button onClick={(event) => handleIsModifyingInfo(event)}>
+              Ajouter une adresse
+            </Button>
+          )}
+        </span>
+      </header>
+
       {!isModifying ? (
         <>
           {!isInfo ? (
@@ -63,11 +62,11 @@ function UserInfoComponent({
                 city,
                 country,
               }) => (
-                <section
+                <ul
                   key={date.toLocaleDateString()}
                   className="flex flex-col gap-4"
                 >
-                  <span className="flex w-1/2 gap-16 items-top">
+                  <li className="flex w-1/2 gap-16 items-top">
                     <h3 className="text-2xl font-bold">
                       Adresse de facturation
                     </h3>
@@ -77,56 +76,56 @@ function UserInfoComponent({
                       </span>
                     ) : (
                       <>
-                        <span
+                        <div
                           className={styles.button}
                           onClick={() => deleteAddress(date)}
                         >
                           <RiDeleteBinLine className="ml-auto size-7" />
-                        </span>
-                        <span
+                        </div>
+                        <div
                           className={styles.button}
                           onClick={() => setCurrentAddress(date)}
                         >
                           <ImCheckmark className="ml-auto size-7" />
-                        </span>
+                        </div>
                       </>
                     )}
-                  </span>
-                  <span>
+                  </li>
+                  <li>
                     <>
-                      <div className={""}>{entreprise}</div>
-                      <div>
+                      <span className={""}>{entreprise}</span>
+                      <span>
                         {firstName} {lastName}
-                      </div>
-                      <div>{street}</div>
-                      <div>
+                      </span>
+                      <span>{street}</span>
+                      <span>
                         {zipCode} {city}
-                      </div>
-                      <div>{country}</div>
+                      </span>
+                      <span>{country}</span>
                     </>
-                  </span>
-                </section>
+                  </li>
+                </ul>
               )
             )
           ) : (
             <section className="flex flex-col gap-4">
-              <span className="flex w-1/2 gap-16 items-top">
+              <div className="flex w-1/2 gap-16 items-top">
                 <h3 className="text-2xl font-bold">{subTitle}</h3>
-                <span
+                <div
                   className={styles.button}
                   onClick={(event) => handleIsModifyingInfo(event)}
                 >
                   <IconButton className="ml-auto size-8 hover:text-color-gold" />
-                </span>
-              </span>
-              <span>
+                </div>
+              </div>
+              <div>
                 <>
-                  <div className={""}>{user?.entreprise}</div>
-                  <div>{user?.firstName}</div>
-                  <div>{user?.lastName}</div>
-                  <div>{user?.email}</div>
+                  <span className={""}>{user?.entreprise}</span>
+                  <span>{user?.firstName}</span>
+                  <span>{user?.lastName}</span>
+                  <span>{user?.email}</span>
                 </>
-              </span>
+              </div>
             </section>
           )}
         </>

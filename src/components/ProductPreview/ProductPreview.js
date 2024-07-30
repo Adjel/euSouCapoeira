@@ -21,7 +21,6 @@ function ProductPreview({ products }) {
       className="flex items-center p-2 pr-3 group w-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      //</CarouselItem> <CarouselItem className="basis-full sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/5 border-2 border-color-text-medium-gray border-blue-400">
     >
       <Carousel className="w-full">
         <CarouselContent className="w-full">

@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import styles from "../Forms.module.css";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -14,8 +13,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useUserStore } from "@/stores/useUserStore";
-import { emailRegex, passwordRegex } from "@/lib/utils";
 import PasswordInput from "@/components/PasswordInput";
+import { emailRegex, passwordRegex } from "@/lib/utils";
+import styles from "../Forms.module.css";
 
 function UserInfoForm({ cancel }) {
   const { user, updateUser } = useUserStore();

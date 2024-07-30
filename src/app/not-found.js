@@ -1,9 +1,10 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import fourhfour from "../../public/fakeAddimages/fourhfour.jpg";
-import "@/styles/globals.css";
 import Image from "next/image";
 import RecommandsComponent from "@/components/RecommandsComponent";
+import "@/styles/globals.css";
 
 export default function NotFound() {
   return (
@@ -14,7 +15,7 @@ export default function NotFound() {
             <h2 className="text-4xl font-bold">
               Uh Oh! Cette page n'existe plus ou n'a peut-être jamais existé!
             </h2>
-            <p className="">{`Vous pouvez tout de même rejoindre l'acceuil via le bouton en dessous, ou alors naviguer comme vous le faite habituellement :)`}</p>
+            <span className="">{`Vous pouvez tout de même rejoindre l'acceuil via le bouton en dessous, ou alors naviguer comme vous le faite habituellement :)`}</span>
           </header>
           <Button className="w-fit">
             <Link href="/">Retourner à l'acceuil</Link>

@@ -17,10 +17,10 @@ export default function dashboard({ params }) {
   const my_ = params.my_;
   const router = useRouter();
 
-  let content = null;
+  let pageContent = null;
   switch (my_) {
     case "mes_informations":
-      content = (
+      pageContent = (
         <UserInfoComponent
           isInfo={true}
           title={"Mes informations"}
@@ -30,16 +30,16 @@ export default function dashboard({ params }) {
       );
       break;
     case "mes_commandes":
-      content = <UserCommands />;
+      pageContent = <UserCommands />;
       break;
     case "mes_adresses":
-      content = <UserInfoComponent isInfo={false} />;
+      pageContent = <UserInfoComponent isInfo={false} />;
       break;
     case "retour":
-      content = <ReturnProductComponent />;
+      pageContent = <ReturnProductComponent />;
       break;
     default:
-      content = (
+      pageContent = (
         <UserInfoComponent
           isInfo={true}
           title={"Mes informations"}
@@ -55,11 +55,11 @@ export default function dashboard({ params }) {
   }, [user]);
 
   return (
-    <div className="relative flex flex-col md:flex-row w-full h-full gap-16 px-4 md:p-8">
+    <section className="relative flex flex-col md:flex-row w-full h-full gap-16 px-4 md:p-8">
       <header className="flex w-full md:hidden gap-4 h-fit items-baseline px-4 py-8 md:px-8">
-        <span onClick={() => setIsOpen(!isOpen)}>
+        <div onClick={() => setIsOpen(!isOpen)}>
           <HiOutlineMenuAlt2 className="cursor-pointer" />
-        </span>
+        </div>
         <span className="uppercase mt-0 p-0">espace client</span>
         <div
           className={`fixed inset-0 z-50 transition-transform duration-500 transform ${
@@ -78,10 +78,10 @@ export default function dashboard({ params }) {
             </header>
             {user && (
               <div>
-                <div>
+                <span>
                   {user?.firstName} {user?.lastName}
-                </div>
-                <div>{user?.email}</div>
+                </span>
+                <span>{user?.email}</span>
               </div>
             )}
             <DashboardNav />
@@ -93,15 +93,15 @@ export default function dashboard({ params }) {
           <h2 className="w-fit text-3xl font-bold m-0 p-0">Espace client</h2>
         </header>
         <div className="mb-8">
-          <div>
+          <span>
             {user?.firstName} {user?.lastName}
-          </div>
-          <div>{user?.email}</div>
+          </span>
+          <span>{user?.email}</span>
         </div>
 
         <DashboardNav isModal={false} />
       </aside>
-      <div className="w-full h-full">{content}</div>
-    </div>
+      <section className="w-full h-full">{pageContent}</section>
+    </section>
   );
 }
