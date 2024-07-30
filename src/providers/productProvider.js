@@ -7,9 +7,10 @@ export function getMockedProductById(productId) {
     const item = productList.products.find((item) => item.id === productId);
     if (!p && item) p = item;
   });
-  return p ?? handleError;
+  return p ?? handleProductNotFound();
 }
 
-function handleError() {
-  throw new Error("failed to find a product by id in productProvider");
-}
+const handleProductNotFound = () => {
+  // Todo: get a way to push the error to dev logs like firebase crashlytics
+  return null;
+};
