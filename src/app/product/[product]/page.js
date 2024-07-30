@@ -18,6 +18,7 @@ import CheckedIcon from "@/components/CheckedIcon";
 import BreadCrumbComponent from "@/components/BreadcrumbComponent/BreadcrumbComponent";
 import { IoCloseOutline } from "react-icons/io5";
 import ZoomImage from "@/components/ZoomOnImage/ZoomOnImage";
+import VariantsComponent from "@/components/VariantsComponent";
 
 export default function page({ params }) {
   const { addToCart } = useCartStore();
@@ -99,32 +100,7 @@ export default function page({ params }) {
         </section>
         <section>
           {product?.variants.length > 0 ? (
-            <div className="flex flex-col gap-2 mt-4 justify-center ">
-              <div className="hidden lg:flex mb-7" />
-              <div className="text-base md:text-lg font-semibold">
-                Variations de ce produit
-              </div>
-              <div className="flex flex-wrap justify-start">
-                {product?.variants.map(({ alt, image, id }, index) => (
-                  <Link
-                    key={id}
-                    href={`/product/${id}`}
-                    className="relative hover:text-color-gold"
-                  >
-                    <Image
-                      className={`${
-                        index === product?.variants.length - 1
-                          ? "border"
-                          : "border border-r-0 hover:border-r"
-                      } w-16 h-16 p-4 border-color-hover-cancel-button hover:border-color-gold cursor-pointer `}
-                      src={image}
-                      alt={alt}
-                    />
-                    {id === product?.id && <CheckedIcon />}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            <VariantsComponent product={product} />
           ) : (
             <div className="hidden lg:flex mb-11" />
           )}
