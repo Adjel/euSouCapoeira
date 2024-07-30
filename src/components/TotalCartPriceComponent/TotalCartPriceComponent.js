@@ -1,7 +1,7 @@
 import useCartStore from "@/stores/useCartStore";
 import React from "react";
 
-function TotalBasketPriceComponent() {
+function TotalCartPriceComponent() {
   const { totalPrice } = useCartStore();
 
   return (
@@ -11,4 +11,4 @@ function TotalBasketPriceComponent() {
   );
 }
 
-export default TotalBasketPriceComponent;
+export default TotalCartPriceComponent;

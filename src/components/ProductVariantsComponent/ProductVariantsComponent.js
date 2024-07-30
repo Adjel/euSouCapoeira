@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CheckedIcon from "../CheckedIcon";
 
-function VariantsComponent({ product }) {
+function ProductVariantsComponent({ product }) {
   const sortedVariants = product.variants.sort((a, b) => a.id - b.id);
   return (
     <div className="flex flex-col gap-2 mt-4 justify-center ">
@@ -36,4 +36,4 @@ function VariantsComponent({ product }) {
   );
 }
 
-export default VariantsComponent;
+export default ProductVariantsComponent;

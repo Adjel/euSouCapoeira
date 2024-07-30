@@ -13,12 +13,10 @@ import "@/styles/globals.css";
 import useCartStore from "@/stores/useCartStore";
 import ShareProductButton from "@/components/ShareProductButton";
 import AddToWishListButton from "@/components/AddToWishListButton";
-import Link from "next/link";
-import CheckedIcon from "@/components/CheckedIcon";
 import BreadCrumbComponent from "@/components/BreadcrumbComponent/BreadcrumbComponent";
 import { IoCloseOutline } from "react-icons/io5";
 import ZoomImage from "@/components/ZoomOnImage/ZoomOnImage";
-import VariantsComponent from "@/components/VariantsComponent";
+import ProductVariantsComponent from "@/components/ProductVariantsComponent";
 
 export default function page({ params }) {
   const { addToCart } = useCartStore();
@@ -31,7 +29,7 @@ export default function page({ params }) {
     setProduct(getMockedProductById(params.product));
   }, [params]);
 
-  const handleQuantity = (productId, plus) => {
+  const handleQuantity = (plus) => {
     setQuantity((prevQuantity) =>
       plus ? prevQuantity + 1 : prevQuantity > 1 ? prevQuantity - 1 : 1
     );
@@ -100,7 +98,7 @@ export default function page({ params }) {
         </section>
         <section>
           {product?.variants.length > 0 ? (
-            <VariantsComponent product={product} />
+            <ProductVariantsComponent product={product} />
           ) : (
             <div className="hidden lg:flex mb-11" />
           )}
@@ -108,19 +106,21 @@ export default function page({ params }) {
             <PriceComponent price={product?.price} />
             <AvailabilityComponent availability={product?.availability} />
           </div>
-          <div className="flex py-3 gap-4">
-            <ProductQuantityButton
-              quantity={quantity}
-              productId={product?.id}
-              onClick={handleQuantity}
-            />
-            <Button
-              className="w-full"
-              onClick={() => addToCart(product, quantity)}
-            >
-              Ajouter au panier
-            </Button>
-          </div>
+          {product?.availability !== "nostock" && (
+            <div className="flex py-3 gap-4">
+              <ProductQuantityButton
+                quantity={quantity}
+                productId={product?.id}
+                onClick={handleQuantity}
+              />
+              <Button
+                className="w-full"
+                onClick={() => addToCart(product, quantity)}
+              >
+                Ajouter au panier
+              </Button>
+            </div>
+          )}
           <div className="flex flex-row justify-evenly">
             <AddToWishListButton product={product} />
             <ShareProductButton params={params} />

@@ -7,10 +7,9 @@ import PriceComponent from "@/components/PriceComponent";
 import useCartStore from "@/stores/useCartStore";
 import ProductQuantityButton from "@/components/ProductQuantityButton";
 import AddToWishListButton from "@/components/AddToWishListButton";
-import DeleteProductFromBasketButton from "@/components/DeleteProductFromBasketButton";
-
+import DeleteProductFromCartButton from "@/components/DeleteProductFromCartButton";
 import ArrowButton from "@/components/ArrowButton";
-import TotalBasketPriceComponent from "@/components/TotalBasketPriceComponent";
+import TotalCartPriceComponent from "@/components/TotalCartPriceComponent";
 import RecommandsComponent from "@/components/RecommandsComponent";
 
 export default function page() {
@@ -56,7 +55,7 @@ export default function page() {
                   </div>
                   <div className="flex flex-col xs:flex-row justify-between">
                     <div className="flex">
-                      <DeleteProductFromBasketButton productId={id} />
+                      <DeleteProductFromCartButton productId={id} />
                       <AddToWishListButton />
                     </div>
                     <PriceComponent price={price * quantity} />
@@ -74,7 +73,7 @@ export default function page() {
         )}
         {cart?.length > 0 && (
           <section className="flex flex-col w-1/2 mx-auto mb-28 p-7 gap-6 justify-center items-center bg-color-hover-cancel-button rounded-xl">
-            <TotalBasketPriceComponent />
+            <TotalCartPriceComponent />
             <ArrowButton href={"/checkout"} text={"Aller à la caisse"} />
           </section>
         )}

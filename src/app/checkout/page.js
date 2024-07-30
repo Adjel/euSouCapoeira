@@ -57,7 +57,7 @@ export default function page() {
     },
   });
 
-  const BasketItem = ({ name, availability, price }) => {
+  const CartItem = ({ name, availability, price }) => {
     return (
       <div className="flex justify-between gap-2">
         <div className="flex flex-col">
@@ -69,20 +69,20 @@ export default function page() {
     );
   };
 
-  const Basket = () => {
+  const Cart = () => {
     return (
       <div className="flex flex-col gap-4 w-full">
         <div className="flex flex-row justify-between gap-4">
           <h2 className={`${style.title} mb-4`}>Panier d'achat</h2>
           <Link
-            href="/basket"
+            href="/cart"
             className="underline underline-offset-8 hover:text-color-gold"
           >
             Editer
           </Link>
         </div>
         {cart.map(({ name, availability, price }) => (
-          <BasketItem name={name} availability={availability} price={price} />
+          <CartItem name={name} availability={availability} price={price} />
         ))}
         <div className="flex justify-between">
           <span>Frais de port</span>
@@ -312,7 +312,7 @@ export default function page() {
               </div>
             )}
             <div className="flex sm:hidden">
-              <Basket />
+              <Cart />
             </div>
             <Button type="submit" className="w-fit mx-auto mt-16">
               {!user ? "S'enregistrer et acheter" : "acheter maintenant"}
@@ -321,7 +321,7 @@ export default function page() {
         </Form>
       </section>
       <aside className="hidden flex-col sm:flex w-1/2 p-2">
-        <Basket />
+        <Cart />
       </aside>
     </section>
   );

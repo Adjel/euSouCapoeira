@@ -29,6 +29,7 @@ function ProductPreview({ products }) {
             <CarouselItem className="basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 border-1 border-color-text-medium-gray">
               <ProductPreviewItem
                 key={id}
+                productId={id}
                 productName={name}
                 image={image}
                 alt={alt}

@@ -5,11 +5,11 @@ import basketIcon from "../../../public/basket.svg";
 import Link from "next/link";
 import useCartStore from "@/stores/useCartStore";
 
-function BasketButton() {
+function CartButton() {
   const { productQuantity } = useCartStore();
 
   return (
-    <Link href={"/basket"} className="cursor-pointer">
+    <Link href={"/cart"} className="cursor-pointer">
       {productQuantity > 0 ? (
         <>
           <Image
@@ -36,4 +36,4 @@ function BasketButton() {
   );
 }
 
-export default BasketButton;
+export default CartButton;
