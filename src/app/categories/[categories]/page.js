@@ -5,8 +5,8 @@ import { categories } from "@/providers/categoriesProvider";
 import { useRouter } from "next/navigation";
 import { normalizeString } from "@/lib/utils";
 import Image from "next/image";
-import "@/styles/globals.css";
 import BreadcrumbComponent from "@/components/BreadcrumbComponent";
+import "@/styles/globals.css";
 
 const Page = ({ params }) => {
   const router = useRouter();

@@ -2,7 +2,6 @@
 import { useUserStore } from "@/stores/useUserStore";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import style from "./checkout.module.css";
 import {
   Form,
   FormControl,
@@ -16,9 +15,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import AvailabilityComponent from "@/components/AvailabilityComponent";
 import useCartStore from "@/stores/useCartStore";
-import { emailRegex } from "@/lib/utils";
 import SignInForm from "@/components/Forms/SignInForm";
 import Link from "next/link";
+import { emailRegex } from "@/lib/utils";
+import style from "./checkout.module.css";
 
 const errorMessage = "Merci de saisir votre";
 
@@ -61,7 +61,7 @@ export default function page() {
     return (
       <div className="flex justify-between gap-2">
         <div className="flex flex-col">
-          <div>{name}</div>
+          <strong>{name}</strong>
           <AvailabilityComponent availability={availability} />
         </div>
         <span>{price} €</span>

@@ -2,9 +2,9 @@
 import SignInForm from "@/components/Forms/SignInForm";
 import React, { useEffect } from "react";
 import Link from "next/link";
-import "@/styles/globals.css";
 import { useUserStore } from "@/stores/useUserStore";
 import { useRouter } from "next/navigation";
+import "@/styles/globals.css";
 
 export default function page() {
   const { user } = useUserStore();

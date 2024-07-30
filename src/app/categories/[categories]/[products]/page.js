@@ -102,10 +102,10 @@ export default function Page({ params }) {
           )}
         </div>
         {productCount > 0 && (
-          <section className="flex gap-4 pr-7 justify-end">
+          <div className="flex gap-4 pr-7 justify-end">
             <SelectSortingComponent />
             <GridListSwitchButton toggle={toggleGridList} className="size-6" />
-          </section>
+          </div>
         )}
       </header>
       <div
@@ -147,27 +147,27 @@ export default function Page({ params }) {
                     <Link href={`/product/${id}`}>
                       {name}
                       <RatingComponent rateList={rates} />
-                      <span className="md:hidden">
+                      <div className="md:hidden">
                         <BestSellerComponent isBestSeller={isBestSeller} />
-                      </span>
+                      </div>
                       <AvailabilityComponent availability={availability} />
                       <PriceComponent price={price} />
                     </Link>
-                    <span className="flex md:hidden">
+                    <div className="flex md:hidden">
                       <AddToCartButton product={product} ml={"ml-0"} />
                       <AddToWishListButton />
-                    </span>
+                    </div>
                   </div>
                   {!isGrid && (
                     <div className="md:flex hidden flex-col gap-1 ml-auto items-end">
                       <BestSellerComponent isBestSeller={isBestSeller} />
-                      <span className="hidden lg:flex">
+                      <div className="hidden lg:flex">
                         <PriceComponent price={price} />
-                      </span>
-                      <span className="mt-auto flex items-center">
+                      </div>
+                      <div className="mt-auto flex items-center">
                         <AddToCartButton product={product} />
                         <AddToWishListButton />
-                      </span>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -178,10 +178,10 @@ export default function Page({ params }) {
                     <AvailabilityComponent availability={availability} />
                     <PriceComponent price={price} />
                   </Link>
-                  <span className="flex">
+                  <div className="flex">
                     <AddToCartButton product={product} ml={"ml-0"} />
                     <AddToWishListButton />
-                  </span>
+                  </div>
                 </div>
               </div>
             );

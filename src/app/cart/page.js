@@ -68,7 +68,7 @@ export default function page() {
           <div className="flex flex-col justify-center items-center h-48 text-center uppercase border-2">
             <span>Votre panier est vide</span>
             <br />
-            <div className="rotate-90">{`:(`}</div>
+            <span className="rotate-90">{`:(`}</span>
           </div>
         )}
         {cart?.length > 0 && (

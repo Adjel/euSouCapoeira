@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import RecommandsComponent from "@/components/RecommandsComponent";
 import RatingComponent from "@/components/RatingComponent";
 import CommentsComponent from "@/components/CommentsComponent";
-import "@/styles/globals.css";
 import useCartStore from "@/stores/useCartStore";
 import ShareProductButton from "@/components/ShareProductButton";
 import AddToWishListButton from "@/components/AddToWishListButton";
@@ -18,6 +17,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import ZoomImage from "@/components/ZoomOnImage/ZoomOnImage";
 import ProductVariantsComponent from "@/components/ProductVariantsComponent";
 import { useRouter } from "next/navigation";
+import "@/styles/globals.css";
 
 export default function page({ params }) {
   const { addToCart } = useCartStore();
@@ -30,7 +30,6 @@ export default function page({ params }) {
 
   useEffect(() => {
     const product = getMockedProductById(params.product);
-    console.log(product);
     if (product) {
       setProduct(product);
     } else {
