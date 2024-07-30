@@ -17,6 +17,7 @@ import BreadCrumbComponent from "@/components/BreadcrumbComponent/BreadcrumbComp
 import { IoCloseOutline } from "react-icons/io5";
 import ZoomImage from "@/components/ZoomOnImage/ZoomOnImage";
 import ProductVariantsComponent from "@/components/ProductVariantsComponent";
+import { useRouter } from "next/navigation";
 
 export default function page({ params }) {
   const { addToCart } = useCartStore();
@@ -25,8 +26,16 @@ export default function page({ params }) {
   const [quantity, setQuantity] = useState(1);
   const [isImageBarExpanded, setIsImageBarExpanded] = useState(false);
 
+  const router = useRouter();
+
   useEffect(() => {
-    setProduct(getMockedProductById(params.product));
+    const product = getMockedProductById(params.product);
+    console.log(product);
+    if (product) {
+      setProduct(product);
+    } else {
+      router.push("/not-found");
+    }
   }, [params]);
 
   const handleQuantity = (plus) => {
