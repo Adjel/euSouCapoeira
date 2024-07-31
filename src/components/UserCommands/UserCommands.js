@@ -17,8 +17,8 @@ function MyCommands() {
         </h2>
       </header>
       <ol>
-        {commands.map(({ products, date, id, totalPrice, status }) => (
-          <li key={id} className="flex flex-col">
+        {commands.map(({ products, date, commandId, totalPrice, status }) => (
+          <li key={commandId} className="flex flex-col">
             <Divider />
             {products.map(({ imageSrc, alt, id, name }, index) => (
               <Link
@@ -45,7 +45,7 @@ function MyCommands() {
                   title="commande du"
                   content={date.toLocaleDateString()}
                 />
-                <CommandState title="commande n°" content={id} />
+                <CommandState title="commande n°" content={commandId} />
               </div>
               <div className="flex flex-col gap-6 md:flex-row">
                 <CommandState title="prix total" content={`${totalPrice} €`} />

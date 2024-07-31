@@ -24,7 +24,7 @@ const ZoomImage = ({ src, alt, classN }) => {
     >
       <Image
         src={src}
-        alt={alt}
+        alt={`une image du produit : ${alt}`}
         className={`transition-transform duration-200 ${
           zoom ? "scale-150" : "scale-100"
         } `}

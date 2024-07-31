@@ -87,7 +87,7 @@ export default function page({ params }) {
             )}
 
             {product?.images.map(({ image, alt }, index) => (
-              <il
+              <li
                 key={index}
                 className={`${
                   index === imageIndex &&
@@ -101,7 +101,7 @@ export default function page({ params }) {
                   alt={alt}
                   onClick={() => setImageIndex(index)}
                 />
-              </il>
+              </li>
             ))}
           </ul>
         </section>
@@ -142,13 +142,13 @@ export default function page({ params }) {
             <h2 className="text-xl font-bold">{product?.name}</h2>
           </header>
           {product?.specs.map((item, index) => (
-            <il
+            <li
               key={index}
               className="flex flex-row gap-1 justify-start items-center"
             >
               <span className="w-2 h-2 border-2 border-black rounded-full"></span>
               <div className="lowercase first-letter:uppercase">{item}</div>
-            </il>
+            </li>
           ))}
         </ul>
       </section>

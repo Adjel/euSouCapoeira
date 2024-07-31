@@ -25,7 +25,11 @@ function ProductPreview({ products }) {
       <Carousel className="w-full">
         <CarouselContent className="w-full">
           {products?.map(({ image, alt, name, price, rate, rateNbr, id }) => (
-            <CarouselItem className="basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 border-1 border-color-text-medium-gray">
+            <CarouselItem
+              key={id}
+              alt={alt}
+              className="basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 border-1 border-color-text-medium-gray"
+            >
               <ProductPreviewItem
                 key={id}
                 productId={id}

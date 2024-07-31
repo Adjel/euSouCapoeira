@@ -17,9 +17,8 @@ function RatingComponent({ rateList, userRate }) {
     <div className="flex w-fit items-center gap-2">
       <ul className="flex w-fit items-center">
         {[...Array(5)].map((_, i) => (
-          <li>
+          <li key={i}>
             <RiStarSFill
-              key={i}
               className={`text-lg ${
                 (userRate ?? average) > i
                   ? "text-black"
