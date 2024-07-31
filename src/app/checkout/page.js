@@ -59,13 +59,13 @@ export default function page() {
 
   const CartItem = ({ name, availability, price }) => {
     return (
-      <div className="flex justify-between gap-2">
+      <li className="flex justify-between gap-2">
         <div className="flex flex-col">
           <strong>{name}</strong>
           <AvailabilityComponent availability={availability} />
         </div>
         <span>{price} €</span>
-      </div>
+      </li>
     );
   };
 
@@ -81,9 +81,16 @@ export default function page() {
             Editer
           </Link>
         </div>
-        {cart.map(({ name, availability, price }) => (
-          <CartItem name={name} availability={availability} price={price} />
-        ))}
+        <ol className="flex flex-col gap-4">
+          {cart.map(({ name, availability, price }, index) => (
+            <CartItem
+              name={name}
+              availability={availability}
+              price={price}
+              key={index}
+            />
+          ))}
+        </ol>
         <div className="flex justify-between">
           <span>Frais de port</span>
           <span>{shippingFees.toFixed(2)} €</span>

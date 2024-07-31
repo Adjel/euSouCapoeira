@@ -14,21 +14,25 @@ function RatingComponent({ rateList, userRate }) {
   }
 
   return (
-    <span className="flex w-fit items-center gap-2">
-      <span className="flex w-fit items-center">
+    <div className="flex w-fit items-center gap-2">
+      <ul className="flex w-fit items-center">
         {[...Array(5)].map((_, i) => (
-          <RiStarSFill
-            key={i}
-            className={`text-lg ${
-              (userRate ?? average) > i ? "text-black" : "text-color-dark-gray"
-            } md:text-xl lg:text-2xl`}
-          />
+          <li>
+            <RiStarSFill
+              key={i}
+              className={`text-lg ${
+                (userRate ?? average) > i
+                  ? "text-black"
+                  : "text-color-dark-gray"
+              } md:text-xl lg:text-2xl`}
+            />
+          </li>
         ))}
-      </span>
+      </ul>
       {rateList && (
         <span className="text-color-dark-gray">{rateList?.length}</span>
       )}
-    </span>
+    </div>
   );
 }
 

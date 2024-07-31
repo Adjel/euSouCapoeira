@@ -48,7 +48,7 @@ function UserInfoComponent({
       </header>
 
       {!isModifying ? (
-        <>
+        <ul>
           {!isInfo ? (
             user?.addresses?.map(
               ({
@@ -62,11 +62,11 @@ function UserInfoComponent({
                 city,
                 country,
               }) => (
-                <ul
+                <li
                   key={date.toLocaleDateString()}
                   className="flex flex-col gap-4"
                 >
-                  <li className="flex w-1/2 gap-16 items-top">
+                  <div className="flex w-1/2 gap-16 items-top">
                     <h3 className="text-2xl font-bold">
                       Adresse de facturation
                     </h3>
@@ -90,8 +90,8 @@ function UserInfoComponent({
                         </div>
                       </>
                     )}
-                  </li>
-                  <li>
+                  </div>
+                  <div>
                     <>
                       <span className={""}>{entreprise}</span>
                       <span>
@@ -103,8 +103,8 @@ function UserInfoComponent({
                       </span>
                       <span>{country}</span>
                     </>
-                  </li>
-                </ul>
+                  </div>
+                </li>
               )
             )
           ) : (
@@ -128,7 +128,7 @@ function UserInfoComponent({
               </div>
             </section>
           )}
-        </>
+        </ul>
       ) : (
         <>
           {!isInfo ? (

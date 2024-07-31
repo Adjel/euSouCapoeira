@@ -37,9 +37,9 @@ const Page = ({ params }) => {
           </h2>
         </header>
         <div className="basicPadding flex-col mt-10 mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {category?.subCategories.map(({ name, image, alt }, index) => (
-              <div key={index} className="flex">
+              <li key={index} className="flex">
                 <CategoryItem
                   preLink={`${params.categories}`}
                   title={name}
@@ -48,9 +48,9 @@ const Page = ({ params }) => {
                   isVertical={true}
                 />
                 <div className="h-0.1 bg-color-divider" />
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
     );

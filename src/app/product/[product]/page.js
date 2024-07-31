@@ -63,7 +63,7 @@ export default function page({ params }) {
             classN="mx-auto w-48 md:w-80 h-auto"
           />
 
-          <div
+          <ul
             className={`flex flex-wrap gap-4 px-2 overflow-hidden ${
               !isImageBarExpanded
                 ? "max-h-24 md:max-h-32"
@@ -85,26 +85,25 @@ export default function page({ params }) {
                 </div>
               </button>
             )}
+
             {product?.images.map(({ image, alt }, index) => (
-              <ul
+              <il
                 key={index}
                 className={`${
                   index === imageIndex &&
                   "px-5 py-4 border-t-2 border-color-gold bg-color-hover-cancel-button rounded"
                 } `}
               >
-                <il>
-                  <Image
-                    className="mx-auto w-16 md:w-24 h-auto cursor-pointer"
-                    key={index}
-                    src={image}
-                    alt={alt}
-                    onClick={() => setImageIndex(index)}
-                  />
-                </il>
-              </ul>
+                <Image
+                  className="mx-auto w-16 md:w-24 h-auto cursor-pointer"
+                  key={index}
+                  src={image}
+                  alt={alt}
+                  onClick={() => setImageIndex(index)}
+                />
+              </il>
             ))}
-          </div>
+          </ul>
         </section>
         <section>
           {product?.variants.length > 0 ? (
