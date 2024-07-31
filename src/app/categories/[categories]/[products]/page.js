@@ -108,7 +108,7 @@ export default function Page({ params }) {
           </div>
         )}
       </header>
-      <div
+      <ol
         className={`${
           !isGrid ? "flex flex-col" : "md:grid-cols-4 min-w-80 grid grid-cols-2"
         } gap-4 p-7`}
@@ -127,7 +127,7 @@ export default function Page({ params }) {
             } = product;
 
             return (
-              <div className={`${isGrid && "flex flex-col gap-4"}`} key={id}>
+              <li className={`${isGrid && "flex flex-col gap-4"}`} key={id}>
                 <div className="xs:flex-row relative flex flex-col min-w-fit gap-4 p-7 bg-background-medium-gray rounded">
                   <Link href={`/product/${id}`}>
                     <Image
@@ -183,7 +183,7 @@ export default function Page({ params }) {
                     <AddToWishListButton />
                   </div>
                 </div>
-              </div>
+              </li>
             );
           })
         ) : (
@@ -194,7 +194,7 @@ export default function Page({ params }) {
             </Button>
           </h2>
         )}
-      </div>
+      </ol>
     </section>
   );
 }

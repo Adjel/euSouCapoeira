@@ -4,11 +4,10 @@ import { FaCheck } from "react-icons/fa";
 export default function ReturnProdutStepsProgressComponent({ steps }) {
   console.log(steps);
   return (
-    <div className="flex w-fit md:gap-2 mx-auto items-center">
+    <ol className="flex w-fit md:gap-2 mx-auto items-center">
       {steps.map(({ step, state }) => (
-        <>
+        <li key={step}>
           <span
-            key={step}
             className={`flex flex-col md:flex-row gap-2 justify-center items-center ${
               state === "current"
                 ? "text-black border-black"
@@ -23,8 +22,8 @@ export default function ReturnProdutStepsProgressComponent({ steps }) {
             <span className="uppercase text-sm">{step}</span>
           </span>
           <span className="last:hidden w-24 h-2 border-b-2 mb-8 md:mb-2" />
-        </>
+        </li>
       ))}
-    </div>
+    </ol>
   );
 }
