@@ -48,12 +48,11 @@ function UserInfoComponent({
       </header>
 
       {!isModifying ? (
-        <ul>
+        <ul className="flex flex-col gap-8">
           {!isInfo ? (
             user?.addresses?.map(
               ({
                 date,
-                entreprise,
                 isCurrent,
                 firstName,
                 lastName,
@@ -64,7 +63,7 @@ function UserInfoComponent({
               }) => (
                 <li
                   key={date.toLocaleDateString()}
-                  className="flex flex-col gap-4"
+                  className="flex flex-col gap-2"
                 >
                   <div className="flex w-1/2 gap-16 items-top">
                     <h3 className="text-2xl font-bold">
@@ -91,18 +90,16 @@ function UserInfoComponent({
                       </>
                     )}
                   </div>
-                  <div>
-                    <>
-                      <span className={""}>{entreprise}</span>
-                      <span>
-                        {firstName} {lastName}
-                      </span>
-                      <span>{street}</span>
-                      <span>
-                        {zipCode} {city}
-                      </span>
-                      <span>{country}</span>
-                    </>
+                  <div className="flex flex-col">
+                    <span className={""}>{user?.business}</span>
+                    <span>
+                      {firstName} {lastName}
+                    </span>
+                    <span>{street}</span>
+                    <span>
+                      {zipCode} {city}
+                    </span>
+                    <span>{country}</span>
                   </div>
                 </li>
               )
@@ -118,13 +115,11 @@ function UserInfoComponent({
                   <IconButton className="ml-auto size-8 hover:text-color-gold" />
                 </div>
               </div>
-              <div>
-                <>
-                  <span className={""}>{user?.entreprise}</span>
-                  <span>{user?.firstName}</span>
-                  <span>{user?.lastName}</span>
-                  <span>{user?.email}</span>
-                </>
+              <div className="flex flex-col gap-1">
+                <span className={""}>{user?.business}</span>
+                <span>{user?.firstName}</span>
+                <span>{user?.lastName}</span>
+                <span>{user?.email}</span>
               </div>
             </section>
           )}
