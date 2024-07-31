@@ -59,7 +59,7 @@ export default function page({ params }) {
           </header>
           <ZoomImage
             src={product?.images[imageIndex ?? 0].image}
-            alt={product?.alt}
+            alt={product?.images[imageIndex ?? 0].alt}
             classN="mx-auto w-48 md:w-80 h-auto"
           />
 
