@@ -2,7 +2,6 @@ import React from "react";
 import { FaCheck } from "react-icons/fa";
 
 export default function ReturnProdutStepsProgressComponent({ steps }) {
-  console.log(steps);
   return (
     <ol className="flex w-fit md:gap-2 mx-auto items-center">
       {steps.map(({ step, state }) => (
