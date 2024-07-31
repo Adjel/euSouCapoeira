@@ -132,7 +132,7 @@ export default function Page({ params }) {
                   <Link href={`/product/${id}`}>
                     <Image
                       src={images[0].image}
-                      alt={alt}
+                      alt={images[0].alt}
                       className={`${!isGrid && "max-w-24 max-h-24"}`}
                     />
                     {isGrid && (

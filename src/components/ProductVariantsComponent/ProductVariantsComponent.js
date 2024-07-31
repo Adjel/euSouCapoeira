@@ -13,7 +13,7 @@ function ProductVariantsComponent({ product }) {
       </span>
       <ol className="flex flex-wrap justify-start">
         {sortedVariants.map(({ alt, image, id }, index) => (
-          <il key={id}>
+          <li key={id}>
             <Link
               href={`/product/${id}`}
               className="relative hover:text-color-gold"
@@ -29,7 +29,7 @@ function ProductVariantsComponent({ product }) {
               />
               {product.id === id && <CheckedIcon />}
             </Link>
-          </il>
+          </li>
         ))}
       </ol>
     </div>
