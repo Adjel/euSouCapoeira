@@ -14,13 +14,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useSignIn } from "@/stores/useUserStore";
-
 import PasswordInput from "@/components/PasswordInput";
 import { useRouter } from "next/navigation";
+import { emailRegex, passwordRegex } from "@/lib/utils";
 
 const formSchema = z.object({
-  /*
-  TODO:
   email: z
     .string()
     .min(1, "Ce champ est requis")
@@ -32,7 +30,6 @@ const formSchema = z.object({
       passwordRegex,
       "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
     ),
-    */
 });
 
 function SignInForm() {
@@ -51,7 +48,7 @@ function SignInForm() {
 
   function onSubmit(values) {
     // TODO SIGIN AND NOT SIGNUP
-    //signUp(values.email, values.password);
+    signIn(values.email, values.password);
   }
 
   return (

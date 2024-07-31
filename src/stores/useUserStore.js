@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 import createAccount, { mockUser } from "@/providers/logInProvider";
 import { toast } from "@/components/ui/use-toast";
 
-// to prevent access storage from server side
+// to prevent access storage from server
 const isClient = typeof window !== "undefined";
 
 const useUserStore = create(
