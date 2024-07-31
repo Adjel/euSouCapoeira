@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useSignUp, useSignUpMock } from "@/stores/useUserStore";
+import { useSignIn } from "@/stores/useUserStore";
 
 import PasswordInput from "@/components/PasswordInput";
 import { useRouter } from "next/navigation";
@@ -35,9 +35,8 @@ const formSchema = z.object({
     */
 });
 
-function SignInForm({ isRedirecting = true }) {
-  const { signUp } = useSignUp();
-  const { signUpMock } = useSignUpMock();
+function SignInForm() {
+  const { signIn } = useSignIn();
 
   const router = useRouter();
 
@@ -51,8 +50,8 @@ function SignInForm({ isRedirecting = true }) {
   });
 
   function onSubmit(values) {
+    // TODO SIGIN AND NOT SIGNUP
     //signUp(values.email, values.password);
-    signUpMock();
   }
 
   return (

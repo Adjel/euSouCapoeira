@@ -11,12 +11,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useUserStore } from "@/stores/useUserStore";
+import { useSignUp } from "@/stores/useUserStore";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { emailRegex } from "@/lib/utils";
+import { emailRegex, passwordRegex } from "@/lib/utils";
 import Link from "next/link";
 import "@/styles/globals.css";
+import PasswordInput from "@/components/PasswordInput";
 
 const errorMessage = "Merci de saisir votre";
 
@@ -35,10 +36,17 @@ const formSchema = z.object({
     .string()
     .min(1, "Ce champ est requis")
     .regex(emailRegex, "l'adresse email fournie n'a pas un format valide"),
+  password: z
+    .string()
+    .min(1, "Ce champ est requis")
+    .regex(
+      passwordRegex,
+      "Le mot de passe doit contenir au moins 8 caractères, une minuscule, une majuscule, un chiffre et un caractère spécial"
+    ),
 });
 
 export default function signup() {
-  const { signUp } = useUserStore();
+  const { signUp } = useSignUp();
 
   const router = useRouter();
 
@@ -53,6 +61,7 @@ export default function signup() {
       city: "",
       country: "France",
       email: "",
+      password: "",
     },
   });
 
@@ -76,6 +85,7 @@ export default function signup() {
                   <FormControl>
                     <div className="relative">
                       <Input
+                        type="text"
                         placeholder="Société/institution/Groupe/"
                         {...field}
                       />
@@ -95,6 +105,7 @@ export default function signup() {
                 <FormItem>
                   <FormControl>
                     <Input
+                      type="text"
                       placeholder="Prénom"
                       {...field}
                       isError={!!form.formState.errors.firstName}
@@ -112,6 +123,7 @@ export default function signup() {
                 <FormItem>
                   <FormControl>
                     <Input
+                      type="text"
                       placeholder="Nom"
                       {...field}
                       isError={!!form.formState.errors.lastName}
@@ -128,9 +140,25 @@ export default function signup() {
                 <FormItem>
                   <FormControl>
                     <Input
+                      type="email"
                       placeholder="monadresse@email.com"
                       {...field}
                       isError={!!form.formState.errors.email}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <PasswordInput
+                      {...field}
+                      isError={!!form.formState.errors.password}
                     />
                   </FormControl>
                   <FormMessage />
@@ -144,6 +172,7 @@ export default function signup() {
                 <FormItem>
                   <FormControl>
                     <Input
+                      type="text"
                       placeholder="Rue et numéro de maison"
                       {...field}
                       isError={!!form.formState.errors.street}
@@ -160,6 +189,7 @@ export default function signup() {
                 <FormItem>
                   <FormControl>
                     <Input
+                      type="number"
                       placeholder="Code postal"
                       {...field}
                       isError={!!form.formState.errors.zipCode}
@@ -176,6 +206,7 @@ export default function signup() {
                 <FormItem>
                   <FormControl>
                     <Input
+                      type="text"
                       placeholder="Ville"
                       {...field}
                       isError={!!form.formState.errors.city}
@@ -190,7 +221,7 @@ export default function signup() {
               name="country"
               render={({ field }) => (
                 <FormItem>
-                  <Input placeholder="France" {...field} />
+                  <Input type="text" placeholder="France" {...field} />
                   <FormMessage />
                 </FormItem>
               )}

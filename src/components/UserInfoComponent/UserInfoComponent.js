@@ -53,6 +53,7 @@ function UserInfoComponent({
             user?.addresses?.map(
               ({
                 date,
+                business,
                 isCurrent,
                 firstName,
                 lastName,
@@ -91,7 +92,7 @@ function UserInfoComponent({
                     )}
                   </div>
                   <div className="flex flex-col">
-                    <span className={""}>{user?.business}</span>
+                    <span>{business}</span>
                     <span>
                       {firstName} {lastName}
                     </span>
@@ -116,7 +117,6 @@ function UserInfoComponent({
                 </div>
               </div>
               <div className="flex flex-col gap-1">
-                <span className={""}>{user?.business}</span>
                 <span>{user?.firstName}</span>
                 <span>{user?.lastName}</span>
                 <span>{user?.email}</span>

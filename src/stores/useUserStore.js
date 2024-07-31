@@ -4,22 +4,37 @@ import { toast } from "@/components/ui/use-toast";
 
 const useUserStore = create((set) => ({
   user: null,
-  signIn: (updatedUser) => {
-    // TODO CHANGE IT
-    set((state) => ({
-      user: { ...state.user, ...updatedUser },
-    }));
-    //TODO: Return success from API
-    return true;
-  },
-  signUp: (values) => {
-    const { business, city, email, firstName, lastName, addresses } = values;
+  createUser: (values) => {
+    console.log(values);
+    const {
+      business,
+      email,
+      password,
+      firstName,
+      lastName,
+      city,
+      street,
+      zipCode,
+      country,
+    } = values;
     const user = {
-      business: business,
       firstName: firstName,
       lastName: lastName,
       email: email,
-      addresses: addresses,
+      password: password,
+      addresses: [
+        {
+          firstName,
+          lastName,
+          date: new Date(),
+          isCurrent: true,
+          business: business,
+          street,
+          city,
+          zipCode,
+          country,
+        },
+      ],
     };
     set({ user });
     // TODO: get response from API
@@ -87,13 +102,13 @@ const useUserStore = create((set) => ({
     }),
 }));
 
-const useSignUp = create((set) => ({
-  signUp: async (email, password) => {
+const useSignIn = create((set) => ({
+  signIn: async (email, password) => {
     try {
-      const user = await createAccount({ email, password });
-      const { signUp } = useUserStore.getState();
+      const user = await mockUserToken({ email, password });
+      const { updateUser } = useUserStore.getState();
       const { setIsOpen } = useLoginModalStore.getState();
-      signUp(user);
+      updateUser(user);
       // Modal have to autoclose when user is connected
       setIsOpen(false);
       // Toast
@@ -107,12 +122,11 @@ const useSignUp = create((set) => ({
   },
 }));
 
-const useSignUpMock = create((set) => ({
-  signUpMock: async () => {
-    const user = await mockUser();
-    const { signUp } = useUserStore.getState();
+const useSignUp = create(() => ({
+  signUp: async (user) => {
+    const { createUser } = useUserStore.getState();
     const { setIsOpen } = useLoginModalStore.getState();
-    signUp(user);
+    createUser(user);
     // Modal have to autoclose when user is connected
     setIsOpen(false);
     // Toast
@@ -130,4 +144,4 @@ const useLoginModalStore = create((set) => ({
   close: () => set({ isOpen: false }),
 }));
 
-export { useUserStore, useLoginModalStore, useSignUp, useSignUpMock };
+export { useUserStore, useLoginModalStore, useSignIn, useSignUp };

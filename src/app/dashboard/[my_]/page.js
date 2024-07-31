@@ -17,6 +17,8 @@ export default function dashboard({ params }) {
   const my_ = params.my_;
   const router = useRouter();
 
+  console.log(user);
+
   let pageContent = null;
   switch (my_) {
     case "mes_informations":
