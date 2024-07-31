@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReturnProdutStepsProgressComponent from "../ReturnProdutStepsProgressComponent";
 import ArrowButton from "../ArrowButton";
 import { useCommandsStore } from "@/stores/useCommandsStore";
@@ -17,10 +17,6 @@ function ReturnProductComponent() {
     { step: "détails", state: "todo" },
     { step: "terminé", state: "todo" },
   ]);
-
-  useEffect(() => {
-    console.log(steps);
-  }, [steps]);
 
   const findCommandProduct = (commandId, productId) => {
     const command = commands.find((cmd) => cmd.commandId === commandId);
@@ -118,7 +114,6 @@ function ReturnProductComponent() {
     const incompleteDetails = returnProductList.filter((item) => !item.details);
     if (incompleteDetails.length > 0) {
       setInputError("Ce champ est requis");
-      incompleteDetails.forEach((item) => console.log(item));
       return;
     }
     onToggleStep(true);
