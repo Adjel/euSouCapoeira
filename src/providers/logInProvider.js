@@ -54,6 +54,7 @@ export async function mockUser() {
     email: "P-toupie@toto.com",
     addresses: [
       {
+        // TODO: business have to be here
         date: yesterday,
         isCurrent: false,
         firstName: "Patrick",

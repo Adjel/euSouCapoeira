@@ -13,25 +13,13 @@ const useUserStore = create((set) => ({
     return true;
   },
   signUp: (values) => {
-    const { business, city, email, firstName, lastName, street, zipCode } =
-      values;
+    const { business, city, email, firstName, lastName, addresses } = values;
     const user = {
       business: business,
       firstName: firstName,
       lastName: lastName,
       email: email,
-      addresses: [
-        {
-          date: new Date(),
-          isCurrent: true,
-          firstName: firstName,
-          lastName: lastName,
-          street: street,
-          zipCode: zipCode,
-          city: city,
-          country: "France",
-        },
-      ],
+      addresses: addresses,
     };
     set({ user });
     // TODO: get response from API
