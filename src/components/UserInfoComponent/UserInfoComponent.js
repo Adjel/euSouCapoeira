@@ -18,8 +18,6 @@ function UserInfoComponent({
   const { user, setCurrentAddress, deleteAddress } = useUserStore();
   const [isModifying, setIsModifying] = useState(false);
 
-  console.log(user);
-
   // Component is Adresses component by default, but can be something else like userInfo component
   if (isInfo === undefined) throw new Error("isInfo is undefined");
 
