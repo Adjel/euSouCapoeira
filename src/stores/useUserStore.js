@@ -1,7 +1,12 @@
 import { create } from "zustand";
-import { mockCreateAccount, mockUserToken } from "@/providers/logInProvider";
+import {
+  mockAddAdress,
+  mockCreateAccount,
+  mockUpdateUser,
+  mockUserToken,
+} from "@/providers/logInProvider";
 
-const useUserStore = create((set) => ({
+const useUserStore = create((set, get) => ({
   user: null,
   createUser: async (values) => {
     const {
@@ -42,6 +47,15 @@ const useUserStore = create((set) => ({
       throw error;
     }
   },
+  logUser: async (email, password) => {
+    try {
+      const user = await mockUserToken({ email, password });
+      set({ user });
+      return "success";
+    } catch (error) {
+      throw error;
+    }
+  },
   updateUser: (updatedUser) => {
     set((state) => ({
       user: { ...state.user, ...updatedUser },
@@ -68,11 +82,10 @@ const useSignUp = create((set) => ({
 
 const useSignIn = create((set) => ({
   signIn: async (email, password) => {
-    const { updateUser } = useUserStore.getState();
+    const { logUser } = useUserStore.getState();
     const { setIsOpen } = useLoginModalStore.getState();
     try {
-      const user = await mockUserToken({ email, password });
-      updateUser(user);
+      logUser(email, password);
       // Modal have to autoclose when user is connected
       setIsOpen(false);
       return "success";
@@ -83,33 +96,33 @@ const useSignIn = create((set) => ({
 }));
 
 const useSignOut = create((set) => ({
-  signOut: async (user) => {
+  signOut: async () => {
     const { clearUser } = useUserStore.getState();
     try {
-      clearUser(user);
+      clearUser();
     } catch (error) {
       throw error;
     }
   },
 }));
 
-const useAdress = create((set) => ({
+// je récu^ère mon adresse, je la mets en forme
+// je l'envoie à l'api
+// l'api me retourne le nouvel user
+// je set mon nouvel utilisateur
+const useUserAdress = create((set) => ({
   addAdress: async (address) => {
-    const { updateUser } = useUserStore.getState();
+    const { user, updateUser } = useUserStore.getState();
+    const date = new Date();
+    const newAddress = {
+      date,
+      ...address,
+      // The site only support France shipment, so we secure the country
+      country: "France",
+    };
     try {
-      const date = new Date();
-      const newAddress = {
-        date,
-        ...address,
-        // The site only support France shipment, so we secure the country
-        country: "France",
-      };
-      updateUser((state) => ({
-        user: {
-          ...state.user,
-          addresses: [...state.user.addresses, newAddress],
-        },
-      }));
+      const udpatedUser = await mockAddAdress(user, newAddress);
+      updateUser(udpatedUser);
       return "success";
     } catch (error) {
       throw error;
@@ -169,5 +182,5 @@ export {
   useSignIn,
   useSignUp,
   useSignOut,
-  useAdress,
+  useUserAdress,
 };

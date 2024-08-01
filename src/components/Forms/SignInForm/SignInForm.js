@@ -17,6 +17,7 @@ import { useSignIn } from "@/stores/useUserStore";
 import PasswordInput from "@/components/PasswordInput";
 import { useRouter } from "next/navigation";
 import { emailRegex, passwordRegex } from "@/lib/utils";
+import { toast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   email: z

@@ -12,7 +12,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useUserStore } from "@/stores/useUserStore";
+import { useUserAdress } from "@/stores/useUserStore";
+import { toast } from "@/components/ui/use-toast";
 import styles from "../forms.module.css";
 
 const errorMessage = "Merci de saisir votre";
@@ -26,7 +27,7 @@ const formSchema = z.object({
 });
 
 function UserAdressForm({ cancel }) {
-  const { addAdress } = useUserStore();
+  const { addAdress } = useUserAdress();
 
   // 1. Define your form.
   const form = useForm({
@@ -41,8 +42,17 @@ function UserAdressForm({ cancel }) {
     },
   });
 
+  const handleAdress = async (values) => {
+    try {
+      addAdress(values);
+      cancel();
+    } catch (error) {
+      toast({ title: `${error}` });
+    }
+  };
+
   function onSubmit(values) {
-    if (addAdress(values)) cancel();
+    handleAdress(values);
   }
 
   return (
