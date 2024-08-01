@@ -24,7 +24,7 @@ function UserInfoComponent({
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) router.push("/login");
+    if (!user) router.push("/signin");
   }, [user]);
 
   function handleIsModifyingInfo(event) {
@@ -62,10 +62,7 @@ function UserInfoComponent({
                 city,
                 country,
               }) => (
-                <li
-                  key={date.toLocaleDateString()}
-                  className="flex flex-col gap-2"
-                >
+                <li key={date} className="flex flex-col gap-2">
                   <div className="flex w-1/2 gap-16 items-top">
                     <h3 className="text-2xl font-bold">
                       Adresse de facturation

@@ -46,9 +46,16 @@ function SignInForm() {
     },
   });
 
+  const handleSignIn = async (values) => {
+    try {
+      await signIn(values.email, values.password);
+    } catch (error) {
+      toast(error);
+    }
+  };
+
   function onSubmit(values) {
-    // TODO SIGIN AND NOT SIGNUP
-    signIn(values.email, values.password);
+    handleSignIn(values);
   }
 
   return (

@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { emailRegex, passwordRegex } from "@/lib/utils";
 import Link from "next/link";
+import { toast } from "@/components/ui/use-toast";
 import "@/styles/globals.css";
 import PasswordInput from "@/components/PasswordInput";
 
@@ -65,8 +66,22 @@ export default function signup() {
     },
   });
 
+  const handleSignUp = async (user) => {
+    try {
+      await signUp(user);
+      toast({
+        title: `Bonjour ${user.firstName}, votre compte à bien été créé!`,
+      });
+      router.push("/dashboard/mes_informations");
+    } catch (error) {
+      toast({
+        title: `${error.message}`,
+      });
+    }
+  };
+
   function onSubmit(values) {
-    if (signUp(values)) router.push("/dashboard/mes_informations");
+    handleSignUp(values);
   }
 
   return (

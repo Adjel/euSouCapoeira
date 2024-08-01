@@ -36,7 +36,7 @@ const formSchema = z.object({
 
 export default function page() {
   const [logInButton, toggleLogInButton] = useState(false);
-  const { user, signUpMock, clearUser } = useUserStore();
+  const { user, signUp, clearUser } = useUserStore();
   const { cart, totalPrice, shippingFees } = useCartStore();
 
   useEffect(() => {
@@ -104,7 +104,7 @@ export default function page() {
   };
 
   function onSubmit(values) {
-    signUpMock(values);
+    signUp(values);
   }
 
   return (
