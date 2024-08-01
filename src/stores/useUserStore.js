@@ -118,13 +118,23 @@ const useSignIn = create((set) => ({
   signIn: async (email, password) => {
     const { updateUser } = useUserStore.getState();
     const { setIsOpen } = useLoginModalStore.getState();
-
     try {
       const user = await mockUserToken({ email, password });
       updateUser(user);
       // Modal have to autoclose when user is connected
       setIsOpen(false);
       return "success";
+    } catch (error) {
+      throw error;
+    }
+  },
+}));
+
+const useSignOut = create((set) => ({
+  signOut: async (user) => {
+    const { clearUser } = useUserStore.getState();
+    try {
+      clearUser(user);
     } catch (error) {
       throw error;
     }
@@ -138,4 +148,4 @@ const useLoginModalStore = create((set) => ({
   close: () => set({ isOpen: false }),
 }));
 
-export { useUserStore, useLoginModalStore, useSignIn, useSignUp };
+export { useUserStore, useLoginModalStore, useSignIn, useSignUp, useSignOut };
