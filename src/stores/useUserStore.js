@@ -49,60 +49,12 @@ const useUserStore = create((set) => ({
     return "success";
   },
   clearUser: () => set({ user: null }),
-  addAdress(address) {
-    const date = new Date();
-    const newAddress = {
-      date,
-      ...address,
-      // The site only support France shipment, so we secure the country
-      country: "France",
-    };
-    set((state) => ({
-      user: {
-        ...state.user,
-        addresses: [...state.user.addresses, newAddress],
-      },
-    }));
-    toast({
-      title: "Votre adresse à bien été enregistrée",
-    });
-    //TODO: Return success from API
-    return true;
-  },
-
-  setCurrentAddress: (date) =>
-    set((state) => {
-      const updatedAddresses = state.user.addresses.map((address) => ({
-        ...address,
-        isCurrent: address.date === date,
-      }));
-      return {
-        user: {
-          ...state.user,
-          addresses: updatedAddresses,
-        },
-      };
-    }),
-
-  deleteAddress: (date) =>
-    set((state) => {
-      const addresses = state.user.addresses.filter(
-        (address) => address.date !== date
-      );
-      return {
-        user: {
-          ...state.user,
-          addresses,
-        },
-      };
-    }),
 }));
 
 const useSignUp = create((set) => ({
   signUp: async (user) => {
     const { createUser } = useUserStore.getState();
     const { setIsOpen } = useLoginModalStore.getState();
-
     try {
       const result = await createUser(user);
       // Modal have to autoclose when user is connected
@@ -141,6 +93,69 @@ const useSignOut = create((set) => ({
   },
 }));
 
+const useAdress = create((set) => ({
+  addAdress: async (address) => {
+    const { updateUser } = useUserStore.getState();
+    try {
+      const date = new Date();
+      const newAddress = {
+        date,
+        ...address,
+        // The site only support France shipment, so we secure the country
+        country: "France",
+      };
+      updateUser((state) => ({
+        user: {
+          ...state.user,
+          addresses: [...state.user.addresses, newAddress],
+        },
+      }));
+      return "success";
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  setCurrentAddress: async (date) => {
+    const { updateUser } = useUserStore.getState();
+    try {
+      updateUser((state) => {
+        const updatedAddresses = state.user.addresses.map((address) => ({
+          ...address,
+          isCurrent: address.date === date,
+        }));
+        return {
+          user: {
+            ...state.user,
+            addresses: updatedAddresses,
+          },
+        };
+      });
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  deleteAddress: async (date) => {
+    const { updateUser } = useUserStore.getState();
+    try {
+      updateUser((state) => {
+        const addresses = state.user.addresses.filter(
+          (address) => address.date !== date
+        );
+        return {
+          user: {
+            ...state.user,
+            addresses,
+          },
+        };
+      });
+    } catch (error) {
+      throw error;
+    }
+  },
+}));
+
 const useLoginModalStore = create((set) => ({
   isOpen: false,
   setIsOpen: (isOpen) => set({ isOpen }),
@@ -148,4 +163,11 @@ const useLoginModalStore = create((set) => ({
   close: () => set({ isOpen: false }),
 }));
 
-export { useUserStore, useLoginModalStore, useSignIn, useSignUp, useSignOut };
+export {
+  useUserStore,
+  useLoginModalStore,
+  useSignIn,
+  useSignUp,
+  useSignOut,
+  useAdress,
+};
