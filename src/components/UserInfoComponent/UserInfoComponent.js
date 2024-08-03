@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useUserStore } from "@/stores/useUserStore";
+import { useUserAdress, useUserStore } from "@/stores/useUserStore";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { ImCheckmark } from "react-icons/im";
 import { FaCheckDouble } from "react-icons/fa";
@@ -15,7 +15,8 @@ function UserInfoComponent({
   subTitle,
   iconButton: IconButton,
 }) {
-  const { user, setCurrentAddress, deleteAddress } = useUserStore();
+  const { user, deleteAddress } = useUserStore();
+  const { setCurrentAddress } = useUserAdress();
   const [isModifying, setIsModifying] = useState(false);
 
   // Component is Adresses component by default, but can be something else like userInfo component
@@ -25,6 +26,7 @@ function UserInfoComponent({
 
   useEffect(() => {
     if (!user) router.push("/signin");
+    console.log(user);
   }, [user]);
 
   function handleIsModifyingInfo(event) {

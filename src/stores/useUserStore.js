@@ -2,7 +2,7 @@ import { create } from "zustand";
 import {
   mockAddAdress,
   mockCreateAccount,
-  mockUpdateUser,
+  mockUpdateAdress,
   mockUserToken,
 } from "@/providers/logInProvider";
 
@@ -57,9 +57,11 @@ const useUserStore = create((set, get) => ({
     }
   },
   updateUser: (updatedUser) => {
-    set((state) => ({
-      user: { ...state.user, ...updatedUser },
-    }));
+    set((state) => {
+      const newUser = { ...state.user, ...updatedUser };
+      console.log(newUser);
+      return newUser;
+    });
     return "success";
   },
   clearUser: () => set({ user: null }),
@@ -106,10 +108,6 @@ const useSignOut = create((set) => ({
   },
 }));
 
-// je récu^ère mon adresse, je la mets en forme
-// je l'envoie à l'api
-// l'api me retourne le nouvel user
-// je set mon nouvel utilisateur
 const useUserAdress = create((set) => ({
   addAdress: async (address) => {
     const { user, updateUser } = useUserStore.getState();
@@ -129,21 +127,12 @@ const useUserAdress = create((set) => ({
     }
   },
 
-  setCurrentAddress: async (date) => {
-    const { updateUser } = useUserStore.getState();
+  setCurrentAddress: async (addressDate) => {
+    const { user, updateUser } = useUserStore.getState();
     try {
-      updateUser((state) => {
-        const updatedAddresses = state.user.addresses.map((address) => ({
-          ...address,
-          isCurrent: address.date === date,
-        }));
-        return {
-          user: {
-            ...state.user,
-            addresses: updatedAddresses,
-          },
-        };
-      });
+      const updateU = await mockUpdateAdress(user, addressDate);
+      updateUser(updateU);
+      return "success";
     } catch (error) {
       throw error;
     }
