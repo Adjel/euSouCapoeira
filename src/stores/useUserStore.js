@@ -57,11 +57,9 @@ const useUserStore = create((set, get) => ({
     }
   },
   updateUser: (updatedUser) => {
-    set((state) => {
-      const newUser = { ...state.user, ...updatedUser };
-      console.log(newUser);
-      return newUser;
-    });
+    set((state) => ({
+      user: { ...state.user, ...updatedUser },
+    }));
     return "success";
   },
   clearUser: () => set({ user: null }),

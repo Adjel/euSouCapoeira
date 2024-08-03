@@ -4,7 +4,6 @@ export const mockUserToken = async ({ email, password }) => {
   const user = users.find(
     (item) => item.password === password && item.email === email
   );
-  console.log(users);
   if (user) return Promise.resolve(user);
   else
     return Promise.reject(new Error("L'email ou le mot de passe est invalide"));
@@ -31,7 +30,9 @@ export const mockUpdateUser = async (currentUser, updatedUser) => {
   const existingUser = await getExistingUser(currentUser);
 
   if (!existingUser)
-    return Promise.reject(new Error("Utilisateur introuvable"));
+    return Promise.reject(
+      new Error("Mise à jour impossible car l'utilisateur est introuvable")
+    );
 
   const newUser = {
     ...existingUser,
@@ -89,13 +90,14 @@ export const mockAddAdress = async (currentUser, newAddress) => {
     addresses: [...currentUser.addresses, newAddress],
   };
 
-  const users = getMockedApi();
+  const users = await getMockedApi();
 
   const newUsers = users.map((user) =>
     user.email === updatedUser.email ? updatedUser : user
   );
 
   localStorage.setItem("users", JSON.stringify(newUsers));
+  console.log("finish");
   return Promise.resolve(updatedUser);
 };
 
