@@ -1,6 +1,10 @@
 // mock API with local storage
+
+//////////////////// USER ///////////////////////////////////
+
 export const mockUserToken = async ({ email, password }) => {
   const users = await getMockedApi();
+  console.log(users);
   const user = users.find(
     (item) => item.password === password && item.email === email
   );
@@ -11,8 +15,6 @@ export const mockUserToken = async ({ email, password }) => {
 
 export const mockCreateAccount = async (user) => {
   const users = await getMockedApi();
-  console.log(users);
-
   const existingUser = await getExistingUser(user);
 
   if (existingUser) {
@@ -49,17 +51,20 @@ export const mockUpdateUser = async (currentUser, updatedUser) => {
     }
   });
 
-  console.log(newUsers);
   localStorage.setItem("users", JSON.stringify(newUsers));
   return Promise.resolve(newUser);
 };
+
+/////////////////////// ADDRESS ///////////////////////////////
 
 export const mockAddAdress = async (currentUser, newAddress) => {
   const existingUser = await getExistingUser(currentUser);
 
   if (!existingUser)
     return Promise.reject(
-      new Error("Impossible d'ajouter l'adresse : utilisateur inexistant")
+      new Error(
+        "Impossible d'ajouter l'adresse car l'utilisateur est introuvable"
+      )
     );
 
   /*
@@ -96,18 +101,82 @@ export const mockAddAdress = async (currentUser, newAddress) => {
     user.email === updatedUser.email ? updatedUser : user
   );
 
+  console.log(newUsers);
   localStorage.setItem("users", JSON.stringify(newUsers));
-  console.log("finish");
+  return Promise.resolve(updatedUser);
+};
+
+export const mockDeleteAddress = async (currentUser, adressDate) => {
+  const existingUser = await getExistingUser(currentUser);
+  const users = await getMockedApi();
+
+  if (!existingUser)
+    return Promise.reject(
+      new Error(
+        "Impossible de supprimer l'adresse car l'utilisateur est introuvable"
+      )
+    );
+
+  if (
+    !existingUser.addresses.find((a) => {
+      console.log(a.date);
+      console.log(adressDate);
+      console.log(new Date(a.date));
+      console.log(new Date(adressDate));
+      return `${new Date(a.date)}` === `${new Date(adressDate)}`;
+    })
+  )
+    return Promise.reject(
+      new Error("Suppression de l'adresse impossible car elle est introuvable")
+    );
+
+  // We have found the adress to delete, now we have to verify if the address is not current or the last one
+  if (!existingUser.addresses > 1)
+    return Promise.reject(
+      new Error(
+        "Suppression impossible, vous devez avoir au moins une adresse liée à ce compte"
+      )
+    );
+
+  if (
+    existingUser.addresses.find(
+      (address) =>
+        `${new Date(address.date)}` === `${new Date(adressDate)}` &&
+        address.isCurrent
+    )
+  )
+    return Promise.reject(
+      new Error(
+        "Suppression de l'adresse principale impossible, veuillez changer ou créer l'adresse principale"
+      )
+    );
+
+  const updatedUser = {
+    ...currentUser,
+    addresses: existingUser.addresses.filter(
+      (address) => `${new Date(address.date)}` !== `${new Date(adressDate)}`
+    ),
+  };
+
+  const newUsers = users.map((user) => {
+    if (user.id === updatedUser.id) {
+      return updatedUser;
+    } else {
+      return user;
+    }
+  });
+
+  console.log(newUsers);
+  localStorage.setItem("users", JSON.stringify(newUsers));
   return Promise.resolve(updatedUser);
 };
 
 export const mockUpdateAdress = async (currentUser, date) => {
   const existingUser = await getExistingUser(currentUser);
+  const users = await getMockedApi();
 
   if (!existingUser)
     return Promise.reject(new Error("Impossible d'ajouter l'adresse"));
-
-  console.log(existingUser.addresses);
 
   const addresses = existingUser.addresses.map((a) => {
     if (a.date === date) {
@@ -116,7 +185,10 @@ export const mockUpdateAdress = async (currentUser, date) => {
         isCurrent: true,
       };
     } else {
-      return a;
+      return {
+        ...a,
+        isCurrent: false,
+      };
     }
   });
 
@@ -125,10 +197,18 @@ export const mockUpdateAdress = async (currentUser, date) => {
     addresses: addresses,
   };
 
+  const newUsers = users.map((user) =>
+    user.id === updatedUser.id ? updatedUser : user
+  );
+
+  localStorage.setItem("users", JSON.stringify(newUsers));
   return Promise.resolve(updatedUser);
 };
 
+////////////////////// UTILS //////////////////////////
+
 const getMockedApi = async () => {
+  //localStorage.clear()
   try {
     let users = JSON.parse(localStorage.getItem("users"));
     if (!users) {
@@ -144,4 +224,8 @@ const getMockedApi = async () => {
 const getExistingUser = async (user) => {
   const users = await getMockedApi();
   return users.find((u) => u.email === user.email);
+};
+
+const compareDates = (date1, date2) => {
+  return new Date(date1) === new Date(date2);
 };

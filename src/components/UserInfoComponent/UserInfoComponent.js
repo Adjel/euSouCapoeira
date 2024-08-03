@@ -7,6 +7,7 @@ import { FaCheckDouble } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import UserAdressForm from "../Forms/UserAdressForm";
 import UserInfoForm from "../Forms/UserInfoForm";
+import { toast } from "../ui/use-toast";
 import styles from "./userInfoComponent.module.css";
 
 function UserInfoComponent({
@@ -15,8 +16,8 @@ function UserInfoComponent({
   subTitle,
   iconButton: IconButton,
 }) {
-  const { user, deleteAddress } = useUserStore();
-  const { setCurrentAddress } = useUserAdress();
+  const { user } = useUserStore();
+  const { setCurrentAddress, deleteAddress } = useUserAdress();
   const [isModifying, setIsModifying] = useState(false);
 
   // Component is Adresses component by default, but can be something else like userInfo component
@@ -28,6 +29,15 @@ function UserInfoComponent({
     if (!user) router.push("/signin");
     console.log(user);
   }, [user]);
+
+  const handleDeleteAdress = async (date) => {
+    try {
+      await deleteAddress(date);
+      toast({ title: `L'adresse a bien été supprimée` });
+    } catch (e) {
+      toast({ title: `Oops, une erreur est survenue: ${e}` });
+    }
+  };
 
   function handleIsModifyingInfo(event) {
     if (event) event.preventDefault();
@@ -77,6 +87,7 @@ function UserInfoComponent({
                       <>
                         <div
                           className={styles.button}
+                          //onClick={() => handleDeleteAdress(date)}
                           onClick={() => deleteAddress(date)}
                         >
                           <RiDeleteBinLine className="ml-auto size-7" />

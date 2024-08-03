@@ -44,10 +44,11 @@ function UserAdressForm({ cancel }) {
 
   const handleAdress = async (values) => {
     try {
-      addAdress(values);
+      await addAdress(values);
       cancel();
-    } catch (error) {
-      toast({ title: `${error}` });
+      toast({ title: "L'adresse à bien été enregistrée" });
+    } catch (e) {
+      toast({ title: `${e}` });
     }
   };
 

@@ -4,6 +4,7 @@ import {
   mockCreateAccount,
   mockUpdateAdress,
   mockUserToken,
+  mockDeleteAddress,
 } from "@/providers/logInProvider";
 
 const useUserStore = create((set, get) => ({
@@ -35,7 +36,8 @@ const useUserStore = create((set, get) => ({
           street,
           city,
           zipCode,
-          country,
+          // At first creation we set default adress to france because we only sell in France
+          country: "France",
         },
       ],
     };
@@ -60,7 +62,6 @@ const useUserStore = create((set, get) => ({
     set((state) => ({
       user: { ...state.user, ...updatedUser },
     }));
-    return "success";
   },
   clearUser: () => set({ user: null }),
 }));
@@ -128,8 +129,8 @@ const useUserAdress = create((set) => ({
   setCurrentAddress: async (addressDate) => {
     const { user, updateUser } = useUserStore.getState();
     try {
-      const updateU = await mockUpdateAdress(user, addressDate);
-      updateUser(updateU);
+      const updatedUser = await mockUpdateAdress(user, addressDate);
+      updateUser(updatedUser);
       return "success";
     } catch (error) {
       throw error;
@@ -137,19 +138,12 @@ const useUserAdress = create((set) => ({
   },
 
   deleteAddress: async (date) => {
-    const { updateUser } = useUserStore.getState();
+    const { user, updateUser } = useUserStore.getState();
     try {
-      updateUser((state) => {
-        const addresses = state.user.addresses.filter(
-          (address) => address.date !== date
-        );
-        return {
-          user: {
-            ...state.user,
-            addresses,
-          },
-        };
-      });
+      console.log(date);
+      const updatedUser = await mockDeleteAddress(user, date);
+      updateUser(updatedUser);
+      return "success";
     } catch (error) {
       throw error;
     }
