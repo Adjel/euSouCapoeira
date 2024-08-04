@@ -64,7 +64,6 @@ function LoginModal() {
           )}
         </aside>
       </div>
-      <useUserLogger />
     </section>
   );
 }
