@@ -1,5 +1,5 @@
 "use client";
-import { useUserStore } from "@/stores/useUserStore";
+import { useSignOut, useUserStore } from "@/stores/useUserStore";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,7 +36,8 @@ const formSchema = z.object({
 
 export default function page() {
   const [logInButton, toggleLogInButton] = useState(false);
-  const { user, signUpMock, clearUser } = useUserStore();
+  const { user, signUp } = useUserStore();
+  const { signOut } = useSignOut();
   const { cart, totalPrice, shippingFees } = useCartStore();
 
   useEffect(() => {
@@ -104,7 +105,7 @@ export default function page() {
   };
 
   function onSubmit(values) {
-    signUpMock(values);
+    signUp(values);
   }
 
   return (
@@ -129,7 +130,7 @@ export default function page() {
               </Button>
             </>
           ) : (
-            <Button onClick={clearUser} className="text-black bg-white w-fit">
+            <Button onClick={signOut} className="text-black bg-white w-fit">
               Me déconnecter
             </Button>
           )}
@@ -300,14 +301,14 @@ export default function page() {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col border-2 rounded">
+              <div className="p-4 flex flex-col border-2 rounded">
                 <span>{user.business}</span>
                 <span>{user.firstName}</span>
                 <span>{user.lastName}</span>
                 {user.addresses.map(
                   ({ street, zipCode, city, country, isCurrent }, index) =>
                     isCurrent && (
-                      <div key={index}>
+                      <div className="flex flex-col" key={index}>
                         <span>{street}</span>
                         <span>
                           {zipCode} {city}

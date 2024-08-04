@@ -13,14 +13,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useSignUp, useSignUpMock } from "@/stores/useUserStore";
-
+import { useSignIn } from "@/stores/useUserStore";
 import PasswordInput from "@/components/PasswordInput";
 import { useRouter } from "next/navigation";
+import { emailRegex, passwordRegex } from "@/lib/utils";
+import { toast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
-  /*
-  TODO:
   email: z
     .string()
     .min(1, "Ce champ est requis")
@@ -32,12 +31,10 @@ const formSchema = z.object({
       passwordRegex,
       "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
     ),
-    */
 });
 
-function SignInForm({ isRedirecting = true }) {
-  const { signUp } = useSignUp();
-  const { signUpMock } = useSignUpMock();
+function SignInForm() {
+  const { signIn } = useSignIn();
 
   const router = useRouter();
 
@@ -50,9 +47,16 @@ function SignInForm({ isRedirecting = true }) {
     },
   });
 
+  const handleSignIn = async (values) => {
+    try {
+      await signIn(values.email, values.password);
+    } catch (error) {
+      toast(error);
+    }
+  };
+
   function onSubmit(values) {
-    //signUp(values.email, values.password);
-    signUpMock();
+    handleSignIn(values);
   }
 
   return (

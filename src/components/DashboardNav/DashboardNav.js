@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import { useLoginModalStore, useUserStore } from "@/stores/useUserStore";
+import { useLoginModalStore, useSignOut } from "@/stores/useUserStore";
 
 function DashboardNav({ isModal = true }) {
-  const { clearUser } = useUserStore();
+  const { signOut } = useSignOut();
   const { close } = useLoginModalStore();
 
   const liStyle = "cursor-pointer hover:text-color-gold";
@@ -46,7 +46,7 @@ function DashboardNav({ isModal = true }) {
       <li className={liStyle}>
         <button
           className={`${linkStyle} first-letter:uppercase`}
-          onClick={clearUser}
+          onClick={signOut}
         >
           me déconnecter
         </button>

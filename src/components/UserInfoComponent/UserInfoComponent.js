@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useUserStore } from "@/stores/useUserStore";
+import { useUserAdress, useUserStore } from "@/stores/useUserStore";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { ImCheckmark } from "react-icons/im";
 import { FaCheckDouble } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import UserAdressForm from "../Forms/UserAdressForm";
 import UserInfoForm from "../Forms/UserInfoForm";
+import { toast } from "../ui/use-toast";
 import styles from "./userInfoComponent.module.css";
 
 function UserInfoComponent({
@@ -15,7 +16,8 @@ function UserInfoComponent({
   subTitle,
   iconButton: IconButton,
 }) {
-  const { user, setCurrentAddress, deleteAddress } = useUserStore();
+  const { user } = useUserStore();
+  const { setCurrentAddress, deleteAddress } = useUserAdress();
   const [isModifying, setIsModifying] = useState(false);
 
   // Component is Adresses component by default, but can be something else like userInfo component
@@ -24,8 +26,17 @@ function UserInfoComponent({
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) router.push("/login");
+    if (!user) router.push("/signin");
   }, [user]);
+
+  const handleDeleteAdress = async (date) => {
+    try {
+      await deleteAddress(date);
+      toast({ title: `L'adresse a bien été supprimée` });
+    } catch (e) {
+      toast({ title: `Oops, une erreur est survenue: ${e}` });
+    }
+  };
 
   function handleIsModifyingInfo(event) {
     if (event) event.preventDefault();
@@ -53,6 +64,7 @@ function UserInfoComponent({
             user?.addresses?.map(
               ({
                 date,
+                business,
                 isCurrent,
                 firstName,
                 lastName,
@@ -61,10 +73,7 @@ function UserInfoComponent({
                 city,
                 country,
               }) => (
-                <li
-                  key={date.toLocaleDateString()}
-                  className="flex flex-col gap-2"
-                >
+                <li key={date} className="flex flex-col gap-2">
                   <div className="flex w-1/2 gap-16 items-top">
                     <h3 className="text-2xl font-bold">
                       Adresse de facturation
@@ -77,6 +86,7 @@ function UserInfoComponent({
                       <>
                         <div
                           className={styles.button}
+                          //onClick={() => handleDeleteAdress(date)}
                           onClick={() => deleteAddress(date)}
                         >
                           <RiDeleteBinLine className="ml-auto size-7" />
@@ -91,7 +101,7 @@ function UserInfoComponent({
                     )}
                   </div>
                   <div className="flex flex-col">
-                    <span className={""}>{user?.business}</span>
+                    <span>{business}</span>
                     <span>
                       {firstName} {lastName}
                     </span>
@@ -116,7 +126,6 @@ function UserInfoComponent({
                 </div>
               </div>
               <div className="flex flex-col gap-1">
-                <span className={""}>{user?.business}</span>
                 <span>{user?.firstName}</span>
                 <span>{user?.lastName}</span>
                 <span>{user?.email}</span>

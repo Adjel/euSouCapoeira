@@ -77,7 +77,7 @@ export default function dashboard({ params }) {
               />
             </header>
             {user && (
-              <div>
+              <div className="flex flex-col">
                 <span>
                   {user?.firstName} {user?.lastName}
                 </span>
@@ -92,7 +92,7 @@ export default function dashboard({ params }) {
         <header className="flex justify-between mb-8">
           <h2 className="w-fit text-3xl font-bold m-0 p-0">Espace client</h2>
         </header>
-        <div className="mb-8">
+        <div className="flex flex-col mb-8">
           <span>
             {user?.firstName} {user?.lastName}
           </span>

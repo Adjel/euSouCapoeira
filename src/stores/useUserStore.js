@@ -1,44 +1,115 @@
 import { create } from "zustand";
-import createAccount, { mockUser } from "@/providers/logInProvider";
-import { toast } from "@/components/ui/use-toast";
+import {
+  mockAddAdress,
+  mockCreateAccount,
+  mockUpdateAdress,
+  mockUserToken,
+  mockDeleteAddress,
+} from "@/providers/logInProvider";
 
-const useUserStore = create((set) => ({
+const useUserStore = create((set, get) => ({
   user: null,
-  signIn: (updatedUser) => {
-    // TODO CHANGE IT
-    set((state) => ({
-      user: { ...state.user, ...updatedUser },
-    }));
-    //TODO: Return success from API
-    return true;
-  },
-  signUp: (values) => {
-    const { business, city, email, firstName, lastName, addresses } = values;
+  createUser: async (values) => {
+    const {
+      business,
+      email,
+      password,
+      firstName,
+      lastName,
+      city,
+      street,
+      zipCode,
+      country,
+    } = values;
     const user = {
-      business: business,
       firstName: firstName,
       lastName: lastName,
       email: email,
-      addresses: addresses,
+      password: password,
+      addresses: [
+        {
+          firstName,
+          lastName,
+          date: new Date(),
+          isCurrent: true,
+          business: business,
+          street,
+          city,
+          zipCode,
+          // At first creation we set default adress to france because we only sell in France
+          country: "France",
+        },
+      ],
     };
-    set({ user });
-    // TODO: get response from API
-    if ("mock" === "mock")
-      toast({
-        title: "Votre compte à bien été crée",
-        description: "Vous êtes connecté",
-      });
-    return true;
+    try {
+      await mockCreateAccount(user);
+      set({ user });
+      return "sucess";
+    } catch (error) {
+      throw error;
+    }
+  },
+  logUser: async (email, password) => {
+    try {
+      const user = await mockUserToken({ email, password });
+      set({ user });
+      return "success";
+    } catch (error) {
+      throw error;
+    }
   },
   updateUser: (updatedUser) => {
     set((state) => ({
       user: { ...state.user, ...updatedUser },
     }));
-    //TODO: Return success from API
-    return true;
   },
   clearUser: () => set({ user: null }),
-  addAdress(address) {
+}));
+
+const useSignUp = create((set) => ({
+  signUp: async (user) => {
+    const { createUser } = useUserStore.getState();
+    const { setIsOpen } = useLoginModalStore.getState();
+    try {
+      const result = await createUser(user);
+      // Modal have to autoclose when user is connected
+      setIsOpen(false);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+}));
+
+const useSignIn = create((set) => ({
+  signIn: async (email, password) => {
+    const { logUser } = useUserStore.getState();
+    const { setIsOpen } = useLoginModalStore.getState();
+    try {
+      logUser(email, password);
+      // Modal have to autoclose when user is connected
+      setIsOpen(false);
+      return "success";
+    } catch (error) {
+      throw error;
+    }
+  },
+}));
+
+const useSignOut = create((set) => ({
+  signOut: async () => {
+    const { clearUser } = useUserStore.getState();
+    try {
+      clearUser();
+    } catch (error) {
+      throw error;
+    }
+  },
+}));
+
+const useUserAdress = create((set) => ({
+  addAdress: async (address) => {
+    const { user, updateUser } = useUserStore.getState();
     const date = new Date();
     const newAddress = {
       date,
@@ -46,80 +117,35 @@ const useUserStore = create((set) => ({
       // The site only support France shipment, so we secure the country
       country: "France",
     };
-    set((state) => ({
-      user: {
-        ...state.user,
-        addresses: [...state.user.addresses, newAddress],
-      },
-    }));
-    toast({
-      title: "Votre adresse à bien été enregistrée",
-    });
-    //TODO: Return success from API
-    return true;
-  },
-
-  setCurrentAddress: (date) =>
-    set((state) => {
-      const updatedAddresses = state.user.addresses.map((address) => ({
-        ...address,
-        isCurrent: address.date === date,
-      }));
-      return {
-        user: {
-          ...state.user,
-          addresses: updatedAddresses,
-        },
-      };
-    }),
-
-  deleteAddress: (date) =>
-    set((state) => {
-      const addresses = state.user.addresses.filter(
-        (address) => address.date !== date
-      );
-      return {
-        user: {
-          ...state.user,
-          addresses,
-        },
-      };
-    }),
-}));
-
-const useSignUp = create((set) => ({
-  signUp: async (email, password) => {
     try {
-      const user = await createAccount({ email, password });
-      const { signUp } = useUserStore.getState();
-      const { setIsOpen } = useLoginModalStore.getState();
-      signUp(user);
-      // Modal have to autoclose when user is connected
-      setIsOpen(false);
-      // Toast
-      toast({
-        title: "Vous êtes connecté !",
-      });
+      const udpatedUser = await mockAddAdress(user, newAddress);
+      updateUser(udpatedUser);
+      return "success";
     } catch (error) {
-      console.error("Failed to sign up:", error);
       throw error;
     }
   },
-}));
 
-const useSignUpMock = create((set) => ({
-  signUpMock: async () => {
-    const user = await mockUser();
-    const { signUp } = useUserStore.getState();
-    const { setIsOpen } = useLoginModalStore.getState();
-    signUp(user);
-    // Modal have to autoclose when user is connected
-    setIsOpen(false);
-    // Toast
-    toast({
-      title: "Vous êtes connecté (Mock) !",
-    });
-    return true;
+  setCurrentAddress: async (addressDate) => {
+    const { user, updateUser } = useUserStore.getState();
+    try {
+      const updatedUser = await mockUpdateAdress(user, addressDate);
+      updateUser(updatedUser);
+      return "success";
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  deleteAddress: async (date) => {
+    const { user, updateUser } = useUserStore.getState();
+    try {
+      const updatedUser = await mockDeleteAddress(user, date);
+      updateUser(updatedUser);
+      return "success";
+    } catch (error) {
+      throw error;
+    }
   },
 }));
 
@@ -130,4 +156,11 @@ const useLoginModalStore = create((set) => ({
   close: () => set({ isOpen: false }),
 }));
 
-export { useUserStore, useLoginModalStore, useSignUp, useSignUpMock };
+export {
+  useUserStore,
+  useLoginModalStore,
+  useSignIn,
+  useSignUp,
+  useSignOut,
+  useUserAdress,
+};
