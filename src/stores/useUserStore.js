@@ -140,7 +140,6 @@ const useUserAdress = create((set) => ({
   deleteAddress: async (date) => {
     const { user, updateUser } = useUserStore.getState();
     try {
-      console.log(date);
       const updatedUser = await mockDeleteAddress(user, date);
       updateUser(updatedUser);
       return "success";

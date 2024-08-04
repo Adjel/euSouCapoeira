@@ -27,7 +27,6 @@ function UserInfoComponent({
 
   useEffect(() => {
     if (!user) router.push("/signin");
-    console.log(user);
   }, [user]);
 
   const handleDeleteAdress = async (date) => {

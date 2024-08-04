@@ -4,7 +4,6 @@
 
 export const mockUserToken = async ({ email, password }) => {
   const users = await getMockedApi();
-  console.log(users);
   const user = users.find(
     (item) => item.password === password && item.email === email
   );
@@ -101,7 +100,6 @@ export const mockAddAdress = async (currentUser, newAddress) => {
     user.email === updatedUser.email ? updatedUser : user
   );
 
-  console.log(newUsers);
   localStorage.setItem("users", JSON.stringify(newUsers));
   return Promise.resolve(updatedUser);
 };
@@ -119,10 +117,6 @@ export const mockDeleteAddress = async (currentUser, adressDate) => {
 
   if (
     !existingUser.addresses.find((a) => {
-      console.log(a.date);
-      console.log(adressDate);
-      console.log(new Date(a.date));
-      console.log(new Date(adressDate));
       return `${new Date(a.date)}` === `${new Date(adressDate)}`;
     })
   )
@@ -166,7 +160,6 @@ export const mockDeleteAddress = async (currentUser, adressDate) => {
     }
   });
 
-  console.log(newUsers);
   localStorage.setItem("users", JSON.stringify(newUsers));
   return Promise.resolve(updatedUser);
 };
@@ -208,7 +201,6 @@ export const mockUpdateAdress = async (currentUser, date) => {
 ////////////////////// UTILS //////////////////////////
 
 const getMockedApi = async () => {
-  //localStorage.clear()
   try {
     let users = JSON.parse(localStorage.getItem("users"));
     if (!users) {
