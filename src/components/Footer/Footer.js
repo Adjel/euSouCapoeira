@@ -71,21 +71,21 @@ function Footer() {
       <ul className="flex flex-col gap-16">
         <li>
           <ul className={`${style.gridItem} hidden lg:flex`}>
-            <il>
+            <li>
               <FaFacebook color="white" className={style.icon} />
-            </il>
-            <il>
+            </li>
+            <li>
               <FaYoutube color="white" className={style.icon} />
-            </il>
-            <il>
+            </li>
+            <li>
               <FaInstagram color="white" className={style.icon} />
-            </il>
-            <il>
+            </li>
+            <li>
               <FaSquareXTwitter color="white" className={style.icon} />
-            </il>
-            <il>
+            </li>
+            <li>
               <Tiktok />
-            </il>
+            </li>
           </ul>
         </li>
         <li
