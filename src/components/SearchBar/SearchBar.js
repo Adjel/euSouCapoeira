@@ -32,14 +32,14 @@ function SearchBar() {
     <div className="relative">
       <form
         onSubmit={handleSubmit}
-        className="flex items-center justify-between w-full h-7 mx-0 px-4 bg-white rounded"
+        className="flex items-center justify-between w-full h-7 mx-0 px-4 bg-white rounded outline-color-gold focus-within:outline"
       >
         <GoSearch className="size-6 fill-color-dark-gray" />
         <input
           type="text"
           value={query}
           onChange={handleInputChange}
-          className="flex-1 text-center"
+          className="flex-1 text-center focus:outline-none"
           placeholder="Rechercher"
         />
       </form>
