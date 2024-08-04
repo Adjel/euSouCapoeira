@@ -6,9 +6,14 @@ import {
   mockUserToken,
   mockDeleteAddress,
 } from "@/providers/logInProvider";
+import {
+  getUserFromCookies,
+  removeUserCoockie,
+  setUserCookies,
+} from "@/coockieStore/userCoockies";
 
 const useUserStore = create((set, get) => ({
-  user: null,
+  user: getUserFromCookies(),
   createUser: async (values) => {
     const {
       business,
@@ -44,6 +49,7 @@ const useUserStore = create((set, get) => ({
     try {
       await mockCreateAccount(user);
       set({ user });
+      setUserCookies(user);
       return "sucess";
     } catch (error) {
       throw error;
@@ -53,6 +59,7 @@ const useUserStore = create((set, get) => ({
     try {
       const user = await mockUserToken({ email, password });
       set({ user });
+      setUserCookies(user);
       return "success";
     } catch (error) {
       throw error;
@@ -62,8 +69,11 @@ const useUserStore = create((set, get) => ({
     set((state) => ({
       user: { ...state.user, ...updatedUser },
     }));
+    setUserCookies(updatedUser);
   },
-  clearUser: () => set({ user: null }),
+  clearUser: () => {
+    removeUserCoockie(), set({ user: null });
+  },
 }));
 
 const useSignUp = create((set) => ({
