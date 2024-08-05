@@ -51,7 +51,7 @@ function SignInForm() {
     try {
       await signIn(values.email, values.password);
     } catch (error) {
-      toast(error);
+      toast({ title: error.message });
     }
   };
 

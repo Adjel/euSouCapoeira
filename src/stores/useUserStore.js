@@ -96,7 +96,7 @@ const useSignIn = create((set) => ({
     const { logUser } = useUserStore.getState();
     const { setIsOpen } = useLoginModalStore.getState();
     try {
-      logUser(email, password);
+      await logUser(email, password);
       // Modal have to autoclose when user is connected
       setIsOpen(false);
       return "success";
