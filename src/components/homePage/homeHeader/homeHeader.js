@@ -28,9 +28,11 @@ function HomeHeader() {
                     className="rounded"
                     src={image}
                     alt={alt}
-                    layout="fill"
-                    objectFit="cover"
-                    objectPosition="50% 20%"
+                    style={{
+                      layout: "fill",
+                      objectFit: "cover",
+                      objectPosition: "50% 20%",
+                    }}
                   />
                 </div>
               </CarouselItem>

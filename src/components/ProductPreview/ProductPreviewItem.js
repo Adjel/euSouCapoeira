@@ -17,7 +17,7 @@ function ProductPreviewItem({
       className="w-auto h-auto flex flex-col justify-center items-center"
     >
       <div className="relative w-full h-auto max-h-64 border-2 border-color-text-medium-gray overflow-hidden">
-        <Image src={image} alt={alt} objectFit="cover" />
+        <Image src={image} alt={alt} style={{ objectFit: "cover" }} />
       </div>
       <RatingComponent rateList={rates} />
       <span className="first-letter:uppercase text-sm text-center">

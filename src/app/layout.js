@@ -1,5 +1,4 @@
 import { Inter } from "next/font/google";
-import "../styles/globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/header";
 import Reinsurance from "@/components/Reinsurance";
@@ -7,6 +6,7 @@ import Footer from "@/components/Footer";
 import LoginModal from "@/components/LoginModal";
 import MobileNav from "@/components/MobileNav";
 const inter = Inter({ subsets: ["latin"] });
+import "../styles/globals.css";
 
 export const metadata = {
   title: "Eu sou capoeira",

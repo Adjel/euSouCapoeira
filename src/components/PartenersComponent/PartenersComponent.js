@@ -34,10 +34,12 @@ function PartenersComponent() {
                 <Image
                   src={image}
                   alt={alt}
-                  layout="fill"
-                  objectFit="cover"
+                  style={{
+                    layout: "fill",
+                    objectFit: "cover",
+                    objectPosition: "0% 0%",
+                  }}
                   className="rounded"
-                  objectPosition="0% 0%"
                 />
               </div>
             </CarouselItem>
