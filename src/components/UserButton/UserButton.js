@@ -4,15 +4,16 @@ import userIcon from "../../../public/userIcon.svg";
 import connectedUserIcon from "../../../public/coUserIcon.svg";
 import styles from "../UserButtonsComponent/userButtonsComponent.module.css";
 import Image from "next/image";
-import { useLoginModalStore, useUserStore } from "@/stores/useUserStore";
+import { useLoginModalStore } from "@/stores/useUserStore";
+import UseUserMounted from "@/lib/useUserMounted";
 
 function UserButton() {
   const { toggle } = useLoginModalStore();
-  const { user } = useUserStore();
+  const isLogged = UseUserMounted();
 
   return (
     <div onClick={toggle} className="w-fit cursor-pointer">
-      {user ? (
+      {isLogged ? (
         <Image
           className={styles.userNavItem}
           alt="l'icône de l'utilisateur connecté"
