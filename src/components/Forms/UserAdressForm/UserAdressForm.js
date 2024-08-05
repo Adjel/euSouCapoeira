@@ -19,6 +19,7 @@ import styles from "../Forms.module.css";
 const errorMessage = "Merci de saisir votre";
 
 const formSchema = z.object({
+  business: z.string().optional(),
   firstName: z.string().min(1, `${errorMessage} prénom.`),
   lastName: z.string().min(1, `${errorMessage} nom de famille.`),
   street: z.string().min(1, `${errorMessage} rue et numéro de rue.`),
@@ -33,6 +34,7 @@ function UserAdressForm({ cancel }) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      business: "",
       firstName: "",
       lastName: "",
       street: "",
@@ -48,7 +50,7 @@ function UserAdressForm({ cancel }) {
       cancel();
       toast({ title: "L'adresse à bien été enregistrée" });
     } catch (e) {
-      toast({ title: `${e}` });
+      toast({ title: `${e.message}` });
     }
   };
 
