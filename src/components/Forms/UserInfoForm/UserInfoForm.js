@@ -12,13 +12,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useUserStore } from "@/stores/useUserStore";
+import { useUpdateUserInfo, useUserStore } from "@/stores/useUserStore";
 import PasswordInput from "@/components/PasswordInput";
 import { emailRegex, passwordRegex } from "@/lib/utils";
 import styles from "../Forms.module.css";
+import { toast } from "@/components/ui/use-toast";
 
 function UserInfoForm({ cancel }) {
-  const { user, updateUser } = useUserStore();
+  const { user } = useUserStore();
+  const { updateUserInfo } = useUpdateUserInfo();
   const errorMessage = "Merci de saisir votre";
 
   const formSchema = z
@@ -56,8 +58,17 @@ function UserInfoForm({ cancel }) {
     },
   });
 
+  const handleSubmit = async (values) => {
+    try {
+      await updateUserInfo(values);
+      cancel();
+    } catch (e) {
+      toast({ title: e.message });
+    }
+  };
+
   function onSubmit(values) {
-    if (updateUser(values)) cancel();
+    handleSubmit(values);
   }
 
   return (

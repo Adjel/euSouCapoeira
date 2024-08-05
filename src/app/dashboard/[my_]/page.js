@@ -9,10 +9,12 @@ import UserCommands from "@/components/UserCommands";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { IoCloseOutline } from "react-icons/io5";
 import ReturnProductComponent from "@/components/ReturnProductComponent";
+import useUserMounted from "@/lib/useUserMounted";
 
 export default function dashboard({ params }) {
   const { user } = useUserStore();
   const [isOpen, setIsOpen] = useState(false);
+  const hasMounted = useUserMounted();
 
   const my_ = params.my_;
   const router = useRouter();
@@ -69,14 +71,14 @@ export default function dashboard({ params }) {
           <aside className="flex flex-col gap-6 z-50 absolute top-0 bottom-0 left-0 w-full md:w-96 lg:w-31.5 h-full p-8 bg-white shadow-lg">
             <header className="flex justify-between mb-8">
               <h2 className="w-fit text-3xl font-bold m-0 p-0">
-                {user ? "Espace client" : "Connexion"}
+                {hasMounted ? "Espace client" : "Connexion"}
               </h2>
               <IoCloseOutline
                 className="size-12 cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
               />
             </header>
-            {user && (
+            {hasMounted && (
               <div className="flex flex-col">
                 <span>
                   {user?.firstName} {user?.lastName}
@@ -92,13 +94,14 @@ export default function dashboard({ params }) {
         <header className="flex justify-between mb-8">
           <h2 className="w-fit text-3xl font-bold m-0 p-0">Espace client</h2>
         </header>
-        <div className="flex flex-col mb-8">
-          <span>
-            {user?.firstName} {user?.lastName}
-          </span>
-          <span>{user?.email}</span>
-        </div>
-
+        {hasMounted && (
+          <div className="flex flex-col mb-8">
+            <span>
+              {user?.firstName} {user?.lastName}
+            </span>
+            <span>{user?.email}</span>
+          </div>
+        )}
         <DashboardNav isModal={false} />
       </aside>
       <section className="w-full h-full">{pageContent}</section>

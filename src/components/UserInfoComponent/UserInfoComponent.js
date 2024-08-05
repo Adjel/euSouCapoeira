@@ -9,6 +9,7 @@ import UserAdressForm from "../Forms/UserAdressForm";
 import UserInfoForm from "../Forms/UserInfoForm";
 import { toast } from "../ui/use-toast";
 import styles from "./userInfoComponent.module.css";
+import useUserMounted from "@/lib/useUserMounted";
 
 function UserInfoComponent({
   isInfo,
@@ -19,6 +20,7 @@ function UserInfoComponent({
   const { user } = useUserStore();
   const { setCurrentAddress, deleteAddress } = useUserAdress();
   const [isModifying, setIsModifying] = useState(false);
+  const hasMounted = useUserMounted();
 
   // Component is Adresses component by default, but can be something else like userInfo component
   if (isInfo === undefined) throw new Error("isInfo is undefined");
@@ -34,7 +36,7 @@ function UserInfoComponent({
       await deleteAddress(date);
       toast({ title: `L'adresse a bien été supprimée` });
     } catch (e) {
-      toast({ title: `Oops, une erreur est survenue: ${e}` });
+      toast({ title: `Oops, une erreur est survenue: ${e.message}` });
     }
   };
 
@@ -86,8 +88,7 @@ function UserInfoComponent({
                       <>
                         <div
                           className={styles.button}
-                          //onClick={() => handleDeleteAdress(date)}
-                          onClick={() => deleteAddress(date)}
+                          onClick={() => handleDeleteAdress(date)}
                         >
                           <RiDeleteBinLine className="ml-auto size-7" />
                         </div>
@@ -100,17 +101,19 @@ function UserInfoComponent({
                       </>
                     )}
                   </div>
-                  <div className="flex flex-col">
-                    <span>{business}</span>
-                    <span>
-                      {firstName} {lastName}
-                    </span>
-                    <span>{street}</span>
-                    <span>
-                      {zipCode} {city}
-                    </span>
-                    <span>{country}</span>
-                  </div>
+                  {hasMounted && (
+                    <div className="flex flex-col">
+                      <span>{business}</span>
+                      <span>
+                        {firstName} {lastName}
+                      </span>
+                      <span>{street}</span>
+                      <span>
+                        {zipCode} {city}
+                      </span>
+                      <span>{country}</span>
+                    </div>
+                  )}
                 </li>
               )
             )
@@ -125,11 +128,13 @@ function UserInfoComponent({
                   <IconButton className="ml-auto size-8 hover:text-color-gold" />
                 </div>
               </div>
-              <div className="flex flex-col gap-1">
-                <span>{user?.firstName}</span>
-                <span>{user?.lastName}</span>
-                <span>{user?.email}</span>
-              </div>
+              {hasMounted && (
+                <div className="flex flex-col gap-1">
+                  <span>{user?.firstName}</span>
+                  <span>{user?.lastName}</span>
+                  <span>{user?.email}</span>
+                </div>
+              )}
             </section>
           )}
         </ul>

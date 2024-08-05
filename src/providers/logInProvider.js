@@ -28,6 +28,9 @@ export const mockCreateAccount = async (user) => {
 };
 
 export const mockUpdateUser = async (currentUser, updatedUser) => {
+  if (!currentUser || !updatedUser)
+    throw new Error("You need a currentUser to update user");
+
   const existingUser = await getExistingUser(currentUser);
 
   if (!existingUser)
