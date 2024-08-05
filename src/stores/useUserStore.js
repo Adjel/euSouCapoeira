@@ -5,6 +5,7 @@ import {
   mockUpdateAdress,
   mockUserToken,
   mockDeleteAddress,
+  mockUpdateUser,
 } from "@/providers/logInProvider";
 import {
   getUserFromCookies,
@@ -117,6 +118,18 @@ const useSignOut = create((set) => ({
   },
 }));
 
+const useUpdateUserInfo = create((set) => ({
+  updateUserInfo: async (values) => {
+    const { user, updateUser } = useUserStore.getState();
+    try {
+      const updatedUser = await mockUpdateUser(user, values);
+      updateUser(updatedUser);
+    } catch (e) {
+      throw e;
+    }
+  },
+}));
+
 const useUserAdress = create((set) => ({
   addAdress: async (address) => {
     const { user, updateUser } = useUserStore.getState();
@@ -169,6 +182,7 @@ const useLoginModalStore = create((set) => ({
 export {
   useUserStore,
   useLoginModalStore,
+  useUpdateUserInfo,
   useSignIn,
   useSignUp,
   useSignOut,

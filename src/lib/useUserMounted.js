@@ -1,7 +1,7 @@
 import { useUserStore } from "@/stores/useUserStore";
 import { useEffect, useState } from "react";
 
-function UseUserMounted() {
+function useUserMounted() {
   const { user } = useUserStore();
   const [hasMounted, setHasMounted] = useState(false);
 
@@ -12,4 +12,4 @@ function UseUserMounted() {
   return hasMounted;
 }
 
-export default UseUserMounted;
+export default useUserMounted;
