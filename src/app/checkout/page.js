@@ -19,6 +19,7 @@ import SignInForm from "@/components/Forms/SignInForm";
 import Link from "next/link";
 import { emailRegex } from "@/lib/utils";
 import style from "./checkout.module.css";
+import { toast } from "@/components/ui/use-toast";
 
 const errorMessage = "Merci de saisir votre";
 
@@ -30,8 +31,15 @@ const formSchema = z.object({
   firstName: z.string().min(1, `${errorMessage} prénom.`),
   lastName: z.string().min(1, `${errorMessage} nom de famille.`),
   street: z.string().min(1, `${errorMessage} rue et numéro de rue.`),
-  zipCode: z.string().min(1, `${errorMessage} code postal.`),
+  zipCode: z
+    .string()
+    .min(5, `${errorMessage} code postal.`)
+    .refine((value) => /^\d{5}$/.test(value), {
+      message: "Merci de saisir un code postal de cinq chiffre.",
+    }),
   city: z.string().min(1, `${errorMessage} ville.`),
+  phone: z.string().optional(),
+  business: z.string().optional(),
 });
 
 export default function page() {
@@ -49,6 +57,7 @@ export default function page() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
+      business: "",
       firstName: "",
       lastName: "",
       street: "",
@@ -105,8 +114,16 @@ export default function page() {
     );
   };
 
+  const handleSignUp = async (values) => {
+    try {
+      await signUp(values);
+    } catch (e) {
+      toast({ title: e.message });
+    }
+  };
+
   function onSubmit(values) {
-    signUp(values);
+    handleSignUp(values);
   }
 
   return (
