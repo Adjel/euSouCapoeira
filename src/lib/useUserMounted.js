@@ -7,7 +7,7 @@ function UseUserMounted() {
 
   useEffect(() => {
     setHasMounted(!!user);
-  }, []);
+  }, [user]);
 
   return hasMounted;
 }

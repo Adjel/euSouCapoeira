@@ -6,12 +6,12 @@ import DashboardNav from "../DashboardNav";
 import SignInForm from "../Forms/SignInForm";
 import Link from "next/link";
 import "@/styles/globals.css";
-import UseHasMounted from "@/lib/useHasMounted";
+import UseUserMounted from "@/lib/useUserMounted";
 
 function LoginModal() {
   const { isOpen, toggle } = useLoginModalStore();
   const { user } = useUserStore();
-  const isLogged = UseHasMounted();
+  const isLogged = UseUserMounted();
 
   return (
     <section>
