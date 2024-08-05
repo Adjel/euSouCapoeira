@@ -6,10 +6,12 @@ import DashboardNav from "../DashboardNav";
 import SignInForm from "../Forms/SignInForm";
 import Link from "next/link";
 import "@/styles/globals.css";
+import UseHasMounted from "@/lib/useHasMounted";
 
 function LoginModal() {
   const { isOpen, toggle } = useLoginModalStore();
   const { user } = useUserStore();
+  const isLogged = UseHasMounted();
 
   return (
     <section>
@@ -31,14 +33,14 @@ function LoginModal() {
         <aside className="flex flex-col gap-6 z-50 absolute top-0 bottom-0 right-0 w-full md:w-96 lg:w-31.5 h-full p-8 bg-white shadow-lg">
           <header className="flex justify-between mb-8">
             <h2 className="w-fit text-3xl font-bold m-0 p-0">
-              {user ? "Espace client" : "Connexion"}
+              {isLogged ? "Espace client" : "Connexion"}
             </h2>
             <IoCloseOutline
               className="size-12 cursor-pointer"
               onClick={toggle}
             />
           </header>
-          {user && (
+          {isLogged && (
             <div>
               <span>
                 {user?.firstName} {user?.lastName}
@@ -46,7 +48,7 @@ function LoginModal() {
               <span>{user?.email}</span>
             </div>
           )}
-          {user ? (
+          {isLogged ? (
             <>
               <DashboardNav />
             </>

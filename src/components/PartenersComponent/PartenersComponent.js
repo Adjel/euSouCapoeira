@@ -30,16 +30,12 @@ function PartenersComponent() {
         <CarouselContent>
           {fakePartners.map(({ image, alt }) => (
             <CarouselItem key={alt} className="w-full">
-              <div className="relative w-full h-48 md:h-64 lg:h-72">
+              <div className="relative w-full h-44 md:h-64 lg:h-72">
                 <Image
                   src={image}
                   alt={alt}
-                  style={{
-                    layout: "fill",
-                    objectFit: "cover",
-                    objectPosition: "0% 0%",
-                  }}
-                  className="rounded"
+                  className="rounded object-cover w-full h-5/6"
+                  style={{ objectPosition: "0% 0%" }}
                 />
               </div>
             </CarouselItem>
@@ -60,10 +56,7 @@ function PartenersComponent() {
                 <Image
                   src={image}
                   alt={alt}
-                  fill
-                  objectFit="cover"
-                  className="rounded"
-                  objectPosition="0% 0%"
+                  className="rounded object-cover w-full h-full"
                 />
               </div>
             </CarouselItem>
