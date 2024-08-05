@@ -1,5 +1,5 @@
 "use client";
-import { useSignOut, useUserStore } from "@/stores/useUserStore";
+import { useSignOut, useSignUp, useUserStore } from "@/stores/useUserStore";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,7 +36,8 @@ const formSchema = z.object({
 
 export default function page() {
   const [logInButton, toggleLogInButton] = useState(false);
-  const { user, signUp } = useUserStore();
+  const { user } = useUserStore();
+  const { signUp } = useSignUp();
   const { signOut } = useSignOut();
   const { cart, totalPrice, shippingFees } = useCartStore();
 

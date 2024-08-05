@@ -6,7 +6,7 @@ import { normalizeString } from "@/lib/utils";
 function CategoryItem({
   title,
   image,
-  alt,
+  alt = "description en cours de chargement",
   isVertical = false,
   preLink,
   className,
