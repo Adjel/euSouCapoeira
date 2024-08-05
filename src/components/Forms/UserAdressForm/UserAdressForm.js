@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useUserAdress } from "@/stores/useUserStore";
 import { toast } from "@/components/ui/use-toast";
-import styles from "../forms.module.css";
+import styles from "../Forms.module.css";
 
 const errorMessage = "Merci de saisir votre";
 

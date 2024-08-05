@@ -1,12 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { FaCheck } from "react-icons/fa";
 
 export default function ReturnProdutStepsProgressComponent({ steps }) {
   return (
     <ol className="flex w-fit md:gap-2 mx-auto items-center">
       {steps.map(({ step, state }) => (
-        <>
-          <li key={step}>
+        <Fragment key={step}>
+          <li>
             <span
               className={`flex flex-col md:flex-row gap-2 justify-center items-center ${
                 state === "current"
@@ -24,7 +24,7 @@ export default function ReturnProdutStepsProgressComponent({ steps }) {
             </span>
           </li>
           <span className="last:hidden w-24 h-2 border-b-2 mb-8 md:mb-2" />
-        </>
+        </Fragment>
       ))}
     </ol>
   );
