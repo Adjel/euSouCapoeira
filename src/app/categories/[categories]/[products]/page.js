@@ -30,6 +30,7 @@ export default function Page({ params }) {
   const [page, setPage] = useState(1);
   const [productDisplayedNumber, setProductDisplayedNumber] = useState(5);
 
+  // get only products from the param subcategory
   const productList = products.find((item) => {
     return (
       normalizeParam(params.products) === normalizeString(item.subCategory)
@@ -70,17 +71,20 @@ export default function Page({ params }) {
     return sorted;
   }, [productList?.products, sortOption]);
 
+  // display list or grid of products
   const toggleGridList = useCallback(() => setIsGrid((prev) => !prev), []);
 
   const productCount = productList?.products?.length ?? 0;
   const isSingleProduct = productCount === 1;
 
+  // filtered product list displayed in a page
   const paginationProductList = sortedProducts.filter(
     (product, index) =>
       index < page * productDisplayedNumber &&
       index >= page * productDisplayedNumber - productDisplayedNumber
   );
 
+  // used to know if nextPage has products
   const canNext = () => {
     return !(
       paginationProductList[paginationProductList.length - 1].id ===
@@ -88,6 +92,8 @@ export default function Page({ params }) {
     );
   };
 
+  //  if we display more products one each page, we may have no products on current page anymore
+  // if so we have to go to the previous page
   const pageNumber = (value) => {
     let newPage;
     if (value) {
@@ -103,11 +109,13 @@ export default function Page({ params }) {
     }
   };
 
+  // handle the number of products displayed on each page
   const handleDisplayNumber = (value) => {
     setPage(pageNumber(value));
     setProductDisplayedNumber(value);
   };
 
+  // handle the current page
   const handlePage = (value) => {
     if (value === "previous" || (value === "next" && value)) {
       setPage((prevPage) =>
