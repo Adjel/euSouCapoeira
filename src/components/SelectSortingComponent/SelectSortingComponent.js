@@ -14,7 +14,7 @@ function SelectSortingComponent() {
   return (
     <Select value={sortOption} onValueChange={setSortOption}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Popular" />
+        <SelectValue placeholder="Popularité" />
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="Popularité">Popularité</SelectItem>

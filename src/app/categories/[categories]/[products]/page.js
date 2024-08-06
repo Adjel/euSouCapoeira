@@ -28,7 +28,7 @@ export default function Page({ params }) {
   const [isGrid, setIsGrid] = useState(false);
   const { sortOption } = useProductSortStore();
   const [page, setPage] = useState(1);
-  const [productDisplayedNumber, setProductDisplayedNumber] = useState(3);
+  const [productDisplayedNumber, setProductDisplayedNumber] = useState(5);
 
   const productList = products.find((item) => {
     return (
@@ -88,16 +88,40 @@ export default function Page({ params }) {
     );
   };
 
-  const pageNumber = Math.ceil(sortedProducts.length / productDisplayedNumber);
+  const pageNumber = (value) => {
+    let newPage;
+    if (value) {
+      newPage = Math.ceil(sortedProducts.length / value);
+    } else {
+      newPage = Math.ceil(sortedProducts.length / productDisplayedNumber);
+    }
+
+    if (page > newPage) {
+      return page - 1;
+    } else {
+      return newPage;
+    }
+  };
+
+  const handleDisplayNumber = (value) => {
+    setPage(pageNumber(value));
+    setProductDisplayedNumber(value);
+  };
 
   const handlePage = (value) => {
-    setPage((prevPage) =>
-      value === "previous" && page > 1
-        ? prevPage - 1
-        : value === "next" && canNext()
-        ? prevPage + 1
-        : value ?? prevPage
-    );
+    if (value === "previous" || (value === "next" && value)) {
+      setPage((prevPage) =>
+        value === "previous" && page > 1
+          ? prevPage - 1
+          : value === "next" && canNext()
+          ? prevPage + 1
+          : prevPage
+      );
+    } else {
+      if (value) {
+        setPage(value);
+      }
+    }
   };
 
   // the breadcrumb will display home then category and subcategory, or category which have not a subcategory
@@ -137,84 +161,107 @@ export default function Page({ params }) {
           </div>
         )}
       </header>
-      <ol
-        className={`${
-          !isGrid ? "flex flex-col" : "md:grid-cols-4 min-w-80 grid grid-cols-2"
-        } gap-4 p-7`}
-      >
+      <div>
         {paginationProductList.length > 0 ? (
-          paginationProductList.map((product) => {
-            const {
-              name,
-              images,
-              price,
-              rates,
-              availability,
-              isBestSeller,
-              id,
-              alt,
-            } = product;
+          <>
+            <ol
+              className={`${
+                !isGrid
+                  ? "flex flex-col"
+                  : "md:grid-cols-4 min-w-80 grid grid-cols-2"
+              } gap-4 p-7`}
+            >
+              {paginationProductList.map((product) => {
+                const {
+                  name,
+                  images,
+                  price,
+                  rates,
+                  availability,
+                  isBestSeller,
+                  id,
+                  alt,
+                } = product;
 
-            return (
-              <li className={`${isGrid && "flex flex-col gap-4"}`} key={id}>
-                <div className="xs:flex-row relative flex flex-col min-w-fit gap-4 p-7 bg-background-medium-gray rounded">
-                  <Link href={`/product/${id}`}>
-                    <Image
-                      src={images[0].image}
-                      alt={images[0].alt}
-                      className={`${!isGrid && "max-w-24 max-h-24"}`}
-                    />
-                    {isGrid && (
-                      <span className="absolute bottom-0 left-0">
-                        <BestSellerComponent isBestSeller={isBestSeller} />
-                      </span>
-                    )}
-                  </Link>
-                  <div
-                    className={`${isGrid && "hidden"} flex flex-col gap-0.5`}
-                  >
-                    <Link href={`/product/${id}`}>
-                      {name}
-                      <RatingComponent rateList={rates} />
-                      <div className="md:hidden">
-                        <BestSellerComponent isBestSeller={isBestSeller} />
+                return (
+                  <li className={`${isGrid && "flex flex-col gap-4"}`} key={id}>
+                    <div className="xs:flex-row relative flex flex-col min-w-fit gap-4 p-7 bg-background-medium-gray rounded">
+                      <Link href={`/product/${id}`}>
+                        <Image
+                          src={images[0].image}
+                          alt={images[0].alt}
+                          className={`${!isGrid && "max-w-24 max-h-24"}`}
+                        />
+                        {isGrid && (
+                          <span className="absolute bottom-0 left-0">
+                            <BestSellerComponent isBestSeller={isBestSeller} />
+                          </span>
+                        )}
+                      </Link>
+                      <div
+                        className={`${
+                          isGrid && "hidden"
+                        } flex flex-col gap-0.5`}
+                      >
+                        <Link href={`/product/${id}`}>
+                          {name}
+                          <RatingComponent rateList={rates} />
+                          <div className="md:hidden">
+                            <BestSellerComponent isBestSeller={isBestSeller} />
+                          </div>
+                          <AvailabilityComponent availability={availability} />
+                          <PriceComponent price={price} />
+                        </Link>
+                        <div className="flex md:hidden">
+                          <AddToCartButton product={product} ml={"ml-0"} />
+                          <AddToWishListButton />
+                        </div>
                       </div>
-                      <AvailabilityComponent availability={availability} />
-                      <PriceComponent price={price} />
-                    </Link>
-                    <div className="flex md:hidden">
-                      <AddToCartButton product={product} ml={"ml-0"} />
-                      <AddToWishListButton />
+                      {!isGrid && (
+                        <div className="md:flex hidden flex-col gap-1 ml-auto items-end">
+                          <BestSellerComponent isBestSeller={isBestSeller} />
+                          <div className="hidden lg:flex">
+                            <PriceComponent price={price} />
+                          </div>
+                          <div className="mt-auto flex items-center">
+                            <AddToCartButton product={product} />
+                            <AddToWishListButton />
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                  {!isGrid && (
-                    <div className="md:flex hidden flex-col gap-1 ml-auto items-end">
-                      <BestSellerComponent isBestSeller={isBestSeller} />
-                      <div className="hidden lg:flex">
+                    <div
+                      className={`${!isGrid && "hidden"} flex flex-col text-sm`}
+                    >
+                      <Link href={`/product/${id}`}>
+                        {name}
+                        <RatingComponent rateList={rates} />
+                        <AvailabilityComponent availability={availability} />
                         <PriceComponent price={price} />
-                      </div>
-                      <div className="mt-auto flex items-center">
-                        <AddToCartButton product={product} />
+                      </Link>
+                      <div className="flex">
+                        <AddToCartButton product={product} ml={"ml-0"} />
                         <AddToWishListButton />
                       </div>
                     </div>
-                  )}
-                </div>
-                <div className={`${!isGrid && "hidden"} flex flex-col text-sm`}>
-                  <Link href={`/product/${id}`}>
-                    {name}
-                    <RatingComponent rateList={rates} />
-                    <AvailabilityComponent availability={availability} />
-                    <PriceComponent price={price} />
-                  </Link>
-                  <div className="flex">
-                    <AddToCartButton product={product} ml={"ml-0"} />
-                    <AddToWishListButton />
-                  </div>
-                </div>
-              </li>
-            );
-          })
+                  </li>
+                );
+              })}
+            </ol>
+            <div className="flex flex-col gap-2 justify-center items-center">
+              <SelectNumberToDisplay
+                number={productDisplayedNumber}
+                setNumber={handleDisplayNumber}
+                maxOptionNumber={sortedProducts.length}
+              />
+
+              <PaginationComponent
+                currentPage={page}
+                pageNumber={pageNumber()}
+                handlePage={handlePage}
+              />
+            </div>
+          </>
         ) : (
           <h2 className="md:text-2xl lg:text-3xl flex flex-col gap-10 text-center text-xl font-bold">
             {`Désolé, cette catégorie ne propose pas encore de produits :'( `}
@@ -223,17 +270,6 @@ export default function Page({ params }) {
             </Button>
           </h2>
         )}
-      </ol>
-      <PaginationComponent
-        currentPage={page}
-        pageNumber={pageNumber}
-        handlePage={handlePage}
-      />
-      <div>
-        <SelectNumberToDisplay
-          number={productDisplayedNumber}
-          setNumber={setProductDisplayedNumber}
-        />
       </div>
     </section>
   );

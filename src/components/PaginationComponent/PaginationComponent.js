@@ -1,13 +1,11 @@
 import React, { Fragment, useId } from "react";
 
 function PaginationComponent({ currentPage, pageNumber, handlePage }) {
-  const id = useId();
-
   function PageButton({ index }) {
     return (
       <button
         className={`w-8 h-8 ${
-          currentPage !== index + 1
+          currentPage === index + 1
             ? "bg-black text-white"
             : "bg-color-cancel-button text-black"
         } rounded-full`}
@@ -26,7 +24,7 @@ function PaginationComponent({ currentPage, pageNumber, handlePage }) {
       >{`<`}</button>
       {Array.from({ length: pageNumber }, (_, i) =>
         pageNumber > 5 ? (
-          <Fragment key={id}>
+          <Fragment key={crypto.randomUUID()}>
             {i < 4 || i === pageNumber - 1 ? (
               <PageButton index={i} />
             ) : (
@@ -34,7 +32,7 @@ function PaginationComponent({ currentPage, pageNumber, handlePage }) {
             )}
           </Fragment>
         ) : (
-          <PageButton index={i} />
+          <PageButton index={i} key={crypto.randomUUID()} />
         )
       )}
       <button

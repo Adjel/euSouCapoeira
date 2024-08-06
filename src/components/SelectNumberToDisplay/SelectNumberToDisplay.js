@@ -7,17 +7,28 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-function SelectNumberToDisplay({ number, setNumber }) {
+function SelectNumberToDisplay({ number, setNumber, maxOptionNumber }) {
+  const SetOption = ({ value }) => {
+    return value <= maxOptionNumber ? (
+      <SelectItem value={`${value}`}>{value} Produits</SelectItem>
+    ) : undefined;
+  };
+
   return (
     <Select value={number} onValueChange={(value) => setNumber(value)}>
-      <SelectTrigger className={`w-[180px]`}>
-        <SelectValue placeholder={`${number} produits`} />
+      <SelectTrigger
+        className={`w-[120px] h-fit border border-color-dark-gray rounded-xl`}
+      >
+        <SelectValue>
+          {number ? `${number} Produits` : "Choisissez un nombre"}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="5">5 produits</SelectItem>
-        <SelectItem value="10">10 produits</SelectItem>
-        <SelectItem value="25">25 produits</SelectItem>
-        <SelectItem value="50">50 produits</SelectItem>
+        <SetOption value={5} />
+        <SetOption value={10} />
+        <SetOption value={15} />
+        <SetOption value={25} />
+        <SetOption value={50} />
       </SelectContent>
     </Select>
   );
