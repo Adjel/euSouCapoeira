@@ -340,9 +340,16 @@ export default function page() {
             <div className="flex sm:hidden">
               <Cart />
             </div>
-            <Button type="submit" className="w-fit mx-auto mt-16">
-              {!user ? "S'enregistrer et acheter" : "acheter maintenant"}
-            </Button>
+            {!user && (
+              <Button type="submit" className="w-fit mx-auto mt-16">
+                S'enregistrer et acheter
+              </Button>
+            )}
+            {user && (
+              <Button className="w-fit mx-auto mt-16">
+                <Link href={"/thanks"}>acheter maintenant</Link>
+              </Button>
+            )}
           </form>
         </Form>
       </section>
