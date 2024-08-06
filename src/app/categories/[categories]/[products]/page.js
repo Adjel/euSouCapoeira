@@ -20,11 +20,15 @@ import AddToWishListButton from "@/components/AddToWishListButton";
 import AddToCartButton from "@/components/AddToCartButton";
 import useProductSortStore from "@/stores/useProductsSortStore";
 import { Button } from "@/components/ui/button";
+import PaginationComponent from "@/components/PaginationComponent";
+import SelectNumberToDisplay from "@/components/SelectNumberToDisplay";
 
 export default function Page({ params }) {
   // the page will present items into a grid or a list
   const [isGrid, setIsGrid] = useState(false);
   const { sortOption } = useProductSortStore();
+  const [page, setPage] = useState(1);
+  const [productDisplayedNumber, setProductDisplayedNumber] = useState(3);
 
   const productList = products.find((item) => {
     return (
@@ -71,6 +75,31 @@ export default function Page({ params }) {
   const productCount = productList?.products?.length ?? 0;
   const isSingleProduct = productCount === 1;
 
+  const paginationProductList = sortedProducts.filter(
+    (product, index) =>
+      index < page * productDisplayedNumber &&
+      index >= page * productDisplayedNumber - productDisplayedNumber
+  );
+
+  const canNext = () => {
+    return !(
+      paginationProductList[paginationProductList.length - 1].id ===
+      sortedProducts[sortedProducts.length - 1].id
+    );
+  };
+
+  const pageNumber = Math.ceil(sortedProducts.length / productDisplayedNumber);
+
+  const handlePage = (value) => {
+    setPage((prevPage) =>
+      value === "previous" && page > 1
+        ? prevPage - 1
+        : value === "next" && canNext()
+        ? prevPage + 1
+        : value ?? prevPage
+    );
+  };
+
   // the breadcrumb will display home then category and subcategory, or category which have not a subcategory
   // if have a sub-category, the category will be clickable and will push to the category, the sub-category will be not
   // if we have no sub-category, the category is not clickable
@@ -113,8 +142,8 @@ export default function Page({ params }) {
           !isGrid ? "flex flex-col" : "md:grid-cols-4 min-w-80 grid grid-cols-2"
         } gap-4 p-7`}
       >
-        {sortedProducts.length > 0 ? (
-          sortedProducts.map((product) => {
+        {paginationProductList.length > 0 ? (
+          paginationProductList.map((product) => {
             const {
               name,
               images,
@@ -195,6 +224,17 @@ export default function Page({ params }) {
           </h2>
         )}
       </ol>
+      <PaginationComponent
+        currentPage={page}
+        pageNumber={pageNumber}
+        handlePage={handlePage}
+      />
+      <div>
+        <SelectNumberToDisplay
+          number={productDisplayedNumber}
+          setNumber={setProductDisplayedNumber}
+        />
+      </div>
     </section>
   );
 }
