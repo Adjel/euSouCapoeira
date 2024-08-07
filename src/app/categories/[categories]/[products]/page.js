@@ -22,6 +22,7 @@ import useProductSortStore from "@/stores/useProductsSortStore";
 import { Button } from "@/components/ui/button";
 import PaginationComponent from "@/components/PaginationComponent";
 import SelectNumberToDisplay from "@/components/SelectNumberToDisplay";
+import ProductLink from "@/components/ProductLink";
 
 export default function Page({ params }) {
   // the page will present items into a grid or a list
@@ -194,7 +195,7 @@ export default function Page({ params }) {
                 return (
                   <li className={`${isGrid && "flex flex-col gap-4"}`} key={id}>
                     <div className="xs:flex-row relative flex flex-col min-w-fit gap-4 p-7 bg-background-medium-gray rounded">
-                      <Link href={`/product/${id}`}>
+                      <ProductLink id={id} name={name}>
                         <Image
                           src={images[0].image}
                           alt={images[0].alt}
@@ -205,13 +206,13 @@ export default function Page({ params }) {
                             <BestSellerComponent isBestSeller={isBestSeller} />
                           </span>
                         )}
-                      </Link>
+                      </ProductLink>
                       <div
                         className={`${
                           isGrid && "hidden"
                         } flex flex-col gap-0.5`}
                       >
-                        <Link href={`/product/${id}`}>
+                        <ProductLink id={id} name={name}>
                           {name}
                           <RatingComponent rateList={rates} />
                           <div className="md:hidden">
@@ -219,7 +220,7 @@ export default function Page({ params }) {
                           </div>
                           <AvailabilityComponent availability={availability} />
                           <PriceComponent price={price} />
-                        </Link>
+                        </ProductLink>
                         <div className="flex md:hidden">
                           <AddToCartButton product={product} ml={"ml-0"} />
                           <AddToWishListButton />
@@ -241,12 +242,12 @@ export default function Page({ params }) {
                     <div
                       className={`${!isGrid && "hidden"} flex flex-col text-sm`}
                     >
-                      <Link href={`/product/${id}`}>
+                      <ProductLink id={id} name={name}>
                         {name}
                         <RatingComponent rateList={rates} />
                         <AvailabilityComponent availability={availability} />
                         <PriceComponent price={price} />
-                      </Link>
+                      </ProductLink>
                       <div className="flex">
                         <AddToCartButton product={product} ml={"ml-0"} />
                         <AddToWishListButton />

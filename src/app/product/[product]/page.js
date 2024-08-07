@@ -10,7 +10,6 @@ import RecommandsComponent from "@/components/RecommandsComponent";
 import RatingComponent from "@/components/RatingComponent";
 import CommentsComponent from "@/components/CommentsComponent";
 import useCartStore from "@/stores/useCartStore";
-import ShareProductButton from "@/components/ShareProductButton";
 import AddToWishListButton from "@/components/AddToWishListButton";
 import BreadCrumbComponent from "@/components/BreadcrumbComponent/BreadcrumbComponent";
 import { IoCloseOutline } from "react-icons/io5";
