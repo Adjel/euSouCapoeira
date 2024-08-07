@@ -20,6 +20,7 @@ import Link from "next/link";
 import { emailRegex } from "@/lib/utils";
 import style from "./checkout.module.css";
 import { toast } from "@/components/ui/use-toast";
+import useUserMounted from "@/lib/useUserMounted";
 
 const errorMessage = "Merci de saisir votre";
 
@@ -48,6 +49,7 @@ export default function page() {
   const { signUp } = useSignUp();
   const { signOut } = useSignOut();
   const { cart, totalPrice, shippingFees } = useCartStore();
+  const userHasMount = useUserMounted();
 
   useEffect(() => {
     if (user) toggleLogInButton(false);
@@ -131,13 +133,13 @@ export default function page() {
       <section className="w-full sm:w-1/2 flex flex-col gap-8 p-2">
         <header
           className={`${
-            !user
+            !userHasMount
               ? "flex flex-col"
               : "flex flex-row justify-between items-center"
           } gap-2`}
         >
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold">Caisse</h2>
-          {!user ? (
+          {!userHasMount ? (
             <>
               <span>Avez-vous déjà un compte client?</span>
               <Button
@@ -163,7 +165,7 @@ export default function page() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="flex flex-col space-y-8"
           >
-            {!user ? (
+            {!userHasMount ? (
               <div className="flex flex-col gap-6">
                 <h2 className={`${style.title} my-4`}>Adresse e-mail</h2>
                 <FormField
@@ -319,33 +321,35 @@ export default function page() {
                 </div>
               </div>
             ) : (
-              <div className="p-4 flex flex-col border-2 rounded">
-                <span>{user.business}</span>
-                <span>{user.firstName}</span>
-                <span>{user.lastName}</span>
-                {user.addresses.map(
-                  ({ street, zipCode, city, country, isCurrent }, index) =>
-                    isCurrent && (
-                      <div className="flex flex-col" key={index}>
-                        <span>{street}</span>
-                        <span>
-                          {zipCode} {city}
-                        </span>
-                        <span>{country}</span>
-                      </div>
-                    )
-                )}
-              </div>
+              userHasMount && (
+                <div className="p-4 flex flex-col border-2 rounded">
+                  <span>{user.business}</span>
+                  <span>{user.firstName}</span>
+                  <span>{user.lastName}</span>
+                  {user.addresses.map(
+                    ({ street, zipCode, city, country, isCurrent }, index) =>
+                      isCurrent && (
+                        <div className="flex flex-col" key={index}>
+                          <span>{street}</span>
+                          <span>
+                            {zipCode} {city}
+                          </span>
+                          <span>{country}</span>
+                        </div>
+                      )
+                  )}
+                </div>
+              )
             )}
             <div className="flex sm:hidden">
               <Cart />
             </div>
-            {!user && (
+            {!userHasMount && (
               <Button type="submit" className="w-fit mx-auto mt-16">
                 S'enregistrer et acheter
               </Button>
             )}
-            {user && (
+            {userHasMount && (
               <Button className="w-fit mx-auto mt-16">
                 <Link href={"/thanks"}>acheter maintenant</Link>
               </Button>
