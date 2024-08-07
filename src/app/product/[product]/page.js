@@ -148,9 +148,9 @@ export default function page({ params }) {
               </Button>
             </div>
           )}
-          <div className="flex flex-row justify-evenly">
-            <AddToWishListButton product={product} />
-            <ShareProductButton params={params} />
+          <div className="flex gap-2 justify-center lg:justify-start">
+            <AddToWishListButton product={product} className={"ml-0"} />
+            <span>Sauvegarder</span>
           </div>
         </section>
       </div>
