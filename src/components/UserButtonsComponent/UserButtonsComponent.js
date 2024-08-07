@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import { SlHeart } from "react-icons/sl";
 import styles from "./userButtonsComponent.module.css";
 import UserButton from "../UserButton/UserButton";
 import CartButton from "../CartButton";
+import WishListButton from "../WishListButton";
 
 function UserButtonsComponent() {
   return (
@@ -12,7 +12,7 @@ function UserButtonsComponent() {
         <UserButton />
       </li>
       <li>
-        <SlHeart className={styles.userNavItem} />
+        <WishListButton className={styles.userNavItem} />
       </li>
       <li>
         <CartButton />

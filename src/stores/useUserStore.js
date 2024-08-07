@@ -12,6 +12,7 @@ import {
   removeUserCoockie,
   setUserCookies,
 } from "@/coockieStore/userCoockies";
+import { products } from "@/providers/productsProvider";
 
 const useUserStore = create((set, get) => ({
   user: getUserFromCookies(),
@@ -200,18 +201,18 @@ const useWishList = create((set) => ({
     const { wishList, updateUserWishList } = useWishList.getState();
     set((state) => {
       const existingProduct = wishList.productIdList.find(
-        (item) => item.id === productId
+        (item) => item === productId
       );
-      console.log(existingProduct);
+
       let updatedList;
       if (existingProduct) {
         updatedList = wishList.productIdList.filter(
-          (item) => item.id !== productId
+          (item) => item !== productId
         );
       } else {
         updatedList = [...wishList.productIdList, productId];
       }
-      console.log(updatedList);
+
       return {
         wishList: {
           date: new Date(),
@@ -220,6 +221,17 @@ const useWishList = create((set) => ({
       };
     });
     updateUserWishList(wishList);
+  },
+  getProductsByWishList: () => {
+    const { wishList } = useWishList.getState();
+
+    const produitsFiltres = products.map((subCategory) =>
+      subCategory.products.filter((item) =>
+        wishList.productIdList.includes(item.id)
+      )
+    );
+    console.log(produitsFiltres);
+    return produitsFiltres;
   },
 }));
 
