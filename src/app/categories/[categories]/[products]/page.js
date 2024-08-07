@@ -223,7 +223,7 @@ export default function Page({ params }) {
                         </ProductLink>
                         <div className="flex md:hidden">
                           <AddToCartButton product={product} ml={"ml-0"} />
-                          <AddToWishListButton />
+                          <AddToWishListButton product={product} />
                         </div>
                       </div>
                       {!isGrid && (
@@ -234,7 +234,7 @@ export default function Page({ params }) {
                           </div>
                           <div className="mt-auto flex items-center">
                             <AddToCartButton product={product} />
-                            <AddToWishListButton />
+                            <AddToWishListButton product={product} />
                           </div>
                         </div>
                       )}
@@ -250,7 +250,7 @@ export default function Page({ params }) {
                       </ProductLink>
                       <div className="flex">
                         <AddToCartButton product={product} ml={"ml-0"} />
-                        <AddToWishListButton />
+                        <AddToWishListButton product={product} />
                       </div>
                     </div>
                   </li>

@@ -179,6 +179,34 @@ const useLoginModalStore = create((set) => ({
   close: () => set({ isOpen: false }),
 }));
 
+const useWishList = create((set) => ({
+  wishList: [],
+  updateUserWishList: async (wishList) => {
+    const { user, updateUser } = useUserStore.getState();
+    const udpatedUser = { ...user, wishList: wishList };
+    console.log(udpatedUser);
+    updateUser(udpatedUser);
+  },
+  toggle: (product) => {
+    const { wishList, updateUserWishList } = useWishList.getState();
+    set((state) => {
+      const existingProduct = wishList.find((item) => item.id === product.id);
+      console.log(existingProduct);
+      let updatedList;
+      if (existingProduct) {
+        updatedList = wishList.filter((item) => item.id !== product.id);
+      } else {
+        updatedList = [...wishList, product];
+      }
+      console.log(updatedList);
+      return {
+        wishList: updatedList,
+      };
+    });
+    updateUserWishList(wishList);
+  },
+}));
+
 export {
   useUserStore,
   useLoginModalStore,
@@ -187,4 +215,5 @@ export {
   useSignUp,
   useSignOut,
   useUserAdress,
+  useWishList,
 };
