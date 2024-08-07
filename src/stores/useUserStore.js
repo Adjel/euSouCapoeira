@@ -180,27 +180,43 @@ const useLoginModalStore = create((set) => ({
 }));
 
 const useWishList = create((set) => ({
-  wishList: [],
+  wishList: {
+    date: "",
+    productIdList: [],
+  },
   updateUserWishList: async (wishList) => {
     const { user, updateUser } = useUserStore.getState();
-    const udpatedUser = { ...user, wishList: wishList };
+    const udpatedUser = {
+      ...user,
+      wishList: {
+        date: new Date(),
+        productIdList: wishList.productIdList,
+      },
+    };
     console.log(udpatedUser);
     updateUser(udpatedUser);
   },
-  toggle: (product) => {
+  toggle: (productId) => {
     const { wishList, updateUserWishList } = useWishList.getState();
     set((state) => {
-      const existingProduct = wishList.find((item) => item.id === product.id);
+      const existingProduct = wishList.productIdList.find(
+        (item) => item.id === productId
+      );
       console.log(existingProduct);
       let updatedList;
       if (existingProduct) {
-        updatedList = wishList.filter((item) => item.id !== product.id);
+        updatedList = wishList.productIdList.filter(
+          (item) => item.id !== productId
+        );
       } else {
-        updatedList = [...wishList, product];
+        updatedList = [...wishList.productIdList, productId];
       }
       console.log(updatedList);
       return {
-        wishList: updatedList,
+        wishList: {
+          date: new Date(),
+          productIdList: updatedList,
+        },
       };
     });
     updateUserWishList(wishList);
