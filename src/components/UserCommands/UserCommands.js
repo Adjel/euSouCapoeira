@@ -39,7 +39,7 @@ function MyCommands() {
               </Link>
             ))}
 
-            <div className="flex w-1/2 md:w-full justify-between items-center gap-6 mb-4">
+            <div className="flex w-1/2 md:w-full justify-start items-center gap-6 mb-4">
               <div className="flex flex-col gap-6 md:flex-row">
                 <CommandState
                   title="commande du"
@@ -47,15 +47,11 @@ function MyCommands() {
                 />
                 <CommandState title="commande n°" content={commandId} />
               </div>
-              <div className="flex flex-col gap-6 md:flex-row">
+              <div className="flex flex-col gap-6 md:flex-row justify-center items-center">
                 <CommandState title="prix total" content={`${totalPrice} €`} />
                 <CommandState title="statut" status={status} />
               </div>
-              <Button className="hidden md:flex md:mx-6 lg:mx-32">
-                Détails
-              </Button>
             </div>
-            <Button className="md:hidden w-fit mb-6">Détails</Button>
             <Divider />
           </li>
         ))}
