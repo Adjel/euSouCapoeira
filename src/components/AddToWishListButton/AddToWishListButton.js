@@ -1,14 +1,12 @@
-import { useWishList } from "@/stores/useUserStore";
+import { useUserStore, useWishList } from "@/stores/useUserStore";
 import React from "react";
 import { SlHeart } from "react-icons/sl";
 
 function AddToWishListButton({ productId, ml }) {
-  const { toggle, getProductsByWishList } = useWishList();
-  const likedProducts = getProductsByWishList();
+  const { user } = useUserStore();
+  const { toggle } = useWishList();
 
-  const liked = likedProducts.some((productList) =>
-    productList.some((product) => product.id === productId)
-  );
+  const liked = user.wishList.productIdList.find((id) => id === productId);
 
   return (
     <SlHeart
