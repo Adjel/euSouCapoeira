@@ -12,7 +12,7 @@ function Page() {
 
   return (
     <div className="flex flex-col gap-6">
-      {wishList.map((productList) =>
+      {wishList?.map((productList) =>
         productList.map(({ name, id }) => <span key={id}>{name}</span>)
       )}
     </div>
