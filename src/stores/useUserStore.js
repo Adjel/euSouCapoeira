@@ -181,10 +181,6 @@ const useLoginModalStore = create((set) => ({
 }));
 
 const useWishList = create((set) => ({
-  wishList: {
-    date: "",
-    productIdList: [],
-  },
   updateUserWishList: async (wishList) => {
     const { user, updateUser } = useUserStore.getState();
     const udpatedUser = {
@@ -198,39 +194,40 @@ const useWishList = create((set) => ({
     updateUser(udpatedUser);
   },
   toggle: (productId) => {
-    const { wishList, updateUserWishList } = useWishList.getState();
-    set((state) => {
-      const existingProduct = wishList.productIdList.find(
-        (item) => item === productId
+    const { user } = useUserStore.getState();
+    const { updateUserWishList } = useWishList.getState();
+    const userwishList = user.wishList;
+    console.log(userwishList);
+
+    const existingProduct = userwishList.productIdList.find(
+      (item) => item === productId
+    );
+    console.log(existingProduct);
+    let updatedList;
+    if (existingProduct) {
+      updatedList = userwishList.productIdList.filter(
+        (item) => item !== productId
       );
-
-      let updatedList;
-      if (existingProduct) {
-        updatedList = wishList.productIdList.filter(
-          (item) => item !== productId
-        );
-      } else {
-        updatedList = [...wishList.productIdList, productId];
-      }
-
-      return {
-        wishList: {
-          date: new Date(),
-          productIdList: updatedList,
-        },
-      };
-    });
+    } else {
+      updatedList = [...userwishList.productIdList, productId];
+    }
+    console.log(updatedList);
+    const wishList = {
+      date: new Date(),
+      productIdList: updatedList,
+    };
+    console.log(wishList);
     updateUserWishList(wishList);
   },
   getProductsByWishList: () => {
-    const { wishList } = useWishList.getState();
+    const { user } = useUserStore.getState();
+    const wishList = user.wishList;
 
     const produitsFiltres = products.map((subCategory) =>
       subCategory.products.filter((item) =>
         wishList.productIdList.includes(item.id)
       )
     );
-    console.log(produitsFiltres);
     return produitsFiltres;
   },
 }));

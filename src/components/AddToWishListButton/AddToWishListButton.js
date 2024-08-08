@@ -3,8 +3,12 @@ import React from "react";
 import { SlHeart } from "react-icons/sl";
 
 function AddToWishListButton({ productId, ml }) {
-  const { toggle, wishList } = useWishList();
-  const liked = wishList.productIdList.find((item) => item === productId);
+  const { toggle, getProductsByWishList } = useWishList();
+  const likedProducts = getProductsByWishList();
+
+  const liked = likedProducts.some((productList) =>
+    productList.some((product) => product.id === productId)
+  );
 
   return (
     <SlHeart
