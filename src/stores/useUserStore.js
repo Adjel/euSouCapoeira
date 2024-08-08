@@ -195,9 +195,9 @@ const useWishList = create((set) => ({
   toggle: (productId) => {
     const { user } = useUserStore.getState();
     const { updateUserWishList } = useWishList.getState();
-    const userwishList = user.wishList;
+    const userwishList = user?.wishList;
 
-    const existingProduct = userwishList.productIdList.find(
+    const existingProduct = userwishList?.productIdList?.find(
       (item) => item === productId
     );
     let updatedList;
@@ -206,7 +206,9 @@ const useWishList = create((set) => ({
         (item) => item !== productId
       );
     } else {
-      updatedList = [...userwishList.productIdList, productId];
+      if (userwishList && userwishList.length > 0) {
+        updatedList = [...userwishList.productIdList, productId];
+      }
     }
     const wishList = {
       date: new Date(),
@@ -217,11 +219,11 @@ const useWishList = create((set) => ({
 
   getProductsByWishList: () => {
     const { user } = useUserStore.getState();
-    const wishList = user.wishList;
+    const wishList = user?.wishList;
 
     const produitsFiltres = products.map((subCategory) =>
       subCategory.products.filter((item) =>
-        wishList.productIdList.includes(item.id)
+        wishList?.productIdList.includes(item.id)
       )
     );
     return produitsFiltres;

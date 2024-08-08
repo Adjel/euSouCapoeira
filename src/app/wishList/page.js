@@ -1,13 +1,18 @@
 "use client";
-import { useWishList } from "@/stores/useUserStore";
-import React from "react";
+import { useUserStore } from "@/stores/useUserStore";
+import React, { useEffect } from "react";
 
 function Page() {
-  const { getProductsByWishList } = useWishList();
-  const test = getProductsByWishList();
+  const { user } = useUserStore();
+  let wishList;
+
+  useEffect(() => {
+    if (user) wishList = user.wishList ?? [];
+  }, [user]);
+
   return (
     <div className="flex flex-col gap-6">
-      {test.map((productList) =>
+      {wishList.map((productList) =>
         productList.map(({ name, id }) => <span key={id}>{name}</span>)
       )}
     </div>

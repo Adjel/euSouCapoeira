@@ -7,7 +7,7 @@ function AddToWishListButton({ productId, ml }) {
   const { user } = useUserStore();
   const { toggle } = useWishList();
 
-  const liked = user.wishList.productIdList.find((id) => id === productId);
+  const liked = user?.wishList?.productIdList?.find((id) => id === productId);
 
   return !liked ? (
     <SlHeart
