@@ -3,6 +3,7 @@ import Coockies from "js-cookie";
 export const setUserCookies = (user) => {
   try {
     Coockies.set("user", JSON.stringify(user), { expires: 7 });
+    return Promise.resolve("user updated in coockies");
   } catch (e) {
     // Crashlytics
     //throw new Error(`Impossible de sauvegarder l'utilisateur dans les cookies: ${e}`);

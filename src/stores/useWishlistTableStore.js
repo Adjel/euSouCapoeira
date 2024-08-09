@@ -1,6 +1,9 @@
 import { useUserStore } from "./useUserStore";
 import { create } from "zustand";
-import { getMockWishlistTable } from "@/providers/wishlistListProvider";
+import {
+  getMockWishlistTable,
+  mockCreateWishlist,
+} from "@/providers/wishlistListProvider";
 
 /*
 const useWishList = create((set, get) => ({
@@ -167,6 +170,24 @@ const useWishList = create((set, get) => {
   const initialState = {
     wishlistTable: [],
     setWishlistTable: (wishlistTable) => set({ wishlistTable }),
+
+    createWishList: async (name) => {
+      const date = new Date();
+      const newName =
+        name ?? `Liste des envies du ${date.toLocaleDateString()}`;
+      try {
+        const wishlist = {
+          date: date,
+          isCurrent: true,
+          name: newName,
+          id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
+          idList: [],
+        };
+        await mockCreateWishlist(user, wishlist);
+      } catch (error) {
+        throw error;
+      }
+    },
 
     updateWishlistTable: async (updatedWishlist) => {
       try {

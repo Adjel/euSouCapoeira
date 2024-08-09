@@ -1,3 +1,6 @@
+import { setUserCookies } from "@/coockieStore/userCoockies";
+import { getMockedApi, mockUpdateUser } from "@/providers/userProvider";
+
 export const mockGetCurrentWishlist = async () => {
   //localStorage.removeItem("wishlistTable");
   // renvoyer la current wishlist
@@ -39,18 +42,17 @@ export const updateMockWishList = async (wishlist) => {
 export const getMockWishlistTable = async (user) => {
   let wishlistTable;
   const date = new Date();
-  // si non co
-  console.log(user);
+
   // je récupère la table en non connecté (jen aurai aussi besoin pour la fusionner si nécéssaire)
   wishlistTable = await getLocalWishlistTable();
+  console.log("dans le local user non connecté:");
   console.log(wishlistTable);
   // si table vide ou non existante
   if (user) {
     // si co
     // je récpuère le user
     const users = JSON.parse(localStorage.getItem("users"));
-    // je récupère la liste du user
-    console.log(users);
+
     const userData = users.find((u) => u.email === user.email);
     // si pas de liste ou liste vide
     // crée une liste
@@ -77,6 +79,11 @@ export const getMockWishlistTable = async (user) => {
       }
     }
     // sauvegarder le user
+    try {
+      updateWishListTable(user, wishlistTable);
+    } catch (e) {
+      return Promise.reject(e);
+    }
   } else {
     if (!wishlistTable || wishlistTable.length < 1) {
       // je crée une liste
@@ -93,7 +100,7 @@ export const getMockWishlistTable = async (user) => {
     console.log(wishlistTable);
 
     // Here wishlist doesn't exist, so create one, then return it
-    wishlistTable = createWishlistTable(wishlistTable);
+    wishlistTable = await updateWishListTable(user, wishlistTable);
     console.log(wishlistTable);
   }
   console.log(wishlistTable);
@@ -101,10 +108,60 @@ export const getMockWishlistTable = async (user) => {
 };
 
 const getLocalWishlistTable = async () => {
+  //localStorage.removeItem("wishlistTable");
   return Promise.resolve(JSON.parse(localStorage.getItem("wishlistTable")));
 };
 
-const createWishlistTable = async (wishlistTable) => {
-  localStorage.setItem("wishlistTable", JSON.stringify(wishlistTable));
-  return Promise.resolve(JSON.parse(localStorage.getItem("wishlistTable")));
+export const mockCreateWishlist = async (user, wishlist) => {
+  if (!user) {
+    let table = await getLocalWishlistTable();
+    const newTable = table.map((wl) => {
+      return {
+        ...wl,
+        isCurrent: false,
+      };
+    });
+    const newWhishlistTable = [...newTable, wishlist];
+    try {
+      await updateWishListTable(user, newWhishlistTable);
+    } catch (e) {
+      console.log(e);
+      return Promise.reject(e);
+    }
+  } else {
+    const users = await getMockedApi();
+    const existingUser = users.find((u) => u.email === user.email);
+    const newTable = existingUser.wishlistTable.map((wl) => {
+      return {
+        ...wl,
+        isCurrent: false,
+      };
+    });
+    const newWishlistTable = [...newTable, wishlist];
+    try {
+      await updateWishListTable(existingUser, newWishlistTable);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  }
+};
+
+const updateWishListTable = async (user, wishlistTable) => {
+  if (!user) {
+    localStorage.setItem("wishlistTable", JSON.stringify(wishlistTable));
+    return Promise.resolve(JSON.parse(localStorage.getItem("wishlistTable")));
+  } else {
+    const updatedUser = {
+      ...user,
+      wishlistTable: wishlistTable,
+    };
+    console.log(updatedUser);
+    try {
+      await setUserCookies(updatedUser);
+      await mockUpdateUser(user, updatedUser);
+      return Promise.resolve("wishlsit added to user");
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  }
 };

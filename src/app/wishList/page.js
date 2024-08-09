@@ -1,16 +1,30 @@
 "use client";
-import { useWishList } from "@/stores/useWishlistTableStore";
 import React from "react";
+import { useWishList } from "@/stores/useWishlistTableStore";
+import { Button } from "@/components/ui/button";
 
 function Page() {
-  const { wishlistTable } = useWishList();
+  const { wishlistTable, createWishList } = useWishList();
 
-  console.log(wishlistTable);
-
-  //console.log(wishlistList);
-
-  //{wishlistList.map((item) => item.idList.map((id) => <span>{id}</span>))}
-  return <div className="flex flex-col gap-6"></div>;
+  return (
+    <div className="p-7 w-full h-full flex flex-col gap-6">
+      <Button className="w-fit" onClick={() => createWishList()}>
+        + nouveau{" "}
+      </Button>
+      {wishlistTable.length > 0 && (
+        <div className="flex flex-col w-full h-full">
+          {wishlistTable.map((wishlist) => (
+            <div className="w-full h-fit" key={wishlist.id}>
+              <span className="">{wishlist.name}</span>
+              {wishlist.idList.map((productId) => (
+                <span key={productId}>{productId}</span>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default Page;

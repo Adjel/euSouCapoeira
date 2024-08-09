@@ -53,6 +53,8 @@ export const mockUpdateUser = async (currentUser, updatedUser) => {
     }
   });
 
+  // TODO ? UPDATE USER IN COOKIES ??
+
   localStorage.setItem("users", JSON.stringify(newUsers));
   return Promise.resolve(newUser);
 };
@@ -203,7 +205,7 @@ export const mockUpdateAdress = async (currentUser, date) => {
 
 ////////////////////// UTILS //////////////////////////
 
-const getMockedApi = async () => {
+export const getMockedApi = async () => {
   try {
     let users = JSON.parse(localStorage.getItem("users"));
     if (!users) {
