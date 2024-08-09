@@ -1,23 +1,25 @@
+import { date } from "zod";
 import { create } from "zustand";
+
+const defaultdate = new Date().toLocaleDateString();
 
 export const useWishlist = create((set, get) => ({
   wishlistTable: [
     {
       userId: "",
-      date: new Date().toLocaleDateString(),
-      name: `Liste de souhaits du ${new Date()}`,
+      date: defaultdate,
+      name: `Liste d'envies du ${defaultdate}`,
       id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
       isCurrent: true,
       idList: [],
     },
   ],
-  createWishlist: async (state, name) => {
-    const date = new Date().toLocaleDateString();
-    const newName = name ?? `Liste de souhaits du ${new Date()}`;
+  createWishlist: async (name) => {
+    const newName = name ?? `Liste d'envies du ${new Date()}`;
 
     const newWishlist = {
       userId: "",
-      date: date,
+      date: defaultdate,
       name: newName,
       id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
       isCurrent: true,
@@ -29,6 +31,8 @@ export const useWishlist = create((set, get) => ({
       isCurrent: false,
     }));
 
+    console.log("createWishlist");
+
     set({ wishlistTable: [...updatedWishlistTable, newWishlist] });
   },
 
@@ -37,6 +41,26 @@ export const useWishlist = create((set, get) => ({
       ...wishlist,
       isCurrent: wishlist.id === id,
     }));
+    console.log("setCurrentWishlist");
     set({ wishlistTable: updatedWishlistTable });
+  },
+
+  deleteWishlist: async (id) => {
+    const wishlistTableRef = get().wishlistTable;
+
+    // Vérifier s'il y a plus d'une liste de souhaits
+    if (wishlistTableRef.length > 1) {
+      const updatedWishlistTable = wishlistTableRef.filter(
+        (wishlist) => wishlist.id !== id
+      );
+      if (!updatedWishlistTable.find((item) => item.isCurrent)) {
+        updatedWishlistTable.map((wishlist, index) => ({
+          ...wishlist,
+          isCurrent: index === 0,
+        }));
+      }
+
+      set({ wishlistTable: updatedWishlistTable });
+    }
   },
 }));
