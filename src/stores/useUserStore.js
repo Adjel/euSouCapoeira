@@ -12,11 +12,6 @@ import {
   removeUserCoockie,
   setUserCookies,
 } from "@/coockieStore/userCoockies";
-import { products } from "@/providers/productsProvider";
-import {
-  mockGetCurrentWishlist,
-  updateMockWishList,
-} from "@/providers/wishlistListProvider";
 
 const useUserStore = create((set) => ({
   user: getUserFromCookies(),
@@ -184,128 +179,6 @@ const useLoginModalStore = create((set) => ({
   close: () => set({ isOpen: false }),
 }));
 
-const useWishList = create((set, get) => ({
-  wishlistList: [],
-  updateUserWishList: async (updatedWishlist) => {
-    const { user } = useUserStore.getState();
-    const { updateUserInfo } = useUpdateUserInfo.getState();
-
-    // créer nouvelle wishlistList avec modification de current
-    const updatedWishlistList = user.wishlistList?.map((wishlist) => {
-      if (wishlist.id === updatedWishlist.id) {
-        return {
-          ...updatedWishlist,
-          isCurrent: true,
-        };
-      } else {
-        return {
-          ...wishlist,
-          isCurrent: false,
-        };
-      }
-    });
-
-    console.log(updatedWishlistList);
-    // TODO
-
-    // vérifier si utilsateur ou pas
-    if (user) {
-      // si oui créer utilisatuer et update utilisateur
-      const udpatedUser = {
-        ...user,
-        wishlist: undefined,
-        wishlistList: updatedWishlistList,
-      };
-      console.log(udpatedUser);
-      // This will update user in cookies, storage and state
-      updateUserInfo(udpatedUser);
-    } else {
-      updateMockWishList(updatedWishlist);
-      // sinon update local
-    }
-    console.log(updatedWishlistList);
-    set({ wishlistList: updatedWishlistList });
-  },
-  toggle: async (productId) => {
-    // créer puis renvoyer la nouvelle liste =>
-    let updatedWishList;
-
-    // récupérer la current list (qui est dans la liste de liste de souhaits)
-    const { getCurrentWishList, updateUserWishList } = get();
-    const currentWishList = await getCurrentWishList();
-
-    // chercher le produit
-    const existingProduct = currentWishList.idList.find(
-      (id) => id === productId
-    );
-    // s'il n'existe pas ajouter le produit
-    if (!existingProduct) {
-      updatedWishList = {
-        ...currentWishList,
-        idList: [...currentWishList.idList, productId],
-      };
-    } else {
-      updatedWishList = {
-        ...currentWishList,
-        idList: currentWishList.idList.filter((id) => id !== productId),
-      };
-    }
-    console.log(updatedWishList);
-    // mettre à jour la wishlistList
-    await updateUserWishList(updatedWishList);
-  },
-
-  getCurrentWishList: async () => {
-    // récupérer la current list =>
-    const { user } = useUserStore.getState();
-    let currentWishList;
-    // si user chercher dans user
-    if (user) {
-      // si existe récupérer celle qui est current
-      // sinon créer et la passer en current
-      const date = new Date();
-      console.log(user);
-
-      currentWishList = user.wishlistList?.find(
-        (wishlist) => wishlist.isCurrent
-      ) || {
-        date: date,
-        isCurrent: true,
-        name: `Liste des envies du ${date.toLocaleDateString()}`,
-        id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
-        idList: [],
-      };
-
-      // si pas user chercher dans storage
-    } else {
-      currentWishList = await mockGetCurrentWishlist();
-    }
-    set({ wishlist: currentWishList });
-    return currentWishList;
-  },
-  createWishList: async (name) => {
-    const { updateUserWishList } = get();
-    const date = new Date();
-    const newWishList = {
-      date: date,
-      isCurrent: true,
-      name: `${name}` ?? `Liste des envies du ${date.toLocaleDateString()}`,
-      id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
-      idList: [],
-    };
-    updateUserWishList(newWishList);
-  },
-  getProductsByWishList: () => {
-    const { user } = useUserStore.getState();
-    const wishList = user?.wishList.find((wl) => wl.isCurrent)?.idList || [];
-
-    const filteredProducts = products.map((subCategory) =>
-      subCategory.products.filter((item) => wishList.includes(item.id))
-    );
-    return filteredProducts;
-  },
-}));
-
 export {
   useUserStore,
   useLoginModalStore,
@@ -314,5 +187,4 @@ export {
   useSignUp,
   useSignOut,
   useUserAdress,
-  useWishList,
 };

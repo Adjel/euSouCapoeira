@@ -4,10 +4,8 @@ import { SlHeart } from "react-icons/sl";
 import { FaHeart } from "react-icons/fa";
 
 function AddToWishListButton({ productId, ml }) {
-  const { user } = useUserStore();
-  const { toggle } = useWishList();
-
-  const liked = user?.wishList?.productIdList?.find((id) => id === productId);
+  //const liked = user?.wishList?.productIdList?.find((id) => id === productId);
+  const liked = false;
 
   return !liked ? (
     <SlHeart
