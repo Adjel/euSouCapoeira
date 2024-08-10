@@ -10,7 +10,7 @@ export const useWishlist = create((set, get) => ({
       name: `Liste d'envies du ${defaultDate}`,
       id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
       isCurrent: true,
-      idList: [],
+      idList: [{ id: "", quantity: "" }],
     },
   ],
 
@@ -37,7 +37,7 @@ export const useWishlist = create((set, get) => ({
       name: newName,
       id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
       isCurrent: true,
-      idList: [],
+      idList: [{ id: "", quantity: "" }],
     };
 
     const updatedWishlistTable = get().wishlistTable.map((wishlist) => ({
@@ -108,9 +108,11 @@ export const useWishlist = create((set, get) => ({
     const updateCurrentWishlist = get().updateCurrentWishlist;
     const current = get().getCurrentWishlist();
 
-    const updatedIdList = current.idList.find((productId) => productId === id)
-      ? current.idList.filter((pId) => pId !== id)
-      : [...current.idList, id];
+    const updatedIdList = current.idList.find((obj) => obj.id === id)
+      ? current.idList.filter((item) => item.id !== id)
+      : [...current.idList, { id: id, quanity: 1 }];
+
+    console.log(updatedIdList);
 
     const newWishlist = { ...current, idList: updatedIdList };
 
