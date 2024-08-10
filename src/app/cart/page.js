@@ -56,7 +56,7 @@ export default function page() {
                   <div className="flex flex-col xs:flex-row justify-between">
                     <div className="flex">
                       <DeleteProductFromCartButton productId={id} />
-                      <AddToWishListButton />
+                      <AddToWishListButton productId={id} />
                     </div>
                     <PriceComponent price={price * quantity} />
                   </div>

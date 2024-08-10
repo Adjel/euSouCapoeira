@@ -1,4 +1,3 @@
-import { date } from "zod";
 import { create } from "zustand";
 
 const defaultdate = new Date().toLocaleDateString();
@@ -15,7 +14,7 @@ export const useWishlist = create((set, get) => ({
     },
   ],
   createWishlist: async (name) => {
-    const newName = name ?? `Liste d'envies du ${new Date()}`;
+    const newName = name ?? `Liste d'envies du ${defaultdate}`;
 
     const newWishlist = {
       userId: "",
@@ -62,5 +61,37 @@ export const useWishlist = create((set, get) => ({
 
       set({ wishlistTable: updatedWishlistTable });
     }
+  },
+
+  /////////////////// CURRENT WISHLIST ///////////////////////
+
+  getCurrentWishlist: () => {
+    const current = get().wishlistTable.find((wishlist) => wishlist.isCurrent);
+    return current;
+  },
+
+  updateCurrentWishlist: async (wishlist) => {
+    const wishlistTable = get().wishlistTable;
+    const newWishlistTable = wishlistTable.map((wl) =>
+      wl.id === wishlist.id ? { ...wishlist } : wl
+    );
+
+    set({ wishlistTable: newWishlistTable });
+  },
+
+  /////////////////// PRODUCTS ID AND PRODUCT ///////////////////////
+
+  toggle: async (id) => {
+    console.log(id);
+    const updateCurrentWishlist = get().updateCurrentWishlist;
+    const current = await get().getCurrentWishlist();
+
+    const updatedIdList = current.idList.find((productId) => productId === id)
+      ? current.idList.filter((pId) => pId !== id)
+      : [...current.idList, id];
+
+    const newWishlist = { ...current, idList: updatedIdList };
+
+    updateCurrentWishlist(newWishlist);
   },
 }));
