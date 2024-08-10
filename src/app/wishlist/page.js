@@ -4,10 +4,13 @@ import { useWishlist } from "@/stores/useWishlistStore";
 import { Button } from "@/components/ui/button";
 
 function Page() {
-  const { wishlistTable, createWishlist, setCurrentWishlist, deleteWishlist } =
-    useWishlist();
-
-  console.log(wishlistTable);
+  const {
+    wishlistTable,
+    createWishlist,
+    setCurrentWishlist,
+    deleteWishlist,
+    currentWishlist,
+  } = useWishlist();
 
   return (
     <div className="flex gap-7">

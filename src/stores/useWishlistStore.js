@@ -1,24 +1,39 @@
 import { create } from "zustand";
 
-const defaultdate = new Date().toLocaleDateString();
+const defaultDate = new Date().toLocaleDateString();
 
 export const useWishlist = create((set, get) => ({
   wishlistTable: [
     {
       userId: "",
-      date: defaultdate,
-      name: `Liste d'envies du ${defaultdate}`,
+      date: defaultDate,
+      name: `Liste d'envies du ${defaultDate}`,
       id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
       isCurrent: true,
       idList: [],
     },
   ],
-  createWishlist: async (name) => {
-    const newName = name ?? `Liste d'envies du ${defaultdate}`;
+
+  currentWishlist: null,
+
+  // avoid to forget update one of two states when udpate at least one
+  updateWishlistState: (newState) => {
+    set(newState);
+    get().initCurrentWishlist();
+  },
+
+  // auto currentWishlist initialisation
+  initCurrentWishlist: () => {
+    const current = get().wishlistTable.find((wishlist) => wishlist.isCurrent);
+    set({ currentWishlist: current });
+  },
+
+  createWishlist: (name) => {
+    const newName = name ?? `Liste d'envies du ${defaultDate}`;
 
     const newWishlist = {
       userId: "",
-      date: defaultdate,
+      date: defaultDate,
       name: newName,
       id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
       isCurrent: true,
@@ -30,19 +45,21 @@ export const useWishlist = create((set, get) => ({
       isCurrent: false,
     }));
 
-    set({ wishlistTable: [...updatedWishlistTable, newWishlist] });
+    get().updateWishlistState({
+      wishlistTable: [...updatedWishlistTable, newWishlist],
+    });
   },
 
-  setCurrentWishlist: async (id) => {
+  udpateWishlistName: (name, wishlistId) => {
     const updatedWishlistTable = get().wishlistTable.map((wishlist) => ({
       ...wishlist,
-      isCurrent: wishlist.id === id,
+      name: wishlist.id === wishlistId ? name : wishlist.name,
     }));
 
-    set({ wishlistTable: updatedWishlistTable });
+    get().updateWishlistState({ wishlistTable: updatedWishlistTable });
   },
 
-  deleteWishlist: async (id) => {
+  deleteWishlist: (id) => {
     const wishlistTableRef = get().wishlistTable;
 
     // Vérifier s'il y a plus d'une liste de souhaits
@@ -57,7 +74,7 @@ export const useWishlist = create((set, get) => ({
         }));
       }
 
-      set({ wishlistTable: updatedWishlistTable });
+      get().updateWishlistState({ wishlistTable: updatedWishlistTable });
     }
   },
 
@@ -68,20 +85,27 @@ export const useWishlist = create((set, get) => ({
     return current;
   },
 
-  updateCurrentWishlist: async (wishlist) => {
-    const wishlistTable = get().wishlistTable;
-    const newWishlistTable = wishlistTable.map((wl) =>
+  setCurrentWishlist: (id) => {
+    const updatedWishlistTable = get().wishlistTable.map((wishlist) => ({
+      ...wishlist,
+      isCurrent: wishlist.id === id,
+    }));
+
+    get().updateWishlistState({ wishlistTable: updatedWishlistTable });
+  },
+
+  updateCurrentWishlist: (wishlist) => {
+    const newWishlistTable = get().wishlistTable.map((wl) =>
       wl.id === wishlist.id ? { ...wishlist } : wl
     );
 
-    set({ wishlistTable: newWishlistTable });
+    get().updateWishlistState({ wishlistTable: newWishlistTable });
   },
 
   /////////////////// PRODUCTS ID AND PRODUCT ///////////////////////
 
-  toggle: async (id) => {
-    const updateCurrentWishlist = get().updateCurrentWishlist;
-    const current = await get().getCurrentWishlist();
+  toggle: (id) => {
+    const current = get().getCurrentWishlist();
 
     const updatedIdList = current.idList.find((productId) => productId === id)
       ? current.idList.filter((pId) => pId !== id)
@@ -89,6 +113,9 @@ export const useWishlist = create((set, get) => ({
 
     const newWishlist = { ...current, idList: updatedIdList };
 
-    updateCurrentWishlist(newWishlist);
+    get().updateWishlistState({ wishlistTable: newWishlist });
   },
 }));
+
+// Initialise currentWishlist when store is created
+useWishlist.getState().initCurrentWishlist();
