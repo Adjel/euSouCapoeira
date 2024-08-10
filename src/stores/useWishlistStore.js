@@ -1,32 +1,30 @@
+import { getWishlistTable, udpateWishlist } from "@/providers/wishlistProvider";
 import { create } from "zustand";
 
 const defaultDate = new Date().toLocaleDateString();
 
 export const useWishlist = create((set, get) => ({
-  wishlistTable: [
-    {
-      userId: "",
-      date: defaultDate,
-      name: `Liste d'envies du ${defaultDate}`,
-      id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
-      isCurrent: true,
-      idList: [{ id: "", quantity: "" }],
-    },
-  ],
+  wishlistTable: getWishlistTable(),
 
-  currentWishlist: null,
+  currentWishlist: {},
+
+  ///////////////////////// HANDLE STATE ///////////////////////////
 
   // avoid to forget update one of two states when udpate at least one
   updateWishlistState: (newState) => {
     set(newState);
+    udpateWishlist(newState.wishlistTable);
     get().initCurrentWishlist();
   },
 
   // auto currentWishlist initialisation
   initCurrentWishlist: () => {
+    console.log(get().wishlistTable);
     const current = get().wishlistTable.find((wishlist) => wishlist.isCurrent);
     set({ currentWishlist: current });
   },
+
+  ///////////////////// WISHLIST ///////////////////////
 
   createWishlist: (name) => {
     const newName = name ?? `Liste d'envies du ${defaultDate}`;
@@ -99,10 +97,12 @@ export const useWishlist = create((set, get) => ({
       wl.id === wishlist.id ? { ...wishlist } : wl
     );
 
+    console.log(newWishlistTable);
+
     get().updateWishlistState({ wishlistTable: newWishlistTable });
   },
 
-  /////////////////// PRODUCTS ID AND PRODUCT ///////////////////////
+  /////////////////// (ADD) PRODUCTS ID AND PRODUCT ///////////////////////
 
   toggle: (id) => {
     const updateCurrentWishlist = get().updateCurrentWishlist;
@@ -111,8 +111,6 @@ export const useWishlist = create((set, get) => ({
     const updatedIdList = current.idList.find((obj) => obj.id === id)
       ? current.idList.filter((item) => item.id !== id)
       : [...current.idList, { id: id, quanity: 1 }];
-
-    console.log(updatedIdList);
 
     const newWishlist = { ...current, idList: updatedIdList };
 

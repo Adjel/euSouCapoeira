@@ -12,6 +12,7 @@ function Page() {
     currentWishlist,
   } = useWishlist();
 
+  console.log(wishlistTable);
   console.log(currentWishlist);
 
   return (
