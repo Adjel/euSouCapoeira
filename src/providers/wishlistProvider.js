@@ -16,7 +16,7 @@ export const udpateWishlist = (wishlistTable) => {
 };
 
 const getLocalWishlisTable = () => {
-  //localStorage.removeItem("wishlisTable");
+  //localStorage.removeItem("wishlistTable");
   let wishlistTable = JSON.parse(localStorage.getItem("wishlistTable"));
 
   if (!wishlistTable) {
@@ -32,7 +32,7 @@ const getLocalWishlisTable = () => {
     ];
 
     localStorage.setItem("wishlistTable", JSON.stringify(wishlistTable));
-    wishlistTable = localStorage.getItem(JSON.parse("wishlistTable"));
+    wishlistTable = JSON.parse(localStorage.getItem("wishlistTable"));
     console.log(wishlistTable);
   }
 

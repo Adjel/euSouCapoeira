@@ -13,7 +13,7 @@ export const useWishlist = create((set, get) => ({
   // avoid to forget update one of two states when udpate at least one
   updateWishlistState: (newState) => {
     set(newState);
-    udpateWishlist(newState);
+    udpateWishlist(newState.wishlistTable);
     get().initCurrentWishlist();
   },
 
