@@ -64,11 +64,11 @@ export const useWishlist = create((set, get) => ({
 
     // Vérifier s'il y a plus d'une liste de souhaits
     if (wishlistTableRef.length > 1) {
-      const updatedWishlistTable = wishlistTableRef.filter(
+      let updatedWishlistTable = wishlistTableRef.filter(
         (wishlist) => wishlist.id !== id
       );
       if (!updatedWishlistTable.find((item) => item.isCurrent)) {
-        updatedWishlistTable.map((wishlist, index) => ({
+        updatedWishlistTable = updatedWishlistTable.map((wishlist, index) => ({
           ...wishlist,
           isCurrent: index === 0,
         }));
@@ -105,6 +105,7 @@ export const useWishlist = create((set, get) => ({
   /////////////////// PRODUCTS ID AND PRODUCT ///////////////////////
 
   toggle: (id) => {
+    const updateCurrentWishlist = get().updateCurrentWishlist;
     const current = get().getCurrentWishlist();
 
     const updatedIdList = current.idList.find((productId) => productId === id)
@@ -113,7 +114,7 @@ export const useWishlist = create((set, get) => ({
 
     const newWishlist = { ...current, idList: updatedIdList };
 
-    get().updateWishlistState({ wishlistTable: newWishlist });
+    updateCurrentWishlist(newWishlist);
   },
 }));
 
