@@ -1,10 +1,10 @@
-import { getWishlisTable, udpateWishlist } from "@/providers/wishlistProvider";
+import { getWishlistTable, udpateWishlist } from "@/providers/wishlistProvider";
 import { create } from "zustand";
 
 const defaultDate = new Date().toLocaleDateString();
 
 export const useWishlist = create((set, get) => ({
-  wishlistTable: getWishlisTable(),
+  wishlistTable: getWishlistTable(),
 
   currentWishlist: {},
 
@@ -20,9 +20,7 @@ export const useWishlist = create((set, get) => ({
   // auto currentWishlist initialisation
   initCurrentWishlist: () => {
     console.log(get().wishlistTable);
-    const current = get().wishlistTable.wishlistTable.idList.find(
-      (wishlist) => wishlist.isCurrent
-    );
+    const current = get().wishlistTable.find((wishlist) => wishlist.isCurrent);
     set({ currentWishlist: current });
   },
 

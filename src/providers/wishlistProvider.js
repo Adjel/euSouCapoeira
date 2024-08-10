@@ -1,6 +1,6 @@
 const defaultDate = new Date().toLocaleDateString();
 
-export const getWishlisTable = () => {
+export const getWishlistTable = () => {
   const wishlistTable = getLocalWishlisTable();
 
   console.log("getWishlisTable");
@@ -10,14 +10,14 @@ export const getWishlisTable = () => {
 
 export const udpateWishlist = (wishlistTable) => {
   console.log(wishlistTable);
-  localStorage.setItem("wishlisTable", JSON.stringify(wishlistTable));
+  localStorage.setItem("wishlistTable", JSON.stringify(wishlistTable));
 
-  return getWishlisTable();
+  return getWishlistTable();
 };
 
 const getLocalWishlisTable = () => {
   //localStorage.removeItem("wishlisTable");
-  let wishlistTable = JSON.parse(localStorage.getItem("wishlisTable"));
+  let wishlistTable = JSON.parse(localStorage.getItem("wishlistTable"));
 
   if (!wishlistTable) {
     wishlistTable = [
@@ -31,8 +31,8 @@ const getLocalWishlisTable = () => {
       },
     ];
 
-    localStorage.setItem("wishlisTable", JSON.stringify(wishlistTable));
-    wishlistTable = localStorage.getItem(JSON.parse("wishlisTable"));
+    localStorage.setItem("wishlistTable", JSON.stringify(wishlistTable));
+    wishlistTable = localStorage.getItem(JSON.parse("wishlistTable"));
     console.log(wishlistTable);
   }
 
