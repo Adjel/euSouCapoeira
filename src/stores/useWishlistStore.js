@@ -30,8 +30,6 @@ export const useWishlist = create((set, get) => ({
       isCurrent: false,
     }));
 
-    console.log("createWishlist");
-
     set({ wishlistTable: [...updatedWishlistTable, newWishlist] });
   },
 
@@ -40,7 +38,7 @@ export const useWishlist = create((set, get) => ({
       ...wishlist,
       isCurrent: wishlist.id === id,
     }));
-    console.log("setCurrentWishlist");
+
     set({ wishlistTable: updatedWishlistTable });
   },
 
@@ -82,7 +80,6 @@ export const useWishlist = create((set, get) => ({
   /////////////////// PRODUCTS ID AND PRODUCT ///////////////////////
 
   toggle: async (id) => {
-    console.log(id);
     const updateCurrentWishlist = get().updateCurrentWishlist;
     const current = await get().getCurrentWishlist();
 
