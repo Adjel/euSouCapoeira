@@ -16,7 +16,7 @@ function Page() {
 
   return (
     <div className="flex flex-row gap-7 border-2 border-pink-500">
-      <div className="flex flex-col w-1/5 gap-7 border-2 border-yellow-500">
+      <div className="hidden md:flex flex-col w-1/5 gap-7 border-2 border-yellow-500">
         <Button className="w-fit" onClick={() => createWishlist()}>
           + nouveau
         </Button>
