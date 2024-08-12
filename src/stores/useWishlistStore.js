@@ -48,10 +48,10 @@ export const useWishlist = create((set, get) => ({
     });
   },
 
-  udpateWishlistName: (name, wishlistId) => {
+  udpateWishlistName: (name) => {
     const updatedWishlistTable = get().wishlistTable.map((wishlist) => ({
       ...wishlist,
-      name: wishlist.id === wishlistId ? name : wishlist.name,
+      name: wishlist.isCurrent ? name : wishlist.name,
     }));
 
     get().updateWishlistState({ wishlistTable: updatedWishlistTable });
