@@ -4,6 +4,7 @@ import { mockUpdateUser } from "./logInProvider";
 const defaultDate = new Date().toLocaleDateString();
 
 export const getWishlistTable = (user) => {
+  console.log(user);
   let wishlistTable;
   if (user) {
     wishlistTable = getUserWishlistTable(user);
@@ -13,7 +14,7 @@ export const getWishlistTable = (user) => {
   return wishlistTable;
 };
 
-export const udpateWishlist = (user, wishlistTable) => {
+export const updateWishlist = (user, wishlistTable) => {
   if (!user) {
     localStorage.setItem("wishlistTable", JSON.stringify(wishlistTable));
   } else {

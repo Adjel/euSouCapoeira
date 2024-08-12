@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useUserStore } from "@/stores/useUserStore";
 
 function Page() {
-  //const {user} = useUserStore()
+  const { user } = useUserStore();
   const {
     wishlistTable,
     createWishlist,
@@ -13,10 +13,15 @@ function Page() {
     deleteWishlist,
     currentWishlist,
     udpateWishlistName,
+    getWishlistTableState,
   } = useWishlist();
 
   const [toggleWishlistName, setToggleWishlistName] = useState(false);
   const [wishlistName, setWishlistName] = useState("");
+
+  useEffect(() => {
+    getWishlistTableState(user);
+  }, [user]);
 
   const handleSubmitWishlistName = (event) => {
     event.preventDefault();
