@@ -1,122 +1,133 @@
 import { getWishlistTable, udpateWishlist } from "@/providers/wishlistProvider";
 import { create } from "zustand";
+import { useUserStore } from "./useUserStore";
 
 const defaultDate = new Date().toLocaleDateString();
 
-export const useWishlist = create((set, get) => ({
-  wishlistTable: getWishlistTable(),
+export const useWishlist = create((set, get) => {
+  const user = useUserStore.getState().user;
 
-  currentWishlist: {},
+  return {
+    wishlistTable: getWishlistTable(user),
 
-  ///////////////////////// HANDLE STATE ///////////////////////////
+    currentWishlist: {},
 
-  // avoid to forget update one of two states when udpate at least one
-  updateWishlistState: (newState) => {
-    set(newState);
-    udpateWishlist(newState.wishlistTable);
-    get().initCurrentWishlist();
-  },
+    ///////////////////////// HANDLE STATE ///////////////////////////
 
-  // auto currentWishlist initialisation
-  initCurrentWishlist: () => {
-    console.log(get().wishlistTable);
-    const current = get().wishlistTable.find((wishlist) => wishlist.isCurrent);
-    set({ currentWishlist: current });
-  },
+    // avoid to forget update one of two states when udpate at least one
+    updateWishlistState: (newState) => {
+      set(newState);
+      udpateWishlist(user, newState.wishlistTable);
+      get().initCurrentWishlist();
+    },
 
-  ///////////////////// WISHLIST ///////////////////////
-
-  createWishlist: (name) => {
-    const newName = name ?? `Liste d'envies du ${defaultDate}`;
-
-    const newWishlist = {
-      userId: "",
-      date: defaultDate,
-      name: newName,
-      id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
-      isCurrent: true,
-      idList: [],
-    };
-
-    const updatedWishlistTable = get().wishlistTable.map((wishlist) => ({
-      ...wishlist,
-      isCurrent: false,
-    }));
-
-    get().updateWishlistState({
-      wishlistTable: [...updatedWishlistTable, newWishlist],
-    });
-  },
-
-  udpateWishlistName: (name) => {
-    const updatedWishlistTable = get().wishlistTable.map((wishlist) => ({
-      ...wishlist,
-      name: wishlist.isCurrent ? name : wishlist.name,
-    }));
-
-    get().updateWishlistState({ wishlistTable: updatedWishlistTable });
-  },
-
-  deleteWishlist: (id) => {
-    const wishlistTableRef = get().wishlistTable;
-
-    // Vérifier s'il y a plus d'une liste de souhaits
-    if (wishlistTableRef.length > 1) {
-      let updatedWishlistTable = wishlistTableRef.filter(
-        (wishlist) => wishlist.id !== id
+    // auto currentWishlist initialisation
+    initCurrentWishlist: () => {
+      console.log(get().wishlistTable);
+      const current = get().wishlistTable.find(
+        (wishlist) => wishlist.isCurrent
       );
-      if (!updatedWishlistTable.find((item) => item.isCurrent)) {
-        updatedWishlistTable = updatedWishlistTable.map((wishlist, index) => ({
-          ...wishlist,
-          isCurrent: index === 0,
-        }));
-      }
+      set({ currentWishlist: current });
+    },
+
+    ///////////////////// WISHLIST ///////////////////////
+
+    createWishlist: (name) => {
+      const newName = name ?? `Liste d'envies du ${defaultDate}`;
+
+      const newWishlist = {
+        userId: "",
+        date: defaultDate,
+        name: newName,
+        id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
+        isCurrent: true,
+        idList: [],
+      };
+
+      const updatedWishlistTable = get().wishlistTable.map((wishlist) => ({
+        ...wishlist,
+        isCurrent: false,
+      }));
+
+      get().updateWishlistState({
+        wishlistTable: [...updatedWishlistTable, newWishlist],
+      });
+    },
+
+    udpateWishlistName: (name) => {
+      const updatedWishlistTable = get().wishlistTable.map((wishlist) => ({
+        ...wishlist,
+        name: wishlist.isCurrent ? name : wishlist.name,
+      }));
 
       get().updateWishlistState({ wishlistTable: updatedWishlistTable });
-    }
-  },
+    },
 
-  /////////////////// CURRENT WISHLIST ///////////////////////
+    deleteWishlist: (id) => {
+      const wishlistTableRef = get().wishlistTable;
 
-  getCurrentWishlist: () => {
-    const current = get().wishlistTable.find((wishlist) => wishlist.isCurrent);
-    return current;
-  },
+      // Vérifier s'il y a plus d'une liste de souhaits
+      if (wishlistTableRef.length > 1) {
+        let updatedWishlistTable = wishlistTableRef.filter(
+          (wishlist) => wishlist.id !== id
+        );
+        if (!updatedWishlistTable.find((item) => item.isCurrent)) {
+          updatedWishlistTable = updatedWishlistTable.map(
+            (wishlist, index) => ({
+              ...wishlist,
+              isCurrent: index === 0,
+            })
+          );
+        }
 
-  setCurrentWishlist: (id) => {
-    const updatedWishlistTable = get().wishlistTable.map((wishlist) => ({
-      ...wishlist,
-      isCurrent: wishlist.id === id,
-    }));
+        get().updateWishlistState({ wishlistTable: updatedWishlistTable });
+      }
+    },
 
-    get().updateWishlistState({ wishlistTable: updatedWishlistTable });
-  },
+    /////////////////// CURRENT WISHLIST ///////////////////////
 
-  updateCurrentWishlist: (wishlist) => {
-    const newWishlistTable = get().wishlistTable.map((wl) =>
-      wl.id === wishlist.id ? { ...wishlist } : wl
-    );
+    getCurrentWishlist: () => {
+      const current = get().wishlistTable.find(
+        (wishlist) => wishlist.isCurrent
+      );
+      return current;
+    },
 
-    console.log(newWishlistTable);
+    setCurrentWishlist: (id) => {
+      const updatedWishlistTable = get().wishlistTable.map((wishlist) => ({
+        ...wishlist,
+        isCurrent: wishlist.id === id,
+      }));
 
-    get().updateWishlistState({ wishlistTable: newWishlistTable });
-  },
+      get().updateWishlistState({ wishlistTable: updatedWishlistTable });
+    },
 
-  /////////////////// (ADD) PRODUCTS ID AND PRODUCT ///////////////////////
+    updateCurrentWishlist: (wishlist) => {
+      const newWishlistTable = get().wishlistTable.map((wl) =>
+        wl.id === wishlist.id ? { ...wishlist } : wl
+      );
 
-  toggle: (id) => {
-    const updateCurrentWishlist = get().updateCurrentWishlist;
-    const current = get().getCurrentWishlist();
+      console.log(newWishlistTable);
 
-    const updatedIdList = current.idList.find((obj) => obj.id === id)
-      ? current.idList.filter((item) => item.id !== id)
-      : [...current.idList, { id: id, quanity: 1 }];
+      get().updateWishlistState({ wishlistTable: newWishlistTable });
+    },
 
-    const newWishlist = { ...current, idList: updatedIdList };
+    /////////////////// (ADD) PRODUCTS ID AND PRODUCT ///////////////////////
 
-    updateCurrentWishlist(newWishlist);
-  },
-}));
+    toggle: (id) => {
+      const updateCurrentWishlist = get().updateCurrentWishlist;
+      const current = get().getCurrentWishlist();
+
+      const updatedIdList = current.idList.find((obj) => obj.id === id)
+        ? current.idList.filter((item) => item.id !== id)
+        : [...current.idList, { id: id, quanity: 1 }];
+
+      const newWishlist = { ...current, idList: updatedIdList };
+
+      updateCurrentWishlist(newWishlist);
+    },
+  };
+});
 
 // Initialise currentWishlist when store is created
 useWishlist.getState().initCurrentWishlist();
