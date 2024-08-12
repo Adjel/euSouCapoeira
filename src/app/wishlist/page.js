@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { useWishlist } from "@/stores/useWishlistStore";
 import { Button } from "@/components/ui/button";
+import { useUserStore } from "@/stores/useUserStore";
 
 function Page() {
+  //const {user} = useUserStore()
   const {
     wishlistTable,
     createWishlist,
@@ -17,9 +19,8 @@ function Page() {
   const [wishlistName, setWishlistName] = useState("");
 
   const handleSubmitWishlistName = (event) => {
-    console.log("handleSubmitWishlistName");
     event.preventDefault();
-    console.log(wishlistName);
+
     udpateWishlistName(wishlistName);
     setToggleWishlistName(false);
     setWishlistName("");
@@ -30,12 +31,8 @@ function Page() {
   };
 
   const handleToggleWishlistName = () => {
-    console.log("handleToggleWishlistName");
     setToggleWishlistName((prev) => !prev);
   };
-
-  console.log(wishlistTable);
-  console.log(currentWishlist);
 
   return (
     <div className="flex flex-row gap-7 border-2 border-pink-500">
