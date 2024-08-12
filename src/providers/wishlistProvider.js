@@ -10,14 +10,10 @@ export const getWishlistTable = (user) => {
   } else {
     wishlistTable = getLocalWishlisTable();
   }
-
-  console.log("getWishlisTable");
-  console.log(wishlistTable);
   return wishlistTable;
 };
 
 export const udpateWishlist = (user, wishlistTable) => {
-  console.log(wishlistTable);
   if (!user) {
     localStorage.setItem("wishlistTable", JSON.stringify(wishlistTable));
   } else {
@@ -45,36 +41,29 @@ const getLocalWishlisTable = () => {
 
     localStorage.setItem("wishlistTable", JSON.stringify(wishlistTable));
     wishlistTable = JSON.parse(localStorage.getItem("wishlistTable"));
-    console.log(wishlistTable);
   }
 
   return wishlistTable;
 };
 
 const getUserWishlistTable = (user) => {
+  // We will merge non user wishlists with user ones
   let wishlistTable = JSON.parse(localStorage.getItem("wishlistTable"))?.filter(
     (wl) => wl.idList.length > 0
   );
 
-  console.log(wishlistTable);
-
   const users = JSON.parse(localStorage.getItem("users"));
   const existingUser = users.find((u) => u.email === user.email);
-
-  console.log(existingUser);
 
   // first time user is using wishlist
   let userWishlistTable = existingUser.wishlistTable ?? [];
 
-  console.log(userWishlistTable);
-
-  // wishlistTable can be undefiend because it is reset each time user is connected
+  // wishlistTable can be undefiend because it is reset each time user is connected after merged
   if (wishlistTable) {
     userWishlistTable.push(...wishlistTable);
   }
 
-  console.log(userWishlistTable);
-
+  // create a wishlistTable if we have nothing at all
   if (!userWishlistTable.some((wl) => wl.idList.length > 0)) {
     userWishlistTable = [
       {
@@ -88,9 +77,12 @@ const getUserWishlistTable = (user) => {
     ];
   }
 
-  console.log(userWishlistTable);
-
-  updateUserWishlistTable(user, userWishlistTable);
+  // reset the currentWishlist avoiding haven't one or having two
+  (userWishlistTable = userWishlistTable.map((wl, index) => ({
+    ...wl,
+    isCurrent: index === 0,
+  }))),
+    updateUserWishlistTable(user, userWishlistTable);
 
   return userWishlistTable;
 };
@@ -98,13 +90,10 @@ const getUserWishlistTable = (user) => {
 const updateUserWishlistTable = (user, wishlistTable) => {
   const newUser = {
     ...user,
-    wishlistTable: wishlistTable.map((wl, index) => ({
-      ...wl,
-      isCurrent: index === 0,
-    })),
+    wishlistTable: wishlistTable,
   };
 
-  console.log(newUser);
+  // TODO: create only one function to handle all user updates
   setUserCookies(newUser);
   mockUpdateUser(user, newUser);
 

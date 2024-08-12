@@ -23,7 +23,6 @@ export const useWishlist = create((set, get) => {
 
     // auto currentWishlist initialisation
     initCurrentWishlist: () => {
-      console.log(get().wishlistTable);
       const current = get().wishlistTable.find(
         (wishlist) => wishlist.isCurrent
       );
@@ -106,8 +105,6 @@ export const useWishlist = create((set, get) => {
       const newWishlistTable = get().wishlistTable.map((wl) =>
         wl.id === wishlist.id ? { ...wishlist } : wl
       );
-
-      console.log(newWishlistTable);
 
       get().updateWishlistState({ wishlistTable: newWishlistTable });
     },
