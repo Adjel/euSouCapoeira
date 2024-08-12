@@ -35,7 +35,7 @@ export const useWishlist = create((set, get) => ({
       name: newName,
       id: `${crypto.randomUUID()}${new Date().toISOString().split("T")[0]}`,
       isCurrent: true,
-      idList: [{ id: "", quantity: "" }],
+      idList: [],
     };
 
     const updatedWishlistTable = get().wishlistTable.map((wishlist) => ({
