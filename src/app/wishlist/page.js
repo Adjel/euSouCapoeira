@@ -10,7 +10,29 @@ function Page() {
     setCurrentWishlist,
     deleteWishlist,
     currentWishlist,
+    udpateWishlistName,
   } = useWishlist();
+
+  const [toggleWishlistName, setToggleWishlistName] = useState(false);
+  const [wishlistName, setWishlistName] = useState("");
+
+  const handleSubmitWishlistName = (event) => {
+    console.log("handleSubmitWishlistName");
+    event.preventDefault();
+    console.log(wishlistName);
+    udpateWishlistName(wishlistName);
+    setToggleWishlistName(false);
+    setWishlistName("");
+  };
+
+  const handleWishlistName = (event) => {
+    setWishlistName(event.target.value);
+  };
+
+  const handleToggleWishlistName = () => {
+    console.log("handleToggleWishlistName");
+    setToggleWishlistName((prev) => !prev);
+  };
 
   console.log(wishlistTable);
   console.log(currentWishlist);
@@ -44,9 +66,24 @@ function Page() {
       </div>
       <div className="flex flex-col p-7 w-full h-full gap-6 border-2 border-green-500">
         <div className="flex border-2 border-red-500">
-          <h2>{currentWishlist.name}</h2>
+          {toggleWishlistName ? (
+            <form
+              onSubmit={(event) => handleSubmitWishlistName(event)}
+              className="w-full"
+            >
+              <input
+                className="w-full"
+                type="text"
+                placeholder={currentWishlist.name}
+                value={wishlistName}
+                onChange={(event) => handleWishlistName(event)}
+              ></input>
+            </form>
+          ) : (
+            <h2 onClick={handleToggleWishlistName}>{currentWishlist.name}</h2>
+          )}
         </div>
-        {currentWishlist.idList.map(({ id }) => (
+        {currentWishlist.idList?.map(({ id }) => (
           <div key={id} className="border-2 border-blue-500">
             <span>{id}</span>
           </div>
