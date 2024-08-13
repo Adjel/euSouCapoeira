@@ -158,12 +158,9 @@ export const useWishlist = create((set, get) => {
     },
 
     toggleQuantity: (user, id, isAdd) => {
-      console.log(id);
       const { updateCurrentWishlist, getCurrentWishlist } = get();
 
       const updateItemQuantity = (item, isAdd) => {
-        console.log(item);
-        console.log(isAdd);
         const newQuantity = isAdd
           ? item.quantity + 1
           : item.quantity > 1
@@ -180,8 +177,6 @@ export const useWishlist = create((set, get) => {
       const updatedIdList = current.idList.map((item) =>
         item.id === id ? updateItemQuantity(item, isAdd) : item
       );
-
-      console.log(updatedIdList);
 
       const newWishlist = { ...current, idList: updatedIdList };
 
