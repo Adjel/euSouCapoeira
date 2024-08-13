@@ -40,7 +40,7 @@ export const useWishlist = create((set, get) => {
 
     ///////////////////// WISHLIST ///////////////////////
 
-    createWishlist: (name) => {
+    createWishlist: (user, name) => {
       const newName = name ?? `Liste d'envies du ${defaultDate}`;
 
       const newWishlist = {

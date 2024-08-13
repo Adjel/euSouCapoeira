@@ -26,7 +26,7 @@ function Page() {
   const handleSubmitWishlistName = (event) => {
     event.preventDefault();
 
-    udpateWishlistName(wishlistName);
+    udpateWishlistName(user, wishlistName);
     setToggleWishlistName(false);
     setWishlistName("");
   };
@@ -42,7 +42,7 @@ function Page() {
   return (
     <div className="flex flex-row gap-7 border-2 border-pink-500">
       <div className="hidden md:flex flex-col w-1/5 gap-7 border-2 border-yellow-500">
-        <Button className="w-fit" onClick={() => createWishlist()}>
+        <Button className="w-fit" onClick={() => createWishlist(user)}>
           + nouveau
         </Button>
         {wishlistTable?.length > 0 && (
@@ -53,14 +53,16 @@ function Page() {
                 key={id}
               >
                 <Button
-                  onClick={() => setCurrentWishlist(id)}
+                  onClick={() => setCurrentWishlist(user, id)}
                   className="bg-transparent text-black shadow-none hover:bg-transparent"
                 >
                   <span className={`${isCurrent && "text-color-gold"}`}>
                     {name}
                   </span>
                 </Button>
-                <Button onClick={() => deleteWishlist(id)}>supprimer</Button>
+                <Button onClick={() => deleteWishlist(user, id)}>
+                  supprimer
+                </Button>
               </div>
             ))}
           </div>
