@@ -13,7 +13,7 @@ export const getWishlistTable = (user) => {
   return wishlistTable;
 };
 
-export const udpateWishlist = (user, wishlistTable) => {
+export const updateWishlist = (user, wishlistTable) => {
   if (!user) {
     localStorage.setItem("wishlistTable", JSON.stringify(wishlistTable));
   } else {
