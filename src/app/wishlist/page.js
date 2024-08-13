@@ -9,9 +9,11 @@ import PriceComponent from "@/components/PriceComponent";
 import Image from "next/image";
 import AddToCartButton from "@/components/AddToCartButton";
 import WishlistProductQuantityButton from "@/components/WishlistProductQuantityButton";
-import WishlistDeleteButton from "@/components/WishlistDeleteButton";
+import WishlistDeleteProductButton from "@/components/WishlistDeleteProductButton";
 import WishlistMobileMenuButton from "@/components/WishlistMobileMenuButton";
 import WishlistTitleItem from "@/components/WishlistTitleItem";
+import ModifyWishlistButton from "@/components/ModifyWishlistButton";
+import DeleteWishlistButton from "@/components/DeleteWishlistButton";
 
 function Page() {
   const { user } = useUserStore();
@@ -20,8 +22,8 @@ function Page() {
     createWishlist,
     toggle,
     toggleQuantity,
+    toggleModify,
     setCurrentWishlist,
-    deleteWishlist,
     currentWishlist,
     currentProductWishlist,
     udpateWishlistName,
@@ -36,7 +38,14 @@ function Page() {
   }, [user]);
 
   const handleSubmitWishlistName = (event) => {
+    const name = event.target.value;
     event.preventDefault();
+
+    if (wishlistName === "") {
+      setWishlistName((prevSate) => prevSate);
+      setToggleWishlistName(false);
+      return;
+    }
 
     udpateWishlistName(user, wishlistName);
     setToggleWishlistName(false);
@@ -54,7 +63,7 @@ function Page() {
   return (
     <div className="flex flex-col gap-4 border-2 border-pink-500">
       <WishlistMobileMenuButton />
-      <div className="flex flex-row pt-0 lg:pt-12 border-2 border-pink-500">
+      <div className="flex flex-row p-0 lg:pt-12 lg:pb-5 border-2 border-pink-500">
         <div className="hidden lg:flex flex-col w-2/5 gap-7 ml-16 border-2 border-yellow-500">
           <Button className="w-fit" onClick={() => createWishlist(user)}>
             + nouveau
@@ -76,9 +85,6 @@ function Page() {
                       idList={idList}
                       date={date}
                     />
-                  </Button>
-                  <Button onClick={() => deleteWishlist(user, id)}>
-                    supprimer
                   </Button>
                 </div>
               ))}
@@ -109,7 +115,25 @@ function Page() {
               </h2>
             )}
           </div>
-          <div className="flex flex-col w-full gap-2">
+          <div
+            className={`transition-all duration-500 transform ease-in-out ${
+              toggleModify ? "h-fit" : "h-0"
+            }`}
+          >
+            <DeleteWishlistButton user={user} wishlistId={currentWishlist.id} />
+          </div>
+          <div
+            className={`flex w-full justify-end transition-all duration-500 transform ease-in-out ${
+              toggleModify ? "translate-y-0" : "-translate-y-10"
+            }`}
+          >
+            <ModifyWishlistButton />
+          </div>
+          <div
+            className={`flex flex-col w-full gap-2 transition-all duration-500 transform ease-in-out ${
+              toggleModify ? "translate-y-0" : "-translate-y-10"
+            }`}
+          >
             {currentProductWishlist?.map((product) => (
               <div
                 key={product.id}
@@ -136,7 +160,7 @@ function Page() {
                     />
                   </div>
                   <div className="flex flex-row w-full">
-                    <WishlistDeleteButton
+                    <WishlistDeleteProductButton
                       onClick={() => toggle(user, product.id)}
                     />
                     <div className="flex ml-auto justify-center items-center">
