@@ -136,7 +136,10 @@ function Page() {
                       productId={product.id}
                       quantity={product.quantity}
                     />
-                    <AddToCartButton product={product} />
+                    <AddToCartButton
+                      product={product}
+                      quantity={product.quantity}
+                    />
                   </div>
                 </div>
               </div>
