@@ -1,6 +1,7 @@
 import { getWishlistTable, updateWishlist } from "@/providers/wishlistProvider";
 import { create } from "zustand";
 import { getUserFromCookies } from "@/coockieStore/userCoockies";
+import { products } from "@/providers/productsProvider";
 
 const defaultDate = new Date().toLocaleDateString();
 
@@ -9,6 +10,7 @@ export const useWishlist = create((set, get) => {
     wishlistTable: [],
 
     currentWishlist: null,
+    currentProductWishlist: null,
 
     getWishlistTableState: (user) => {
       // by default the user is logged or by cookies or not logged
@@ -35,6 +37,8 @@ export const useWishlist = create((set, get) => {
       const current = get().wishlistTable.find(
         (wishlist) => wishlist.isCurrent
       );
+      console.log(current);
+      get().getCurrentWishlistProducts(current);
       set({ currentWishlist: current });
     },
 
@@ -95,6 +99,29 @@ export const useWishlist = create((set, get) => {
     },
 
     /////////////////// CURRENT WISHLIST ///////////////////////
+    getCurrentWishlistProducts: (current) => {
+      console.log("getCurrentWishlistProducts");
+      console.log(current);
+
+      const currentWishlistProducts = [];
+
+      // find and set products by id
+      products.forEach((subCategory) => {
+        subCategory.products.forEach((product) => {
+          current.idList.map(({ id, quantity = 1 }) => {
+            if (id === product.id)
+              currentWishlistProducts.push({
+                ...product,
+                quantity,
+              });
+          });
+        });
+      });
+      console.log(currentWishlistProducts);
+      set({
+        currentProductWishlist: currentWishlistProducts,
+      });
+    },
 
     getCurrentWishlist: () => {
       const current = get().wishlistTable.find(
@@ -113,6 +140,7 @@ export const useWishlist = create((set, get) => {
     },
 
     updateCurrentWishlist: (user, wishlist) => {
+      console.log(wishlist);
       const newWishlistTable = get().wishlistTable.map((wl) =>
         wl.id === wishlist.id ? { ...wishlist } : wl
       );
@@ -123,6 +151,8 @@ export const useWishlist = create((set, get) => {
     /////////////////// (ADD) PRODUCTS ID AND PRODUCT ///////////////////////
 
     toggle: (user, id) => {
+      console.log(id);
+
       const updateCurrentWishlist = get().updateCurrentWishlist;
       const current = get().getCurrentWishlist();
 
@@ -131,6 +161,37 @@ export const useWishlist = create((set, get) => {
         : [...current.idList, { id: id, quanity: 1 }];
 
       const newWishlist = { ...current, idList: updatedIdList };
+
+      updateCurrentWishlist(user, newWishlist);
+    },
+
+    toggleQuantity: (user, id, quantity, isAdd) => {
+      console.log(id);
+      const updateCurrentWishlist = get().updateCurrentWishlist;
+      const current = get().getCurrentWishlist();
+
+      const updatedIdList = current.idList.map((obj) => {
+        console.log(obj);
+        if (obj.id === id) {
+          return {
+            id: id,
+            quantity:
+              isAdd === true
+                ? quantity + 1
+                : quantity > 1
+                ? quantity - 1
+                : quantity,
+          };
+        } else {
+          return obj;
+        }
+      });
+
+      console.log(updatedIdList);
+
+      const newWishlist = { ...current, idList: updatedIdList };
+
+      console.log(newWishlist);
 
       updateCurrentWishlist(user, newWishlist);
     },
