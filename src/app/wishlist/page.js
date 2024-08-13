@@ -10,6 +10,8 @@ import Image from "next/image";
 import AddToCartButton from "@/components/AddToCartButton";
 import WishlistProductQuantityButton from "@/components/WishlistProductQuantityButton";
 import WishlistDeleteButton from "@/components/WishlistDeleteButton";
+import WishlistMobileMenuButton from "@/components/WishlistMobileMenuButton";
+import WishlistTitleItem from "@/components/WishlistTitleItem";
 
 function Page() {
   const { user } = useUserStore();
@@ -50,93 +52,107 @@ function Page() {
   };
 
   return (
-    <div className="flex flex-row gap-7 border-2 border-pink-500">
-      <div className="hidden md:flex flex-col w-1/5 gap-7 border-2 border-yellow-500">
-        <Button className="w-fit" onClick={() => createWishlist(user)}>
-          + nouveau
-        </Button>
-        {wishlistTable?.length > 0 && (
-          <div className="flex flex-col w-full h-full border-2 border-red-500">
-            {wishlistTable?.map(({ id, name, isCurrent }) => (
-              <div
-                className="flex w-full h-fit gap-4 justify-start items-center "
-                key={id}
-              >
-                <Button
-                  onClick={() => setCurrentWishlist(user, id)}
-                  className="bg-transparent text-black shadow-none hover:bg-transparent"
+    <div className="flex flex-col gap-4 border-2 border-pink-500">
+      <WishlistMobileMenuButton />
+      <div className="flex flex-row pt-0 lg:pt-12 border-2 border-pink-500">
+        <div className="hidden lg:flex flex-col w-2/5 gap-7 ml-16 border-2 border-yellow-500">
+          <Button className="w-fit" onClick={() => createWishlist(user)}>
+            + nouveau
+          </Button>
+          {wishlistTable?.length > 0 && (
+            <div className="flex flex-col w-full h-full gap-7 border-2 border-red-500">
+              {wishlistTable?.map(({ id, name, isCurrent, idList, date }) => (
+                <div
+                  className="flex w-full h-fit gap-4 justify-start items-center"
+                  key={id}
                 >
-                  <span className={`${isCurrent && "text-color-gold"}`}>
-                    {name}
-                  </span>
-                </Button>
-                <Button onClick={() => deleteWishlist(user, id)}>
-                  supprimer
-                </Button>
+                  <Button
+                    onClick={() => setCurrentWishlist(user, id)}
+                    className="bg-transparent text-black shadow-none hover:bg-transparent"
+                  >
+                    <WishlistTitleItem
+                      isCurrent={isCurrent}
+                      name={name}
+                      idList={idList}
+                      date={date}
+                    />
+                  </Button>
+                  <Button onClick={() => deleteWishlist(user, id)}>
+                    supprimer
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col px-7 w-full h-full gap-6 border-2 border-green-500">
+          <div className="flex border-2 border-red-500">
+            {toggleWishlistName ? (
+              <form
+                onSubmit={(event) => handleSubmitWishlistName(event)}
+                className="w-full"
+              >
+                <input
+                  className="w-full"
+                  type="text"
+                  placeholder={currentWishlist.name}
+                  value={wishlistName}
+                  onChange={(event) => handleWishlistName(event)}
+                ></input>
+              </form>
+            ) : (
+              <h2
+                className="text-3xl font-bold first-letter:uppercase"
+                onClick={handleToggleWishlistName}
+              >
+                {currentWishlist.name}
+              </h2>
+            )}
+          </div>
+          <div className="flex flex-col w-full gap-2">
+            {currentProductWishlist?.map((product) => (
+              <div
+                key={product.id}
+                className="flex flex-row w-full h-fit px-4 py-2 items-center justify-start bg-background-medium-gray rounded"
+              >
+                <Image
+                  alt={product.images[0].alt}
+                  src={product.images[0].image}
+                  className="w-20 h-20 md:w-24 md:h-24 p-1 mr-4"
+                />
+                <div key={product.id} className="flex flex-col w-full">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-sm w-full">{product.name}</span>
+                    <AvailabilityComponent
+                      availability={product.availability}
+                      className="text-xs"
+                    />
+                    <div className="hidden lg:block">
+                      <RatingComponent userRate={product.rates} />
+                    </div>
+                    <PriceComponent
+                      price={product.price}
+                      className="text-base"
+                    />
+                  </div>
+                  <div className="flex flex-row w-full">
+                    <WishlistDeleteButton
+                      onClick={() => toggle(user, product.id)}
+                    />
+                    <div className="flex ml-auto justify-center items-center">
+                      <WishlistProductQuantityButton
+                        onClick={toggleQuantity}
+                        user={user}
+                        productId={product.id}
+                        quantity={product.quantity}
+                      />
+                      <AddToCartButton product={product} />
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
-        )}
-      </div>
-      <div className="flex flex-col p-7 w-full h-full gap-6 border-2 border-green-500">
-        <div className="flex border-2 border-red-500">
-          {toggleWishlistName ? (
-            <form
-              onSubmit={(event) => handleSubmitWishlistName(event)}
-              className="w-full"
-            >
-              <input
-                className="w-full"
-                type="text"
-                placeholder={currentWishlist.name}
-                value={wishlistName}
-                onChange={(event) => handleWishlistName(event)}
-              ></input>
-            </form>
-          ) : (
-            <h2 onClick={handleToggleWishlistName}>{currentWishlist.name}</h2>
-          )}
-        </div>
-        <div className="flex flex-col w-full gap-2">
-          {currentProductWishlist?.map((product) => (
-            <div
-              key={product.id}
-              className="flex flex-row w-full h-fit px-4 py-2 items-center justify-start bg-background-medium-gray rounded"
-            >
-              <Image
-                alt={product.images[0].alt}
-                src={product.images[0].image}
-                className="w-20 h-20 md:w-24 md:h-24 p-1 mr-4"
-              />
-              <div key={product.id} className="flex flex-col gap-5 w-full">
-                <div className="flex flex-col gap-1">
-                  <span className="text-sm w-full">{product.name}</span>
-                  <AvailabilityComponent
-                    availability={product.availability}
-                    className="text-xs"
-                  />
-                  <div className="hidden md:block">
-                    <RatingComponent userRate={product.rates} />
-                  </div>
-                  <PriceComponent price={product.price} className="text-base" />
-                </div>
-                <div className="flex flex-row w-full">
-                  <WishlistDeleteButton
-                    onClick={() => toggle(user, product.id)}
-                  />
-                  <div className="flex ml-auto justify-center items-center">
-                    <WishlistProductQuantityButton
-                      onClick={toggleQuantity}
-                      user={user}
-                      productId={product.id}
-                      quantity={product.quantity}
-                    />
-                    <AddToCartButton product={product} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </div>
