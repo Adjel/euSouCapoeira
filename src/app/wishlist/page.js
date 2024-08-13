@@ -28,8 +28,6 @@ function Page() {
     getWishlistTableState,
   } = useWishlist();
 
-  console.log(currentProductWishlist);
-
   const [toggleWishlistName, setToggleWishlistName] = useState(false);
   const [wishlistName, setWishlistName] = useState("");
 
