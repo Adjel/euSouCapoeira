@@ -5,6 +5,7 @@
 :root {
     --background-medium-gray: rgb(243 243 243);
     --color-divider: rgb(232 232 232);
+    --color-info: rgb(138 138 138);
     --color-cancel-button: rgb(232 232 232);
     --color-hover-cancel-button: rgb(209 209 209);
     --color-text-medium-gray: rgb(243 243 243);

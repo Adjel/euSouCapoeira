@@ -11,6 +11,11 @@ export const useWishlist = create((set, get) => {
 
     currentWishlist: null,
     currentProductWishlist: null,
+    toggleModify: false,
+
+    setToggleModify: () => {
+      set((state) => ({ toggleModify: !state.toggleModify }));
+    },
 
     getWishlistTableState: (user) => {
       // by default the user is logged or by cookies or not logged
@@ -30,6 +35,7 @@ export const useWishlist = create((set, get) => {
       set(newState);
       updateWishlist(user, newState.wishlistTable);
       get().initCurrentWishlist();
+      set({ toggleModify: false });
     },
 
     // auto currentWishlist initialisation
