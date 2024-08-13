@@ -3,7 +3,6 @@ import { IoChevronDownOutline } from "react-icons/io5";
 import { IoChevronUpOutline } from "react-icons/io5";
 
 function WishlistProductQuantityButton({ user, productId, quantity, onClick }) {
-  console.log(productId);
   return (
     <div className="flex w-fit h-fit px-2 py-1 md:px-4 md:py-3 gap-3 justify-center items-center">
       {quantity}
