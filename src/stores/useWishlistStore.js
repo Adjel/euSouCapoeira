@@ -150,7 +150,7 @@ export const useWishlist = create((set, get) => {
 
       const updatedIdList = current.idList.find((obj) => obj.id === id)
         ? current.idList.filter((item) => item.id !== id)
-        : [...current.idList, { id: id, quanity: 1 }];
+        : [...current.idList, { id: id, quantity: 1 }];
 
       const newWishlist = { ...current, idList: updatedIdList };
 
