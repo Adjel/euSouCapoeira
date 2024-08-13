@@ -9,13 +9,11 @@ function WishlistProductQuantityButton({ user, productId, quantity, onClick }) {
       {quantity}
       <div className="flex flex-col h-fit justify-center items-center">
         <button className="button">
-          <IoChevronUpOutline
-            onClick={() => onClick(user, productId, quantity, true)}
-          />
+          <IoChevronUpOutline onClick={() => onClick(user, productId, true)} />
         </button>
         <button className="button">
           <IoChevronDownOutline
-            onClick={() => onClick(user, productId, quantity, false)}
+            onClick={() => onClick(user, productId, false)}
           />
         </button>
       </div>

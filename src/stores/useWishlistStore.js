@@ -37,7 +37,6 @@ export const useWishlist = create((set, get) => {
       const current = get().wishlistTable.find(
         (wishlist) => wishlist.isCurrent
       );
-      console.log(current);
       get().getCurrentWishlistProducts(current);
       set({ currentWishlist: current });
     },
@@ -100,9 +99,6 @@ export const useWishlist = create((set, get) => {
 
     /////////////////// CURRENT WISHLIST ///////////////////////
     getCurrentWishlistProducts: (current) => {
-      console.log("getCurrentWishlistProducts");
-      console.log(current);
-
       const currentWishlistProducts = [];
 
       // find and set products by id
@@ -117,7 +113,6 @@ export const useWishlist = create((set, get) => {
           });
         });
       });
-      console.log(currentWishlistProducts);
       set({
         currentProductWishlist: currentWishlistProducts,
       });
@@ -140,7 +135,6 @@ export const useWishlist = create((set, get) => {
     },
 
     updateCurrentWishlist: (user, wishlist) => {
-      console.log(wishlist);
       const newWishlistTable = get().wishlistTable.map((wl) =>
         wl.id === wishlist.id ? { ...wishlist } : wl
       );
@@ -151,8 +145,6 @@ export const useWishlist = create((set, get) => {
     /////////////////// (ADD) PRODUCTS ID AND PRODUCT ///////////////////////
 
     toggle: (user, id) => {
-      console.log(id);
-
       const updateCurrentWishlist = get().updateCurrentWishlist;
       const current = get().getCurrentWishlist();
 
@@ -165,33 +157,28 @@ export const useWishlist = create((set, get) => {
       updateCurrentWishlist(user, newWishlist);
     },
 
-    toggleQuantity: (user, id, quantity, isAdd) => {
-      console.log(id);
-      const updateCurrentWishlist = get().updateCurrentWishlist;
-      const current = get().getCurrentWishlist();
+    toggleQuantity: (user, id, isAdd) => {
+      const { updateCurrentWishlist, getCurrentWishlist } = get();
 
-      const updatedIdList = current.idList.map((obj) => {
-        console.log(obj);
-        if (obj.id === id) {
-          return {
-            id: id,
-            quantity:
-              isAdd === true
-                ? quantity + 1
-                : quantity > 1
-                ? quantity - 1
-                : quantity,
-          };
-        } else {
-          return obj;
-        }
-      });
+      const updateItemQuantity = (item, isAdd) => {
+        const newQuantity = isAdd
+          ? item.quantity + 1
+          : item.quantity > 1
+          ? item.quantity - 1
+          : 1;
+        return {
+          ...item,
+          quantity: newQuantity,
+        };
+      };
 
-      console.log(updatedIdList);
+      const current = getCurrentWishlist();
+
+      const updatedIdList = current.idList.map((item) =>
+        item.id === id ? updateItemQuantity(item, isAdd) : item
+      );
 
       const newWishlist = { ...current, idList: updatedIdList };
-
-      console.log(newWishlist);
 
       updateCurrentWishlist(user, newWishlist);
     },
