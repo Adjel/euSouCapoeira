@@ -1,6 +1,7 @@
 import { getWishlistTable, updateWishlist } from "@/providers/wishlistProvider";
 import { create } from "zustand";
 import { getUserFromCookies } from "@/coockieStore/userCoockies";
+import { products } from "@/providers/productsProvider";
 
 const defaultDate = new Date().toLocaleDateString();
 
@@ -9,6 +10,7 @@ export const useWishlist = create((set, get) => {
     wishlistTable: [],
 
     currentWishlist: null,
+    currentProductWishlist: null,
 
     getWishlistTableState: (user) => {
       // by default the user is logged or by cookies or not logged
@@ -35,6 +37,7 @@ export const useWishlist = create((set, get) => {
       const current = get().wishlistTable.find(
         (wishlist) => wishlist.isCurrent
       );
+      get().getCurrentWishlistProducts(current);
       set({ currentWishlist: current });
     },
 
@@ -95,6 +98,25 @@ export const useWishlist = create((set, get) => {
     },
 
     /////////////////// CURRENT WISHLIST ///////////////////////
+    getCurrentWishlistProducts: (current) => {
+      const currentWishlistProducts = [];
+
+      // find and set products by id
+      products.forEach((subCategory) => {
+        subCategory.products.forEach((product) => {
+          current.idList.map(({ id, quantity = 1 }) => {
+            if (id === product.id)
+              currentWishlistProducts.push({
+                ...product,
+                quantity,
+              });
+          });
+        });
+      });
+      set({
+        currentProductWishlist: currentWishlistProducts,
+      });
+    },
 
     getCurrentWishlist: () => {
       const current = get().wishlistTable.find(
@@ -129,6 +151,32 @@ export const useWishlist = create((set, get) => {
       const updatedIdList = current.idList.find((obj) => obj.id === id)
         ? current.idList.filter((item) => item.id !== id)
         : [...current.idList, { id: id, quanity: 1 }];
+
+      const newWishlist = { ...current, idList: updatedIdList };
+
+      updateCurrentWishlist(user, newWishlist);
+    },
+
+    toggleQuantity: (user, id, isAdd) => {
+      const { updateCurrentWishlist, getCurrentWishlist } = get();
+
+      const updateItemQuantity = (item, isAdd) => {
+        const newQuantity = isAdd
+          ? item.quantity + 1
+          : item.quantity > 1
+          ? item.quantity - 1
+          : 1;
+        return {
+          ...item,
+          quantity: newQuantity,
+        };
+      };
+
+      const current = getCurrentWishlist();
+
+      const updatedIdList = current.idList.map((item) =>
+        item.id === id ? updateItemQuantity(item, isAdd) : item
+      );
 
       const newWishlist = { ...current, idList: updatedIdList };
 

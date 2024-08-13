@@ -1,6 +1,6 @@
 import React from "react";
 
-function AvailabilityComponent({ availability }) {
+function AvailabilityComponent({ availability, className }) {
   let textColor;
   let content;
   if (availability === "now") {
@@ -21,7 +21,9 @@ function AvailabilityComponent({ availability }) {
   }
 
   return (
-    <div className={`${textColor} text-sm md:text-base first-letter:uppercase`}>
+    <div
+      className={`${textColor} text-sm md:text-base first-letter:uppercase ${className}`}
+    >
       {content}
     </div>
   );

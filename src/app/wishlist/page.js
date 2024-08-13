@@ -3,15 +3,27 @@ import React, { useEffect, useState } from "react";
 import { useWishlist } from "@/stores/useWishlistStore";
 import { Button } from "@/components/ui/button";
 import { useUserStore } from "@/stores/useUserStore";
+import RatingComponent from "@/components/RatingComponent";
+import AvailabilityComponent from "@/components/AvailabilityComponent";
+import PriceComponent from "@/components/PriceComponent";
+import Image from "next/image";
+
+import { RiDeleteBinLine } from "react-icons/ri";
+import AddToCartButton from "@/components/AddToCartButton";
+import ProductQuantityButton from "@/components/ProductQuantityButton";
+import WishlistProductQuantityButton from "@/components/WishlistProductQuantityButton";
 
 function Page() {
   const { user } = useUserStore();
   const {
     wishlistTable,
     createWishlist,
+    toogle,
+    toggleQuantity,
     setCurrentWishlist,
     deleteWishlist,
     currentWishlist,
+    currentProductWishlist,
     udpateWishlistName,
     getWishlistTableState,
   } = useWishlist();
@@ -87,11 +99,50 @@ function Page() {
             <h2 onClick={handleToggleWishlistName}>{currentWishlist.name}</h2>
           )}
         </div>
-        {currentWishlist.idList?.map(({ id }) => (
-          <div key={id} className="border-2 border-blue-500">
-            <span>{id}</span>
-          </div>
-        ))}
+        <div className="flex flex-col w-full gap-2">
+          {currentProductWishlist?.map((product) => (
+            <div
+              key={product.id}
+              className="flex flex-row w-full h-fit px-4 py-2 items-center justify-start bg-background-medium-gray rounded"
+            >
+              <Image
+                alt={product.images[0].alt}
+                src={product.images[0].image}
+                className="w-20 h-20 md:w-24 md:h-24 p-1 mr-4"
+              />
+              <div key={product.id} className="flex flex-col gap-5 w-full">
+                <div className="flex flex-col gap-1">
+                  <span className="text-sm w-full">{product.name}</span>
+                  <AvailabilityComponent
+                    availability={product.availability}
+                    className="text-xs"
+                  />
+                  <div className="hidden md:block">
+                    <RatingComponent userRate={product.rates} />
+                  </div>
+                  <PriceComponent price={product.price} className="text-base" />
+                </div>
+                <div className="flex flex-row w-full">
+                  <button>
+                    <RiDeleteBinLine
+                      className="w-6 h-6 text-extreme-dark-gray"
+                      onClick={() => toogle(product.id)}
+                    />
+                  </button>
+                  <div className="flex ml-auto justify-center items-center">
+                    <WishlistProductQuantityButton
+                      onClick={toggleQuantity}
+                      user={user}
+                      productId={product.id}
+                      quantity={product.quantity}
+                    />
+                    <AddToCartButton product={product} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
