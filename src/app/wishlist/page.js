@@ -7,18 +7,16 @@ import RatingComponent from "@/components/RatingComponent";
 import AvailabilityComponent from "@/components/AvailabilityComponent";
 import PriceComponent from "@/components/PriceComponent";
 import Image from "next/image";
-
-import { RiDeleteBinLine } from "react-icons/ri";
 import AddToCartButton from "@/components/AddToCartButton";
-import ProductQuantityButton from "@/components/ProductQuantityButton";
 import WishlistProductQuantityButton from "@/components/WishlistProductQuantityButton";
+import WishlistDeleteButton from "@/components/WishlistDeleteButton";
 
 function Page() {
   const { user } = useUserStore();
   const {
     wishlistTable,
     createWishlist,
-    toogle,
+    toggle,
     toggleQuantity,
     setCurrentWishlist,
     deleteWishlist,
@@ -123,12 +121,9 @@ function Page() {
                   <PriceComponent price={product.price} className="text-base" />
                 </div>
                 <div className="flex flex-row w-full">
-                  <button>
-                    <RiDeleteBinLine
-                      className="w-6 h-6 text-extreme-dark-gray"
-                      onClick={() => toogle(product.id)}
-                    />
-                  </button>
+                  <WishlistDeleteButton
+                    onClick={() => toggle(user, product.id)}
+                  />
                   <div className="flex ml-auto justify-center items-center">
                     <WishlistProductQuantityButton
                       onClick={toggleQuantity}
