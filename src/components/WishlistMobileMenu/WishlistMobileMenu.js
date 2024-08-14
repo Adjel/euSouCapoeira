@@ -32,8 +32,9 @@ function WishlistMobileMenu({ wishlistTable }) {
           </header>
           <div className="flex flex-col gap-6">
             <NewWishlistButton className="h-fit" user={user} />
-            {wishlistTable.map(({ isCurrent, name, idList, date }) => (
+            {wishlistTable.map(({ isCurrent, name, idList, date, id }) => (
               <WishlistTitleItem
+                key={id}
                 isCurrent={isCurrent}
                 name={name}
                 idList={idList}

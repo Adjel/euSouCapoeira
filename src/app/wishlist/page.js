@@ -57,7 +57,7 @@ function Page() {
         </div>
         <div className="flex flex-col px-7 w-full h-full gap-6">
           <div className="flex">
-            <WishlistTitleInput />
+            <WishlistTitleInput user={user} />
           </div>
           <div
             className={`transition-all duration-150 transform ease-in-out ${
