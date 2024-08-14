@@ -15,7 +15,6 @@ export const useWishlist = create((set, get) => {
     toggleMenu: false,
 
     setToggleMenu: () => {
-      console.log("toogleMenu");
       set((state) => ({ toggleMenu: !state.toggleMenu }));
     },
 
