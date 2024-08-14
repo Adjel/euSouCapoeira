@@ -9,7 +9,7 @@ function AddToCartButton({ product, ml = "ml-4" }) {
     (product.availability === "now" || product.availability === "command") && (
       <SlBasket
         className={`${ml} w-6 h-6 cursor-pointer`}
-        onClick={() => addToCart(product)}
+        onClick={() => addToCart(product, product.quantity)}
       />
     )
   );

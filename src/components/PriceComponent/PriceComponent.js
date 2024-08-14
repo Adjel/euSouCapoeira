@@ -1,6 +1,6 @@
 import React from "react";
 
-function PriceComponent({ price }) {
+function PriceComponent({ price, className }) {
   // Convertir le prix en une chaîne de caractères avec une virgule comme séparateur décimal
   const formattedPrice = price?.toLocaleString("fr-FR", {
     minimumFractionDigits: 2,
@@ -9,7 +9,9 @@ function PriceComponent({ price }) {
 
   return (
     price !== "" && (
-      <span className="font-bold text-3xl">{formattedPrice} €</span>
+      <span className={`font-bold text-3xl ${className}`}>
+        {formattedPrice} €
+      </span>
     )
   );
 }

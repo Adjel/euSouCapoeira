@@ -29,6 +29,7 @@ module.exports = {
         0.1: "0.025rem",
       },
       colors: {
+        "color-info": "var(--color-info)",
         "color-green": "var(--color-green)",
         "color-yellow": "var(--color-yellow)",
         "color-red": "var(--color-red)",
