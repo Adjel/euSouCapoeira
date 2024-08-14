@@ -22,6 +22,8 @@ export const useWishlist = create((set, get) => {
       set((state) => ({ toggleModify: !state.toggleModify }));
     },
 
+    ///////////////////////// HANDLE STATE ///////////////////////////
+
     getWishlistTableState: (user) => {
       // by default the user is logged or by cookies or not logged
       const coockieUser = getUserFromCookies();
@@ -32,8 +34,6 @@ export const useWishlist = create((set, get) => {
       });
       get().initCurrentWishlist();
     },
-
-    ///////////////////////// HANDLE STATE ///////////////////////////
 
     // avoid to forget update one of two states when udpate at least one
     updateWishlistState: (user, newState) => {
@@ -109,6 +109,7 @@ export const useWishlist = create((set, get) => {
     },
 
     /////////////////// CURRENT WISHLIST ///////////////////////
+
     getCurrentWishlistProducts: (current) => {
       const currentWishlistProducts = [];
 
@@ -173,7 +174,9 @@ export const useWishlist = create((set, get) => {
 
       const updateItemQuantity = (item, isAdd) => {
         const newQuantity = isAdd
-          ? item.quantity + 1
+          ? item.quantity < 99
+            ? item.quantity + 1
+            : item.quantity
           : item.quantity > 1
           ? item.quantity - 1
           : 1;

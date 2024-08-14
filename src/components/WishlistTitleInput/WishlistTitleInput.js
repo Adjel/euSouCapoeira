@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useWishlist } from "@/stores/useWishlistStore";
 
-function WishlistTitleInput() {
+function WishlistTitleInput({ user }) {
   const { udpateWishlistName, currentWishlist } = useWishlist();
 
   const [toggleWishlistName, setToggleWishlistName] = useState(false);
@@ -35,7 +35,7 @@ function WishlistTitleInput() {
       className="w-full"
     >
       <input
-        className="w-full"
+        className="w-full text-3xl font-bold first-letter:uppercase"
         type="text"
         placeholder={currentWishlist.name}
         value={wishlistName}
