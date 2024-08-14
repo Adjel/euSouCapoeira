@@ -1,5 +1,5 @@
 import { setUserCookies } from "@/coockieStore/userCoockies";
-import { mockUpdateUser } from "./logInProvider";
+import { mockUpdateUser } from "./userProvider";
 
 const defaultDate = new Date().toLocaleDateString();
 
@@ -53,7 +53,7 @@ const getUserWishlistTable = (user) => {
   );
 
   const users = JSON.parse(localStorage.getItem("users"));
-  const existingUser = users.find((u) => u.email === user.email);
+  const existingUser = users.find((u) => u.id === user.id);
 
   // first time user is using wishlist
   let userWishlistTable = existingUser.wishlistTable ?? [];
