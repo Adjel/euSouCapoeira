@@ -5,7 +5,6 @@ import { RiDeleteBinLine } from "react-icons/ri";
 function DeleteWishlistButton({ user, wishlistId }) {
   const { deleteWishlist, toggleModify } = useWishlist();
 
-  //toggleModify ? "flex " : "hidden"
   return (
     <button
       onClick={() => deleteWishlist(user, wishlistId)}

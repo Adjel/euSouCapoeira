@@ -11,8 +11,6 @@ import WishlistDeleteProductButton from "@/components/WishlistDeleteProductButto
 function CurrentWishlistProductListComponent({ user }) {
   const { currentProductWishlist, toggle, toggleQuantity } = useWishlist();
 
-  console.log(currentProductWishlist);
-
   return currentProductWishlist.length > 0 ? (
     currentProductWishlist?.map((product) => (
       <div
