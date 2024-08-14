@@ -6,7 +6,7 @@ import {
   mockUserToken,
   mockDeleteAddress,
   mockUpdateUser,
-} from "@/providers/logInProvider";
+} from "@/providers/userProvider";
 import {
   getUserFromCookies,
   removeUserCoockie,
@@ -28,6 +28,7 @@ const useUserStore = create((set, get) => ({
       country,
     } = values;
     const user = {
+      id: crypto.randomUUID(),
       firstName: firstName,
       lastName: lastName,
       email: email,
