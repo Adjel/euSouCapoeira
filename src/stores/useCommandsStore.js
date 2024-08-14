@@ -1,14 +1,16 @@
 import { create } from "zustand";
-import { commands } from "@/providers/commandsProvider";
+import { commands, createUserCommand } from "@/providers/commandsProvider";
 
 const useCommandsStore = create((set) => ({
-  //commands: [],
-  commands: commands,
-  setCommands: (commands) => set({ commands }),
-  addCommands: (command) =>
-    set((state) => ({
-      commands: [...state.commands, command],
-    })),
+  userCommands: [],
+  getCommand: (user) => {},
+  addCommand: async (productList, user) => {
+    const commands = await createUserCommand(productList, user);
+
+    console.log(commands);
+
+    set({ userCommands: commands });
+  },
 }));
 
 export { useCommandsStore };

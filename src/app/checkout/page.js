@@ -21,6 +21,7 @@ import { emailRegex } from "@/lib/utils";
 import style from "./checkout.module.css";
 import { toast } from "@/components/ui/use-toast";
 import useUserMounted from "@/lib/useUserMounted";
+import { useCommandsStore } from "@/stores/useCommandsStore";
 
 const errorMessage = "Merci de saisir votre";
 
@@ -49,6 +50,7 @@ export default function page() {
   const { signUp } = useSignUp();
   const { signOut } = useSignOut();
   const { cart, totalPrice, shippingFees } = useCartStore();
+  const { addCommand } = useCommandsStore();
   const userHasMount = useUserMounted();
 
   useEffect(() => {
@@ -350,7 +352,10 @@ export default function page() {
               </Button>
             )}
             {userHasMount && (
-              <Button className="w-fit mx-auto mt-16">
+              <Button
+                onClick={() => addCommand(cart, user)}
+                className="w-fit mx-auto mt-16"
+              >
                 <Link href={"/thanks"}>acheter maintenant</Link>
               </Button>
             )}
