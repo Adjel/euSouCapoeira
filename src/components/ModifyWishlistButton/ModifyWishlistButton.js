@@ -16,7 +16,7 @@ function ModifyWishlistButton() {
       {!toggleModify ? (
         <PiPencilSimpleThin color="white" className="size-8" />
       ) : (
-        <FaCheck color="black" className="size-5" />
+        <FaCheck color="white" className="size-5" />
       )}
     </button>
   );

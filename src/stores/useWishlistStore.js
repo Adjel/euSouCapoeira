@@ -12,6 +12,12 @@ export const useWishlist = create((set, get) => {
     currentWishlist: null,
     currentProductWishlist: null,
     toggleModify: false,
+    toggleMenu: false,
+
+    setToggleMenu: () => {
+      console.log("toogleMenu");
+      set((state) => ({ toggleMenu: !state.toggleMenu }));
+    },
 
     setToggleModify: () => {
       set((state) => ({ toggleModify: !state.toggleModify }));

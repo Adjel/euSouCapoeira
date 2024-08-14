@@ -1,15 +1,17 @@
+import { useWishlist } from "@/stores/useWishlistStore";
 import React from "react";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 
-function WishlistMobileMenuButton({ toggle }) {
+function WishlistMobileMenuButton() {
+  const { setToggleMenu } = useWishlist();
+
   return (
-    <button
-      onClick={toggle}
-      className="flex lg:hidden px-7 pt-4 gap-3 justify-start items-center"
-    >
-      <HiOutlineMenuAlt2 className="size-4 sm:size-6 cursor-pointer" />
+    <div className="flex lg:hidden px-7 pt-4 gap-3 justify-start items-center">
+      <button onClick={setToggleMenu}>
+        <HiOutlineMenuAlt2 className="size-4 sm:size-6 cursor-pointer" />
+      </button>
       <h2>Ma liste d'envies</h2>
-    </button>
+    </div>
   );
 }
 

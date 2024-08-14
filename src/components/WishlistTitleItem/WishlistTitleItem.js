@@ -2,7 +2,7 @@ import React from "react";
 
 function WishlistTitleItem({ isCurrent, name, idList, date }) {
   return (
-    <div className="flex flex-col items-start">
+    <div className="flex flex-col items-start cursor-pointer hover:text-color-gold">
       <h2
         className={`text-xl font-semibold first-letter:uppercase ${
           isCurrent && "text-color-gold"

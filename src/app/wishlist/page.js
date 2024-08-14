@@ -14,6 +14,8 @@ import WishlistMobileMenuButton from "@/components/WishlistMobileMenuButton";
 import WishlistTitleItem from "@/components/WishlistTitleItem";
 import ModifyWishlistButton from "@/components/ModifyWishlistButton";
 import DeleteWishlistButton from "@/components/DeleteWishlistButton";
+import WishlistMobileMenu from "@/components/WishlistMobileMenu";
+import NewWishlistButton from "@/components/NewWishlistButton";
 
 function Page() {
   const { user } = useUserStore();
@@ -38,7 +40,6 @@ function Page() {
   }, [user]);
 
   const handleSubmitWishlistName = (event) => {
-    const name = event.target.value;
     event.preventDefault();
 
     if (wishlistName === "") {
@@ -61,15 +62,13 @@ function Page() {
   };
 
   return (
-    <div className="flex flex-col gap-4 border-2 border-pink-500">
+    <div className="flex flex-col gap-4 lg:mr-4 xl:mr-12">
       <WishlistMobileMenuButton />
-      <div className="flex flex-row p-0 lg:pt-12 lg:pb-5 border-2 border-pink-500">
-        <div className="hidden lg:flex flex-col w-2/5 gap-7 ml-16 border-2 border-yellow-500">
-          <Button className="w-fit" onClick={() => createWishlist(user)}>
-            + nouveau
-          </Button>
+      <div className="flex flex-row p-0 lg:pt-12 lg:pb-5">
+        <div className="hidden lg:flex flex-col w-2/5 gap-7 ml-16">
+          <NewWishlistButton />
           {wishlistTable?.length > 0 && (
-            <div className="flex flex-col w-full h-full gap-7 border-2 border-red-500">
+            <div className="flex flex-col w-full h-full gap-7">
               {wishlistTable?.map(({ id, name, isCurrent, idList, date }) => (
                 <div
                   className="flex w-full h-fit gap-4 justify-start items-center"
@@ -91,8 +90,8 @@ function Page() {
             </div>
           )}
         </div>
-        <div className="flex flex-col px-7 w-full h-full gap-6 border-2 border-green-500">
-          <div className="flex border-2 border-red-500">
+        <div className="flex flex-col px-7 w-full h-full gap-6">
+          <div className="flex">
             {toggleWishlistName ? (
               <form
                 onSubmit={(event) => handleSubmitWishlistName(event)}
@@ -179,6 +178,7 @@ function Page() {
           </div>
         </div>
       </div>
+      <WishlistMobileMenu wishlistTable={wishlistTable} />
     </div>
   );
 }
