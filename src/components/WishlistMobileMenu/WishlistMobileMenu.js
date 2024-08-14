@@ -3,8 +3,10 @@ import { useWishlist } from "@/stores/useWishlistStore";
 import { IoCloseOutline } from "react-icons/io5";
 import NewWishlistButton from "../NewWishlistButton";
 import WishlistTitleItem from "../WishlistTitleItem";
+import { useUserStore } from "@/stores/useUserStore";
 
 function WishlistMobileMenu({ wishlistTable }) {
+  const { user } = useUserStore();
   const { toggleMenu, setToggleMenu } = useWishlist();
   return (
     <div>
@@ -29,7 +31,7 @@ function WishlistMobileMenu({ wishlistTable }) {
             />
           </header>
           <div className="flex flex-col gap-6">
-            <NewWishlistButton className="h-fit" />
+            <NewWishlistButton className="h-fit" user={user} />
             {wishlistTable.map(({ isCurrent, name, idList, date }) => (
               <WishlistTitleItem
                 isCurrent={isCurrent}

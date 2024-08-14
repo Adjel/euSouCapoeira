@@ -1,7 +1,10 @@
 import React from "react";
 import { Button } from "../ui/button";
+import { useWishlist } from "@/stores/useWishlistStore";
 
-function NewWishlistButton({ className }) {
+function NewWishlistButton({ user, className }) {
+  const { createWishlist } = useWishlist();
+
   return (
     <Button
       className={`w-fit ${className}`}
