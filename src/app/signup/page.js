@@ -55,6 +55,7 @@ export default function signup() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      business: "",
       firstName: "",
       lastName: "",
       street: "",
