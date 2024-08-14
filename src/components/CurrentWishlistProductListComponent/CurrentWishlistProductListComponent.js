@@ -7,6 +7,7 @@ import Image from "next/image";
 import AddToCartButton from "@/components/AddToCartButton";
 import WishlistProductQuantityButton from "@/components/WishlistProductQuantityButton";
 import WishlistDeleteProductButton from "@/components/WishlistDeleteProductButton";
+import Link from "next/link";
 
 function CurrentWishlistProductListComponent({ user }) {
   const { currentProductWishlist, toggle, toggleQuantity } = useWishlist();
@@ -17,14 +18,18 @@ function CurrentWishlistProductListComponent({ user }) {
         key={product.id}
         className="flex flex-row w-full h-fit px-4 py-2 items-center justify-start bg-background-medium-gray rounded"
       >
-        <Image
-          alt={product.images[0].alt}
-          src={product.images[0].image}
-          className="w-20 h-20 md:w-24 md:h-24 p-1 mr-4"
-        />
+        <Link href={`product/${product.id}`}>
+          <Image
+            alt={product.images[0].alt}
+            src={product.images[0].image}
+            className="w-20 h-20 md:w-24 md:h-24 p-1 mr-4"
+          />
+        </Link>
         <div key={product.id} className="flex flex-col w-full">
           <div className="flex flex-col gap-1">
-            <span className="text-sm w-full">{product.name}</span>
+            <Link href={`product/${product.id}`}>
+              <span className="text-sm w-full">{product.name}</span>
+            </Link>
             <AvailabilityComponent
               availability={product.availability}
               className="text-xs"
