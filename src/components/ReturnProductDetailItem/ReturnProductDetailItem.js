@@ -14,8 +14,8 @@ function ReturnProductDetailItem({
       <CategoryItem
         key={product.id}
         title={product.name}
-        image={product.imageSrc}
-        alt={product.alt}
+        image={product.images[0].image}
+        alt={product.images[0].alt}
         isLink={false}
       />
       <span>{reason}</span>

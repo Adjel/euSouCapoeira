@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReturnProdutStepsProgressComponent from "../ReturnProdutStepsProgressComponent";
 import ArrowButton from "../ArrowButton";
 import { useCommandsStore } from "@/stores/useCommandsStore";
@@ -7,9 +7,11 @@ import ReturnProductItem from "../ReturnProductItem";
 import ReturnProductDetailItem from "../ReturnProductDetailItem";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useUserStore } from "@/stores/useUserStore";
 
 function ReturnProductComponent() {
-  const { userCommands } = useCommandsStore();
+  const { userCommands, getCommands } = useCommandsStore();
+  const { user } = useUserStore();
   const [returnProductList, setReturnProductList] = useState([]);
   const [inputError, setInputError] = useState("");
   const [steps, setSteps] = useState([
@@ -18,27 +20,31 @@ function ReturnProductComponent() {
     { step: "terminé", state: "todo" },
   ]);
 
+  useEffect(() => {
+    getCommands(user);
+  }, [user]);
+
   const findCommandProduct = (commandId, productId) => {
-    const command = userCommands.find((cmd) => cmd.commandId === commandId);
+    const command = userCommands.find((cmd) => cmd.id === commandId);
     return command
-      ? command.products.find((prod) => prod.id === productId)
+      ? command.productList.find((prod) => prod.id === productId)
       : null;
   };
 
+  // if the product is in the returnProductList delete it, else add it
   const toggleSelectProduct = (commandId, productId) => {
     const product = findCommandProduct(commandId, productId);
     if (product) {
       setReturnProductList((prevList) => {
         const existingProductIndex = prevList.findIndex(
-          (item) =>
-            item.product.id === productId && item.commandId === commandId
+          (item) => item.product.id === productId && item.id === commandId
         );
 
         if (existingProductIndex === -1) {
           return [
             ...prevList,
             {
-              commandId,
+              id: commandId,
               product: { ...product },
               checked: true,
               reason: "",
@@ -47,8 +53,8 @@ function ReturnProductComponent() {
           ];
         } else {
           return prevList.filter(
-            (item) =>
-              item.product.id !== productId || item.commandId !== commandId
+            (command) =>
+              command.product.id !== productId || command.id !== commandId
           );
         }
       });
@@ -57,26 +63,27 @@ function ReturnProductComponent() {
 
   const setProductReturnReason = (commandId, productId, reasonOption) => {
     setReturnProductList((prevList) =>
-      prevList.map((item) =>
-        item.product.id === productId && item.commandId === commandId
-          ? { ...item, reason: reasonOption }
-          : item
+      prevList.map((command) =>
+        command.product.id === productId && command.id === commandId
+          ? { ...command, reason: reasonOption }
+          : command
       )
     );
   };
 
   const setReturnProductDetails = (commandId, productId, value) => {
     setReturnProductList((prevList) =>
-      prevList.map((item) =>
-        item.commandId === commandId && item.product.id === productId
-          ? { ...item, details: value }
-          : item
+      prevList.map((command) =>
+        command.id === commandId && command.product.id === productId
+          ? { ...command, details: value }
+          : command
       )
     );
   };
 
   const getStep = () => steps.find((item) => item.state === "current")?.step;
 
+  // Here we will decide wich step is current, wich is next
   const onToggleStep = (isNext) => {
     const currentStep = getStep();
 
@@ -110,6 +117,7 @@ function ReturnProductComponent() {
     });
   };
 
+  // Decide if we can validate the last needed step
   const onFinish = () => {
     const incompleteDetails = returnProductList.filter((item) => !item.details);
     if (incompleteDetails.length > 0) {
@@ -149,7 +157,7 @@ function ReturnProductComponent() {
               <ul className="flex flex-col gap-6">
                 {userCommands
                   .filter((command) => command.status === "processed")
-                  .map(({ products, commandId, date }) => (
+                  .map(({ productList, id: commandId, date }) => (
                     <li
                       key={commandId}
                       className="flex flex-col w-full gap-4 justify-center items-start border-2 rounded px-6 py-4"
@@ -167,12 +175,12 @@ function ReturnProductComponent() {
                         </div>
                       </div>
                       <ul className="flex flex-col w-full">
-                        {products.map(({ name, imageSrc, alt, id }) => (
+                        {productList.map(({ name, images, id }) => (
                           <ReturnProductItem
                             key={id}
                             name={name}
-                            imageSrc={imageSrc}
-                            alt={alt}
+                            imageSrc={images[0].image}
+                            alt={images[0].alt}
                             commandId={commandId}
                             id={id}
                             toggle={() => toggleSelectProduct(commandId, id)}
@@ -206,7 +214,7 @@ function ReturnProductComponent() {
               </header>
               <ul>
                 {returnProductList.map(
-                  ({ product, commandId, reason, details }) => (
+                  ({ product, id: commandId, reason, details }) => (
                     <li key={`${commandId}-${product.id}`}>
                       <form className="flex p-7 flex-col w-full justify-center gap-10 border rounded-xl">
                         <ReturnProductDetailItem
