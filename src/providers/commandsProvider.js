@@ -1,7 +1,4 @@
 export const createUserCommand = async (productList, user) => {
-  console.log(productList);
-  console.log(user);
-
   const total = 0;
   let totalPrice = productList.reduce(
     (totalPrice, product) => totalPrice + product.price,
@@ -17,9 +14,6 @@ export const createUserCommand = async (productList, user) => {
     );
   }
 
-  console.log(totalPrice);
-  console.log(address);
-
   const command = {
     productList: [...productList],
     userId: user.id,
@@ -30,17 +24,31 @@ export const createUserCommand = async (productList, user) => {
     deliveryAddress: address,
   };
 
-  console.log(command);
-
   try {
+    localStorage.removeItem("commands");
     const commands = JSON.parse(localStorage.getItem("commands")) || [];
 
     const newCommands = [...commands, command];
-    console.log(newCommands);
-    localStorage.setItem("commands", JSON.stringify(command));
+
+    localStorage.setItem("commands", JSON.stringify(newCommands));
 
     return Promise.resolve(newCommands);
   } catch (e) {
     return Promise.reject(new Error(e));
+  }
+};
+
+export const getUserCommands = async (user) => {
+  try {
+    const commands = JSON.parse(localStorage.getItem("commands"));
+    let userCommands;
+
+    if (commands) {
+      userCommands = commands.filter((command) => command.userId === user.id);
+    }
+
+    return Promise.resolve(userCommands);
+  } catch (error) {
+    return Promise.reject(`Can't get user commands: ${error.message}`);
   }
 };
