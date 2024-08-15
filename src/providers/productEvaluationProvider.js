@@ -1,99 +1,112 @@
 export const updateEval = (user, productId, title = "", comment = "", note) => {
   console.log(user, productId, comment);
 
-  // je cherche dans toutes les evaluations si je trouve cette eval
-  // je récupère toutes mes evals
-  // je regarde si une eval a mon productId
-  // si non je la crée et je l'ajoute à mes evals
-  // si oui je la remplace (puisque j'ai déjà toutes ses infos
-
-  // récupérer les données en storage ou array vide
+  // on cherche si on a des evals
+  let existingEval;
   let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];
 
-  console.log(productsEvals);
+  // si oui
+  // on cherche si notre produit à une eval
+  existingEval = productsEvals.find((pEval) => pEval.productId === productId);
 
-  // récupérer les données du produit en question
-  let existingProductEval = productsEvals.find(
-    (pEval) => pEval.productId === productId
-  );
-
-  console.log(existingProductEval);
-
-  // soit on a une liste de commentaires
-  // on recherche le com existant
-  // si il existe
-  // on vient modifier le com
-  // on met a jour la liste
-  // soit on en a pas on crée et on modifie la liste
-
-  let comments;
-  let rates;
-  const newRate = { authId: user.id, rate: note };
-  const newComment = {
-    id: crypto.randomUUID(),
-    title: title,
-    authorName: user.firstName,
-    authorId: user.id,
-    date: new Date(),
-    rating: note,
-    comment: comment,
-  };
-
-  if (existingProductEval && existingProductEval.comments.length > 0) {
-    let exsistingComment = existingProductEval.comments.find(
-      (c) => c.authorId === user.id
+  // si on a pas d'evals du tout
+  // on crée tout ***
+  if (!existingEval) {
+    console.log("will create");
+    existingEval = createEval(user, title, comment, note);
+    productsEvals = [...productsEvals, existingEval];
+    // si oui
+  } else {
+    console.log(existingEval);
+    console.log("found");
+    //on cherche la note et
+    let newRate;
+    let newComment;
+    const exsitingRateIndex = existingEval.rates?.findIndex(
+      (rate) => rate.authId === user.id
     );
 
-    exsistingComment = {
-      ...exsistingComment,
-      title: title,
-      authorName: user.firstName,
-      date: new Date(),
-      comment: comment,
+    // si existe
+    //on remplace
+    // sinon on créer
+    newRate = {
+      authId: user.id,
+      rate: note,
     };
-
-    if (exsistingComment) {
-      comments = existingProductEval.comments.map((c) =>
-        c.authorId === user.id ? exsistingComment : c
-      );
+    if (exsitingRateIndex && exsitingRateIndex !== -1) {
+      existingEval.rates[exsitingRateIndex] = newRate;
     } else {
-      comments = [...comments, newComment];
+      existingEval = [...existingEval, newRate];
     }
 
-    exsistingNote = existingProductEval.comments.map(
-      (r) => r.authId === user.id
+    // on cherche le commentaire
+    const existingCommentIndex = existingEval.comments?.findIndex(
+      (comment) => comment.authorId === user.id
     );
 
-    if (!exsistingNote) {
-      rates = [...rates, newRate];
+    if (existingCommentIndex && existingCommentIndex !== -1) {
+      newComment = {
+        id: existingEval.comments[existingCommentIndex].id,
+        title: title,
+        authorName: user.firstName,
+        authorId: user.id,
+        date: new Date(),
+        rating: note,
+        comment: comment,
+      };
+      existingEval.comments[existingCommentIndex] = newComment;
     } else {
-      rates = existingProductEval.rates.map((rate) =>
-        rate.authId === user.id ? newRate : rate
-      );
+      // si existe
+      // sinon on créer
+
+      newComment = {
+        id: crypto.randomUUID(),
+        title: title,
+        authorName: user.firstName,
+        authorId: user.id,
+        date: new Date(),
+        rating: note,
+        comment: comment,
+      };
+      existingEval = [...existingEval, newComment];
     }
-  } else {
-    comments = [newComment];
-    rates = [newRate];
-  }
 
-  const newProductEval = {
-    id: crypto.randomUUID(),
-    productId: productId,
-    rates: [{ authId: user.id, rate: note }],
-    comments: comments,
-  };
-
-  if (productsEvals && productsEvals.length > 0) {
-    productsEvals = productsEvals.map((pE) =>
-      pE.productId === productId ? newProductEval : pE
+    productsEvals = productsEvals.map((pEval) =>
+      pEval.productId === productId ? existingEval : pEval
     );
-  } else {
-    productsEvals = [newProductEval];
   }
 
   console.log(productsEvals);
 
   localStorage.setItem("productsEvals", JSON.stringify(productsEvals));
+};
+
+const updateRates = () => {};
+
+const updateComments = () => {};
+
+const createEval = (user, title, comment, note) => {
+  const newEval = {
+    comments: [
+      {
+        id: crypto.randomUUID(),
+        title: title,
+        authorName: user.firstName,
+        authorId: user.id,
+        date: new Date(),
+        rating: note,
+        comment: comment,
+      },
+    ],
+    rates: [
+      {
+        authId: user.id,
+        rate: note,
+      },
+    ],
+  };
+
+  return newEval;
 };
 
 ///////// FUNCTIONS TO EASILY GET PRODUCTS IN PRODUCT PROVIDER
