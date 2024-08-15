@@ -9,7 +9,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 
 function ReturnProductComponent() {
-  const { commands } = useCommandsStore();
+  const { userCommands } = useCommandsStore();
   const [returnProductList, setReturnProductList] = useState([]);
   const [inputError, setInputError] = useState("");
   const [steps, setSteps] = useState([
@@ -19,7 +19,7 @@ function ReturnProductComponent() {
   ]);
 
   const findCommandProduct = (commandId, productId) => {
-    const command = commands.find((cmd) => cmd.commandId === commandId);
+    const command = userCommands.find((cmd) => cmd.commandId === commandId);
     return command
       ? command.products.find((prod) => prod.id === productId)
       : null;
@@ -121,7 +121,7 @@ function ReturnProductComponent() {
 
   return (
     <section className="flex flex-col items-center p-7">
-      {commands.length < 1 ? (
+      {userCommands.length < 1 ? (
         <header className="flex flex-col w-full gap-12 justify-center items-center">
           <h2 className="text-bold">Ooups</h2>
           <span>{`Avant de retourner un article, il faut passer commande ! :)`}</span>
@@ -147,7 +147,7 @@ function ReturnProductComponent() {
                 <ReturnProdutStepsProgressComponent steps={steps} />
               </header>
               <ul className="flex flex-col gap-6">
-                {commands
+                {userCommands
                   .filter((command) => command.status === "processed")
                   .map(({ products, commandId, date }) => (
                     <li

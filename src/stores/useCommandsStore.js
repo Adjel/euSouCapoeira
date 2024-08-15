@@ -1,14 +1,25 @@
 import { create } from "zustand";
-import { commands } from "@/providers/commandsProvider";
+import {
+  createUserCommand,
+  getUserCommands,
+} from "@/providers/commandsProvider";
 
 const useCommandsStore = create((set) => ({
-  //commands: [],
-  commands: commands,
-  setCommands: (commands) => set({ commands }),
-  addCommands: (command) =>
-    set((state) => ({
-      commands: [...state.commands, command],
-    })),
+  userCommands: [],
+  getCommands: async (user) => {
+    try {
+      const commands = await getUserCommands(user);
+
+      set({ userCommands: commands });
+    } catch (e) {
+      throw new Error(e);
+    }
+  },
+  addCommand: async (productList, user) => {
+    const updatedCommands = await createUserCommand(productList, user);
+
+    set({ userCommands: updatedCommands });
+  },
 }));
 
 export { useCommandsStore };
