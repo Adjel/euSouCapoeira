@@ -41,6 +41,12 @@ function DashboardNav({ isModal = true }) {
         <LinkComponent link={"mes_adresses"} title={"mes adresses"} />
       </li>
       <li className={liStyle}>
+        <LinkComponent
+          link={"evaluer_un_produit"}
+          title={"evaluer un produit"}
+        />
+      </li>
+      <li className={liStyle}>
         <LinkComponent link={"retour"} title={"retourner un produit"} />
       </li>
       <li className={liStyle}>

@@ -1,59 +1,173 @@
+export const updateEval = (user, productId, title = "", comment = "", note) => {
+  let existingEval;
+  let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];
+
+  // TODO: USE eval ID too reinforce
+  existingEval = productsEvals.find((pEval) => pEval.productId === productId);
+
+  if (!existingEval) {
+    existingEval = createEval(user, productId, title, comment, note);
+    productsEvals.push(existingEval);
+  } else {
+    existingEval = updateEvalRates(existingEval, user, note);
+    existingEval = updateEvalComments(existingEval, user, title, comment, note);
+
+    productsEvals = productsEvals.map((pEval) =>
+      pEval.productId === productId ? existingEval : pEval
+    );
+  }
+
+  localStorage.setItem("productsEvals", JSON.stringify(productsEvals));
+};
+
+const updateEvalRates = (currentEval, user, note) => {
+  let newRate;
+  newRate = {
+    authorId: user.id,
+    rate: note,
+  };
+  const exsitingRateIndex = currentEval.rates?.findIndex(
+    (rate) => rate.authorId === user.id
+  );
+  if (exsitingRateIndex > -1) {
+    currentEval.rates[exsitingRateIndex] = newRate;
+  } else {
+    currentEval.rates.push(newRate);
+  }
+  return currentEval;
+};
+
+const updateEvalComments = (currentEval, user, title, comment, note) => {
+  const newComment = {
+    title: title,
+    authorName: user.firstName,
+    authorId: user.id,
+    date: new Date(),
+    rating: note,
+    comment: comment,
+  };
+
+  const existingCommentIndex = currentEval.comments?.findIndex(
+    (comment) => comment.authorId === user.id
+  );
+
+  if (existingCommentIndex > -1) {
+    currentEval.comments[existingCommentIndex] = newComment;
+  } else {
+    currentEval.comments.push(newComment);
+  }
+
+  return currentEval;
+};
+
+const createEval = (user, productId, title, comment, note) => {
+  const newEval = {
+    id: crypto.randomUUID(),
+    productId: productId,
+    comments: [
+      {
+        title: title,
+        authorName: user.firstName,
+        authorId: user.id,
+        date: new Date(),
+        rating: note,
+        comment: comment,
+      },
+    ],
+    rates: [
+      {
+        authorId: user.id,
+        rate: note,
+      },
+    ],
+  };
+
+  return newEval;
+};
+
+///////// FUNCTIONS TO EASILY GET PRODUCTS IN PRODUCT PROVIDER
+
+const mockGetRatesFromApi = (productId) => {
+  let existingEval;
+  const productsEvals = JSON.parse(localStorage.getItem("productsEvals"));
+
+  if (productsEvals)
+    existingEval = productsEvals.find((pEval) => pEval.productId === productId);
+
+  if (existingEval && existingEval.rates) return existingEval.rates;
+};
+
 export const getRates = (productId) => {
-  console.log(productId);
+  const apiRates = mockGetRatesFromApi(productId);
+
+  console.log(apiRates);
 
   const productEval = defaultProductEvals.find(
     (productEval) => productEval.productId === productId
   );
+
+  if (apiRates) productEval.rates.push(...apiRates);
 
   return productEval.rates ?? [];
 };
-export const getComments = (productId) => {
-  console.log(productId);
 
-  const productEval = defaultProductEvals.find(
+const mockGetCommentsFromApi = (productId) => {
+  let existingEval;
+  const productsEvals = JSON.parse(localStorage.getItem("productsEvals"));
+
+  if (productsEvals)
+    existingEval = productsEvals.find((pEval) => pEval.productId === productId);
+
+  if (existingEval && existingEval.comments) return existingEval.comments;
+};
+
+export const getComments = (productId) => {
+  const apiComments = mockGetCommentsFromApi(productId);
+
+  console.log(apiComments);
+
+  let productEval = defaultProductEvals.find(
     (productEval) => productEval.productId === productId
   );
+
+  if (apiComments) productEval.comments.push(...apiComments);
 
   return productEval.comments ?? [];
 };
 
 const defaultProductEvals = [
   {
-    id: crypto.randomUUID(),
     productId: "12345456789",
     rates: [
-      { authId: "bcde71a8764f-36b8f84d-df4e-4d49-b662", rate: 5 },
-      { authId: "36b8f84d-df4e-4d49-b662-bcde71a8764f", rate: 4 },
-      { authId: "bcde71a8764f-36b8f84d-bcde71a8764f-36b8f84d", rate: 3 },
-      { authId: "aaaaaaaaaaaaaaaaaaaaaa", rate: 2 },
-      { authId: "bbbbbbbbbbbbbbbbbbbb", rate: 5 },
-      { authId: "ccccccccccccccccccccc", rate: 5 },
-      { authId: "ddddddddddddddddddddd", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "121212",
         title: "YEah",
         authorName: "goku",
-        authorId: "36b8f84d-df4e-4d49-b662-bcde71a8764f",
+        authorId: "",
         date: new Date(),
         rating: 4,
         comment: "Il sonne trop bien",
       },
       {
-        id: "111111",
         title: "J'aime",
         authorName: "Pernalonga",
-        authorId: "bcde71a8764f-36b8f84d-df4e-4d49-b662",
+        authorId: "",
         date: new Date(),
         rating: 5,
         comment: "Top à l'aise",
       },
       {
-        id: "0101010",
         title: "Ok à première vue",
         authorName: "Tanjiro",
-        authorId: "bcde71a8764f-36b8f84d-bcde71a8764f-36b8f84d",
+        authorId: "",
         date: new Date(),
         rating: 3,
         comment: "Ca a l'air solide on verra avec le temps",
@@ -61,20 +175,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "123454",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "303030",
         title: "YEah",
         authorName: "goku",
         authorId: "",
@@ -83,7 +195,6 @@ const defaultProductEvals = [
         comment: "Il sonne trop bien",
       },
       {
-        id: "202020",
         title: "YEah",
         authorName: "Pernalonga",
         authorId: "",
@@ -92,7 +203,6 @@ const defaultProductEvals = [
         comment: "Je n'arrive pas à l'accorder, comment faire ?",
       },
       {
-        id: "191919",
         title: "YEah",
         authorName: "Tanjiro",
         authorId: "",
@@ -103,20 +213,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "321454",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 0 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 1 },
-      { authId: "", rate: 1 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 0 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 1 },
+      { authorId: "", rate: 1 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "181818",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -125,7 +233,6 @@ const defaultProductEvals = [
         comment: "Il sonne vraiment bien",
       },
       {
-        id: "171717",
         title: "YEah",
         authorName: "Pixote",
         authorId: "",
@@ -134,7 +241,6 @@ const defaultProductEvals = [
         comment: "E bom !",
       },
       {
-        id: "1616161",
         title: "YEah",
         authorName: "Tanjiro",
         authorId: "",
@@ -145,20 +251,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "12344409876",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "151515",
         title: "YEah",
         authorName: "Chama",
         authorId: "",
@@ -167,7 +271,6 @@ const defaultProductEvals = [
         comment: "Super rapport qualité prix",
       },
       {
-        id: "141414",
         title: "YEah",
         authorName: "Babalo",
         authorId: "",
@@ -176,7 +279,6 @@ const defaultProductEvals = [
         comment: "J'aime pas'",
       },
       {
-        id: "131313",
         title: "YEah",
         authorName: "Tanjiro",
         authorId: "",
@@ -187,20 +289,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "111111112",
     rates: [
-      { authId: "", rate: 2 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "999",
         title: "Bien",
         authorName: "Laïa",
         authorId: "",
@@ -209,7 +309,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "888",
         title: "Khaja",
         authorName: "Pixote",
         authorId: "",
@@ -218,7 +317,6 @@ const defaultProductEvals = [
         comment: "Le top !",
       },
       {
-        id: "777",
         title: "Top !",
         authorName: "Tanjiro",
         authorId: "",
@@ -229,20 +327,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "222222223",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 3 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 3 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 3 },
     ],
     comments: [
       {
-        id: "666",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -251,7 +347,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "555",
         title: "ouds",
         authorName: "Pixote",
         authorId: "",
@@ -260,7 +355,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "444",
         title: "Super",
         authorName: "Tanjiro",
         authorId: "",
@@ -271,20 +365,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "3440066338822993",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "333",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -293,7 +385,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "222",
         title: "J'adore !",
         authorName: "Pixote",
         authorId: "",
@@ -302,7 +393,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "111",
         title: "Cool",
         authorNameName: "Tanjiro",
         authorId: "",
@@ -313,20 +403,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "325476879801",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "333",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -335,7 +423,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "222",
         title: "J'adore !",
         authorName: "Pixote",
         authorId: "",
@@ -344,7 +431,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "111",
         title: "Cool",
         authorNameName: "Tanjiro",
         authorId: "",
@@ -355,20 +441,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "333333333",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "333",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -377,7 +461,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "222",
         title: "J'adore !",
         authorName: "Pixote",
         authorId: "",
@@ -386,7 +469,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "111",
         title: "Cool",
         authorNameName: "Tanjiro",
         authorId: "",
@@ -397,20 +479,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "7272727272727",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "333",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -419,7 +499,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "222",
         title: "J'adore !",
         authorName: "Pixote",
         authorId: "",
@@ -428,7 +507,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "111",
         title: "Cool",
         authorNameName: "Tanjiro",
         authorId: "",
@@ -439,20 +517,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "12213443455465567667877898",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "333",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -461,7 +537,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "222",
         title: "J'adore !",
         authorName: "Pixote",
         authorId: "",
@@ -470,7 +545,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "111",
         title: "Cool",
         authorNameName: "Tanjiro",
         authorId: "",
@@ -481,20 +555,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "720718392",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "333",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -503,7 +575,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "222",
         title: "J'adore !",
         authorName: "Pixote",
         authorId: "",
@@ -512,7 +583,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "111",
         title: "Cool",
         authorNameName: "Tanjiro",
         authorId: "",
@@ -523,20 +593,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "113355779908642",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "333",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -545,7 +613,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "222",
         title: "J'adore !",
         authorName: "Pixote",
         authorId: "",
@@ -554,7 +621,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "111",
         title: "Cool",
         authorNameName: "Tanjiro",
         authorId: "",
@@ -565,20 +631,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "32244556677883",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "333",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -587,7 +651,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "222",
         title: "J'adore !",
         authorName: "Pixote",
         authorId: "",
@@ -596,7 +659,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "111",
         title: "Cool",
         authorNameName: "Tanjiro",
         authorId: "",
@@ -607,20 +669,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "135798642",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "333",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -629,7 +689,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "222",
         title: "J'adore !",
         authorName: "Pixote",
         authorId: "",
@@ -638,7 +697,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "111",
         title: "Cool",
         authorNameName: "Tanjiro",
         authorId: "",
@@ -649,20 +707,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "8765433",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "333",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -671,7 +727,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "222",
         title: "J'adore !",
         authorName: "Pixote",
         authorId: "",
@@ -680,7 +735,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "111",
         title: "Cool",
         authorNameName: "Tanjiro",
         authorId: "",
@@ -691,20 +745,18 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "3456783",
     rates: [
-      { authId: "", rate: 3 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "333",
         title: "YEah",
         authorName: "Laïa",
         authorId: "",
@@ -713,7 +765,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "222",
         title: "J'adore !",
         authorName: "Pixote",
         authorId: "",
@@ -722,7 +773,6 @@ const defaultProductEvals = [
         comment: "Au top !",
       },
       {
-        id: "111",
         title: "Cool",
         authorNameName: "Tanjiro",
         authorId: "",
@@ -733,25 +783,23 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "987654321",
     rates: [
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 4 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "30",
         title: "YEah",
         authorName: "goku",
         authorId: "",
@@ -760,7 +808,6 @@ const defaultProductEvals = [
         comment: "Il sonne trop bien",
       },
       {
-        id: "20",
         title: "J'aime",
         authorName: "Pernalonga",
         authorId: "",
@@ -769,7 +816,6 @@ const defaultProductEvals = [
         comment: "Top à l'aise",
       },
       {
-        id: "10",
         title: "Ok à première vue",
         authorName: "Tanjiro",
         authorId: "",
@@ -780,19 +826,17 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "555577778888",
     rates: [
-      { authId: "", rate: 2 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "002",
         title: "Bien",
         authorName: "Laïa",
         authorId: "",
@@ -801,7 +845,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "001",
         title: "Khaja",
         authorName: "Pixote",
         authorId: "",
@@ -810,7 +853,6 @@ const defaultProductEvals = [
         comment: "Le top !",
       },
       {
-        id: "003",
         title: "Top !",
         authorName: "Tanjiro",
         authorId: "",
@@ -821,19 +863,17 @@ const defaultProductEvals = [
     ],
   },
   {
-    id: crypto.randomUUID(),
     productId: "444466667777",
     rates: [
-      { authId: "", rate: 2 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 2 },
-      { authId: "", rate: 5 },
-      { authId: "", rate: 4 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
-        id: "002",
         title: "Bien",
         authorName: "Laïa",
         authorId: "",
@@ -842,7 +882,6 @@ const defaultProductEvals = [
         comment: "Bien bien",
       },
       {
-        id: "001",
         title: "Khaja",
         authorName: "Pixote",
         authorId: "",
@@ -851,7 +890,6 @@ const defaultProductEvals = [
         comment: "Le top !",
       },
       {
-        id: "003",
         title: "Top !",
         authorName: "Tanjiro",
         authorId: "",

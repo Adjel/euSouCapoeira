@@ -10,6 +10,7 @@ import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { IoCloseOutline } from "react-icons/io5";
 import ReturnProductComponent from "@/components/ReturnProductComponent";
 import useUserMounted from "@/lib/useUserMounted";
+import EvaluateProductComponent from "@/components/EvaluateProductComponent";
 
 export default function dashboard({ params }) {
   const { user } = useUserStore();
@@ -36,6 +37,9 @@ export default function dashboard({ params }) {
       break;
     case "mes_adresses":
       pageContent = <UserInfoComponent isInfo={false} />;
+      break;
+    case "evaluer_un_produit":
+      pageContent = <EvaluateProductComponent />;
       break;
     case "retour":
       pageContent = <ReturnProductComponent />;
