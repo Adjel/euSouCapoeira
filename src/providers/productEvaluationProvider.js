@@ -87,10 +87,26 @@ const createEval = (user, productId, title, comment, note) => {
 
 ///////// FUNCTIONS TO EASILY GET PRODUCTS IN PRODUCT PROVIDER
 
+const mockGetRatesFromApi = (productId) => {
+  let existingEval;
+  const productsEvals = JSON.parse(localStorage.getItem("productsEvals"));
+
+  if (productsEvals)
+    existingEval = productsEvals.find((pEval) => pEval.productId === productId);
+
+  if (existingEval && existingEval.rates) return existingEval.rates;
+};
+
 export const getRates = (productId) => {
+  const apiRates = mockGetRatesFromApi(productId);
+
+  console.log(apiRates);
+
   const productEval = defaultProductEvals.find(
     (productEval) => productEval.productId === productId
   );
+
+  if (apiRates) productEval.rates.push(...apiRates);
 
   return productEval.rates ?? [];
 };
