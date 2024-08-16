@@ -6,21 +6,15 @@ export const updateEval = (user, productId, title = "", comment = "", note) => {
   existingEval = productsEvals.find((pEval) => pEval.productId === productId);
 
   if (!existingEval) {
-    console.log("create");
     existingEval = createEval(user, productId, title, comment, note);
     productsEvals.push(existingEval);
   } else {
-    console.log(existingEval);
-    console.log("found");
-
     existingEval = updateEvalRates(existingEval, user, note);
     existingEval = updateEvalComments(existingEval, user, title, comment, note);
 
     productsEvals = productsEvals.map((pEval) =>
       pEval.productId === productId ? existingEval : pEval
     );
-
-    console.log(productsEvals);
   }
 
   localStorage.setItem("productsEvals", JSON.stringify(productsEvals));
@@ -44,7 +38,6 @@ const updateEvalRates = (currentEval, user, note) => {
 };
 
 const updateEvalComments = (currentEval, user, title, comment, note) => {
-  console.log(note);
   const newComment = {
     title: title,
     authorName: user.firstName,
@@ -58,11 +51,8 @@ const updateEvalComments = (currentEval, user, title, comment, note) => {
     (comment) => comment.authorId === user.id
   );
 
-  console.log(existingCommentIndex);
-
   if (existingCommentIndex > -1) {
     currentEval.comments[existingCommentIndex] = newComment;
-    console.log(currentEval);
   } else {
     currentEval.comments.push(newComment);
   }
@@ -71,7 +61,6 @@ const updateEvalComments = (currentEval, user, title, comment, note) => {
 };
 
 const createEval = (user, productId, title, comment, note) => {
-  console.log(note);
   const newEval = {
     id: crypto.randomUUID(),
     productId: productId,
@@ -105,10 +94,27 @@ export const getRates = (productId) => {
 
   return productEval.rates ?? [];
 };
+
+const mockGetCommentsFromApi = (productId) => {
+  let existingEval;
+  const productsEvals = JSON.parse(localStorage.getItem("productsEvals"));
+
+  if (productsEvals)
+    existingEval = productsEvals.find((pEval) => pEval.productId === productId);
+
+  if (existingEval && existingEval.comments) return existingEval.comments;
+};
+
 export const getComments = (productId) => {
-  const productEval = defaultProductEvals.find(
+  const apiComments = mockGetCommentsFromApi(productId);
+
+  console.log(apiComments);
+
+  let productEval = defaultProductEvals.find(
     (productEval) => productEval.productId === productId
   );
+
+  if (apiComments) productEval.comments.push(...apiComments);
 
   return productEval.comments ?? [];
 };
@@ -117,19 +123,19 @@ const defaultProductEvals = [
   {
     productId: "12345456789",
     rates: [
-      { authorId: "bcde71a8764f-36b8f84d-df4e-4d49-b662", rate: 5 },
-      { authorId: "36b8f84d-df4e-4d49-b662-bcde71a8764f", rate: 4 },
-      { authorId: "bcde71a8764f-36b8f84d-bcde71a8764f-36b8f84d", rate: 3 },
-      { authorId: "aaaaaaaaaaaaaaaaaaaaaa", rate: 2 },
-      { authorId: "bbbbbbbbbbbbbbbbbbbb", rate: 5 },
-      { authorId: "ccccccccccccccccccccc", rate: 5 },
-      { authorId: "ddddddddddddddddddddd", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 3 },
+      { authorId: "", rate: 2 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4 },
     ],
     comments: [
       {
         title: "YEah",
         authorName: "goku",
-        authorId: "36b8f84d-df4e-4d49-b662-bcde71a8764f",
+        authorId: "",
         date: new Date(),
         rating: 4,
         comment: "Il sonne trop bien",
@@ -137,7 +143,7 @@ const defaultProductEvals = [
       {
         title: "J'aime",
         authorName: "Pernalonga",
-        authorId: "bcde71a8764f-36b8f84d-df4e-4d49-b662",
+        authorId: "",
         date: new Date(),
         rating: 5,
         comment: "Top à l'aise",
@@ -145,7 +151,7 @@ const defaultProductEvals = [
       {
         title: "Ok à première vue",
         authorName: "Tanjiro",
-        authorId: "bcde71a8764f-36b8f84d-bcde71a8764f-36b8f84d",
+        authorId: "",
         date: new Date(),
         rating: 3,
         comment: "Ca a l'air solide on verra avec le temps",

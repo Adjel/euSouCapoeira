@@ -16,11 +16,12 @@ function EvaluateProductItem({ user, name, productId }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!comment || comment === "") {
-      toast({ title: "Votre commentaire ne peut pas être vide" });
-      return;
+      //TODO ?
+      //toast({ title: "Votre commentaire ne peut pas être vide" });
     }
     if (!note) {
       toast({ title: "Vous devez attribuer une note" });
+      return;
     }
     updateEval(user, productId, title, comment, note);
     setTitle("");
