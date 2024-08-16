@@ -8,13 +8,12 @@ export const updateEval = (user, productId, title = "", comment = "", note) => {
   if (!existingEval) {
     console.log("create");
     existingEval = createEval(user, productId, title, comment, note);
-    productsEvals = [...productsEvals, existingEval];
+    productsEvals.push(existingEval);
   } else {
     console.log(existingEval);
     console.log("found");
 
     existingEval = updateEvalRates(existingEval, user, note);
-
     existingEval = updateEvalComments(existingEval, user, title, comment, note);
 
     productsEvals = productsEvals.map((pEval) =>
@@ -28,8 +27,6 @@ export const updateEval = (user, productId, title = "", comment = "", note) => {
 };
 
 const updateEvalRates = (currentEval, user, note) => {
-  console.log(currentEval);
-  console.log(note);
   let newRate;
   newRate = {
     authorId: user.id,
@@ -41,7 +38,7 @@ const updateEvalRates = (currentEval, user, note) => {
   if (exsitingRateIndex > -1) {
     currentEval.rates[exsitingRateIndex] = newRate;
   } else {
-    currentEval.rates = [...currentEval.rates, newRate];
+    currentEval.rates.push(newRate);
   }
   return currentEval;
 };
@@ -67,8 +64,7 @@ const updateEvalComments = (currentEval, user, title, comment, note) => {
     currentEval.comments[existingCommentIndex] = newComment;
     console.log(currentEval);
   } else {
-    console.log("pas compris");
-    currentEval.comments = [...currentEval.comments, newComment];
+    currentEval.comments.push(newComment);
   }
 
   return currentEval;
