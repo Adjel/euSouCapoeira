@@ -48,7 +48,7 @@ export const getComments = (productId) => {
   return productEval.comments ?? [];
 };
 
-const defaultProductEvals = [
+export const defaultProductEvals = [
   {
     productId: "12345456789",
     rates: [

@@ -1,9 +1,30 @@
+import { defaultProductEvals } from "@/providers/productEvaluationProvider";
+
 import { create } from "zustand";
 
 export const useEvalStore = create((set, get) => ({
   productsEvals: [],
-  producEvals: [],
+  productEvals: [],
 
+  getProductEvals: (productId) => {
+    let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];
+
+    let existingEval = productsEvals.find(
+      (pEval) => pEval.productId === productId
+    );
+
+    const defaultEvals = defaultProductEvals.find(
+      (pEval) => pEval.productId === productId
+    );
+
+    const evals = {
+      productId: productId,
+      comments: [...defaultEvals.comments, ...existingEval.comments],
+      rates: [...defaultEvals.rates, ...existingEval.rates],
+    };
+
+    set({ productEvals: evals });
+  },
   updateEval: (user, productId, title = "", comment = "", note) => {
     let existingEval;
     let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];

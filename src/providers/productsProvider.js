@@ -18,8 +18,6 @@ export const products = [
         id: "123454",
         date: new Date().toISOString(),
         isBestSeller: true,
-        rates: getRates("123454"),
-        comments: getComments("123454"),
         specs: [
           "Matériau : Bois",
           "Inclus : Corde et baqueta",
@@ -43,8 +41,6 @@ export const products = [
         id: "321454",
         date: new Date().toISOString(),
         isBestSeller: false,
-        rates: getRates("321454"),
-        comments: getComments("321454"),
         specs: [
           "Matériau : Bois de qualité",
           "Inclus : Corde et baqueta",
@@ -68,8 +64,6 @@ export const products = [
         id: "12344409876",
         date: new Date().toISOString(),
         isBestSeller: false,
-        rates: getRates("12344409876"),
-        comments: getComments("12344409876"),
         specs: [
           "Matériau : Bois de Noisetié",
           "Inclus : Corde et baqueta",
@@ -98,8 +92,6 @@ export const products = [
         id: "12345456789",
         date: new Date().toISOString(),
         isBestSeller: true,
-        rates: getRates("12345456789"),
-        comments: getComments("12345456789"),
         specs: [
           "Marque : Rainha Volei VL 2500",
           "Semelle intérieure : Textile",
@@ -123,8 +115,6 @@ export const products = [
         id: "111111112",
         date: new Date().toISOString(),
         isBestSeller: false,
-        rates: getRates("111111112"),
-        comments: getComments("111111112"),
         specs: [
           "Marque : Rainha Volei VL 2500",
           "Semelle intérieure : Textile",
@@ -147,8 +137,6 @@ export const products = [
         id: "222222223",
         date: new Date().toISOString(),
         isBestSeller: true,
-        rates: getRates("222222223"),
-        comments: getComments("222222223"),
         specs: [
           "Marque : Rainha Volei VL 2500",
           "Semelle intérieure : Textile",
@@ -171,8 +159,6 @@ export const products = [
         id: "3440066338822993",
         date: new Date().toISOString(),
         isBestSeller: false,
-        rates: getRates("3440066338822993"),
-        comments: getComments("3440066338822993"),
         specs: [
           "Marque : Rainha Volei VL 2500",
           "Semelle intérieure : Textile",
@@ -195,8 +181,6 @@ export const products = [
         id: "325476879801",
         date: new Date().toISOString(),
         isBestSeller: false,
-        rates: getRates("325476879801"),
-        comments: getComments("325476879801"),
         specs: [
           "Marque : Rainha Volei VL 2500",
           "Semelle intérieure : Textile",
@@ -217,8 +201,6 @@ export const products = [
         id: "333333333",
         date: new Date().toISOString(),
         isBestSeller: false,
-        rates: getRates("333333333"),
-        comments: getComments("333333333"),
         specs: [
           "Marque : Rainha Volei VL 2500",
           "Semelle intérieure : Textile",
@@ -244,8 +226,6 @@ export const products = [
         id: "444466667777",
         date: new Date().toISOString(),
         isBestSeller: true,
-        rates: getRates("444466667777"),
-        comments: getComments("444466667777"),
         specs: [
           "Auteur : X",
           "Éditeur : Y",
@@ -271,8 +251,6 @@ export const products = [
         id: "555577778888",
         date: new Date().toISOString(),
         isBestSeller: false,
-        rates: getRates("555577778888"),
-        comments: getComments("555577778888"),
         specs: [
           "Auteur : Y",
           "Éditeur : Z",

@@ -170,10 +170,7 @@ export default function page({ params }) {
         </ul>
       </section>
       <section className="mt-12">
-        <CommentsComponent
-          comments={product?.comments}
-          rates={product?.rates}
-        />
+        <CommentsComponent productId={product.id} rates={product?.rates} />
       </section>
       <RecommandsComponent />
     </section>
