@@ -7,7 +7,7 @@ function CommentsComponent({ productId }) {
 
   useEffect(() => {
     getProductEvals(productId);
-  }, []);
+  }, [productId]);
 
   return (
     <section className="flex flex-col gap-4 ">
@@ -15,7 +15,7 @@ function CommentsComponent({ productId }) {
         <h2 className="text-center text-2xl font-bold">
           <span>{productEvals.rates?.length}</span> Evaluations de clients
         </h2>
-        <RatingComponent rateList={productEvals.rates} />
+        <RatingComponent average={productEvals.rates} />
       </header>
       <h3 className="text-xl font-bold">
         <span>{productEvals.comments?.length}</span>

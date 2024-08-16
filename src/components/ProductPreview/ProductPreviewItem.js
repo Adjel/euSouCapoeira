@@ -19,7 +19,7 @@ function ProductPreviewItem({
       <div className="relative w-full h-auto max-h-64 border-2 border-color-text-medium-gray overflow-hidden">
         <Image src={image} alt={alt} style={{ objectFit: "cover" }} />
       </div>
-      <RatingComponent rateList={rates} />
+      <RatingComponent average={rates} />
       <span className="first-letter:uppercase text-sm text-center">
         {productName}
       </span>

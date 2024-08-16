@@ -5,8 +5,9 @@ import { create } from "zustand";
 export const useEvalStore = create((set, get) => ({
   productsEvals: [],
   productEvals: [],
+  productRates: [],
 
-  getProductEvals: (productId) => {
+  getProductEvals: (productId = "") => {
     let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];
 
     let existingEval = productsEvals.find(
@@ -19,12 +20,24 @@ export const useEvalStore = create((set, get) => ({
 
     const evals = {
       productId: productId,
-      comments: [...defaultEvals.comments, ...existingEval.comments],
-      rates: [...defaultEvals.rates, ...existingEval.rates],
+      comments: [
+        ...(defaultEvals?.comments || []),
+        ...(existingEval?.comments || []),
+      ],
+      rates: [...(defaultEvals?.rates || []), ...(existingEval?.rates || [])],
     };
 
     set({ productEvals: evals });
   },
+
+  getProductRates: (productId) => {
+    const productEvals = get().getProductEvals(productId);
+
+    const rates = productEvals?.rates || [];
+
+    set({ productRates: rates });
+  },
+
   updateEval: (user, productId, title = "", comment = "", note) => {
     let existingEval;
     let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];

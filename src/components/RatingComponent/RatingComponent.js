@@ -1,16 +1,23 @@
-import React from "react";
+import { useEvalStore } from "@/stores/useEvalStore";
+import React, { useEffect } from "react";
 import { RiStarSFill } from "react-icons/ri";
 
-function RatingComponent({ rateList, userRate }) {
+function RatingComponent({ productId, userRate }) {
+  const { productRates, getProductRates } = useEvalStore();
+
+  useEffect(() => {
+    getProductRates(productId);
+  }, [productId]);
+
   let sum;
-  let average = undefined;
+  let average = productRates;
   // Getting the global average
-  if (rateList) {
+  if (average) {
     sum = 0;
-    for (let obj of rateList) {
+    for (let obj of average) {
       sum += obj.rate;
     }
-    average = sum / rateList.length;
+    average = sum / average.length;
   }
 
   return (
@@ -28,8 +35,8 @@ function RatingComponent({ rateList, userRate }) {
           </li>
         ))}
       </ul>
-      {rateList && (
-        <span className="text-color-dark-gray">{rateList?.length}</span>
+      {average && (
+        <span className="text-color-dark-gray">{average?.length}</span>
       )}
     </div>
   );
