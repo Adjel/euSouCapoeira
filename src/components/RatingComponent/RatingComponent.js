@@ -22,7 +22,6 @@ function RatingComponent({ productId, userRate, option = "totalRates" }) {
       <ul className="flex w-fit items-center">
         {[...Array(5)].map((_, i) => (
           <li key={i}>
-            {console.log(rates)}
             <RiStarSFill
               className={`text-lg ${
                 (userRate ?? Math.round(average)) > i
