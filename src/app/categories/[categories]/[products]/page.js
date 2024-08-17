@@ -214,7 +214,7 @@ export default function Page({ params }) {
                       >
                         <ProductLink id={id} name={name}>
                           {name}
-                          <RatingComponent rateList={rates} />
+                          <RatingComponent productId={id} />
                           <div className="md:hidden">
                             <BestSellerComponent isBestSeller={isBestSeller} />
                           </div>
@@ -244,7 +244,7 @@ export default function Page({ params }) {
                     >
                       <ProductLink id={id} name={name}>
                         {name}
-                        <RatingComponent rateList={rates} />
+                        <RatingComponent productId={id} />
                         <AvailabilityComponent availability={availability} />
                         <PriceComponent price={price} />
                       </ProductLink>

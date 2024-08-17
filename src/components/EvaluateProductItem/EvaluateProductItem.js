@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { updateEval } from "@/providers/productEvaluationProvider";
 import { toast } from "../ui/use-toast";
+import { useEvalStore } from "@/stores/useEvalStore";
 
 function EvaluateProductItem({ user, name, productId }) {
+  const { updateEval } = useEvalStore();
   const [title, setTitle] = useState("");
   const [comment, setComment] = useState("");
   const [note, setNote] = useState();

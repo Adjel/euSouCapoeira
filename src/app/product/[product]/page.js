@@ -72,7 +72,7 @@ export default function page({ params }) {
               />
             </div>
             <h2 className="text-2xl md:text-3xl">{product?.name}</h2>
-            <RatingComponent rateList={product?.rates} />
+            <RatingComponent productId={product?.id} />
           </header>
           <ZoomImage
             src={product?.images[imageIndex ?? 0].image}
@@ -170,10 +170,7 @@ export default function page({ params }) {
         </ul>
       </section>
       <section className="mt-12">
-        <CommentsComponent
-          comments={product?.comments}
-          rates={product?.rates}
-        />
+        <CommentsComponent productId={product.id} rates={product?.rates} />
       </section>
       <RecommandsComponent />
     </section>

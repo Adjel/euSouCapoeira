@@ -1,16 +1,20 @@
+import { useEvalStore } from "@/stores/useEvalStore";
 import React from "react";
 import { RiStarSFill } from "react-icons/ri";
 
-function RatingComponent({ rateList, userRate }) {
-  let sum;
-  let average = undefined;
+function RatingComponent({ productId, userRate, option = "totalRates" }) {
+  const { getProductRates } = useEvalStore();
+
+  let rates = getProductRates(productId);
+  let average;
+
   // Getting the global average
-  if (rateList) {
-    sum = 0;
-    for (let obj of rateList) {
+  if (rates) {
+    let sum = 0;
+    for (let obj of rates) {
       sum += obj.rate;
     }
-    average = sum / rateList.length;
+    average = sum / rates.length;
   }
 
   return (
@@ -20,7 +24,7 @@ function RatingComponent({ rateList, userRate }) {
           <li key={i}>
             <RiStarSFill
               className={`text-lg ${
-                (userRate ?? average) > i
+                (userRate ?? Math.round(average)) > i
                   ? "text-black"
                   : "text-color-dark-gray"
               } md:text-xl lg:text-2xl`}
@@ -28,8 +32,16 @@ function RatingComponent({ rateList, userRate }) {
           </li>
         ))}
       </ul>
-      {rateList && (
-        <span className="text-color-dark-gray">{rateList?.length}</span>
+      {option === "totalRates" ? (
+        <span className="text-color-dark-gray">{rates.length}</span>
+      ) : option === "average" ? (
+        <div className="flex lfex-row gap-1 text-color-dark-gray">
+          <span>{Math.round(average)}</span>
+          <span>/</span>
+          <span>5</span>
+        </div>
+      ) : (
+        <></>
       )}
     </div>
   );
