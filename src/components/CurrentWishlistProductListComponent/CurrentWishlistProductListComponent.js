@@ -35,7 +35,7 @@ function CurrentWishlistProductListComponent({ user }) {
               className="text-xs"
             />
             <div className="hidden lg:block">
-              <RatingComponent rateList={product.rates} />
+              <RatingComponent productId={product.id} />
             </div>
             <PriceComponent price={product.price} className="text-base" />
           </div>

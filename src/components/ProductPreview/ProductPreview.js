@@ -24,6 +24,7 @@ function ProductPreview({ products }) {
     >
       <Carousel className="w-full">
         <CarouselContent className="w-full">
+          {console.log(products)}
           {products?.map(({ image, alt, name, price, rate, rateNbr, id }) => (
             <CarouselItem
               key={id}
@@ -32,13 +33,11 @@ function ProductPreview({ products }) {
             >
               <ProductPreviewItem
                 key={id}
-                productId={id}
                 productName={name}
                 image={image}
                 alt={alt}
                 price={price}
-                rate={rate}
-                rateNbr={rateNbr}
+                productId={id}
               />
             </CarouselItem>
           ))}
