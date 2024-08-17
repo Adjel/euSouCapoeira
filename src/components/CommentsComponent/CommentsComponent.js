@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import RatingComponent from "../RatingComponent";
 import { useEvalStore } from "@/stores/useEvalStore";
+import { average } from "firebase/firestore";
 
 function CommentsComponent({ productId }) {
-  const { productEvals, getProductEvals } = useEvalStore();
+  const { getProductEvals } = useEvalStore();
 
-  useEffect(() => {
-    getProductEvals(productId);
-  }, [productId]);
+  let productEvals;
+  productEvals = getProductEvals(productId);
 
   return (
     <section className="flex flex-col gap-4 ">
@@ -15,7 +15,7 @@ function CommentsComponent({ productId }) {
         <h2 className="text-center text-2xl font-bold">
           <span>{productEvals.rates?.length}</span> Evaluations de clients
         </h2>
-        <RatingComponent average={productEvals.rates} />
+        <RatingComponent productId={productId} option="average" />
       </header>
       <h3 className="text-xl font-bold">
         <span>{productEvals.comments?.length}</span>
@@ -34,7 +34,7 @@ function CommentsComponent({ productId }) {
                 <div className="flex flex-col">
                   <span>{title}</span>
                   <div className="flex flex-row gap-2 items-center text-color-dark-gray">
-                    <RatingComponent userRate={rating} />
+                    <RatingComponent userRate={rating} option="none" />
                     <span>{authorName}</span>
                     <span>{new Date(date).toLocaleDateString()}</span>
                   </div>

@@ -72,7 +72,7 @@ export default function page({ params }) {
               />
             </div>
             <h2 className="text-2xl md:text-3xl">{product?.name}</h2>
-            <RatingComponent average={product?.rates} />
+            <RatingComponent productId={product?.id} />
           </header>
           <ZoomImage
             src={product?.images[imageIndex ?? 0].image}

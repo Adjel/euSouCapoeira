@@ -4,16 +4,17 @@ import { create } from "zustand";
 
 export const useEvalStore = create((set, get) => ({
   productsEvals: [],
-  productEvals: [],
   productRates: [],
 
   getProductEvals: (productId = "") => {
     let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];
 
+    // api mocked (user) evals
     let existingEval = productsEvals.find(
       (pEval) => pEval.productId === productId
     );
 
+    // Get default mocked/constant evals
     const defaultEvals = defaultProductEvals.find(
       (pEval) => pEval.productId === productId
     );
@@ -27,15 +28,28 @@ export const useEvalStore = create((set, get) => ({
       rates: [...(defaultEvals?.rates || []), ...(existingEval?.rates || [])],
     };
 
-    set({ productEvals: evals });
+    return evals;
   },
 
   getProductRates: (productId) => {
-    const productEvals = get().getProductEvals(productId);
+    let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];
 
-    const rates = productEvals?.rates || [];
+    // api mocked (user) evals
+    let existingEval = productsEvals.find(
+      (pEval) => pEval.productId === productId
+    );
 
-    set({ productRates: rates });
+    // Get default mocked/constant evals
+    const defaultEvals = defaultProductEvals.find(
+      (pEval) => pEval.productId === productId
+    );
+
+    const rates = [
+      ...(defaultEvals?.rates || []),
+      ...(existingEval?.rates || []),
+    ];
+
+    return rates;
   },
 
   updateEval: (user, productId, title = "", comment = "", note) => {
