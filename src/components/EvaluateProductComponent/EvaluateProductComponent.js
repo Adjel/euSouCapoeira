@@ -24,7 +24,7 @@ function EvaluateProductComponent() {
       {userCommands.map(({ productList }) => (
         <ul
           key={crypto.randomUUID()}
-          className="flex flex-col gap-2 w-full h-full"
+          className="flex flex-col gap-12 w-full h-full"
         >
           {productList.map((product) => (
             <li key={product.id}>

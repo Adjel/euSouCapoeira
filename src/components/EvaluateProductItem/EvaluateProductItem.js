@@ -63,7 +63,7 @@ function EvaluateProductItem({ user, product }) {
   // TODO: SET THE ALREADY EXIST DATA FOR TITLE COMMENT AND NOTE !!
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 py-5 border-t border-b">
       <div className="flex gap-6">
         <Image
           className="ml-8 max-w-14 max-h-14 md:max-w-24 md:max-h-24"
