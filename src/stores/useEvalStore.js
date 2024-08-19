@@ -31,6 +31,21 @@ export const useEvalStore = create((set, get) => ({
     return evals;
   },
 
+  getUserProductEvals: (productId, user) => {
+    const evals = get().getProductEvals(productId);
+
+    const userComment = evals.comments.find(
+      (comment) => comment.authorId === user.id
+    );
+    const userRate = evals.rates.find((rate) => rate.authorId === user.id);
+
+    return {
+      title: userComment?.title,
+      comment: userComment?.comment,
+      rate: userRate?.rate,
+    };
+  },
+
   getProductRates: (productId) => {
     let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];
 
