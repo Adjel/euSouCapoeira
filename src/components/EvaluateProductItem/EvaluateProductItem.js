@@ -9,14 +9,17 @@ import { IoMdClose } from "react-icons/io";
 function EvaluateProductItem({ user, product }) {
   let productEval;
   const { updateEval, getUserProductEvals } = useEvalStore();
-  const [title, setTitle] = useState(productEval?.title ?? "");
-  const [comment, setComment] = useState(productEval?.comment ?? "");
-  const [note, setNote] = useState(productEval?.rate ?? "");
+  const [title, setTitle] = useState("");
+  const [comment, setComment] = useState("");
+  const [note, setNote] = useState("");
 
   const [isEvaluating, setIsEvaluating] = useState(false);
 
   useEffect(() => {
-    productEval = getUserProductEvals();
+    productEval = getUserProductEvals(user, product.id);
+    setTitle(productEval?.title ?? "");
+    setComment(productEval?.comment ?? "");
+    setNote(productEval?.rate ?? "");
   }, [product]);
 
   const handleIsEvaluating = () => {

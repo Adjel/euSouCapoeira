@@ -31,7 +31,7 @@ export const useEvalStore = create((set, get) => ({
     return evals;
   },
 
-  getUserProductEvals: (productId, user) => {
+  getUserProductEvals: (user, productId) => {
     const evals = get().getProductEvals(productId);
 
     const userComment = evals.comments.find(
