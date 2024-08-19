@@ -24,7 +24,6 @@ function ProductPreview({ products }) {
     >
       <Carousel className="w-full">
         <CarouselContent className="w-full">
-          {console.log(products)}
           {products?.map(({ image, alt, name, price, rate, rateNbr, id }) => (
             <CarouselItem
               key={id}

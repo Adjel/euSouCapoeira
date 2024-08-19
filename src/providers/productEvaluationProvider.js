@@ -13,8 +13,6 @@ const mockGetRatesFromApi = (productId) => {
 export const getRates = (productId) => {
   const apiRates = mockGetRatesFromApi(productId);
 
-  console.log(apiRates);
-
   const productEval = defaultProductEvals.find(
     (productEval) => productEval.productId === productId
   );
@@ -36,8 +34,6 @@ const mockGetCommentsFromApi = (productId) => {
 
 export const getComments = (productId) => {
   const apiComments = mockGetCommentsFromApi(productId);
-
-  console.log(apiComments);
 
   let productEval = defaultProductEvals.find(
     (productEval) => productEval.productId === productId

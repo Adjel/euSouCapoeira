@@ -11,26 +11,28 @@ function EvaluateProductComponent() {
     getCommands(user);
   }, []);
 
-  useEffect(() => {
-    console.log(userCommands);
-  }, [userCommands]);
-
   return (
-    <div className="flex flex-col w-full h-full gap-10">
-      {userCommands.map(({ productList }) =>
-        productList.map(({ name, id }) => (
-          <ul key={id} className="w-full h-full">
-            <li>
-              <EvaluateProductItem
-                key={id}
-                user={user}
-                name={name}
-                productId={id}
-              />
+    <div className="flex flex-col w-full h-full p-7 gap-10">
+      <header className="flex flex-col w-full h-full gap-6">
+        <h2 className="text-3xl font-bold">Evaluer un produit</h2>
+        <h3 className="text-lg">
+          Vous pouvez laisser une note et/ou un commentaire pour chacun des
+          produits que vous avez acheté
+        </h3>
+      </header>
+
+      {userCommands.map(({ productList }) => (
+        <ul
+          key={crypto.randomUUID()}
+          className="flex flex-col gap-12 w-full h-full"
+        >
+          {productList.map((product) => (
+            <li key={product.id}>
+              <EvaluateProductItem user={user} product={product} />
             </li>
-          </ul>
-        ))
-      )}
+          ))}
+        </ul>
+      ))}
     </div>
   );
 }
