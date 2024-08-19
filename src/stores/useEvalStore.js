@@ -1,10 +1,45 @@
-import { defaultProductEvals } from "@/providers/productEvaluationProvider";
-
 import { create } from "zustand";
+import { defaultProductEvals } from "@/providers/productEvaluationProvider";
+import { fetchUserCommands } from "./useCommandsStore";
 
 export const useEvalStore = create((set, get) => ({
-  productsEvals: [],
-  productRates: [],
+  userCommandsWithEvals: [],
+
+  getUserProductsAndEvals: async (user) => {
+    try {
+      const userProductList = await fetchUserCommands(user);
+
+      const productsWithEvals = userProductList.map((product) => {
+        const evals = get().getUserEvalsForProduct(user, product.id);
+        return {
+          ...product,
+          ...evals,
+        };
+      });
+      set({ userCommandsWithEvals: productsWithEvals });
+    } catch (error) {
+      console.error("Failed to fetch user products and evaluations", error);
+    }
+  },
+
+  updateUserProductsAndEvals: (user) => {
+    get().getUserProductsAndEvals(user);
+  },
+
+  getUserEvalsForProduct: (user, productId) => {
+    const evals = get().getProductEvals(productId);
+
+    const userComment = evals.comments.find(
+      (comment) => comment.authorId === user.id
+    );
+    const userRate = evals.rates.find((rate) => rate.authorId === user.id);
+
+    return {
+      title: userComment?.title,
+      comment: userComment?.comment,
+      rate: userRate?.rate,
+    };
+  },
 
   getProductEvals: (productId = "") => {
     let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];
@@ -29,21 +64,6 @@ export const useEvalStore = create((set, get) => ({
     };
 
     return evals;
-  },
-
-  getUserProductEvals: (user, productId) => {
-    const evals = get().getProductEvals(productId);
-
-    const userComment = evals.comments.find(
-      (comment) => comment.authorId === user.id
-    );
-    const userRate = evals.rates.find((rate) => rate.authorId === user.id);
-
-    return {
-      title: userComment?.title,
-      comment: userComment?.comment,
-      rate: userRate?.rate,
-    };
   },
 
   getProductRates: (productId) => {
@@ -93,7 +113,9 @@ export const useEvalStore = create((set, get) => ({
     }
 
     localStorage.setItem("productsEvals", JSON.stringify(productsEvals));
+    get().updateUserProductsAndEvals(user);
   },
+
   updateEvalRates: (currentEval, user, note) => {
     let newRate;
     newRate = {
@@ -110,6 +132,7 @@ export const useEvalStore = create((set, get) => ({
     }
     return currentEval;
   },
+
   updateEvalComments: (currentEval, user, title, comment, note) => {
     const newComment = {
       title: title,
