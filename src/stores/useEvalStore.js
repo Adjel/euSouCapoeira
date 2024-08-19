@@ -18,7 +18,7 @@ export const useEvalStore = create((set, get) => ({
       });
       set({ userCommandsWithEvals: productsWithEvals });
     } catch (error) {
-      console.error("Failed to fetch user products and evaluations", error);
+      throw new Error("Failed to fetch user products and evaluations", error);
     }
   },
 
