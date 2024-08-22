@@ -8,8 +8,10 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "../ui/carousel";
+import { useEvalStore } from "@/stores/useEvalStore";
 
 function ProductPreview({ products }) {
+  const { getProductEvals } = useEvalStore();
   const [isHovered, setIsHovered] = useState(false);
 
   const buttonStyle = `hidden ${
@@ -24,7 +26,7 @@ function ProductPreview({ products }) {
     >
       <Carousel className="w-full">
         <CarouselContent className="w-full">
-          {products?.map(({ image, alt, name, price, rate, rateNbr, id }) => (
+          {products?.map(({ images, alt, name, price, id }) => (
             <CarouselItem
               key={id}
               alt={alt}
@@ -33,8 +35,8 @@ function ProductPreview({ products }) {
               <ProductPreviewItem
                 key={id}
                 productName={name}
-                image={image}
-                alt={alt}
+                image={images[0].image}
+                alt={images[0].alt}
                 price={price}
                 productId={id}
               />

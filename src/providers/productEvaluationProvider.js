@@ -762,4 +762,41 @@ export const defaultProductEvals = [
       },
     ],
   },
+  {
+    productId: "9877807655684321234",
+    rates: [
+      { authorId: "", rate: 4.5 },
+      { authorId: "", rate: 4 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 5 },
+      { authorId: "", rate: 4.5 },
+      { authorId: "", rate: 4 },
+    ],
+    comments: [
+      {
+        title: "Parfait",
+        authorName: "Aventura",
+        authorId: "",
+        date: new Date(),
+        rating: 4,
+        comment: "SUper je recommande",
+      },
+      {
+        title: "Qualité top",
+        authorName: "Pixote",
+        authorId: "",
+        date: new Date(),
+        rating: 2.5,
+        comment: "Le top !",
+      },
+      {
+        title: "Achetez les yeux fermés",
+        authorName: "Tanjiro",
+        authorId: "",
+        date: new Date(),
+        rating: 3,
+        comment: "Il est tout simplement top",
+      },
+    ],
+  },
 ];
