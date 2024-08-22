@@ -106,6 +106,7 @@ function EvaluateProductItem({
               className="w-full h-full p-4 border border-color-hover-cancel-button rounded-xl"
               type="text"
               name="title"
+              id="title"
               value={newTitle}
               placeholder="Intitulé"
               onChange={(event) => handleOnTitleChange(event)}
@@ -114,6 +115,7 @@ function EvaluateProductItem({
               className="w-full h-40 p-4 border border-color-hover-cancel-button rounded-xl"
               type="text"
               name="comment"
+              if="comment"
               value={newComment}
               placeholder="Votre commentaire"
               onChange={(event) => handleCommentOnChange(event)}

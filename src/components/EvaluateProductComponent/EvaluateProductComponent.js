@@ -27,7 +27,7 @@ function EvaluateProductComponent() {
       >
         {userCommandsWithEvals.map(
           ({ id, name, images, title, comment, rate }) => (
-            <li key={id}>
+            <li key={`${crypto.randomUUID()}-${id}`}>
               <EvaluateProductItem
                 id={id}
                 user={user}
