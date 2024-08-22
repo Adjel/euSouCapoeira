@@ -9,10 +9,7 @@ export const adds = [
     alt: "fake alt",
     image: fake1,
   },
-  {
-    alt: "fake alt",
-    image: fake2,
-  },
+
   {
     alt: "fake alt",
     image: fake3,
