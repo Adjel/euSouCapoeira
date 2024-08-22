@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useUserStore } from "@/stores/useUserStore";
-import { useCommandsStore } from "@/stores/useCommandsStore";
 import EvaluateProductItem from "../EvaluateProductItem";
+import { useEvalStore } from "@/stores/useEvalStore";
 
 function EvaluateProductComponent() {
   const { user } = useUserStore();
-  const { userCommands, getCommands } = useCommandsStore();
+  const { userCommandsWithEvals, getUserProductsAndEvals } = useEvalStore();
 
   useEffect(() => {
-    getCommands(user);
-  }, []);
+    getUserProductsAndEvals(user);
+  }, [user]);
 
   return (
     <div className="flex flex-col w-full h-full p-7 gap-10">
@@ -21,18 +21,28 @@ function EvaluateProductComponent() {
         </h3>
       </header>
 
-      {userCommands.map(({ productList }) => (
-        <ul
-          key={crypto.randomUUID()}
-          className="flex flex-col gap-12 w-full h-full"
-        >
-          {productList.map((product) => (
-            <li key={product.id}>
-              <EvaluateProductItem user={user} product={product} />
+      <ul
+        key={crypto.randomUUID()}
+        className="flex flex-col gap-12 w-full h-full"
+      >
+        {userCommandsWithEvals.map(
+          ({ id, name, images, title, comment, rate }) => (
+            <li key={id}>
+              <EvaluateProductItem
+                id={id}
+                user={user}
+                name={name}
+                rate={rate}
+                image={images[0].image}
+                alt={images[0].alt}
+                title={title}
+                comment={comment}
+                note={rate}
+              />
             </li>
-          ))}
-        </ul>
-      ))}
+          )
+        )}
+      </ul>
     </div>
   );
 }

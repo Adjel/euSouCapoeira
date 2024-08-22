@@ -6,56 +6,55 @@ import Image from "next/image";
 import NoteProductButton from "../NoteProductButton";
 import { IoMdClose } from "react-icons/io";
 
-function EvaluateProductItem({ user, product }) {
-  let productEval;
-  const { updateEval, getUserProductEvals } = useEvalStore();
-  const [title, setTitle] = useState("");
-  const [comment, setComment] = useState("");
-  const [note, setNote] = useState("");
+function EvaluateProductItem({
+  user,
+  id,
+  name,
+  image,
+  alt,
+  title,
+  comment,
+  rate,
+}) {
+  // get the product total rates
+  const { getProductEvals } = useEvalStore();
+  const productEvals = getProductEvals(id).rates;
+
+  const { updateEval } = useEvalStore();
+  const [newTitle, setNewTitle] = useState(title);
+  const [newComment, setNewComment] = useState(comment);
+  const [newRate, setNewRate] = useState(rate);
 
   const [isEvaluating, setIsEvaluating] = useState(false);
 
-  useEffect(() => {
-    productEval = getUserProductEvals(user, product.id);
-    setTitle(productEval?.title ?? "");
-    setComment(productEval?.comment ?? "");
-    setNote(productEval?.rate ?? "");
-  }, [product]);
-
   const handleIsEvaluating = () => {
-    if (isEvaluating === true) {
-      setNote(0);
-      setTitle("");
-      setComment("");
-    }
-
     setIsEvaluating(!isEvaluating);
   };
 
   const handleCommentOnChange = (event) => {
     event.preventDefault();
-    setComment(event.target.value);
+    setNewComment(event.target.value);
   };
 
   const handleOnTitleChange = (event) => {
     event.preventDefault();
-    setTitle(event.target.value);
+    setNewTitle(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!note) {
+    if (!newRate) {
       toast({ title: "Vous devez attribuer une note" });
       return;
     }
-    if (!comment || comment === "") {
+    if (!newComment || newComment === "") {
       toast({ title: "Votre commentaire ne peut pas être vide" });
       return;
     }
-    updateEval(user, product.id, title, comment, note);
-    setTitle("");
-    setComment("");
-    setNote(undefined);
+    updateEval(user, id, newTitle, newComment, newRate);
+    setNewTitle("");
+    setNewComment("");
+    setNewRate(undefined);
     setIsEvaluating(false);
     toast({ title: "Votre évaluation à été prise en compte" });
   };
@@ -67,16 +66,16 @@ function EvaluateProductItem({ user, product }) {
       <div className="flex gap-6">
         <Image
           className="ml-8 max-w-14 max-h-14 md:max-w-24 md:max-h-24"
-          src={product.images[0].image}
-          alt={product.images[0].alt}
+          src={image}
+          alt={alt}
         />
         <div className="flex flex-col w-full gap-4 justify-between">
           <div className="flex w-full p-4">
-            <span>{product.name}</span>
+            <span>{name}</span>
           </div>
           <div className="flex w-full pl-4 justify-between items-center">
             <span className="font-bold">
-              Ce produits à {updateEval.length} évaluations
+              Ce produits à {productEvals.length} évaluations
             </span>
             {!isEvaluating ? (
               <Button onClick={handleIsEvaluating} className="w-fit mr-6">
@@ -98,7 +97,7 @@ function EvaluateProductItem({ user, product }) {
           <div className="flex justify-between items-center">
             <span className="w-1/4 text-center font-bold">Note</span>
             <ul className="flex w-2/4 gap-5 justify-center">
-              <NoteProductButton note={note} onClick={setNote} />
+              <NoteProductButton note={newRate} onClick={setNewRate} />
             </ul>
             <span className="w-1/4" />
           </div>
@@ -107,7 +106,7 @@ function EvaluateProductItem({ user, product }) {
               className="w-full h-full p-4 border border-color-hover-cancel-button rounded-xl"
               type="text"
               name="title"
-              value={title}
+              value={newTitle}
               placeholder="Intitulé"
               onChange={(event) => handleOnTitleChange(event)}
             />
@@ -115,7 +114,7 @@ function EvaluateProductItem({ user, product }) {
               className="w-full h-40 p-4 border border-color-hover-cancel-button rounded-xl"
               type="text"
               name="comment"
-              value={comment}
+              value={newComment}
               placeholder="Votre commentaire"
               onChange={(event) => handleCommentOnChange(event)}
             />

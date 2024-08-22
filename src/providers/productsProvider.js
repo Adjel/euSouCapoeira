@@ -1,5 +1,3 @@
-import { getRates } from "./productEvaluationProvider";
-import { getComments } from "./productEvaluationProvider";
 import music from "../../public/fakeCatsImages/music.jpg";
 import clothes from "../../public/fakeCatsImages/clothes.jpg";
 import livreBatuque from "../../public/fakeApi/livreBatuque.jpg";

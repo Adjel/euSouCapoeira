@@ -23,7 +23,7 @@ function MyCommands() {
         </h2>
       </header>
       {userCommands.length > 0 ? (
-        <ol className="mt-20">
+        <ol className="flex flex-col gap-16 mt-20">
           {userCommands.map(({ productList, date, id, status, totalPrice }) => (
             <li key={id} className="flex flex-col">
               <Divider />
@@ -57,7 +57,7 @@ function MyCommands() {
                 <div className="flex flex-col gap-6 md:flex-row justify-center items-center">
                   <CommandState
                     title="prix total"
-                    content={`${totalPrice} €`}
+                    content={`${totalPrice.toFixed(2)} €`}
                   />
                   <CommandState title="statut" status={status} />
                 </div>
