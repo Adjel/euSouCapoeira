@@ -16,6 +16,10 @@ function EvaluateProductItem({
   comment,
   rate,
 }) {
+  // get the product total rates
+  const { getProductEvals } = useEvalStore();
+  const productEvals = getProductEvals(id).rates;
+
   const { updateEval } = useEvalStore();
   const [newTitle, setNewTitle] = useState(title);
   const [newComment, setNewComment] = useState(comment);
@@ -71,7 +75,7 @@ function EvaluateProductItem({
           </div>
           <div className="flex w-full pl-4 justify-between items-center">
             <span className="font-bold">
-              Ce produits à {updateEval.length} évaluations
+              Ce produits à {productEvals.length} évaluations
             </span>
             {!isEvaluating ? (
               <Button onClick={handleIsEvaluating} className="w-fit mr-6">
