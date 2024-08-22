@@ -15,11 +15,8 @@ function EvaluateProductItem({
   title,
   comment,
   rate,
+  productEvals,
 }) {
-  // get the product total rates
-  const { getProductEvals } = useEvalStore();
-  const productEvals = getProductEvals(id).rates;
-
   const { updateEval } = useEvalStore();
   const [newTitle, setNewTitle] = useState(title);
   const [newComment, setNewComment] = useState(comment);

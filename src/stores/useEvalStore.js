@@ -4,12 +4,23 @@ import { fetchUserCommands } from "./useCommandsStore";
 
 export const useEvalStore = create((set, get) => ({
   userCommandsWithEvals: [],
+  // pour chaque produit des commandes, son nombre total d'evaluations
+  commandsProductsTotalRates: [],
+
+  getCommandsProductsTotalRates: async (userCommandsWithEvals) => {
+    const rates = await userCommandsWithEvals.map(({ id }) =>
+      get().getProductEvals(id)
+    );
+    console.log(rates);
+
+    set({ commandsProductsTotalRates: rates });
+  },
 
   getUserProductsAndEvals: async (user) => {
     try {
       const userProductList = await fetchUserCommands(user);
 
-      const productsWithEvals = userProductList.map((product) => {
+      const productsWithEvals = await userProductList.map((product) => {
         const evals = get().getUserEvalsForProduct(user, product.id);
         return {
           ...product,
@@ -26,44 +37,53 @@ export const useEvalStore = create((set, get) => ({
     get().getUserProductsAndEvals(user);
   },
 
-  getUserEvalsForProduct: (user, productId) => {
-    const evals = get().getProductEvals(productId);
+  getUserEvalsForProduct: async (user, productId) => {
+    try {
+      const evals = await get().getProductEvals(productId);
 
-    const userComment = evals.comments.find(
-      (comment) => comment.authorId === user.id
-    );
-    const userRate = evals.rates.find((rate) => rate.authorId === user.id);
+      const userComment = evals.comments.find(
+        (comment) => comment.authorId === user.id
+      );
+      const userRate = evals.rates.find((rate) => rate.authorId === user.id);
 
-    return {
-      title: userComment?.title,
-      comment: userComment?.comment,
-      rate: userRate?.rate,
-    };
+      return Promise.resolve({
+        title: userComment?.title,
+        comment: userComment?.comment,
+        rate: userRate?.rate,
+      });
+    } catch (e) {
+      return Promise.reject(e);
+    }
   },
 
-  getProductEvals: (productId = "") => {
-    let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];
+  getProductEvals: async (productId = "") => {
+    try {
+      let productsEvals =
+        (await JSON.parse(localStorage.getItem("productsEvals"))) || [];
 
-    // api mocked (user) evals
-    let existingEval = productsEvals.find(
-      (pEval) => pEval.productId === productId
-    );
+      // api mocked (user) evals
+      let existingEval = productsEvals.find(
+        (pEval) => pEval.productId === productId
+      );
 
-    // Get default mocked/constant evals
-    const defaultEvals = defaultProductEvals.find(
-      (pEval) => pEval.productId === productId
-    );
+      // Get default mocked/constant evals
+      const defaultEvals = defaultProductEvals.find(
+        (pEval) => pEval.productId === productId
+      );
 
-    const evals = {
-      productId: productId,
-      comments: [
-        ...(defaultEvals?.comments || []),
-        ...(existingEval?.comments || []),
-      ],
-      rates: [...(defaultEvals?.rates || []), ...(existingEval?.rates || [])],
-    };
+      const evals = {
+        productId: productId,
+        comments: [
+          ...(defaultEvals?.comments || []),
+          ...(existingEval?.comments || []),
+        ],
+        rates: [...(defaultEvals?.rates || []), ...(existingEval?.rates || [])],
+      };
 
-    return evals;
+      return Promise.resolve(evals);
+    } catch (e) {
+      return Promise.reject(e);
+    }
   },
 
   getProductRates: (productId) => {

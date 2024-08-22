@@ -5,7 +5,17 @@ import { useEvalStore } from "@/stores/useEvalStore";
 
 function EvaluateProductComponent() {
   const { user } = useUserStore();
-  const { userCommandsWithEvals, getUserProductsAndEvals } = useEvalStore();
+  const {
+    userCommandsWithEvals,
+    getUserProductsAndEvals,
+    getCommandsProductsTotalRates,
+    commandsProductsTotalRates,
+  } = useEvalStore();
+
+  useEffect(() => {
+    getCommandsProductsTotalRates(userCommandsWithEvals);
+    console.log(userCommandsWithEvals);
+  }, [userCommandsWithEvals]);
 
   useEffect(() => {
     getUserProductsAndEvals(user);
@@ -38,6 +48,7 @@ function EvaluateProductComponent() {
                 title={title}
                 comment={comment}
                 note={rate}
+                productEvals={""}
               />
             </li>
           )
