@@ -25,7 +25,6 @@ export const createUserCommand = async (productList, user) => {
   };
 
   try {
-    localStorage.removeItem("commands");
     const commands = JSON.parse(localStorage.getItem("commands")) || [];
 
     const newCommands = [...commands, command];

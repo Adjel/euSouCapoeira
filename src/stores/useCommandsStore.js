@@ -11,6 +11,7 @@ const useCommandsStore = create((set) => ({
       const commands = await getUserCommands(user);
 
       set({ userCommands: commands });
+      return Promise.resolve(commands);
     } catch (e) {
       throw new Error(e);
     }
@@ -21,5 +22,12 @@ const useCommandsStore = create((set) => ({
     set({ userCommands: updatedCommands });
   },
 }));
+
+export const fetchUserCommands = async (user) => {
+  const state = useCommandsStore.getState();
+  const userCommand = await state.getCommands(user);
+  const products = userCommand.map((command) => command.productList).flat();
+  return Promise.resolve(products);
+};
 
 export { useCommandsStore };

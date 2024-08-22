@@ -32,13 +32,11 @@ function ProductPreview({ products }) {
             >
               <ProductPreviewItem
                 key={id}
-                productId={id}
                 productName={name}
                 image={image}
                 alt={alt}
                 price={price}
-                rate={rate}
-                rateNbr={rateNbr}
+                productId={id}
               />
             </CarouselItem>
           ))}
