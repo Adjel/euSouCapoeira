@@ -4,11 +4,35 @@ import livreBatuque from "../../public/fakeApi/livreBatuque.jpg";
 import livreBatuqueBack from "../../public/fakeApi/livreBatuqueBack.jpg";
 import livreBatuqueOpen from "../../public/fakeApi/livreBatuqueOpen.jpg";
 import livretexpressao from "../../public/fakeApi/livretexpressao.jpg";
+import entrain from "../../public/fakeCatsImages/entrain.jpg";
 
 export const products = [
   {
     subCategory: "berimbau viola",
     products: [
+      {
+        name: "Berimbau Viola - Mestre Foguete Edition",
+        price: 60.0,
+        availability: "now",
+        id: "123454",
+        date: new Date().toISOString(),
+        isBestSeller: true,
+        specs: [
+          "Matériau : Bois",
+          "Inclus : Corde et baqueta",
+          "Dimensions : Standard",
+          "Poids : Léger",
+          "Fait main",
+        ],
+        variants: [
+          { id: "321455", image: music, alt: "Vue 1" },
+          { id: "12344409877", image: music, alt: "Vue 2" },
+        ],
+        images: [
+          { image: music, alt: "Berimbau Viola vue 1" },
+          { image: music, alt: "Berimbau Viola vue 2" },
+        ],
+      },
       {
         name: "Berimbau Viola - Mestre Foguete Edition",
         price: 60.0,
@@ -260,6 +284,29 @@ export const products = [
           { id: "555577779999", image: livretexpressao, alt: "Vue 1" },
         ],
         images: [{ image: livretexpressao, alt: "Livre Expressao vue" }],
+      },
+    ],
+  },
+  {
+    subCategory: "entrainement",
+    products: [
+      {
+        name: "Sac de frappeSac de Frappe FIGHTR® Premium 120x35cm avec chaîne Lourde",
+        price: 69.9,
+        availability: "now",
+        id: "9877807655684321234",
+        date: new Date().toISOString(),
+        isBestSeller: true,
+        specs: [
+          "Poids:",
+          "Hauteur",
+          "Largeur",
+          "Composé de sable et coton",
+          "Conteneur en cuir",
+        ],
+        variants: [],
+
+        images: [{ image: entrain, alt: "un sac de frappe" }],
       },
     ],
   },
