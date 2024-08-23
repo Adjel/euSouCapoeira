@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { useUpdateUserInfo, useUserStore } from "@/stores/useUserStore";
 import PasswordInput from "@/components/PasswordInput";
 import { emailRegex, passwordRegex } from "@/lib/utils";
-import styles from "../Forms.module.css";
+import styles from "../forms.module.css";
 import { toast } from "@/components/ui/use-toast";
 
 function UserInfoForm({ cancel }) {

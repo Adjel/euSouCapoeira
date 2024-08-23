@@ -1,5 +1,5 @@
 import React from "react";
-import HomeHeader from "@/components/homePage/HomeHeader";
+import HomeHeader from "@/components/homePage/homeHeader";
 import Categories from "@/components/Categories/Categories";
 import RecommandsComponent from "@/components/RecommandsComponent";
 import {
