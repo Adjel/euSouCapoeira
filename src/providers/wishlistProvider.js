@@ -13,7 +13,7 @@ export const getWishlistTable = async (user) => {
     } else {
       wishlistTable = await getLocalWishlisTable();
     }
-    return wishlistTable;
+    return Promise.resolve(wishlistTable);
   } catch (e) {
     throw e;
   }
