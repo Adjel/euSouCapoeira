@@ -21,6 +21,11 @@ function EvaluateProductComponent() {
     getUserProductsAndEvals(user);
   }, [user]);
 
+  const getTotalProductRatesById = (id) => {
+    return commandsProductsTotalRates.find((pEval) => pEval.productId === id)
+      ?.rates;
+  };
+
   return (
     <div className="flex flex-col w-full h-full p-7 gap-10">
       <header className="flex flex-col w-full h-full gap-6">
@@ -48,7 +53,7 @@ function EvaluateProductComponent() {
                 title={title}
                 comment={comment}
                 note={rate}
-                productEvals={""}
+                productEvals={getTotalProductRatesById(id)}
               />
             </li>
           )
