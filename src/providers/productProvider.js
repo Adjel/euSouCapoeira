@@ -1,16 +1,15 @@
 import { products } from "./productsProvider";
 
-export function getMockedProductById(productId) {
-  let p;
+export async function getMockedProductById(productId) {
+  try {
+    let p;
 
-  products.map((productList) => {
-    const item = productList.products.find((item) => item.id === productId);
-    if (!p && item) p = item;
-  });
-  return p ?? handleProductNotFound();
+    products.map((productList) => {
+      const item = productList.products.find((item) => item.id === productId);
+      if (!p && item) p = item;
+    });
+    return Promise.resolve(p);
+  } catch (e) {
+    return Promise.reject(e);
+  }
 }
-
-const handleProductNotFound = () => {
-  // Todo: get a way to push the error to dev logs like firebase crashlytics
-  return null;
-};

@@ -21,20 +21,29 @@ import "@/styles/globals.css";
 
 export default function page({ params }) {
   const { addToCart } = useCartStore();
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState(null);
   const [imageIndex, setImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isImageBarExpanded, setIsImageBarExpanded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
 
   useEffect(() => {
-    const product = getMockedProductById(params.product);
-    if (product) {
-      setProduct(product);
-    } else {
-      router.push("/not-found");
-    }
+    const fetchProduct = async () => {
+      try {
+        const product = await getMockedProductById(params.product);
+        if (product) {
+          setProduct(product);
+        } else {
+          router.push("/not-found");
+        }
+      } catch (e) {
+        return null;
+      }
+      setIsLoading(false);
+    };
+    fetchProduct();
   }, [params]);
 
   const handleQuantity = (plus) => {
@@ -43,24 +52,20 @@ export default function page({ params }) {
     );
   };
 
-  if (!product) {
-    return (
-      <section className="basicPadding py-7">
-        <div className="flex justify-center items-center">
-          <div className="flex flex-col justify-center items-center">
-            <Image
-              alt="une photo d'un berimbau représentant une lettre C"
-              src={icon}
-              className="animate-spin h-32 w-32 my-32 text-color-gold "
-            />
-            <span className="text-lg uppercase">Chargement en cours...</span>
-          </div>
+  return isLoading || !product ? (
+    <section className="basicPadding py-7">
+      <div className="flex justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
+          <Image
+            alt="une photo d'un berimbau représentant une lettre C"
+            src={icon}
+            className="animate-spin h-32 w-32 my-32 text-color-gold "
+          />
+          <span className="text-lg uppercase">Chargement en cours...</span>
         </div>
-      </section>
-    );
-  }
-
-  return (
+      </div>
+    </section>
+  ) : (
     <section className="basicPadding py-7">
       <div className="flex flex-col lg:flex-row">
         <section className="flex flex-col lg:w-2/3">
