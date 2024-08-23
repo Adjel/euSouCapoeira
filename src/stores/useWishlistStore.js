@@ -2,6 +2,7 @@ import { getWishlistTable, updateWishlist } from "@/providers/wishlistProvider";
 import { create } from "zustand";
 import { getUserFromCookies } from "@/coockieStore/userCoockies";
 import { products } from "@/providers/productsProvider";
+import { toast } from "@/components/ui/use-toast";
 
 const defaultDate = new Date().toLocaleDateString();
 
@@ -24,15 +25,19 @@ export const useWishlist = create((set, get) => {
 
     ///////////////////////// HANDLE STATE ///////////////////////////
 
-    getWishlistTableState: (user) => {
-      // by default the user is logged or by cookies or not logged
-      const coockieUser = getUserFromCookies();
-      // so wishlist will be uppdate when it need if user log in
-      const data = getWishlistTable(user ?? coockieUser);
-      set({
-        wishlistTable: data,
-      });
-      get().initCurrentWishlist();
+    getWishlistTableState: async (user) => {
+      try {
+        // by default the user is logged or by cookies or not logged
+        const coockieUser = getUserFromCookies();
+        // so wishlist will be uppdate when it need if user log in
+        const data = await getWishlistTable(user ?? coockieUser);
+        set({
+          wishlistTable: data,
+        });
+        get().initCurrentWishlist();
+      } catch (e) {
+        toast({ title: `Une erreur est survenue: code erreur ${e}` });
+      }
     },
 
     // avoid to forget update one of two states when udpate at least one

@@ -16,7 +16,6 @@ import { IoCloseOutline } from "react-icons/io5";
 import ZoomImage from "@/components/ZoomOnImage/ZoomOnImage";
 import ProductVariantsComponent from "@/components/ProductVariantsComponent";
 import { useRouter } from "next/navigation";
-import icon from "../../../../public/icon.svg";
 import "@/styles/globals.css";
 import LoadingComponent from "@/components/LoadingComponent";
 
