@@ -1,15 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import RatingComponent from "../RatingComponent";
 import { useEvalStore } from "@/stores/useEvalStore";
-import { average } from "firebase/firestore";
 
 function CommentsComponent({ productId }) {
   const { getProductEvals } = useEvalStore();
+  const [productEvals, setProductEvals] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  let productEvals;
-  productEvals = getProductEvals(productId);
+  useEffect(() => {
+    const fetchProductEvals = async () => {
+      try {
+        const data = await getProductEvals(productId);
+        setProductEvals(data);
+      } catch (e) {
+        throw e;
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  return (
+    fetchProductEvals();
+  }, [productId, getProductEvals]);
+
+  return isLoading ? (
+    <div>Chargement des commentaires ...</div>
+  ) : !productEvals ? (
+    <p>Commentaires indisponibles</p>
+  ) : (
     <section className="flex flex-col gap-4 ">
       <header className="flex flex-col gap-2">
         <h2 className="text-center text-2xl font-bold">

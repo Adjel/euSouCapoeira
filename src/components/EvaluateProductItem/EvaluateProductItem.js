@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 import { useEvalStore } from "@/stores/useEvalStore";
@@ -15,11 +15,8 @@ function EvaluateProductItem({
   title,
   comment,
   rate,
+  productEvals,
 }) {
-  // get the product total rates
-  const { getProductEvals } = useEvalStore();
-  const productEvals = getProductEvals(id).rates;
-
   const { updateEval } = useEvalStore();
   const [newTitle, setNewTitle] = useState(title);
   const [newComment, setNewComment] = useState(comment);
@@ -74,9 +71,11 @@ function EvaluateProductItem({
             <span>{name}</span>
           </div>
           <div className="flex w-full pl-4 justify-between items-center">
-            <span className="font-bold">
-              Ce produits à {productEvals.length} évaluations
-            </span>
+            {productEvals && (
+              <span className="font-bold">
+                Ce produits à {productEvals.length} évaluations
+              </span>
+            )}
             {!isEvaluating ? (
               <Button onClick={handleIsEvaluating} className="w-fit mr-6">
                 évaluer
