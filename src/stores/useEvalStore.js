@@ -20,22 +20,24 @@ export const useEvalStore = create((set, get) => ({
   },
 
   getUserProductsAndEvals: async (user) => {
-    try {
-      const userProductList = await fetchUserCommands(user);
+    if (user) {
+      try {
+        const userProductList = await fetchUserCommands(user);
 
-      const productsWithEvals = await Promise.all(
-        userProductList.map(async (product) => {
-          const evals = await get().getUserEvalsForProduct(user, product.id);
-          return {
-            ...product,
-            ...evals,
-          };
-        })
-      );
+        const productsWithEvals = await Promise.all(
+          userProductList.map(async (product) => {
+            const evals = await get().getUserEvalsForProduct(user, product.id);
+            return {
+              ...product,
+              ...evals,
+            };
+          })
+        );
 
-      set({ userCommandsWithEvals: productsWithEvals });
-    } catch (error) {
-      throw new Error("Failed to fetch user products and evaluations", error);
+        set({ userCommandsWithEvals: productsWithEvals });
+      } catch (error) {
+        throw new Error("Failed to fetch user products and evaluations", error);
+      }
     }
   },
 

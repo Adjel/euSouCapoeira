@@ -17,7 +17,7 @@ function EvaluateProductComponent() {
   }, [userCommandsWithEvals]);
 
   useEffect(() => {
-    getUserProductsAndEvals(user);
+    if (user) getUserProductsAndEvals(user);
   }, [user]);
 
   const getTotalProductRatesById = (id) => {
