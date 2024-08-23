@@ -1,5 +1,6 @@
 import React from "react";
-import icon from "../../../../public/icon.svg";
+import icon from "../../../public/icon.svg";
+import Image from "next/image";
 
 function LoadingComponent() {
   return (
