@@ -1,5 +1,4 @@
-import fake1 from "../../public/fakeApi/fakeadd.jpg";
-import fake2 from "../../public/fakeApi/bateria.webp";
+import fake2 from "../../public/fakeApi/fake2.jpg";
 import fake3 from "../../public/fakeApi/fake3.webp";
 import capo from "../../public/fakeApi/capo.jpg";
 import event from "../../public/fakeApi/event.jpg";
@@ -7,7 +6,7 @@ import event from "../../public/fakeApi/event.jpg";
 export const adds = [
   {
     alt: "fake alt",
-    image: fake1,
+    image: fake2,
   },
 
   {
