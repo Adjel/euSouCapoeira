@@ -5,11 +5,25 @@ import { useEvalStore } from "@/stores/useEvalStore";
 
 function EvaluateProductComponent() {
   const { user } = useUserStore();
-  const { userCommandsWithEvals, getUserProductsAndEvals } = useEvalStore();
+  const {
+    userCommandsWithEvals,
+    getUserProductsAndEvals,
+    getCommandsProductsTotalRates,
+    commandsProductsTotalRates,
+  } = useEvalStore();
+
+  useEffect(() => {
+    getCommandsProductsTotalRates(userCommandsWithEvals);
+  }, [userCommandsWithEvals]);
 
   useEffect(() => {
     getUserProductsAndEvals(user);
   }, [user]);
+
+  const getTotalProductRatesById = (id) => {
+    return commandsProductsTotalRates.find((pEval) => pEval.productId === id)
+      ?.rates;
+  };
 
   return (
     <div className="flex flex-col w-full h-full p-7 gap-10">
@@ -27,7 +41,7 @@ function EvaluateProductComponent() {
       >
         {userCommandsWithEvals.map(
           ({ id, name, images, title, comment, rate }) => (
-            <li key={id}>
+            <li key={`${crypto.randomUUID()}-${id}`}>
               <EvaluateProductItem
                 id={id}
                 user={user}
@@ -38,6 +52,7 @@ function EvaluateProductComponent() {
                 title={title}
                 comment={comment}
                 note={rate}
+                productEvals={getTotalProductRatesById(id)}
               />
             </li>
           )
