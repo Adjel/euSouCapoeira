@@ -1,4 +1,5 @@
 import React from "react";
+import icon from "../../../../public/icon.svg";
 
 function LoadingComponent() {
   return (
