@@ -67,9 +67,9 @@ function MyCommands() {
           ))}
         </ol>
       ) : (
-        <div className="w-full min-h-72 flex p-7">
+        <div className="flex p-7 w-full min-h-72 justify-center items-center">
           <div className="w-full min-h-72 flex justify-center items-center border border-color-dark-gray rounded-xl">
-            <span className="text-3xl font-bold">{`Vous n'avez pas passé de commande pour le moment :(`}</span>
+            <span className="text-center text-3xl font-bold">{`Vous n'avez pas passé de commande pour le moment :(`}</span>
           </div>
         </div>
       )}
