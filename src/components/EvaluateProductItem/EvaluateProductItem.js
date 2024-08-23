@@ -24,6 +24,10 @@ function EvaluateProductItem({
 
   const [isEvaluating, setIsEvaluating] = useState(false);
 
+  useEffect(() => {
+    console.log(title, comment, rate);
+  }, []);
+
   const handleIsEvaluating = () => {
     setIsEvaluating(!isEvaluating);
   };
