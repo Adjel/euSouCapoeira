@@ -11,10 +11,10 @@ export const products = [
     subCategory: "berimbau viola",
     products: [
       {
-        name: "Berimbau Viola - Mestre Foguete Edition",
+        name: "Berimbau Gunga - Mestre Foguete Edition",
         price: 60.0,
         availability: "now",
-        id: "123454",
+        id: "123454123454123454123454123454",
         date: new Date().toISOString(),
         isBestSeller: true,
         specs: [
@@ -25,8 +25,7 @@ export const products = [
           "Fait main",
         ],
         variants: [
-          { id: "321455", image: music, alt: "Vue 1" },
-          { id: "12344409877", image: music, alt: "Vue 2" },
+          { id: "1234540987667890123123321", image: music, alt: "Vue 1" },
         ],
         images: [
           { image: music, alt: "Berimbau Viola vue 1" },
@@ -37,7 +36,7 @@ export const products = [
         name: "Berimbau Viola - Mestre Foguete Edition",
         price: 60.0,
         availability: "now",
-        id: "123454",
+        id: "1234540987667890123123321",
         date: new Date().toISOString(),
         isBestSeller: true,
         specs: [
@@ -48,8 +47,7 @@ export const products = [
           "Fait main",
         ],
         variants: [
-          { id: "321455", image: music, alt: "Vue 1" },
-          { id: "12344409877", image: music, alt: "Vue 2" },
+          { id: "123454123454123454123454123454", image: music, alt: "Vue 1" },
         ],
         images: [
           { image: music, alt: "Berimbau Viola vue 1" },
