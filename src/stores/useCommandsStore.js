@@ -3,6 +3,7 @@ import {
   createUserCommand,
   getUserCommands,
 } from "@/providers/commandsProvider";
+import { clearCartStore } from "./useCartStore";
 
 const useCommandsStore = create((set) => ({
   userCommands: [],
@@ -20,6 +21,9 @@ const useCommandsStore = create((set) => ({
     const updatedCommands = await createUserCommand(productList, user);
 
     set({ userCommands: updatedCommands });
+
+    //reset cart store
+    clearCartStore();
   },
 }));
 

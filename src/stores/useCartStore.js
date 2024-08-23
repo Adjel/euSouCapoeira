@@ -71,6 +71,10 @@ const useCartStore = create((set) => ({
     }),
 }));
 
+export const clearCartStore = () => {
+  useCartStore.getState().clearCart();
+};
+
 function handleQuantityError() {
   throw new Error("Can't change the quantity product of an undefined product");
 }
