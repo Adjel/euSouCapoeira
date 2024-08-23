@@ -14,7 +14,6 @@ function EvaluateProductComponent() {
 
   useEffect(() => {
     getCommandsProductsTotalRates(userCommandsWithEvals);
-    console.log(userCommandsWithEvals);
   }, [userCommandsWithEvals]);
 
   useEffect(() => {
