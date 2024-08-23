@@ -24,11 +24,11 @@ export const useWishlist = create((set, get) => {
 
     ///////////////////////// HANDLE STATE ///////////////////////////
 
-    getWishlistTableState: (user) => {
+    getWishlistTableState: async (user) => {
       // by default the user is logged or by cookies or not logged
       const coockieUser = getUserFromCookies();
       // so wishlist will be uppdate when it need if user log in
-      const data = getWishlistTable(user ?? coockieUser);
+      const data = await getWishlistTable(user ?? coockieUser);
       set({
         wishlistTable: data,
       });
