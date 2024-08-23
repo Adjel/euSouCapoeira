@@ -5,7 +5,7 @@ import {
 } from "@/providers/commandsProvider";
 import { clearCartStore } from "./useCartStore";
 
-const useCommandsStore = create((set, get) => ({
+const useCommandsStore = create((set) => ({
   userCommands: [],
   getCommands: async (user) => {
     try {
