@@ -24,6 +24,10 @@ function EvaluateProductItem({
 
   const [isEvaluating, setIsEvaluating] = useState(false);
 
+  useEffect(() => {
+    console.log(title, comment, rate);
+  }, []);
+
   const handleIsEvaluating = () => {
     setIsEvaluating(!isEvaluating);
   };
@@ -71,9 +75,11 @@ function EvaluateProductItem({
             <span>{name}</span>
           </div>
           <div className="flex w-full pl-4 justify-between items-center">
-            <span className="font-bold">
-              Ce produits à {productEvals.length} évaluations
-            </span>
+            {productEvals && (
+              <span className="font-bold">
+                Ce produits à {productEvals.length} évaluations
+              </span>
+            )}
             {!isEvaluating ? (
               <Button onClick={handleIsEvaluating} className="w-fit mr-6">
                 évaluer
