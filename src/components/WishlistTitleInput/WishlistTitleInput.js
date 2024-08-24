@@ -47,7 +47,8 @@ function WishlistTitleInput({ user }) {
       className="text-3xl font-bold first-letter:uppercase"
       onClick={handleToggleWishlistName}
     >
-      {currentWishlist.name}
+      {currentWishlist?.name ??
+        `Liste des envies du ${new Date().toLocaleDateString()}`}
     </h2>
   );
 }
