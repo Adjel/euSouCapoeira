@@ -94,25 +94,30 @@ export const useEvalStore = create((set, get) => ({
     }
   },
 
-  getProductRates: (productId) => {
-    let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];
+  getProductRates: async (productId) => {
+    try {
+      let productsEvals =
+        JSON.parse(localStorage.getItem("productsEvals")) || [];
 
-    // api mocked (user) evals
-    let existingEval = productsEvals.find(
-      (pEval) => pEval.productId === productId
-    );
+      // api mocked (user) evals
+      let existingEval = productsEvals.find(
+        (pEval) => pEval.productId === productId
+      );
 
-    // Get default mocked/constant evals
-    const defaultEvals = defaultProductEvals.find(
-      (pEval) => pEval.productId === productId
-    );
+      // Get default mocked/constant evals
+      const defaultEvals = defaultProductEvals.find(
+        (pEval) => pEval.productId === productId
+      );
 
-    const rates = [
-      ...(defaultEvals?.rates || []),
-      ...(existingEval?.rates || []),
-    ];
+      const rates = [
+        ...(defaultEvals?.rates || []),
+        ...(existingEval?.rates || []),
+      ];
 
-    return rates;
+      return Promise.resolve(rates);
+    } catch (e) {
+      return Promise.reject(e);
+    }
   },
 
   updateEval: (user, productId, title = "", comment = "", note) => {
