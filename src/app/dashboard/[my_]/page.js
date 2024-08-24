@@ -12,7 +12,7 @@ import ReturnProductComponent from "@/components/ReturnProductComponent";
 import useUserMounted from "@/lib/useUserMounted";
 import EvaluateProductComponent from "@/components/EvaluateProductComponent";
 
-export default function dashboard({ params }) {
+export default function Dashboard({ params }) {
   const { user } = useUserStore();
   const [isOpen, setIsOpen] = useState(false);
   const hasMounted = useUserMounted();

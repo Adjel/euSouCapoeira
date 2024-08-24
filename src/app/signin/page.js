@@ -6,7 +6,7 @@ import Link from "next/link";
 import SignInForm from "@/components/Forms/SignInForm";
 import "@/styles/globals.css";
 
-export default function page() {
+export default function Page() {
   const { user } = useUserStore();
   const router = useRouter();
 

@@ -25,7 +25,7 @@ const formSchema = z.object({
     .regex(emailRegex, "L'adresse email fournie n'a pas un format valide"),
 });
 
-export default function page() {
+export default function Page() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {

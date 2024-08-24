@@ -46,7 +46,7 @@ const formSchema = z.object({
     ),
 });
 
-export default function signup() {
+export default function Signup() {
   const { signUp } = useSignUp();
 
   const router = useRouter();

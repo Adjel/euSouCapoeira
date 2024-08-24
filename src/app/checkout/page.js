@@ -44,7 +44,7 @@ const formSchema = z.object({
   business: z.string().optional(),
 });
 
-export default function page() {
+export default function Page() {
   const [logInButton, toggleLogInButton] = useState(false);
   const { user } = useUserStore();
   const { signUp } = useSignUp();

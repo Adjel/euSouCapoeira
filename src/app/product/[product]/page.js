@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 import "@/styles/globals.css";
 import LoadingComponent from "@/components/LoadingComponent";
 
-export default function page({ params }) {
+export default function Page({ params }) {
   const { addToCart } = useCartStore();
   const [product, setProduct] = useState(null);
   const [imageIndex, setImageIndex] = useState(0);
