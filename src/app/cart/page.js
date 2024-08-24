@@ -12,7 +12,7 @@ import ArrowButton from "@/components/ArrowButton";
 import TotalCartPriceComponent from "@/components/TotalCartPriceComponent";
 import RecommandsComponent from "@/components/RecommandsComponent";
 
-export default function page() {
+export default function Page() {
   const { cart } = useCartStore();
   const { updateProductQuantity } = useCartStore();
 

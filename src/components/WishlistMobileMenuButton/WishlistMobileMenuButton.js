@@ -10,7 +10,7 @@ function WishlistMobileMenuButton() {
       <button onClick={setToggleMenu}>
         <HiOutlineMenuAlt2 className="size-4 sm:size-6 cursor-pointer" />
       </button>
-      <h2>Ma liste d'envies</h2>
+      <h2>Ma liste d&apos;envies</h2>
     </div>
   );
 }

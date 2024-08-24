@@ -62,7 +62,7 @@ function UserAdressForm({ cancel }) {
     <section className="border-4 py-6 px-48">
       <Form {...form}>
         <h2 className="text-2xl font-bold text-center my-8">
-          Modifier l'adresse de livraison
+          Modifier l&apos;adresse de livraison
         </h2>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField

@@ -11,6 +11,7 @@ import WishlistMobileMenu from "@/components/WishlistMobileMenu";
 import NewWishlistButton from "@/components/NewWishlistButton";
 import WishlistTitleInput from "@/components/WishlistTitleInput";
 import CurrentWishlistProductListComponent from "@/components/CurrentWishlistProductListComponent";
+import LoadingComponent from "@/components/LoadingComponent";
 
 function Page() {
   const { user } = useUserStore();
@@ -23,7 +24,10 @@ function Page() {
   } = useWishlist();
 
   useEffect(() => {
-    getWishlistTableState(user);
+    const getWishlist = async () => {
+      await getWishlistTableState(user);
+    };
+    getWishlist();
   }, [user]);
 
   return (
@@ -32,7 +36,7 @@ function Page() {
       <div className="flex flex-row p-0 lg:pt-12 lg:pb-5">
         <div className="hidden lg:flex flex-col w-2/5 gap-7 ml-16">
           <NewWishlistButton user={user} />
-          {wishlistTable?.length > 0 && (
+          {wishlistTable?.length > 0 ? (
             <div className="flex flex-col w-full h-full gap-7">
               {wishlistTable?.map(({ id, name, isCurrent, idList, date }) => (
                 <div
@@ -53,6 +57,12 @@ function Page() {
                 </div>
               ))}
             </div>
+          ) : (
+            <div>
+              <span className="opacity-100 transform-all text-xl font-semibold first-letter:uppercase">
+                Chargement de vos listes d&apos;envies...
+              </span>
+            </div>
           )}
         </div>
         <div className="flex flex-col px-7 w-full h-full gap-6">
@@ -64,7 +74,10 @@ function Page() {
               toggleModify ? "h-fit" : "h-0"
             }`}
           >
-            <DeleteWishlistButton user={user} wishlistId={currentWishlist.id} />
+            <DeleteWishlistButton
+              user={user}
+              wishlistId={currentWishlist?.id}
+            />
           </div>
           <div
             className={`flex w-full justify-end transition-all duration-500 transform ease-in-out ${

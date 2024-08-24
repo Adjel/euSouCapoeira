@@ -44,7 +44,7 @@ const formSchema = z.object({
   business: z.string().optional(),
 });
 
-export default function page() {
+export default function Page() {
   const [logInButton, toggleLogInButton] = useState(false);
   const { user } = useUserStore();
   const { signUp } = useSignUp();
@@ -88,7 +88,7 @@ export default function page() {
     return (
       <div className="flex flex-col gap-4 w-full">
         <div className="flex flex-row justify-between gap-4">
-          <h2 className={`${style.title} mb-4`}>Panier d'achat</h2>
+          <h2 className={`${style.title} mb-4`}>Panier d&apos;achat</h2>
           <Link
             href="/cart"
             className="underline underline-offset-8 hover:text-color-gold"
@@ -348,7 +348,7 @@ export default function page() {
             </div>
             {!userHasMount && (
               <Button type="submit" className="w-fit mx-auto mt-16">
-                S'enregistrer et acheter
+                S&apos;enregistrer et acheter
               </Button>
             )}
             {userHasMount && (

@@ -37,4 +37,7 @@ const PasswordInput = forwardRef(
   }
 );
 
+// Définition du nom d'affichage pour le composant
+PasswordInput.displayName = "PasswordInput";
+
 export default PasswordInput;

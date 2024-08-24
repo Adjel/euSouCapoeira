@@ -25,7 +25,7 @@ const formSchema = z.object({
     .regex(emailRegex, "L'adresse email fournie n'a pas un format valide"),
 });
 
-export default function page() {
+export default function Page() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -75,7 +75,7 @@ export default function page() {
               Changer le mot de passe
             </Button>
             <Link href="/signup" className={styles.link}>
-              s'inscrire
+              s&apos;inscrire
             </Link>
             <Link href="/signin" className={styles.link}>
               Se connecter

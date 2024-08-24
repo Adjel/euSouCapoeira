@@ -1,12 +1,20 @@
 import { useEvalStore } from "@/stores/useEvalStore";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RiStarSFill } from "react-icons/ri";
 
 function RatingComponent({ productId, userRate, option = "totalRates" }) {
   const { getProductRates } = useEvalStore();
+  const [rates, setRates] = useState();
 
-  let rates = getProductRates(productId);
   let average;
+
+  useEffect(() => {
+    const getRates = async () => {
+      setRates(await getProductRates(productId));
+    };
+
+    getRates();
+  }, [productId]);
 
   // Getting the global average
   if (rates) {
@@ -33,7 +41,7 @@ function RatingComponent({ productId, userRate, option = "totalRates" }) {
         ))}
       </ul>
       {option === "totalRates" ? (
-        <span className="text-color-dark-gray">{rates.length}</span>
+        <span className="text-color-dark-gray">{rates?.length}</span>
       ) : option === "average" ? (
         <div className="flex lfex-row gap-1 text-color-dark-gray">
           <span>{Math.round(average)}</span>

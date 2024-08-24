@@ -13,12 +13,13 @@ export default function NotFound() {
         <div className="flex flex-col w-full lg:2/3 justify-center items-center gap-8">
           <header className="flex flex-col gap-2">
             <h2 className="text-4xl font-bold">
-              Uh Oh! Cette page n'existe plus ou n'a peut-être jamais existé!
+              Uh Oh! Cette page n&apos;existe plus ou n&apos;a peut-être jamais
+              existé!
             </h2>
             <span className="">{`Vous pouvez tout de même rejoindre l'acceuil via le bouton en dessous, ou alors naviguer comme vous le faite habituellement :)`}</span>
           </header>
           <Button className="w-fit">
-            <Link href="/">Retourner à l'acceuil</Link>
+            <Link href="/">Retourner à l&apos;acceuil</Link>
           </Button>
         </div>
         <Image

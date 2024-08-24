@@ -14,7 +14,7 @@ function DeleteWishlistButton({ user, wishlistId }) {
       } flex flex-row w-fit p-4 gap-2 justify-center items-center text-xl font-bold border border-black rounded-full`}
     >
       <RiDeleteBinLine className="size-7" />
-      Supprimer la liste d'envies
+      Supprimer la liste d&apos;envies
     </button>
   );
 }
