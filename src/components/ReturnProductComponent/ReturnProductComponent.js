@@ -21,7 +21,10 @@ function ReturnProductComponent() {
   ]);
 
   useEffect(() => {
-    getCommands(user);
+    const fetchCommands = async () => {
+      await getCommands(user);
+    };
+    if (user) fetchCommands();
   }, [user]);
 
   const findCommandProduct = (commandId, productId) => {
