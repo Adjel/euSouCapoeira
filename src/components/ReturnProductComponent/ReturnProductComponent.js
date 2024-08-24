@@ -87,10 +87,13 @@ function ReturnProductComponent() {
   const onToggleStep = (isNext) => {
     const currentStep = getStep();
 
+    // go back
     if (!isNext && currentStep === "détails") {
       setReturnProductList([]);
+      setInputError("");
     }
 
+    // verify if we have reasons
     if (isNext && returnProductList.some((item) => !item.reason)) {
       setInputError("Vous devez sélectionner une raison");
       return;
@@ -101,6 +104,7 @@ function ReturnProductComponent() {
         (step) => step.state === "current"
       );
 
+      // if this is not the last step, go forward
       if (currentIndex === -1) return prevSteps;
 
       return prevSteps.map((step, index) => {
@@ -112,6 +116,8 @@ function ReturnProductComponent() {
         } else if (index === currentIndex) {
           return { ...step, state: "todo" };
         }
+        // user can go next, there are no errors anymore so reset error
+        setInputError("");
         return step;
       });
     });
