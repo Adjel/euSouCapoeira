@@ -52,7 +52,11 @@ function SearchBar() {
                 className="flex gap-3"
                 onClick={handleProductClicked}
               >
-                <Image src={images[0].image} className="w-16 h-16" />
+                <Image
+                  src={images[0].image}
+                  alt={images[0].alt}
+                  className="w-16 h-16"
+                />
                 <div className="flex flex-col">
                   <strong className="text-xs md:text-sm">{name}</strong>
                   <span className="text-sx md:text-sm">{price} €</span>
