@@ -1,6 +1,6 @@
 "use client";
-import { products } from "@/providers/productsProvider";
-import React, { useState, useMemo, useCallback } from "react";
+import { getMockProducts } from "@/providers/productsProvider";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import Image from "next/image";
 import RatingComponent from "@/components/RatingComponent";
 import {
@@ -32,12 +32,25 @@ export default function Page({ params }) {
   const [page, setPage] = useState(1);
   const [productDisplayedNumber, setProductDisplayedNumber] = useState(5);
 
-  // get only products from the param subcategory
-  const productList = products.find((item) => {
-    return (
-      normalizeParam(params.products) === normalizeString(item.subCategory)
-    );
-  });
+  const [productList, setProductList] = useState(null);
+
+  useEffect(() => {
+    // get only products from the param subcategory
+    const getProductList = async () => {
+      const products = await getMockProducts();
+
+      setProductList(
+        products.find((item) => {
+          return (
+            normalizeParam(params.products) ===
+            normalizeString(item.subCategory)
+          );
+        })
+      );
+    };
+
+    getProductList();
+  }, [params]);
 
   const paramProducts = normalizeParam(params.products);
 
@@ -137,7 +150,7 @@ export default function Page({ params }) {
   // the breadcrumb will display home then category and subcategory, or category which have not a subcategory
   // if have a sub-category, the category will be clickable and will push to the category, the sub-category will be not
   // if we have no sub-category, the category is not clickable
-  return !products ? (
+  return !productList ? (
     <LoadingComponent />
   ) : (
     <section className="py-7 px-14">
