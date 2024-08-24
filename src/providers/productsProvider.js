@@ -5,6 +5,44 @@ import livreBatuqueBack from "../../public/fakeApi/livreBatuqueBack.jpg";
 import livreBatuqueOpen from "../../public/fakeApi/livreBatuqueOpen.jpg";
 import livretexpressao from "../../public/fakeApi/livretexpressao.jpg";
 import entrain from "../../public/fakeCatsImages/entrain.jpg";
+import { defaultProductEvals } from "./productEvaluationProvider";
+
+export const getMockProducts = async () => {
+  const mockedApiEvals =
+    JSON.parse(localStorage.getItem("productsEvals")) || [];
+
+  const allProductsEval = defaultProductEvals.map((pEval) => ({
+    productId: pEval.productId,
+    rates: [
+      ...pEval.rates,
+      ...(mockedApiEvals.find(
+        (mockEval) => mockEval.productId === pEval.productId
+      )?.rates ?? []),
+    ],
+    comments: [
+      ...pEval.comments,
+      ...(mockedApiEvals.find(
+        (mockEval) => mockEval.productId === pEval.productId
+      )?.comments ?? []),
+    ],
+  }));
+
+  const productsWithEvals = products.map((subCategory) => ({
+    subCategory: subCategory.subCategory,
+    products: [
+      ...subCategory.products.map((product) => ({
+        ...product,
+        comments: allProductsEval.find(
+          (pEval) => pEval.productId === product.id
+        ).comments,
+        rates: allProductsEval.find((pEval) => pEval.productId === product.id)
+          .rates,
+      })),
+    ],
+  }));
+
+  return productsWithEvals;
+};
 
 export const products = [
   {
