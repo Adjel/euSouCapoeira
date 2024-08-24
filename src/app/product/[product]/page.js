@@ -53,7 +53,7 @@ export default function Page({ params }) {
   };
 
   return isLoading || !product ? (
-    <LoadingComponent />
+    <LoadingComponent imagePriority={true} />
   ) : (
     <section className="basicPadding py-7">
       <div className="flex flex-col lg:flex-row">
@@ -71,7 +71,7 @@ export default function Page({ params }) {
           <ZoomImage
             src={product?.images[imageIndex ?? 0].image}
             alt={product?.images[imageIndex ?? 0].alt}
-            classN="mx-auto w-48 md:w-80 h-auto"
+            customClassName="mx-auto w-48 md:w-80 h-auto"
           />
 
           <ul
@@ -106,6 +106,7 @@ export default function Page({ params }) {
                 } `}
               >
                 <Image
+                  priority={true}
                   className="mx-auto w-16 md:w-24 h-auto cursor-pointer"
                   key={index}
                   src={image}
@@ -118,7 +119,7 @@ export default function Page({ params }) {
         </section>
         <section>
           {product?.variants.length > 0 ? (
-            <ProductVariantsComponent product={product} />
+            <ProductVariantsComponent product={product} imagePriority={true} />
           ) : (
             <div className="hidden lg:flex mb-11" />
           )}
@@ -164,7 +165,7 @@ export default function Page({ params }) {
         </ul>
       </section>
       <section className="mt-12">
-        <CommentsComponent productId={product.id} rates={product?.rates} />
+        <CommentsComponent productId={product.id} />
       </section>
       <RecommandsComponent />
     </section>

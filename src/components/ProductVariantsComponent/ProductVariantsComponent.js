@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CheckedIcon from "../CheckedIcon";
 
-function ProductVariantsComponent({ product }) {
+function ProductVariantsComponent({ product, imagePriority = false }) {
   const sortedVariants = product.variants.sort((a, b) => a.id - b.id);
   return (
     <div className="flex flex-col gap-2 mt-4 justify-center ">
@@ -19,6 +19,7 @@ function ProductVariantsComponent({ product }) {
               className="relative hover:text-color-gold"
             >
               <Image
+                priority={imagePriority}
                 className={`${
                   index === product?.variants.length - 1
                     ? "border"
