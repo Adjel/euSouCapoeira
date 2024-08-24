@@ -45,11 +45,7 @@ function Page() {
                   >
                     <WishlistTitleItem
                       isCurrent={isCurrent}
-                      name={
-                        name
-                          ? name
-                          : `Liste d'envies du ${new Date().toLocaleDateString()}`
-                      }
+                      name={name}
                       idList={idList}
                       date={date}
                     />
