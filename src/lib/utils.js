@@ -41,6 +41,7 @@ export const normalizeParam = (name) => {
 };
 
 export const average = (arr) => {
+  console.log(arr);
   const sum = arr.reduce(
     (accumulator, element) => accumulator + element.rate,
     0

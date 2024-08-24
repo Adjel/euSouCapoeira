@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import PaginationComponent from "@/components/PaginationComponent";
 import SelectNumberToDisplay from "@/components/SelectNumberToDisplay";
 import ProductLink from "@/components/ProductLink";
+import LoadingComponent from "@/components/LoadingComponent";
 
 export default function Page({ params }) {
   // the page will present items into a grid or a list
@@ -136,7 +137,9 @@ export default function Page({ params }) {
   // the breadcrumb will display home then category and subcategory, or category which have not a subcategory
   // if have a sub-category, the category will be clickable and will push to the category, the sub-category will be not
   // if we have no sub-category, the category is not clickable
-  return (
+  return !paginationProductList || paginationProductList.length < 1 ? (
+    <LoadingComponent />
+  ) : (
     <section className="py-7 px-14">
       <header className="flex flex-col gap-4">
         <div className="lg:flex hidden flex-col w-fit h-1/2 justify-center items-start p-2">
@@ -181,16 +184,8 @@ export default function Page({ params }) {
               } gap-4 p-7`}
             >
               {paginationProductList.map((product) => {
-                const {
-                  name,
-                  images,
-                  price,
-                  rates,
-                  availability,
-                  isBestSeller,
-                  id,
-                  alt,
-                } = product;
+                const { name, images, price, availability, isBestSeller, id } =
+                  product;
 
                 return (
                   <li className={`${isGrid && "flex flex-col gap-4"}`} key={id}>
