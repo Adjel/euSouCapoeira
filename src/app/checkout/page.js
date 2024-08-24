@@ -323,7 +323,8 @@ export default function Page() {
                 </div>
               </div>
             ) : (
-              userHasMount && (
+              userHasMount &&
+              user && (
                 <div className="p-4 flex flex-col border-2 rounded">
                   <span>{user.business}</span>
                   <span>{user.firstName}</span>
