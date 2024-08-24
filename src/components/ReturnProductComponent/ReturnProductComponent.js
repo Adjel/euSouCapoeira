@@ -208,7 +208,7 @@ function ReturnProductComponent() {
             <section className="flex flex-col w-full gap-8">
               <header className="flex flex-col w-full gap-12">
                 <h2 className="text-2xl md:text-4xl font-bold">
-                  Pouriez-vous nous donner plus de détails s'il vous plaît?
+                  Pouriez-vous nous donner plus de détails s&apos;il vous plaît?
                 </h2>
                 <ReturnProdutStepsProgressComponent steps={steps} />
               </header>
@@ -257,7 +257,7 @@ function ReturnProductComponent() {
                 adresse e-mail princispale :)`}
               </span>
               <Button>
-                <Link href="/">Retour à l'accueil</Link>
+                <Link href="/">Retour à l&apos;accueil</Link>
               </Button>
             </div>
           )}

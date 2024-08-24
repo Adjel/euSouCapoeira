@@ -75,7 +75,7 @@ export default function Page() {
               Changer le mot de passe
             </Button>
             <Link href="/signup" className={styles.link}>
-              s'inscrire
+              s&apos;inscrire
             </Link>
             <Link href="/signin" className={styles.link}>
               Se connecter

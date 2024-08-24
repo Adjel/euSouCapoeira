@@ -64,7 +64,10 @@ function Page() {
               toggleModify ? "h-fit" : "h-0"
             }`}
           >
-            <DeleteWishlistButton user={user} wishlistId={currentWishlist.id} />
+            <DeleteWishlistButton
+              user={user}
+              wishlistId={currentWishlist?.id}
+            />
           </div>
           <div
             className={`flex w-full justify-end transition-all duration-500 transform ease-in-out ${

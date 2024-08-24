@@ -23,7 +23,7 @@ function WishlistMobileMenu({ wishlistTable }) {
         <aside className="flex flex-col gap-1 z-50 absolute top-0 bottom-0 left-0 w-full md:w-96 lg:w-31.5 h-full p-6 bg-white shadow-lg transition-transform duration-500">
           <header className="flex justify-between mb-2">
             <h2 className="w-fit text-lg font-bold m-0 p-0">
-              Ma liste d'envies
+              Ma liste d&apos;envies
             </h2>
             <IoCloseOutline
               className="size-8 cursor-pointer"

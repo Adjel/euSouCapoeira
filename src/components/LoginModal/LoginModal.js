@@ -64,7 +64,7 @@ function LoginModal() {
                   Pas encore de compte ?
                 </span>
                 <Link href="/signup" className="signLink" onClick={toggle}>
-                  s'inscrire maintenant
+                  s&apos;inscrire maintenant
                 </Link>
               </div>
             </>

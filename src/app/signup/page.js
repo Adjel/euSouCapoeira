@@ -90,7 +90,7 @@ export default function Signup() {
       <div className="flex flex-col gap-6 w-1/2">
         <Form {...form}>
           <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold text-center">
-            S'enregistrer
+            S&apos;enregistrer
           </h2>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField

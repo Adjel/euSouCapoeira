@@ -62,8 +62,8 @@ function EvaluateProductComponent() {
       ) : (
         <div className="flex p-7 w-full h-72 justify-center items-center border rounded-xl">
           <h3 className="text-2xl text-center font-bold">
-            Vous n'avez pas de produits à évaluer pour le moment. Réessayez une
-            fois vos premiers produits reçus.
+            Vous n&apos;avez pas de produits à évaluer pour le moment. Réessayez
+            une fois vos premiers produits reçus.
           </h3>
         </div>
       )}

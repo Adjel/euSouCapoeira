@@ -17,7 +17,7 @@ export default function Page() {
   return (
     <section className="flex flex-col justify-center items-center py-6">
       <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold text-center">
-        Connection à l'espace client
+        Connection à l&apos;espace client
       </h2>
       <div className="flex flex-col w-full lg:w-1/2 justify-center items-center p-8 gap-6">
         <SignInForm className="w-full" />
@@ -31,7 +31,7 @@ export default function Page() {
             pas encore de compte ?
           </span>
           <Link href="/signup" className="signLink">
-            s'inscrire maintenant
+            s&apos;inscrire maintenant
           </Link>
         </div>
       </div>

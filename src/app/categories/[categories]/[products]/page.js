@@ -275,7 +275,7 @@ export default function Page({ params }) {
           <h2 className="md:text-2xl lg:text-3xl flex flex-col gap-10 text-center text-xl font-bold">
             {`Désolé, cette catégorie ne propose pas encore de produits :'( `}
             <Button className="w-fit mx-auto">
-              <Link href="/">Retour à l'accueil</Link>
+              <Link href="/">Retour à l&apos;accueil</Link>
             </Button>
           </h2>
         )}
