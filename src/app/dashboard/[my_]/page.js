@@ -11,6 +11,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import ReturnProductComponent from "@/components/ReturnProductComponent";
 import useUserMounted from "@/lib/useUserMounted";
 import EvaluateProductComponent from "@/components/EvaluateProductComponent";
+import LoadingComponent from "@/components/LoadingComponent";
 
 export default function Dashboard({ params }) {
   const { user } = useUserStore();
@@ -45,14 +46,7 @@ export default function Dashboard({ params }) {
       pageContent = <ReturnProductComponent />;
       break;
     default:
-      pageContent = (
-        <UserInfoComponent
-          isInfo={true}
-          title={"Mes informations"}
-          subTitle={"Mettez à jour vos informations"}
-          iconButton={FaPen}
-        />
-      );
+      pageContent = <LoadingComponent />;
       break;
   }
 
@@ -60,7 +54,9 @@ export default function Dashboard({ params }) {
     if (!user) router.push("/signin");
   }, [user]);
 
-  return (
+  return !hasMounted ? (
+    <LoadingComponent />
+  ) : (
     <section className="relative flex flex-col md:flex-row w-full h-full gap-16 px-4 md:p-8">
       <header className="flex w-full md:hidden gap-4 h-fit items-baseline px-4 py-8 md:px-8">
         <div onClick={() => setIsOpen(!isOpen)}>
