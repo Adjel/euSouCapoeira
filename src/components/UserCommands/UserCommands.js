@@ -12,7 +12,10 @@ function MyCommands() {
   const { user } = useUserStore();
 
   useEffect(() => {
-    getCommands(user);
+    const fetchCommands = async () => {
+      await getCommands(user);
+    };
+    if (user) fetchCommands();
   }, [user]);
 
   return (
