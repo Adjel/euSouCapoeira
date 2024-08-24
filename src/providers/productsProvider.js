@@ -8,9 +8,11 @@ import entrain from "../../public/fakeCatsImages/entrain.jpg";
 import { defaultProductEvals } from "./productEvaluationProvider";
 
 export const getMockProducts = async () => {
+  // Get mocked user evals
   const mockedApiEvals =
     JSON.parse(localStorage.getItem("productsEvals")) || [];
 
+  // create a table with all mocked defaults evals and users mocked evals
   const allProductsEval = defaultProductEvals.map((pEval) => ({
     productId: pEval.productId,
     rates: [
@@ -27,6 +29,7 @@ export const getMockProducts = async () => {
     ],
   }));
 
+  // add evals to product which have
   const productsWithEvals = products.map((subCategory) => ({
     subCategory: subCategory.subCategory,
     products: [
