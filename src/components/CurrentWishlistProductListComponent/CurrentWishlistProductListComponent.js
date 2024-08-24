@@ -8,11 +8,14 @@ import AddToCartButton from "@/components/AddToCartButton";
 import WishlistProductQuantityButton from "@/components/WishlistProductQuantityButton";
 import WishlistDeleteProductButton from "@/components/WishlistDeleteProductButton";
 import Link from "next/link";
+import LoadingComponent from "../LoadingComponent";
 
 function CurrentWishlistProductListComponent({ user }) {
   const { currentProductWishlist, toggle, toggleQuantity } = useWishlist();
 
-  return currentProductWishlist.length > 0 ? (
+  return !currentProductWishlist ? (
+    <div>Chargement des produits...</div>
+  ) : currentProductWishlist.length > 0 ? (
     currentProductWishlist?.map((product) => (
       <div
         key={product.id}
@@ -58,7 +61,7 @@ function CurrentWishlistProductListComponent({ user }) {
     ))
   ) : (
     <div className="flex justify-center items-center w-full h-72 bg-background-medium-gray rounded-xl">
-      <span>{`Vous n'avez encore de produit dans votre liste de souhaits :(`}</span>
+      <span>{`Vous n'avez pas encore de produit dans votre liste de souhaits :(`}</span>
     </div>
   );
 }

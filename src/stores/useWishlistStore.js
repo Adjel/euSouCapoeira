@@ -11,7 +11,7 @@ export const useWishlist = create((set, get) => {
     wishlistTable: [],
 
     currentWishlist: null,
-    currentProductWishlist: null,
+    currentProductWishlist: [],
     toggleModify: false,
     toggleMenu: false,
 

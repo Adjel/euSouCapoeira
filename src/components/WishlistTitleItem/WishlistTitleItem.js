@@ -12,7 +12,7 @@ function WishlistTitleItem({ isCurrent, name, idList, date }) {
       </h2>
       <div className="flex items-center space-x-1 font-normal text-sm text-color-info">
         <span className="first-letter:uppercase">
-          {idList?.length > 0 ? idList?.length + " produits" : "aucun produit"}
+          {idList.length > 0 ? idList.length + " produits" : "aucun produit"}
         </span>
         <div className="w-1 h-1 bg-color-info rounded-full" />
         <span>Créée le {date}</span>
