@@ -5,7 +5,7 @@ import { Input } from "../ui/input";
 
 const PasswordInput = forwardRef(
   ({ placeholder = "Mot de passe", isError, field, ...props }, ref) => {
-    const [isPasswordVisible, setIsPasswordVisible] = useState(true);
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     function handlePasswordVisibility(event) {
       event.preventDefault();
