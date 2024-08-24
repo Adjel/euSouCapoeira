@@ -44,7 +44,6 @@ function RatingComponent({ productId, userRate, option = "totalRates" }) {
         <span className="text-color-dark-gray">{rates?.length}</span>
       ) : option === "average" ? (
         <div className="flex lfex-row gap-1 text-color-dark-gray">
-          {console.log(average)}
           <span>{!isNaN(average) ? Math.round(average) : ""}</span>
           <span>/</span>
           <span>5</span>
