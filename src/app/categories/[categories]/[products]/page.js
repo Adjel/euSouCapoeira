@@ -137,7 +137,7 @@ export default function Page({ params }) {
   // the breadcrumb will display home then category and subcategory, or category which have not a subcategory
   // if have a sub-category, the category will be clickable and will push to the category, the sub-category will be not
   // if we have no sub-category, the category is not clickable
-  return !paginationProductList || paginationProductList.length < 1 ? (
+  return !paginationProductList ? (
     <LoadingComponent />
   ) : (
     <section className="py-7 px-14">
