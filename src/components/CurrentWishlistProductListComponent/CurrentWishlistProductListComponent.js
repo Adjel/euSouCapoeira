@@ -8,7 +8,6 @@ import AddToCartButton from "@/components/AddToCartButton";
 import WishlistProductQuantityButton from "@/components/WishlistProductQuantityButton";
 import WishlistDeleteProductButton from "@/components/WishlistDeleteProductButton";
 import Link from "next/link";
-import LoadingComponent from "../LoadingComponent";
 
 function CurrentWishlistProductListComponent({ user }) {
   const { currentProductWishlist, toggle, toggleQuantity } = useWishlist();

@@ -150,7 +150,7 @@ export default function Page({ params }) {
   // if have a sub-category, the category will be clickable and will push to the category, the sub-category will be not
   // if we have no sub-category, the category is not clickable
   return !productList ? (
-    <LoadingComponent />
+    <LoadingComponent sentence="chargement des produits en cours..." />
   ) : (
     <section className="py-7 px-14">
       <header className="flex flex-col gap-4">

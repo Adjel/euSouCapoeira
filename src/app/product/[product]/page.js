@@ -53,7 +53,10 @@ export default function Page({ params }) {
   };
 
   return isLoading || !product ? (
-    <LoadingComponent imagePriority={true} />
+    <LoadingComponent
+      sentence="chargement du produit..."
+      imagePriority={true}
+    />
   ) : (
     <section className="basicPadding py-7">
       <div className="flex flex-col lg:flex-row">

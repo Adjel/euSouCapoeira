@@ -11,7 +11,6 @@ import WishlistMobileMenu from "@/components/WishlistMobileMenu";
 import NewWishlistButton from "@/components/NewWishlistButton";
 import WishlistTitleInput from "@/components/WishlistTitleInput";
 import CurrentWishlistProductListComponent from "@/components/CurrentWishlistProductListComponent";
-import LoadingComponent from "@/components/LoadingComponent";
 
 function Page() {
   const { user } = useUserStore();

@@ -2,7 +2,10 @@ import React from "react";
 import icon from "../../../public/icon.svg";
 import Image from "next/image";
 
-function LoadingComponent({ imagePriority = false }) {
+function LoadingComponent({
+  sentence = "Chargement en cours...",
+  imagePriority = false,
+}) {
   return (
     <section className="basicPadding py-7">
       <div className="flex justify-center items-center">
@@ -13,7 +16,7 @@ function LoadingComponent({ imagePriority = false }) {
             src={icon}
             className="animate-spin h-32 w-32 my-32 text-color-gold "
           />
-          <span className="text-lg uppercase">Chargement en cours...</span>
+          <span className="text-lg uppercase">{sentence}</span>
         </div>
       </div>
     </section>
