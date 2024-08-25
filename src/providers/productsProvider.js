@@ -88,7 +88,7 @@ export const getMockProducts = async () => {
     ],
   }));
 
-  // add all evals to product which have
+  // add evals to product which have
   const productsWithEvals = products.map((subCategory) => ({
     subCategory: subCategory.subCategory,
     products: [
