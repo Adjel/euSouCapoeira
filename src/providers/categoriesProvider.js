@@ -25,7 +25,7 @@ export const categories = [
       },
 
       {
-        name: "t-shirt",
+        name: "tshirt",
         image: clothes,
         alt: "une image représentant la catégorie t-shirt",
         productNbr: 5,
