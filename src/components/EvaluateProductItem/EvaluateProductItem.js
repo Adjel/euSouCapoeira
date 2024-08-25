@@ -56,8 +56,6 @@ function EvaluateProductItem({
     toast({ title: "Votre évaluation à été prise en compte" });
   };
 
-  // TODO: SET THE ALREADY EXIST DATA FOR TITLE COMMENT AND NOTE !!
-
   return (
     <div className="flex flex-col gap-6 py-5 border-t border-b">
       <div className="flex gap-6">

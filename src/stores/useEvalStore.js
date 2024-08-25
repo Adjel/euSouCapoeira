@@ -124,7 +124,6 @@ export const useEvalStore = create((set, get) => ({
     let existingEval;
     let productsEvals = JSON.parse(localStorage.getItem("productsEvals")) || [];
 
-    // TODO: USE eval ID too reinforce
     existingEval = productsEvals.find((pEval) => pEval.productId === productId);
 
     if (!existingEval) {
