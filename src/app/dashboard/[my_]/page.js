@@ -55,7 +55,7 @@ export default function Dashboard({ params }) {
   }, [user]);
 
   return !hasMounted ? (
-    <LoadingComponent />
+    <LoadingComponent sentence="chargement de vos informations..." />
   ) : (
     <section className="relative flex flex-col md:flex-row w-full h-full gap-16 px-4 md:p-8">
       <header className="flex w-full md:hidden gap-4 h-fit items-baseline px-4 py-8 md:px-8">
