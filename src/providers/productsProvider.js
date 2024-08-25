@@ -66,6 +66,8 @@ import pattes_d_ours_capoeira from "../../public/fakeApi/entrainement/pattes_d_o
 import pattesdourscapoeira from "../../public/fakeApi/entrainement/pattesdourscapoeira.jpg";
 import { defaultProductEvals } from "./productEvaluationProvider";
 
+console.log();
+
 export const getMockProducts = async () => {
   // Get mocked user evals
   const mockedApiEvals =
