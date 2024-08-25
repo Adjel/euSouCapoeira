@@ -40,12 +40,11 @@ export default function Page({ params }) {
       const products = await getMockProducts();
 
       setProductList(
-        products.find((item) => {
-          return (
+        products.find(
+          (item) =>
             normalizeParam(params.products) ===
             normalizeString(item.subCategory)
-          );
-        })
+        ) ?? []
       );
     };
 
