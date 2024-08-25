@@ -39,6 +39,15 @@ export default function Page({ params }) {
     const getProductList = async () => {
       const products = await getMockProducts();
 
+      const test =
+        products.find(
+          (item) =>
+            normalizeParam(params.products) ===
+            normalizeString(item.subCategory)
+        ) ?? [];
+
+      console.log(normalizeParam(params.products));
+
       setProductList(
         products.find(
           (item) =>
