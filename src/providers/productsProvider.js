@@ -13,24 +13,31 @@ import tshirt_manequin_homme_capoeira_carybe from "../../public/fakeApi/vetement
 import tshirt_homme_capoeira_carybe from "../../public/fakeApi/vetements/tshirt/tshirt_homme_capoeira_carybe.jpg";
 import tshirt_femme_capoeira_carybe from "../../public/fakeApi/vetements/tshirt/tshirt_femme_capoeira_carybe.jpeg";
 import tshirt_fb_femme_capoeira_carybe from "../../public/fakeApi/vetements/tshirt/tshirt_fb_femme_capoeira_carybe.jpeg";
+import debardeur_femme_capoeira_original_rose from "../../public/fakeApi/vetements/tshirt/debardeur_femme_capoeira_original_rose.jpeg";
 import debardeur_femme_capoeira_logo_rose from "../../public/fakeApi/vetements/tshirt/debardeur_femme_capoeira_logo_rose.jpeg";
 import debardeur_femme_capoeira_original_rose_face from "../../public/fakeApi/vetements/tshirt/debardeur_femme_capoeira_original_rose_face.jpeg";
 import debardeur_femme_capoeira_original_rose_manequin from "../../public/fakeApi/vetements/tshirt/debardeur_femme_capoeira_original_rose_manequin.jpeg";
 import debardeur_femme_capoeira_original_blanc from "../../public/fakeApi/vetements/tshirt/debardeur_femme_capoeira_original_blanc.jpeg";
 import abada_blanc_coupe_tapered_carrot_unisexe from "../../public/fakeApi/vetements/pantalon/abada_blanc_coupe_tapered_carrot_unisexe.jpeg";
-
+import abada_blanc_coupe_tapered_carrot_unisexe_side from "../../public/fakeApi/vetements/pantalon/abada_blanc_coupe_tapered_carrot_unisexe_side.jpeg";
+import abada_blanc_coupe_tapered_carrot_unisexe_back from "../../public/fakeApi/vetements/pantalon/abada_blanc_coupe_tapered_carrot_unisexe_back.jpeg";
 import abada_blanc_capoeira_shop_ue from "../../public/fakeApi/vetements/pantalon/abada_blanc_capoeira_shop_ue.jpeg";
 import abada_blanc_capoeira_shop_ue_back from "../../public/fakeApi/vetements/pantalon/abada_blanc_capoeira_shop_ue_back.jpeg";
 import pantalon_noir_capoeira_angola from "../../public/fakeApi/vetements/pantalon/pantalon_noir_capoeira_angola.jpeg";
-
+import pantalon_noir_capoeira_angola_back from "../../public/fakeApi/vetements/pantalon/pantalon_noir_capoeira_angola_back.jpeg";
+import pantalon_noir_capoeira_angola_zoomed from "../../public/fakeApi/vetements/pantalon/pantalon_noir_capoeira_angola_zoomed.jpeg";
 import abada_capoeira_blanc_jamaica_side from "../../public/fakeApi/vetements/pantalon/abada_capoeira_blanc_jamaica_side.jpeg";
 import abada_capoeira_blanc_jamaica from "../../public/fakeApi/vetements/pantalon/abada_capoeira_blanc_jamaica.jpeg";
-
+import pantalon_capoeira_noir_jamaique_back from "../../public/fakeApi/vetements/pantalon/pantalon_capoeira_noir_jamaique_back.jpeg";
 import pantalon_capoeira_noir_jamaique_face from "../../public/fakeApi/vetements/pantalon/pantalon_capoeira_noir_jamaique_face.jpeg";
 import pantalon_capoeira_noir_jamaique_side from "../../public/fakeApi/vetements/pantalon/pantalon_capoeira_noir_jamaique_side.jpeg";
-
+import pantalon_jogging_capoeira_homme_gris_back from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme_gris_back.jpeg";
+import pantalon_jogging_capoeira_homme_gris_side from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme_gris_side.jpeg";
+import pantalon_jogging_capoeira_homme_gris from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme_gris.jpeg";
+import pantalon_jogging_capoeira_homme_noir_back from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme_noir_back.jpeg";
+import pantalon_jogging_capoeira_homme_noir_side from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme_noir_side.jpeg";
 import pantalon_jogging_capoeira_homme_noir from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme_noir.jpeg";
-
+import pantalon_jogging_capoeira_homme_pocket_back from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme_pocket_back.jpeg";
 import pantalon_jogging_capoeira_homme_pocket from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme_pocket.jpeg";
 import pantalon_jogging_capoeira_homme from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme.jpeg";
 import corde_capoeira_souple_8_10_12mm from "../../public/fakeApi/vetements/cordes/corde_capoeira_souple_8_10_12mm.jpeg";
@@ -44,16 +51,17 @@ import pandeiro_capoeira from "../../public/fakeApi/instruments/pandeiro/pandeir
 import pandeiros_capoeira from "../../public/fakeApi/instruments/pandeiro/pandeiros_capoeira.jpg";
 import atabaque_capoeira_shop_all from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_shop_all.jpeg";
 import atabaque_capoeira_shop_bottom from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_shop_bottom.jpeg";
-
+import atabaque_capoeira_shop_top from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_shop_top.jpeg";
 import atabaque_capoeira_shop_top_top from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_shop_top_top.jpeg";
 import atabaque_capoeira_shop from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_shop.jpg";
 import atabaque_capoeira_top from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_top.jpeg";
 import atabaque_capoeira from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira.jpeg";
 import agogo_pyrograve_lua_rasta_back from "../../public/fakeApi/instruments/agogo/agogo_pyrograve_lua_rasta_back.jpeg";
-
+import agogo_pyrograve_lua_rasta_zoomed from "../../public/fakeApi/instruments/agogo/agogo_pyrograve_lua_rasta_zoomed.jpeg";
 import reco_reco_bambou_bahia from "../../public/fakeApi/instruments/recoreco/reco_reco_bambou_bahia.jpg";
 import encens_dialux_abre_caminhos from "../../public/fakeApi/esoterisme/encens_dialux_abre_caminhos.jpeg";
-
+import pattes_d_ours_capoeira_tech_2 from "../../public/fakeApi/entrainement/pattes_d_ours_capoeira_tech_2.jpg";
+import pattes_d_ours_capoeira_tech from "../../public/fakeApi/entrainement/pattes_d_ours_capoeira_tech.jpg";
 import pattes_d_ours_capoeira from "../../public/fakeApi/entrainement/pattes_d_ours_capoeira.jpg";
 import pattesdourscapoeira from "../../public/fakeApi/entrainement/pattesdourscapoeira.jpg";
 import { defaultProductEvals } from "./productEvaluationProvider";
@@ -80,7 +88,7 @@ export const getMockProducts = async () => {
     ],
   }));
 
-  // add evals to product which have
+  // add all evals to product which have
   const productsWithEvals = products.map((subCategory) => ({
     subCategory: subCategory.subCategory,
     products: [
