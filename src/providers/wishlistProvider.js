@@ -109,7 +109,6 @@ const updateUserWishlistTable = async (user, wishlistTable) => {
       wishlistTable: wishlistTable,
     };
 
-    // TODO: create only one function to handle all user updates
     setUserCookies(newUser);
     mockUpdateUser(user, newUser);
 

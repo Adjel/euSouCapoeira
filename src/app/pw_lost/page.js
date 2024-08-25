@@ -34,7 +34,6 @@ export default function Page() {
   });
 
   function onSubmit(values) {
-    //TODO: provider
     toast({
       title:
         "Demande validée, vous allez recevoir un email pour changer votre mot de passe",
