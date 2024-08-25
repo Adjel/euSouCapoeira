@@ -40,6 +40,30 @@ import pantalon_jogging_capoeira_homme_noir from "../../public/fakeApi/vetements
 import pantalon_jogging_capoeira_homme_pocket_back from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme_pocket_back.jpeg";
 import pantalon_jogging_capoeira_homme_pocket from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme_pocket.jpeg";
 import pantalon_jogging_capoeira_homme from "../../public/fakeApi/vetements/pantalon/pantalon_jogging_capoeira_homme.jpeg";
+import corde_capoeira_souple_8_10_12mm from "../../public/fakeApi/vetements/cordes/corde_capoeira_souple_8_10_12mm.jpeg";
+import teinture_pour_corde_de_capoeira_example from "../../public/fakeApi/vetements/cordes/teinture_pour_corde_de_capoeira_example.jpeg";
+import teinture_pour_corde_de_capoeira from "../../public/fakeApi/vetements/cordes/teinture_pour_corde_de_capoeira.jpeg";
+import corde_enfant_avec_noeuds_8mm from "../../public/fakeApi/vetements/cordes/corde_enfant_avec_noeuds_8mm.jpg";
+import berimbau_capoeira_regional_mestre_nenel_profissional from "../../public/fakeApi/instruments/berimbauviola/berimbau_capoeira_regional_mestre_nenel_profissional.jpg";
+import berimbau_valmir_das_biribas from "../../public/fakeApi/instruments/berimbaumedio/berimbau_valmir_das_biribas.jpg";
+import pandeiro_capoeira_in_hand from "../../public/fakeApi/instruments/pandeiro/pandeiro_capoeira_in_hand.jpeg";
+import pandeiro_capoeira from "../../public/fakeApi/instruments/pandeiro/pandeiro_capoeira.jpeg";
+import pandeiros_capoeira from "../../public/fakeApi/instruments/pandeiro/pandeiros_capoeira.jpg";
+import atabaque_capoeira_shop_all from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_shop_all.jpeg";
+import atabaque_capoeira_shop_bottom from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_shop_bottom.jpeg";
+import atabaque_capoeira_shop_top from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_shop_top.jpeg";
+import atabaque_capoeira_shop_top_top from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_shop_top_top.jpeg";
+import atabaque_capoeira_shop from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_shop.jpg";
+import atabaque_capoeira_top from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira_top.jpeg";
+import atabaque_capoeira from "../../public/fakeApi/instruments/atabaque/atabaque_capoeira.jpeg";
+import agogo_pyrograve_lua_rasta_back from "../../public/fakeApi/instruments/agogo/agogo_pyrograve_lua_rasta_back.jpeg";
+import agogo_pyrograve_lua_rasta_zoomed from "../../public/fakeApi/instruments/agogo/agogo_pyrograve_lua_rasta_zoomed.jpeg";
+import reco_reco_bambou_bahia from "../../public/fakeApi/instruments/recoreco/reco_reco_bambou_bahia.jpg";
+import encens_dialux_abre_caminhos from "../../public/fakeApi/esoterisme/encens_dialux_abre_caminhos.jpeg";
+import pattes_d_ours_capoeira_tech_2 from "../../public/fakeApi/entrainement/pattes_d_ours_capoeira_tech_2.jpg";
+import pattes_d_ours_capoeira_tech from "../../public/fakeApi/entrainement/pattes_d_ours_capoeira_tech.jpg";
+import pattes_d_ours_capoeira from "../../public/fakeApi/entrainement/pattes_d_ours_capoeira.jpg";
+import pattesdourscapoeira from "../../public/fakeApi/entrainement/pattesdourscapoeira.jpg";
 import { defaultProductEvals } from "./productEvaluationProvider";
 
 export const getMockProducts = async () => {
@@ -269,54 +293,6 @@ export const products = [
           { image: music, alt: "Berimbau Gunga édition spéciale vue 1" },
         ],
       },
-    ],
-  },
-
-  // Instruments - Berimbau Medio
-  {
-    subCategory: "berimbau medio",
-    products: [
-      // Liste des produits pour "berimbau medio" à ajouter ici avec le même format
-    ],
-  },
-
-  // Instruments - Berimbau Viola
-  {
-    subCategory: "berimbau viola",
-    products: [
-      // Liste des produits pour "berimbau viola" à ajouter ici avec le même format
-    ],
-  },
-
-  // Instruments - Atabaque
-  {
-    subCategory: "atabaque",
-    products: [
-      // Liste des produits pour "atabaque" à ajouter ici avec le même format
-    ],
-  },
-
-  // Instruments - Pandeiro
-  {
-    subCategory: "pandeiro",
-    products: [
-      // Liste des produits pour "pandeiro" à ajouter ici avec le même format
-    ],
-  },
-
-  // Instruments - Reco Reco
-  {
-    subCategory: "reco reco",
-    products: [
-      // Liste des produits pour "reco reco" à ajouter ici avec le même format
-    ],
-  },
-
-  // Instruments - Agogo
-  {
-    subCategory: "agogo",
-    products: [
-      // Liste des produits pour "agogo" à ajouter ici avec le même format
     ],
   },
 
@@ -953,6 +929,10 @@ export const products = [
             image: abada_blanc_capoeira_shop_ue,
             alt: "Pantalon Sportif vue 1",
           },
+          {
+            image: abada_blanc_capoeira_shop_ue_back,
+            alt: "Pantalon Sportif vue 1",
+          },
         ],
       },
       {
@@ -1053,6 +1033,261 @@ export const products = [
       },
     ],
   },
+
+  // Vêtements - Cordes
+  {
+    subCategory: "cordes",
+    products: [
+      {
+        name: "CORDE CAPOEIRA SOUPLE - (8-10-12MM)",
+        price: 15.0,
+        availability: "now",
+        id: "401",
+        date: new Date().toISOString(),
+        isBestSeller: true,
+        specs: [
+          "Matériau : Coton tressé",
+          "Longueur : 100 mètres",
+          "Diamètre : 12 mm",
+          "Couleur : Blanc, non coloré",
+        ],
+        variants: [],
+        images: [
+          {
+            image: corde_capoeira_souple_8_10_12mm,
+            alt: "Corde de capoeira débutant écrue",
+          },
+        ],
+      },
+      {
+        name: "TEINTURE POUR CORDE DE CAPOEIRA JAUNE",
+        price: 18.0,
+        availability: "now",
+        id: "402d",
+        date: new Date().toISOString(),
+        isBestSeller: false,
+        specs: [
+          "Un tube permet de teindre 2 ou 3 cordes adultes ou 5/6 corde enfant",
+          "1. Utilisez un tube de colorant/teinture TUPY® (45g) pour 300g de tissu sec",
+          "2- Préparez la SOLUTION DE COLORATION en dissolvant le contenu du tube dans 1 à 2 litres d'eau bouillante.",
+          "3- Versez la SOLUTION COLORANTE dans un récipient contenant suffisamment d'eau bouillante pour recouvrir le tissu, environ 6 litres pour 300g de tissu. Bien mélanger.",
+          "4- Lavez le tissu et, encore humide, plongez-le dans le bain de teinture en le laissant bouillir pendant 30 à 40 minutes, en remuant toujours avec un bâton.",
+          "5- Après le temps de teinture, rincez le tissu en enlevant l'excès de colorant et laissez sécher à l'ombre. Pour une meilleure fixation, utilisez TUPYFIX® ou ajoutez 50g de sel de cuisine au même moment que la teinture.",
+        ],
+        variants: [
+          {
+            id: "402a",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+          {
+            id: "402c",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+          {
+            id: "402b",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+        ],
+        images: [
+          {
+            image: teinture_pour_corde_de_capoeira,
+            alt: "teinture pour corde de capoeira",
+          },
+          {
+            image: teinture_pour_corde_de_capoeira_example,
+            alt: "des cordes de capoeira de couleur",
+          },
+        ],
+      },
+      {
+        name: "TEINTURE POUR CORDE DE CAPOEIRA BLEU",
+        price: 18.0,
+        availability: "now",
+        id: "402a",
+        date: new Date().toISOString(),
+        isBestSeller: false,
+        specs: [
+          "Un tube permet de teindre 2 ou 3 cordes adultes ou 5/6 corde enfant",
+          "1. Utilisez un tube de colorant/teinture TUPY® (45g) pour 300g de tissu sec",
+          "2- Préparez la SOLUTION DE COLORATION en dissolvant le contenu du tube dans 1 à 2 litres d'eau bouillante.",
+          "3- Versez la SOLUTION COLORANTE dans un récipient contenant suffisamment d'eau bouillante pour recouvrir le tissu, environ 6 litres pour 300g de tissu. Bien mélanger.",
+          "4- Lavez le tissu et, encore humide, plongez-le dans le bain de teinture en le laissant bouillir pendant 30 à 40 minutes, en remuant toujours avec un bâton.",
+          "5- Après le temps de teinture, rincez le tissu en enlevant l'excès de colorant et laissez sécher à l'ombre. Pour une meilleure fixation, utilisez TUPYFIX® ou ajoutez 50g de sel de cuisine au même moment que la teinture.",
+        ],
+        variants: [
+          {
+            id: "402b",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+          {
+            id: "402c",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+          {
+            id: "402d",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+        ],
+        images: [
+          {
+            image: teinture_pour_corde_de_capoeira,
+            alt: "teinture pour corde de capoeira",
+          },
+          {
+            image: teinture_pour_corde_de_capoeira_example,
+            alt: "des cordes de capoeira de couleur",
+          },
+        ],
+      },
+      {
+        name: "TEINTURE POUR CORDE DE CAPOEIRA VERT",
+        price: 18.0,
+        availability: "now",
+        id: "402b",
+        date: new Date().toISOString(),
+        isBestSeller: false,
+        specs: [
+          "Un tube permet de teindre 2 ou 3 cordes adultes ou 5/6 corde enfant",
+          "1. Utilisez un tube de colorant/teinture TUPY® (45g) pour 300g de tissu sec",
+          "2- Préparez la SOLUTION DE COLORATION en dissolvant le contenu du tube dans 1 à 2 litres d'eau bouillante.",
+          "3- Versez la SOLUTION COLORANTE dans un récipient contenant suffisamment d'eau bouillante pour recouvrir le tissu, environ 6 litres pour 300g de tissu. Bien mélanger.",
+          "4- Lavez le tissu et, encore humide, plongez-le dans le bain de teinture en le laissant bouillir pendant 30 à 40 minutes, en remuant toujours avec un bâton.",
+          "5- Après le temps de teinture, rincez le tissu en enlevant l'excès de colorant et laissez sécher à l'ombre. Pour une meilleure fixation, utilisez TUPYFIX® ou ajoutez 50g de sel de cuisine au même moment que la teinture.",
+        ],
+        variants: [
+          {
+            id: "402a",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+          {
+            id: "402c",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+          {
+            id: "402d",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+        ],
+        images: [
+          {
+            image: teinture_pour_corde_de_capoeira,
+            alt: "teinture pour corde de capoeira",
+          },
+          {
+            image: teinture_pour_corde_de_capoeira_example,
+            alt: "des cordes de capoeira de couleur",
+          },
+        ],
+      },
+      {
+        name: "TEINTURE POUR CORDE DE CAPOEIRA ROUGE",
+        price: 18.0,
+        availability: "now",
+        id: "402c",
+        date: new Date().toISOString(),
+        isBestSeller: false,
+        specs: [
+          "Un tube permet de teindre 2 ou 3 cordes adultes ou 5/6 corde enfant",
+          "1. Utilisez un tube de colorant/teinture TUPY® (45g) pour 300g de tissu sec",
+          "2- Préparez la SOLUTION DE COLORATION en dissolvant le contenu du tube dans 1 à 2 litres d'eau bouillante.",
+          "3- Versez la SOLUTION COLORANTE dans un récipient contenant suffisamment d'eau bouillante pour recouvrir le tissu, environ 6 litres pour 300g de tissu. Bien mélanger.",
+          "4- Lavez le tissu et, encore humide, plongez-le dans le bain de teinture en le laissant bouillir pendant 30 à 40 minutes, en remuant toujours avec un bâton.",
+          "5- Après le temps de teinture, rincez le tissu en enlevant l'excès de colorant et laissez sécher à l'ombre. Pour une meilleure fixation, utilisez TUPYFIX® ou ajoutez 50g de sel de cuisine au même moment que la teinture.",
+        ],
+        variants: [
+          {
+            id: "402b",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+          {
+            id: "402a",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+          {
+            id: "402d",
+            image: teinture_pour_corde_de_capoeira,
+            alt: "de la teintue textile",
+          },
+        ],
+        images: [
+          {
+            image: teinture_pour_corde_de_capoeira,
+            alt: "Corde Performance vue 1",
+          },
+          {
+            image: teinture_pour_corde_de_capoeira_example,
+            alt: "Corde Performance vue 1",
+          },
+        ],
+      },
+      {
+        name: "CORDE ADULTE AVEC NOEUDS",
+        price: 11.83,
+        availability: "now",
+        id: "403a",
+        date: new Date().toISOString(),
+        isBestSeller: false,
+        specs: [
+          "Matériau : Coton et polyester",
+          "Longueur : 2,50 mètres",
+          "Diamètre : 10 mm",
+          "Couleur : Ecrue",
+        ],
+        variants: [
+          {
+            id: "403b",
+            image: corde_enfant_avec_noeuds_8mm,
+            alt: "une corde de capoeira",
+          },
+        ],
+        images: [
+          {
+            image: corde_enfant_avec_noeuds_8mm,
+            alt: "une corde de capoeira écrue adulte",
+          },
+        ],
+      },
+      {
+        name: "CORDE ENFANT AVEC NOEUDS (8MM)",
+        price: 11.83,
+        availability: "now",
+        id: "403b",
+        date: new Date().toISOString(),
+        isBestSeller: false,
+        specs: [
+          "Matériau : Coton et polyester",
+          "Longueur : 2,50 mètres",
+          "Diamètre : 10 mm",
+          "Couleur : Ecrue",
+        ],
+        variants: [
+          {
+            id: "403a",
+            image: corde_enfant_avec_noeuds_8mm,
+            alt: "une corde de capoeira",
+          },
+        ],
+        images: [
+          {
+            image: corde_enfant_avec_noeuds_8mm,
+            alt: "une corde de capoeira écrue enfant",
+          },
+        ],
+      },
+    ],
+  },
+
   {
     subCategory: "berimbau viola",
     products: [
@@ -1351,6 +1586,296 @@ export const products = [
         variants: [],
 
         images: [{ image: entrain, alt: "un sac de frappe" }],
+      },
+    ],
+  },
+
+  // Instruments - Berimbau Medio
+  {
+    subCategory: "berimbau medio",
+    products: [
+      {
+        name: "Berimbau Medio - Mestre Cobra Edition",
+        price: 168.0,
+        availability: "now",
+        id: "501",
+        date: new Date().toISOString(),
+        isBestSeller: true,
+        specs: [
+          "Matériau : Bois de Biriba",
+          "Inclus : Corde, baqueta, caxixi",
+          "Dimensions : Standard",
+          "Poids : Léger",
+          "Fait main au Brésil",
+        ],
+        variants: [,],
+        images: [
+          {
+            image: berimbau_capoeira_regional_mestre_nenel_profissional,
+            alt: "un berimbau",
+          },
+        ],
+      },
+    ],
+  },
+  // Instruments - Berimbau Viola
+  {
+    subCategory: "berimbau viola",
+    products: [
+      {
+        name: "Berimbau Viola - Mestre Bimba Edition",
+        price: 60.0,
+        availability: "now",
+        id: "502",
+        date: new Date().toISOString(),
+        isBestSeller: true,
+        specs: [
+          "Matériau : Bois de Biriba",
+          "Inclus : Corde, baqueta, caxixi",
+          "Dimensions : Standard",
+          "Poids : Léger",
+          "Fait main au Brésil",
+        ],
+        variants: [,],
+        images: [
+          {
+            image: berimbau_valmir_das_biribas,
+            alt: "Berimbau Viola Mestre Bimba",
+          },
+        ],
+      },
+    ],
+  },
+  // Instruments - Atabaque
+  {
+    subCategory: "atabaque",
+    products: [
+      {
+        name: "Atabaque - Mestre Pastinha Edition",
+        price: 150.0,
+        availability: "now",
+        id: "503",
+        date: new Date().toISOString(),
+        isBestSeller: true,
+        specs: [
+          "Matériau : Bois de cèdre",
+          "Tête : Cuir naturel",
+          "Hauteur : 1m",
+          "Diamètre : 50cm",
+          "Poids : Moyen",
+          "Fait main au Brésil",
+        ],
+        variants: [],
+        images: [
+          {
+            image: atabaque_capoeira_top,
+            alt: "Atabaque Mestre Pastinha vue 1",
+          },
+          { image: atabaque_capoeira, alt: "Atabaque Mestre Pastinha vue 1" },
+        ],
+      },
+      {
+        name: "Atabaque - Mestre Pastinha Edition",
+        price: 150.0,
+        availability: "now",
+        id: "5011111111111113",
+        date: new Date().toISOString(),
+        isBestSeller: true,
+        specs: [
+          "Matériau : Bois de cèdre",
+          "Tête : Cuir naturel",
+          "Hauteur : 1m",
+          "Diamètre : 50cm",
+          "Poids : Moyen",
+          "Fait main au Brésil",
+        ],
+        variants: [],
+        images: [
+          {
+            image: atabaque_capoeira_shop_all,
+            alt: "Atabaque Mestre Pastinha vue 1",
+          },
+          {
+            image: atabaque_capoeira_shop_bottom,
+            alt: "Atabaque Mestre Pastinha vue 1",
+          },
+          {
+            image: atabaque_capoeira_shop_top,
+            alt: "Atabaque Mestre Pastinha vue 1",
+          },
+          {
+            image: atabaque_capoeira_shop_top_top,
+            alt: "Atabaque Mestre Pastinha vue 1",
+          },
+          {
+            image: atabaque_capoeira_shop,
+            alt: "Atabaque Mestre Pastinha vue 1",
+          },
+        ],
+      },
+    ],
+  },
+  // Instruments - Pandeiro
+  {
+    subCategory: "pandeiro",
+    products: [
+      {
+        name: "Pandeiro - Mestre Suassuna Edition",
+        price: 71.2,
+        availability: "now",
+        id: "504",
+        date: new Date().toISOString(),
+        isBestSeller: true,
+        specs: [
+          "Matériau : Bois de pin",
+          "Tête : Peau de chèvre",
+          "Diamètre : 10 pouces",
+          "Poids : Léger",
+          "Fait main au Brésil",
+        ],
+        variants: [{ id: "504a", image: pandeiro_capoeira, alt: "Vue 1" }],
+        images: [
+          {
+            image: pandeiro_capoeira_in_hand,
+            alt: "Pandeiro en peau de chèvre tenu par une personne",
+          },
+          { image: pandeiro_capoeira, alt: "Pandeiro en peau de chèvre" },
+          {
+            image: pandeiros_capoeira,
+            alt: "plusieurs Pandeiros en peau de chèvre",
+          },
+        ],
+      },
+    ],
+  },
+  // Instruments - Reco Reco
+  {
+    subCategory: "reco reco",
+    products: [
+      {
+        name: "RECO RECO BAMBOU - BAHIA",
+        price: 25.0,
+        availability: "now",
+        id: "505",
+        date: new Date().toISOString(),
+        isBestSeller: false,
+        specs: [
+          "Matériau : Bambou",
+          "Dimensions : 30cm",
+          "Inclus : Baguette",
+          "Poids : Léger",
+          "Fait main au Brésil",
+        ],
+        variants: [],
+        images: [{ image: reco_reco_bambou_bahia, alt: "Reco Reco en bambou" }],
+      },
+    ],
+  },
+  // Instruments - Agogo
+  {
+    subCategory: "agogo",
+    products: [
+      {
+        name: "Agogo Pyrogravé Lua Rasta",
+        price: 87.4,
+        availability: "now",
+        id: "506",
+        date: new Date().toISOString(),
+        isBestSeller: false,
+        specs: [
+          "Matériau : Métal",
+          "Dimensions : 20cm",
+          "Inclus : Baguette",
+          "Poids : Léger",
+          "Fait main au Brésil",
+        ],
+        variants: [],
+        images: [
+          {
+            image: agogo_pyrograve_lua_rasta_back,
+            alt: "Agogo Mestre Lua Rasta",
+          },
+          {
+            image: agogo_pyrograve_lua_rasta_zoomed,
+            alt: "Agogo Mestre Lua Rasta",
+          },
+        ],
+      },
+    ],
+  },
+  // Esoterisme
+  {
+    subCategory: "esoterisme",
+    products: [
+      {
+        name: "Encens Dialux Abre Caminhos",
+        price: 2.88,
+        availability: "now",
+        id: "507",
+        date: new Date().toISOString(),
+        isBestSeller: false,
+        specs: [
+          "Ingrédients : Plantes aromatiques",
+          "Durée : 1 heure par bâtonnet",
+          "Quantité : 20 bâtonnets",
+          "Origine : Brésil",
+          "Utilisation : Rituel spirituel",
+        ],
+        variants: [],
+        images: [
+          { image: encens_dialux_abre_caminhos, alt: "une boîte d'encens" },
+        ],
+      },
+    ],
+  },
+  // Entrainement - Frappe
+  {
+    subCategory: "frappe",
+    products: [
+      {
+        name: "Sac de Frappe - Capoeira Force",
+        price: 75.0,
+        availability: "now",
+        id: "601",
+        date: new Date().toISOString(),
+        isBestSeller: true,
+        specs: [
+          "Matériau : Cuir synthétique",
+          "Poids : 30kg",
+          "Hauteur : 120cm",
+          "Inclus : Chaînes de suspension",
+          "Remplissage : Sable et coton",
+        ],
+        variants: [],
+        images: [{ image: entrain, alt: "Sac de Frappe Capoeira Force vue 1" }],
+      },
+      {
+        name: "PATTES D'OURS CAPOEIRA",
+        price: 35.99,
+        availability: "now",
+        id: "602",
+        date: new Date().toISOString(),
+        isBestSeller: false,
+        specs: [
+          "Matériau : Cuir véritable",
+          "Poids : 35kg",
+          "Hauteur : 130cm",
+          "Inclus : Chaînes de suspension",
+          "Remplissage : Sable et mousse",
+        ],
+        variants: [],
+        images: [
+          { image: pattesdourscapoeira, alt: "Pattes d'ours de capoeira" },
+          { image: pattes_d_ours_capoeira, alt: "Pattes d'ours de capoeira" },
+          {
+            image: pattes_d_ours_capoeira_tech,
+            alt: "plan technique Pattes d'ours de capoeira",
+          },
+          {
+            image: pattes_d_ours_capoeira_tech_2,
+            alt: "fiche technique Pattes d'ours de capoeira",
+          },
+        ],
       },
     ],
   },
