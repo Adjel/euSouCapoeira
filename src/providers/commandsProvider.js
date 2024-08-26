@@ -1,7 +1,7 @@
 export const createUserCommand = async (productList, user) => {
   const total = 0;
   let totalPrice = productList.reduce(
-    (totalPrice, product) => totalPrice + product.price,
+    (totalPrice, product) => totalPrice + product.price * product.quantity,
     total
   );
 

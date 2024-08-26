@@ -6,6 +6,7 @@ import Divider from "../Divider";
 import Link from "next/link";
 import { useUserStore } from "@/stores/useUserStore";
 import { useCommandsStore } from "@/stores/useCommandsStore";
+import LoadingComponent from "../LoadingComponent";
 
 function MyCommands() {
   const { userCommands, getCommands } = useCommandsStore();
@@ -18,7 +19,9 @@ function MyCommands() {
     if (user) fetchCommands();
   }, [user]);
 
-  return (
+  return !userCommands ? (
+    <LoadingComponent />
+  ) : (
     <section className="flex flex-col gap-4 pl-4 md:pl-8">
       <header>
         <h2 className="text-5xl font-bold first-letter:uppercase">
@@ -30,26 +33,30 @@ function MyCommands() {
           {userCommands.map(({ productList, date, id, status, totalPrice }) => (
             <li key={id} className="flex flex-col">
               <Divider />
-              {productList.map(({ images, alt, id, name }, index) => (
-                <Link
-                  href={`/product/${id}`}
-                  key={index}
-                  className="flex gap-12 items-center"
-                >
-                  <Image
-                    src={images[0].image}
-                    alt={images[0].alt}
-                    width={100}
-                    height={100}
-                    className="py-6"
-                  />
-                  <strong className="first-letter:uppercase text-lg font-normal">
-                    {name}
-                  </strong>
-                </Link>
+              {productList.map(({ images, id, name, quantity }, index) => (
+                <div className="flex flex-col justify-between">
+                  <Link
+                    href={`/product/${id}`}
+                    key={index}
+                    className="flex gap-12 items-center"
+                  >
+                    <Image
+                      src={images[0].image}
+                      alt={images[0].alt}
+                      width={100}
+                      height={100}
+                      className="py-6"
+                    />
+                    <strong className="first-letter:uppercase text-lg font-normal">
+                      {name}
+                    </strong>
+                  </Link>
+                  <span className="text-color-dark-gray text-md font-bold">
+                    {quantity}
+                  </span>
+                </div>
               ))}
-
-              <div className="flex w-1/2 md:w-full justify-start items-center gap-6 mb-4">
+              <div className="flex w-1/2 md:w-full justify-start items-center gap-6 my-4">
                 <div className="flex flex-col gap-6 md:flex-row">
                   <CommandState
                     title="commande du"
