@@ -7,7 +7,7 @@ import { useUserStore } from "@/stores/useUserStore";
 function AddToWishListButton({ productId, ml }) {
   const { user } = useUserStore();
   const { toggle, currentWishlist } = useWishlist();
-  const liked = currentWishlist.idList.find((obj) => obj.id === productId);
+  const liked = currentWishlist?.idList.find((obj) => obj.id === productId);
 
   const handleToogle = () => {
     toggle(user, productId);
