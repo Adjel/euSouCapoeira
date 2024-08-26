@@ -132,6 +132,7 @@ export default function Page() {
 
   const handleCommand = async () => {
     try {
+      console.log("handlecommand");
       await addCommand(cart, user);
     } catch (e) {
       // The way is to push to crashlytics

@@ -11,6 +11,8 @@ const useCommandsStore = create((set) => ({
     try {
       const commands = await getUserCommands(user);
 
+      console.log(commands);
+
       set({ userCommands: commands });
       return Promise.resolve(commands);
     } catch (e) {
