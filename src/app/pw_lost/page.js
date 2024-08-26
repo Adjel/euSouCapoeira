@@ -42,10 +42,10 @@ export default function Page() {
   }
 
   return (
-    <section className="p-7 flex flex-col justify-center gap-2 mx-60 mb-20">
-      <header className="flex flex-col gap-10 mb-9 mt-4">
-        <h2 className="text-6xl font-bold">Mot de passe oublié</h2>
-        <span>
+    <section className="p-7 flex flex-col justify-center gap-2 md:mx-20 lg:mx-60 mb-20">
+      <header className="flex w-full flex-col gap-10 mb-9 mt-4 justify-center items-center">
+        <h2 className="text-center text-6xl font-bold">Mot de passe oublié</h2>
+        <span className="text-center">
           Veuillez entrer votre adresse e-mail avec laquelle vous vous êtes
           inscrit chez nous. Nous vous enverrons ensuite un lien que vous
           pourrez utiliser pour définir un nouveau mot de passe
