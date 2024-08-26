@@ -130,6 +130,17 @@ export default function Page() {
     handleSignUp(values);
   }
 
+  const handleCommand = async () => {
+    try {
+      await addCommand(cart, user);
+    } catch (e) {
+      // The way is to push to crashlytics
+      toast({
+        title: `la commande n'a pas pu être passée, veuillez contacter le support et indiquer ${e}`,
+      });
+    }
+  };
+
   return (
     <section className="flex p-5 gap-2 md:px-7 lg:px-32">
       <section className="w-full sm:w-1/2 flex flex-col gap-8 p-2">
@@ -353,10 +364,7 @@ export default function Page() {
               </Button>
             )}
             {userHasMount && (
-              <Button
-                onClick={() => addCommand(cart, user)}
-                className="w-fit mx-auto mt-16"
-              >
+              <Button onClick={handleCommand} className="w-fit mx-auto mt-16">
                 <Link href={"/thanks"}>acheter maintenant</Link>
               </Button>
             )}
