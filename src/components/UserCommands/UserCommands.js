@@ -34,10 +34,12 @@ function MyCommands() {
             <li key={id} className="flex flex-col">
               <Divider />
               {productList.map(({ images, id, name, quantity }, index) => (
-                <div className="flex flex-col justify-between">
+                <div
+                  key={`${crypto.randomUUID}-${index}`}
+                  className="flex flex-col justify-between"
+                >
                   <Link
                     href={`/product/${id}`}
-                    key={index}
                     className="flex gap-12 items-center"
                   >
                     <Image
