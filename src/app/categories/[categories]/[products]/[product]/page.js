@@ -44,6 +44,7 @@ export default function Page({ params }) {
       setIsLoading(false);
     };
     fetchProduct();
+    console.log(params);
   }, [params]);
 
   const handleQuantity = (plus) => {
@@ -64,7 +65,16 @@ export default function Page({ params }) {
           <header>
             <div className="mb-7">
               <BreadCrumbComponent
-                hrefLinkList={[{ display: params.categories }]}
+                hrefLinkList={[
+                  {
+                    display: params.categories,
+                    link: `categories/${params.categories}`,
+                  },
+                  {
+                    display: params.products,
+                    link: `categories/${params.categories}/${params.products}`,
+                  },
+                ]}
                 unClickableList={[`${product?.name}`]}
               />
             </div>

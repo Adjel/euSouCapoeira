@@ -2,7 +2,11 @@ import React from "react";
 import Link from "next/link";
 
 function ProductLink({ id, params, children }) {
-  return <Link href={`${params.products}/${id}`}>{children}</Link>;
+  return (
+    <Link href={`${params.products !== "categories" && params.products}/${id}`}>
+      {children}
+    </Link>
+  );
 }
 
 export default ProductLink;
