@@ -49,6 +49,7 @@ export default function Page({ params }) {
     };
 
     getProductList();
+    console.log(params);
   }, [params]);
 
   const paramProducts = normalizeParam(params.products);
@@ -202,7 +203,7 @@ export default function Page({ params }) {
                 return (
                   <li className={`${isGrid && "flex flex-col gap-4"}`} key={id}>
                     <div className="xs:flex-row relative flex flex-col min-w-fit gap-4 p-7 bg-background-medium-gray rounded">
-                      <ProductLink id={id} name={name}>
+                      <ProductLink id={id} params={params} name={name}>
                         <Image
                           src={images[0].image}
                           alt={images[0].alt}
@@ -219,7 +220,7 @@ export default function Page({ params }) {
                           isGrid && "hidden"
                         } flex flex-col gap-0.5`}
                       >
-                        <ProductLink id={id} name={name}>
+                        <ProductLink id={id} name={name} params={params}>
                           {name}
                           <RatingComponent productId={id} />
                           <div className="md:hidden">
@@ -249,7 +250,7 @@ export default function Page({ params }) {
                     <div
                       className={`${!isGrid && "hidden"} flex flex-col text-sm`}
                     >
-                      <ProductLink id={id} name={name}>
+                      <ProductLink id={id} name={name} params={params}>
                         {name}
                         <RatingComponent productId={id} />
                         <AvailabilityComponent availability={availability} />

@@ -1,17 +1,8 @@
 import React from "react";
 import Link from "next/link";
 
-function ProductLink({ id, name, children }) {
-  return (
-    <Link
-      href={{
-        pathname: `/product/${id}`,
-        query: { productId: id, productName: name },
-      }}
-    >
-      {children}
-    </Link>
-  );
+function ProductLink({ id, params, children }) {
+  return <Link href={`${params.products}/${id}`}>{children}</Link>;
 }
 
 export default ProductLink;
