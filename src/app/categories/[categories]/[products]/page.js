@@ -49,7 +49,6 @@ export default function Page({ params }) {
     };
 
     getProductList();
-    console.log(params);
   }, [params]);
 
   const paramProducts = normalizeParam(params.products);

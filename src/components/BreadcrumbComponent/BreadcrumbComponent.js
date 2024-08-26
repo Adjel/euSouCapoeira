@@ -26,16 +26,19 @@ function BreadCrumbComponent({ hrefLinkList, unClickableList = [] }) {
           ({ display, link }, index) =>
             display && (
               <div className="flex items-center gap-2.5 capitalize" key={index}>
-                <BreadcrumbItem>
-                  {display !== hrefLinkList[index - 1]?.display && (
-                    <>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbLink className="uppercase" href={`/${link}`}>
-                        {display}
-                      </BreadcrumbLink>
-                    </>
-                  )}
-                </BreadcrumbItem>
+                {/** avoid duplication */}
+                {display !== hrefLinkList[index - 1]?.display && (
+                  <>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                      <div>
+                        <BreadcrumbLink className="uppercase" href={`/${link}`}>
+                          {display}
+                        </BreadcrumbLink>
+                      </div>
+                    </BreadcrumbItem>
+                  </>
+                )}
               </div>
             )
         )}

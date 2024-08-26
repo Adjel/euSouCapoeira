@@ -44,7 +44,6 @@ export default function Page({ params }) {
       setIsLoading(false);
     };
     fetchProduct();
-    console.log(params);
   }, [params]);
 
   const handleQuantity = (plus) => {
