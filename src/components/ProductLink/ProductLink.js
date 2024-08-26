@@ -1,14 +1,9 @@
 import React from "react";
 import Link from "next/link";
 
-function ProductLink({ id, name, children }) {
+function ProductLink({ id, params, children }) {
   return (
-    <Link
-      href={{
-        pathname: `/product/${id}`,
-        query: { productId: id, productName: name },
-      }}
-    >
+    <Link href={`${params.products !== "categories" && params.products}/${id}`}>
       {children}
     </Link>
   );

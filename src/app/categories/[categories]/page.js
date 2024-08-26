@@ -19,7 +19,7 @@ const Page = ({ params }) => {
 
   useEffect(() => {
     if (category && category.subCategories.length < 1) {
-      router.push(`/categories/products/${normalizedCategory}`);
+      router.push(`/categories/${normalizedCategory}/${normalizedCategory}`);
     }
   }, [categories]);
 
