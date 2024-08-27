@@ -23,13 +23,13 @@ function PartenersComponent() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Carousel
+      <div
         orientation="vertical"
         className="block md:hidden basis-1/3 overflow-hidden w-full"
       >
-        <CarouselContent>
+        <ul>
           {fakePartners.map(({ image, alt }) => (
-            <CarouselItem key={alt} className="w-full">
+            <li key={alt} className="w-full">
               <div className="relative w-full h-44 md:h-64 lg:h-72">
                 <Image
                   src={image}
@@ -38,10 +38,10 @@ function PartenersComponent() {
                   style={{ objectPosition: "0% 0%" }}
                 />
               </div>
-            </CarouselItem>
+            </li>
           ))}
-        </CarouselContent>
-      </Carousel>
+        </ul>
+      </div>
       <Carousel
         opts={{
           align: "center",
