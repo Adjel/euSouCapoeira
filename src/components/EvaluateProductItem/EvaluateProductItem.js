@@ -53,7 +53,7 @@ function EvaluateProductItem({
     setNewComment("");
     setNewRate(undefined);
     setIsEvaluating(false);
-    toast({ title: "Votre évaluation à été prise en compte" });
+    toast({ title: "Votre évaluation a été prise en compte" });
   };
 
   return (
@@ -71,7 +71,7 @@ function EvaluateProductItem({
           <div className="flex w-full pl-4 justify-between items-center">
             {productEvals && (
               <span className="font-bold">
-                Ce produits à {productEvals.length} évaluations
+                Ce produits a {productEvals.length} évaluations
               </span>
             )}
             {!isEvaluating ? (

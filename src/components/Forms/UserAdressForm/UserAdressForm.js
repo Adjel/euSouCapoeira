@@ -48,7 +48,7 @@ function UserAdressForm({ cancel }) {
     try {
       await addAdress(values);
       cancel();
-      toast({ title: "L'adresse à bien été enregistrée" });
+      toast({ title: "L'adresse a bien été enregistrée" });
     } catch (e) {
       toast({ title: `${e.message}` });
     }

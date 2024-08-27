@@ -262,7 +262,7 @@ function ReturnProductComponent() {
               </header>
               <span className="text-center">
                 {`
-                Votre demande à été envoyée, vous serez recontacté sur votre
+                Votre demande a été envoyée, vous serez recontacté sur votre
                 adresse e-mail princispale :)`}
               </span>
               <Button>

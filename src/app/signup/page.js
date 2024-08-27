@@ -71,7 +71,7 @@ export default function Signup() {
     try {
       await signUp(user);
       toast({
-        title: `Bonjour ${user.firstName}, votre compte à bien été créé!`,
+        title: `Bonjour ${user.firstName}, votre compte a bien été créé!`,
       });
       router.push("/dashboard/mes_informations");
     } catch (error) {
