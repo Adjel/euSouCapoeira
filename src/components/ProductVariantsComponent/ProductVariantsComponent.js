@@ -6,8 +6,7 @@ import CheckedIcon from "../CheckedIcon";
 function ProductVariantsComponent({ product, imagePriority = false }) {
   const sortedVariants = product.variants.sort((a, b) => a.id - b.id);
   return (
-    <div className="flex flex-col gap-2 mt-4 justify-center ">
-      <div className="hidden lg:flex mb-7" />
+    <div className="flex flex-col gap-2 mt-2 justify-center ">
       <span className="text-base md:text-lg font-semibold">
         Variations de ce produit
       </span>
