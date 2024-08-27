@@ -6,6 +6,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import BreadcrumbLinkComponent from "../BreadcrumbLinkComponent";
 
 function BreadCrumbComponent({ hrefLinkList, unClickableList = [] }) {
   const double = !hrefLinkList?.some((item) =>
@@ -18,9 +19,9 @@ function BreadCrumbComponent({ hrefLinkList, unClickableList = [] }) {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink className="uppercase" href="/">
+          <BreadcrumbLinkComponent className="uppercase">
             accueil
-          </BreadcrumbLink>
+          </BreadcrumbLinkComponent>
         </BreadcrumbItem>
         {hrefLinkList?.map(
           ({ display, link }, index) =>
@@ -32,9 +33,12 @@ function BreadCrumbComponent({ hrefLinkList, unClickableList = [] }) {
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
                       <div>
-                        <BreadcrumbLink className="uppercase" href={`/${link}`}>
+                        <BreadcrumbLinkComponent
+                          className="uppercase"
+                          link={link}
+                        >
                           {display}
-                        </BreadcrumbLink>
+                        </BreadcrumbLinkComponent>
                       </div>
                     </BreadcrumbItem>
                   </>
@@ -51,7 +55,7 @@ function BreadCrumbComponent({ hrefLinkList, unClickableList = [] }) {
                   key={index}
                 >
                   <BreadcrumbSeparator />
-                  <BreadcrumbItem className="uppercase">
+                  <BreadcrumbItem className="text-base uppercase">
                     {display}
                   </BreadcrumbItem>
                 </div>

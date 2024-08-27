@@ -59,27 +59,27 @@ export default function Page({ params }) {
     />
   ) : (
     <section className="basicPadding py-7">
+      <div className="hidden lg:block mb-7">
+        <BreadCrumbComponent
+          hrefLinkList={[
+            {
+              display: params.categories,
+              link: `categories/${params.categories}`,
+            },
+            {
+              display: params.products,
+              link: `categories/${params.categories}/${params.products}`,
+            },
+          ]}
+          unClickableList={[`${product?.name}`]}
+        />
+      </div>
       <div className="flex flex-col lg:flex-row">
         <section className="flex flex-col lg:w-2/3">
           <header>
-            <div className="mb-7">
-              <BreadCrumbComponent
-                hrefLinkList={[
-                  {
-                    display: params.categories,
-                    link: `categories/${params.categories}`,
-                  },
-                  {
-                    display: params.products,
-                    link: `categories/${params.categories}/${params.products}`,
-                  },
-                ]}
-                unClickableList={[`${product?.name}`]}
-              />
-            </div>
             <h2 className="text-2xl md:text-3xl">{product?.name}</h2>
-            <RatingComponent productId={product?.id} />
           </header>
+          <RatingComponent productId={product?.id} />
           <ZoomImage
             src={product?.images[imageIndex ?? 0].image}
             alt={product?.images[imageIndex ?? 0].alt}
