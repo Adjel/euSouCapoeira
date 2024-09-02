@@ -46,7 +46,9 @@ export default function Page({ params }) {
     fetchProduct();
   }, [params]);
 
-  const handleQuantity = (plus) => {
+  // consumer sometimes need to return the product id
+  const handleQuantity = (productId, plus) => {
+    console.log(plus);
     setQuantity((prevQuantity) =>
       plus ? prevQuantity + 1 : prevQuantity > 1 ? prevQuantity - 1 : 1
     );
