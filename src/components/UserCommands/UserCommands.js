@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useUserStore } from "@/stores/useUserStore";
 import { useCommandsStore } from "@/stores/useCommandsStore";
 import LoadingComponent from "../LoadingComponent";
+import { getProductLinkById } from "@/providers/productProvider";
 
 function MyCommands() {
   const { userCommands, getCommands } = useCommandsStore();
@@ -39,7 +40,7 @@ function MyCommands() {
                   className="flex flex-col justify-between"
                 >
                   <Link
-                    href={`/product/${id}`}
+                    href={`${getProductLinkById(id)}`}
                     className="flex gap-12 items-center"
                   >
                     <Image

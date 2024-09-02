@@ -65,6 +65,7 @@ import pattes_d_ours_capoeira_tech from "../../public/fakeApi/entrainement/patte
 import pattes_d_ours_capoeira from "../../public/fakeApi/entrainement/pattes_d_ours_capoeira.jpg";
 import pattesdourscapoeira from "../../public/fakeApi/entrainement/pattesdourscapoeira.jpg";
 import { defaultProductEvals } from "./productEvaluationProvider";
+import { categories } from "./categoriesProvider";
 
 export const getMockProducts = async () => {
   // Get mocked user evals
@@ -109,6 +110,7 @@ export const getMockProducts = async () => {
 
 export const products = [
   {
+    category: "instrument",
     subCategory: "berimbau gunga",
     products: [
       {
@@ -298,6 +300,7 @@ export const products = [
 
   // Vêtements - Chaussures
   {
+    category: "vetement",
     subCategory: "chaussures",
     products: [
       {
@@ -484,6 +487,7 @@ export const products = [
 
   // Vêtements - T-shirt
   {
+    category: "vetement",
     subCategory: "tshirt",
     products: [
       {
@@ -778,6 +782,7 @@ export const products = [
 
   // Vêtements - Pantalon
   {
+    category: "vetement",
     subCategory: "pantalon",
     products: [
       {
@@ -1036,6 +1041,7 @@ export const products = [
 
   // Vêtements - Cordes
   {
+    category: "vetement",
     subCategory: "cordes",
     products: [
       {
@@ -1289,6 +1295,7 @@ export const products = [
   },
 
   {
+    category: "instrument",
     subCategory: "berimbau viola",
     products: [
       {
@@ -1384,6 +1391,7 @@ export const products = [
     ],
   },
   {
+    category: "vetement",
     subCategory: "chaussures",
     products: [
       {
@@ -1518,6 +1526,7 @@ export const products = [
     ],
   },
   {
+    category: "livre",
     subCategory: "livres",
     products: [
       {
@@ -1567,6 +1576,7 @@ export const products = [
     ],
   },
   {
+    category: "entrainement",
     subCategory: "entrainement",
     products: [
       {
@@ -1592,6 +1602,7 @@ export const products = [
 
   // Instruments - Berimbau Medio
   {
+    category: "entrainement",
     subCategory: "berimbau medio",
     products: [
       {
@@ -1620,6 +1631,7 @@ export const products = [
   },
   // Instruments - Berimbau Viola
   {
+    category: "entrainement",
     subCategory: "berimbau viola",
     products: [
       {
@@ -1648,6 +1660,7 @@ export const products = [
   },
   // Instruments - Atabaque
   {
+    category: "entrainement",
     subCategory: "atabaque",
     products: [
       {
@@ -1717,6 +1730,7 @@ export const products = [
   },
   // Instruments - Pandeiro
   {
+    category: "entrainement",
     subCategory: "pandeiro",
     products: [
       {
@@ -1750,6 +1764,7 @@ export const products = [
   },
   // Instruments - Reco Reco
   {
+    category: "entrainement",
     subCategory: "reco reco",
     products: [
       {
@@ -1773,6 +1788,7 @@ export const products = [
   },
   // Instruments - Agogo
   {
+    category: "entrainement",
     subCategory: "agogo",
     products: [
       {
@@ -1805,6 +1821,7 @@ export const products = [
   },
   // Esoterisme
   {
+    category: "esoterisme",
     subCategory: "esoterisme",
     products: [
       {
@@ -1830,6 +1847,7 @@ export const products = [
   },
   // Entrainement - Frappe
   {
+    category: "entrainement",
     subCategory: "frappe",
     products: [
       {

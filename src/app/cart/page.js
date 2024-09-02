@@ -11,6 +11,7 @@ import DeleteProductFromCartButton from "@/components/DeleteProductFromCartButto
 import ArrowButton from "@/components/ArrowButton";
 import TotalCartPriceComponent from "@/components/TotalCartPriceComponent";
 import RecommandsComponent from "@/components/RecommandsComponent";
+import { getProductLinkById } from "@/providers/productProvider";
 
 export default function Page() {
   const { cart } = useCartStore();
@@ -31,7 +32,7 @@ export default function Page() {
                 key={id}
                 className="flex gap-4 border-t bt-background-medium-gray"
               >
-                <Link href={`product/${id}`}>
+                <Link href={`${getProductLinkById(id)}`}>
                   <Image
                     src={images[0].image}
                     alt={images[0].alt}
@@ -40,7 +41,10 @@ export default function Page() {
                 </Link>
                 <div className="flex flex-col w-full p-2 gap-3 justify-between">
                   <div className="flex justify-between gap-4">
-                    <Link href={`product/${id}`} className="flex flex-col ">
+                    <Link
+                      href={`${getProductLinkById(id)}`}
+                      className="flex flex-col "
+                    >
                       <strong className="text-lg font-bold">{name}</strong>
                       {quantity > 1 && (
                         <span className="text-sm text-color-dark-gray">{`${price} € / pièce`}</span>

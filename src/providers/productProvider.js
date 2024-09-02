@@ -13,3 +13,16 @@ export async function getMockedProductById(productId) {
     return Promise.reject(e);
   }
 }
+
+export const getProductLinkById = (productId) => {
+  let productLink = "";
+
+  products.forEach((productList) => {
+    const item = productList.products.find((item) => item.id === productId);
+
+    if (item) {
+      productLink = `/categories/${productList.category}/${productList.subCategory}/${item.id}`;
+    }
+  });
+  return productLink;
+};

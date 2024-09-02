@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CheckedIcon from "../CheckedIcon";
+import { getProductLinkById } from "@/providers/productProvider";
 
 function ProductVariantsComponent({ product, imagePriority = false }) {
   const sortedVariants = product.variants.sort((a, b) => a.id - b.id);
@@ -14,7 +15,7 @@ function ProductVariantsComponent({ product, imagePriority = false }) {
         {sortedVariants.map(({ alt, image, id }, index) => (
           <li key={id}>
             <Link
-              href={`/product/${id}`}
+              href={`${getProductLinkById(id)}`}
               className="relative hover:text-color-gold"
             >
               <Image

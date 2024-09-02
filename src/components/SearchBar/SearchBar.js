@@ -4,6 +4,7 @@ import { GoSearch } from "react-icons/go";
 import { products } from "@/providers/productsProvider";
 import Image from "next/image";
 import Link from "next/link";
+import { getProductLinkById } from "@/providers/productProvider";
 
 function SearchBar() {
   const [query, setQuery] = useState("");
@@ -48,7 +49,7 @@ function SearchBar() {
           {productList.map(({ id, name, images, price }) => (
             <li key={id}>
               <Link
-                href={`/product/${id}`}
+                href={`${getProductLinkById(id)}`}
                 className="flex gap-3"
                 onClick={handleProductClicked}
               >
